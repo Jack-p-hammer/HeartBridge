@@ -289,9 +289,13 @@ void showCurrentFrame(int cG) {
 void showCurrentFrameAndAudio(int cG) {
   showCurrentFrame(cG);
   playCurrentWav(cG);
+  audioBusy = true;
+  audioStartedAt = millis();  // record when audio started
 }
 
 bool nextButtonLoop() {
+
+  if (audioBusy) return false;
   
   // ====== Handle GREEN button (pin 4) with debounce ======
   digitalWrite(NEXT_LED_PIN, HIGH); 
@@ -327,6 +331,8 @@ bool nextButtonLoop() {
 
 
 bool pauseButtonLoop() {
+
+  if (audioBusy) return false;
      // ====== Handle PAUSE button with debounce ======
   digitalWrite(NEXT_LED_PIN, LOW); 
   digitalWrite(PAUSE_LED_PIN, HIGH);

@@ -53,6 +53,9 @@ extern const char *frameGroups[11];
 extern const char *wavGroups[11];
 //extern int currentGroup;
 
+extern bool audioBusy;
+extern uint32_t audioStartedAt;
+
 void showCurrentFrame(int currentGroup);
 void playCurrentWav(int currentGroup);
 extern void showCurrentFrameAndAudio(int currentGroup);

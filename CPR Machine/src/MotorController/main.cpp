@@ -12,6 +12,8 @@ long prepTimer = millis();
 static bool firstRun = true;
 uint32_t nextPrintMillis = 0;
 int currentGroupNum = 0;
+bool audioBusy = false;
+uint32_t audioStartedAt = 0;
 
 void setup() {
   Serial.begin(115200);
@@ -53,8 +55,19 @@ void loop() {
         DPRINT("State:"); DPRINT(currentState);
         DPRINT(",");
         DPRINT("PrevState:"); DPRINTLN(prevState);  
-        logBatteryData();
+        //logBatteryData();
+        // Serial.print("audioBusy: ");
+        // Serial.println(audioBusy ? "true" : "false");
+        
     }
+
+    if (audioBusy && !playWav1.isPlaying() && (millis() - audioStartedAt > 500)) {
+        audioBusy = false;
+        Serial.println("audioBusy cleared");
+    }
+
+    Serial.print("audioBusy: ");
+    Serial.println(audioBusy ? "true" : "false");
     
 
   
@@ -63,13 +76,13 @@ void loop() {
   // DPRINT(", Setpoint:"); DPRINT((computeCompressionSetpoint()+ linearZeroPos)*39.37);
   // DPRINT(", LinearPos:"); DPRINT(linearPos*39.37);
 
- 
-  if(firstRun){
-    showCurrentFrameAndAudio(currentGroupNum);
-    firstRun = false;
-  } else if (prevState != currentState){
-    showCurrentFrameAndAudio(currentGroupNum);
-  }
+    if(firstRun){
+      showCurrentFrameAndAudio(currentGroupNum);
+      firstRun = false;
+    } else if (prevState != currentState){
+      showCurrentFrameAndAudio(currentGroupNum);
+    }
+
 
   
 

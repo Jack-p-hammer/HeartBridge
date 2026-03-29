@@ -365,6 +365,30 @@ bool verifyBatteryPercentage() {
     return true;
 }
 
+float getBatteryPercentage(float totalVoltage) {
+    float cell = totalVoltage / 6.0f;
+
+    if (cell > 4.2f) cell = 4.2f;
+    if (cell < 3.3f) cell = 3.3f;
+
+    return ((cell - 3.3f) / 0.9f) * 100.0f;
+}
+
+void logBatteryData() {
+    float voltage = moteus.last_result().values.voltage;
+    float percentage = getBatteryPercentage(voltage);
+    unsigned long timeNow = millis();
+
+    // CSV format: time,voltage,percentage
+    Serial.print("LOG,");
+    Serial.print(timeNow);
+    Serial.print(",");
+    Serial.print(voltage);
+    Serial.print(",");
+    Serial.println(percentage);
+}
+
+
 
 void displayCutClothingInstructions() { 
     // TODO: Send HMI instructions for setup display

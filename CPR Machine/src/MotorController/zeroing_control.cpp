@@ -8,7 +8,7 @@
 #include <assert.h>
 #include "HMI_utils.h"
 
-double const zeroPos = 1.72;
+double const zeroPos = 1.72;//1.72;
 double current_error_gain = 68.58;
 
 double prev_command_gain = 1.002;

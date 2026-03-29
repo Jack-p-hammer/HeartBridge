@@ -15,6 +15,8 @@ void showScreen(const char *file);
 void playAudio(const char *wavFileName);
 bool nextButtonLoop();
 bool pauseButtonLoop();
+float getBatteryPercentage();
+void logBatteryData(); 
 
 extern unsigned long GreenNow;
 extern unsigned long PauseNow;

@@ -53,7 +53,10 @@ void loop() {
         DPRINT("State:"); DPRINT(currentState);
         DPRINT(",");
         DPRINT("PrevState:"); DPRINTLN(prevState);  
+        logBatteryData();
     }
+    
+
   
   
   // DPRINT(", Zero:"); DPRINT(linearZeroPos*39.37);

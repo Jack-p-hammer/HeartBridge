@@ -1183,7 +1183,7 @@
 	)
 	(rectangle
 		(start 19.685 27.94)
-		(end 128.905 102.87)
+		(end 128.27 97.155)
 		(stroke
 			(width 0)
 			(type default)
@@ -2363,7 +2363,7 @@
 				)
 			)
 		)
-		(property "Value" "80.6 Ohm"
+		(property "Value" "80.6 kOhm"
 			(at 58.42 66.04 90)
 			(effects
 				(font

@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 1.3,
-          "height": 2.8,
-          "width": 2.8
+          "drill": 2.0,
+          "height": 4.0,
+          "width": 4.0
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -58,7 +58,64 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "duplicate_footprints|164798761|83192336|08371d48-5ec1-4fa3-81d3-50654f5bce1e|a10b1fb4-055f-4a48-861a-dbab412fb489",
+          ""
+        ],
+        [
+          "extra_footprint|159600000|89052911|a10b1fb4-055f-4a48-861a-dbab412fb489|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "extra_footprint|164798761|83192336|08371d48-5ec1-4fa3-81d3-50654f5bce1e|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|131711900|88700000|f082c5ab-94d8-4157-b769-f6b14b999975|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|135376067|88700000|f7f370bd-f6a1-4403-a252-e25bce2327c4|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|138974733|88700000|c85dc727-265d-487c-9eed-04438048bee7|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|142575400|88700000|566b4e74-131f-4ceb-8fb7-b0e14c4138a5|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|146380000|107600000|866a8025-e4e6-4ab7-afa4-894e2d8bf8d4|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|153562500|107600000|53197291-2cd5-4843-b9b0-f8f00843f2b1|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "via_dangling|148250000|103700000|f4de6040-32fe-4f7a-ba02-80a8964f4101|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "via_dangling|148250000|104515488|4beb5bfb-53b3-40fe-a89e-1e8e39509c1f|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "via_dangling|148250000|105330976|b82a703c-2a9e-4b02-9ab7-f832c8c37a8f|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "via_dangling|148254924|111500000|27234b07-0705-4a6e-8a58-a6c254fbd6ff|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "via_dangling|148261079|110650022|bfc81b7f-386d-4252-a53e-e5c24ec94d1f|00000000-0000-0000-0000-000000000000",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -591,7 +648,7 @@
           "group_by": false,
           "label": "Datasheet",
           "name": "Datasheet",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
@@ -726,7 +783,7 @@
           "show": false
         }
       ],
-      "filter_string": "",
+      "filter_string": "r11",
       "group_symbols": true,
       "include_excluded_from_bom": false,
       "name": "",

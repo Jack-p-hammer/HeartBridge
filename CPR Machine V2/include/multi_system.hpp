@@ -17,24 +17,25 @@
 #include "actuation.hpp"
 #include "hmi.hpp"
 #include "sensing.hpp"
+#include "error_codes.hpp"
 
 /**
  * @brief Executes the mechanical zeroing sequence.
  *
  * This function coordinates the actuation of solenoids and error detection to perform the entire mechanical zeroing process.
  *
- * @return int PLACEHOLDER, will eventually return error state
+ * @return Error_Code
  */
-int mechanical_zeroing();
+Error_Code mechanical_zeroing();
 
 /**
  * @brief Executes the fine zeroing sequence.
  *
  * This function coordinates fine zeroing through motor velocity control and sensor feedback.
  *
- * @return int PLACEHOLDER, will eventually return error state
+ * @return Error_Code
  */
-int fine_zeroing();
+Error_Code fine_zeroing();
 
 /**
  * @brief Waits for the user to press the next button.
@@ -42,8 +43,8 @@ int fine_zeroing();
  * This function monitors the HMI input system until the next button is pressed,
  * initiating a state change when the next button is required for said change.
  *
- * @return int PLACEHOLDER, will eventually return error state
+ * @return True if next button detected, False if not
  */
-int wait_for_next_button();
+bool wait_for_next_button();
 
 #endif // MULTI_SYSTEM_HPP

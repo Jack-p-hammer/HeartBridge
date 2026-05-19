@@ -12,6 +12,24 @@
 #include "sensing.hpp"
 
 Error_Code init_sensors() {
+    // Setup I2C bus:
+    
+    
+    // Sensors to initiatilize:
+    // - IMU 
+    // - Force sensor 
+    // - Time of Flight sensor
+    ////// The ones below are on the motor controller board
+    // - Rotary encoder
+    // - Battery level
+
+    Adafruit_VL53L0X ToFSensor = Adafruit_VL53L0X();
+
+
+    
+
+
+
     return Error_Code::NORMAL_OPERATION;
 }
 

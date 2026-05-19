@@ -71,6 +71,7 @@ Error_Code main(void) {
         switch (currentState) {
             case STARTUP:
                 // Initialization code - runs once at startup, then transitions to next state
+                // Initialize sensors, motor, and screens, then display 911 screen and wait for next button press to transition to next state
                 error_code = init_sensors();
                 if (error_code != Error_Code::NORMAL_OPERATION) {
                     std::cerr << "Error during sensor initialization: " << static_cast<int>(error_code) << std::endl;

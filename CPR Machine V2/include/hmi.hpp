@@ -14,6 +14,8 @@
 #define HMI_HPP
 
 #include "error_codes.hpp"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 /**
  * @brief Initializes the display screens.

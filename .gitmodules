@@ -1,3 +1,6 @@
 [submodule "Boilerplate/lib/moteus"]
 	path = Boilerplate/lib/moteus
 	url = https://github.com/mjbots/moteus
+[submodule "CPR Machine V2/vcpkg"]
+	path = CPR Machine V2/vcpkg
+	url = https://github.com/microsoft/vcpkg.git

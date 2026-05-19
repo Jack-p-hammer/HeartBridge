@@ -35,7 +35,8 @@ Error_Code main(void) {
     Error_Code error_code = Error_Code::NORMAL_OPERATION;
     // Stay in loop unless something really fucked happens
     while (error_code != Error_Code::EXIT_UNKNOWN && error_code != Error_Code::ERROR_UNKNOWN_IMAGE) { 
-        static CPR_Machine_State currentState = STARTUP; // Placeholder initial state, declared as static in loop to preserve scope
+        // Initialize State, declare as static in loop to enforce scope
+        static CPR_Machine_State currentState = STARTUP; 
 
         // State-independent code, left empty for now
         if(false){

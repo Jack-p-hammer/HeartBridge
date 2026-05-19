@@ -19,6 +19,6 @@ Error_Code fine_zeroing() {
     return Error_Code::NORMAL_OPERATION;
 }
 
-Error_Code wait_for_next_button() {
-    return Error_Code::NORMAL_OPERATION;
+bool wait_for_next_button() {
+    return true;
 }

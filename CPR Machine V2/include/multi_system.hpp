@@ -45,6 +45,6 @@ Error_Code fine_zeroing();
  *
  * @return True if next button detected, False if not
  */
-bool wait_for_next_button();
+Error_Code wait_for_next_button();
 
 #endif // MULTI_SYSTEM_HPP

@@ -31,11 +31,10 @@ enum CPR_Machine_State {
     KNEEL_FAILURE
 };
 
-
 Error_Code main(void) {
     Error_Code error_code = Error_Code::NORMAL_OPERATION;
-
-    while (error_code != Error_Code::EXIT_UNKNOWN) { // Stay in loop unless something really fucked happens
+    // Stay in loop unless something really fucked happens
+    while (error_code != Error_Code::EXIT_UNKNOWN && error_code != Error_Code::ERROR_UNKNOWN_IMAGE) { 
         static CPR_Machine_State currentState = STARTUP; // Placeholder initial state, declared as static in loop to preserve scope
 
         // State-independent code, left empty for now

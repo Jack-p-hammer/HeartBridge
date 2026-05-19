@@ -15,10 +15,40 @@
 
 #include "error_codes.hpp"
 #include <iostream>
+#include <stdexcept>
+#include <unordered_map>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 
+// Enum of possible displayed images
+enum class Image {
+    UNFOLD,
+    CUT_CLOTHES,
+    ALIGNMENT,
+    ZEROING_PREP,
+    ZEROING,
+    COMPRESSION_PREP,
+    COMPRESSION,
+    PAUSE,
+    ABORT,
+    KNEEL_FAILURE
+};
+
+// Enum of possible audio prompts
+enum class Audio_Prompt {
+    STARTUP,
+    UNFOLD,
+    CUT_CLOTHES,
+    ALIGNMENT,
+    ZEROING_PREP,
+    ZEROING,
+    COMPRESSION_PREP,
+    COMPRESSION,
+    PAUSE,
+    ABORT,
+    KNEEL_FAILURE
+};
 /**
  * @brief Initializes the display screens.
  *

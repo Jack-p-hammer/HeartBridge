@@ -9451,6 +9451,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 59.69 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "74cea26e-8911-4a0d-80b1-944cf1666597")
 		)
@@ -9650,6 +9659,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 199.39 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "5"
 			(uuid "a139a194-30b4-49ef-8ea1-2485fa76f72c")
 		)
@@ -9738,6 +9756,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 45.72 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e603fe1e-52de-4824-8afe-0c0e961135f5")
 		)
@@ -9809,6 +9836,15 @@
 			)
 		)
 		(property "digikey" "732-8099-1-ND"
+			(at 104.14 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 104.14 76.2 0)
 			(effects
 				(font
@@ -10028,6 +10064,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 123.19 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a1539b47-6727-47ba-9960-54caee76bb96")
 		)
@@ -10101,6 +10146,15 @@
 			)
 		)
 		(property "digikey" "1951-2742-ND"
+			(at 116.84 35.56 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" "Have: 1"
 			(at 116.84 35.56 90)
 			(effects
 				(font
@@ -10255,6 +10309,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 147.32 148.59 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "dae914e2-4d4b-414a-a9e3-bece53e3a7f7")
 		)
@@ -10278,7 +10341,7 @@
 		(at 50.8 165.1 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -10327,6 +10390,15 @@
 			)
 		)
 		(property "digikey" "490-10787-1-ND"
+			(at 50.8 165.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 50.8 165.1 90)
 			(effects
 				(font
@@ -10416,6 +10488,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" "Have: 2"
+			(at 161.29 55.88 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "67728ab9-d628-44e4-a454-18d18f019316")
 		)
@@ -10487,6 +10568,15 @@
 			)
 		)
 		(property "digikey" "490-17674-1-ND"
+			(at 36.83 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" "Have: 4"
 			(at 36.83 142.24 0)
 			(effects
 				(font
@@ -10581,7 +10671,7 @@
 		(at 24.13 38.1 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "380d277d-4994-492a-950a-725a646ed811")
@@ -10637,6 +10727,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 24.13 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "570f1665-0870-446b-898d-5d044308bd5d")
 		)
@@ -10658,7 +10757,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "3f72f4ec-e408-4572-b49e-5d25fcb8fb3a")
@@ -10739,6 +10838,15 @@
 			)
 		)
 		(property "digikey" "DMMT5401-FDICT-ND"
+			(at 66.04 35.56 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 66.04 35.56 90)
 			(effects
 				(font
@@ -10844,6 +10952,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 151.13 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d896132d-068f-4370-8cf8-8ff3228f6306")
 		)
@@ -10865,7 +10982,7 @@
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -10918,6 +11035,15 @@
 			)
 		)
 		(property "digikey" "1951-2739-ND"
+			(at 48.26 45.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 48.26 45.72 90)
 			(effects
 				(font
@@ -11003,6 +11129,15 @@
 			)
 		)
 		(property "digikey" "2N3904FS-ND"
+			(at 118.11 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 118.11 88.9 0)
 			(effects
 				(font
@@ -11100,7 +11235,7 @@
 		(at 110.49 157.48 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -11149,6 +11284,15 @@
 			)
 		)
 		(property "digikey" "RMCF1206FT20K0CT-ND"
+			(at 110.49 157.48 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 110.49 157.48 90)
 			(effects
 				(font
@@ -11234,6 +11378,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 72.39 22.86 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "a6031b97-085e-42ca-a04b-5e87681adf9f")
 		)
@@ -11257,7 +11410,7 @@
 		(at 40.64 168.91 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -11308,6 +11461,15 @@
 			)
 		)
 		(property "digikey" "311-49.9KFRCT-ND"
+			(at 40.64 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 40.64 168.91 0)
 			(effects
 				(font
@@ -11403,7 +11565,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "4bf0632d-8c0f-43a7-aacc-922426a86a3a")
@@ -11459,6 +11621,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 24.13 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "751ffedf-da59-4702-a34f-46413b046742")
 		)
@@ -11480,7 +11651,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "4df6f435-576a-4ec0-bf1c-7dd077f37ff0")
@@ -11569,11 +11740,20 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 140.97 161.29 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "6"
 			(uuid "92c14d66-8eba-46d4-b3ea-daf23eb329c0")
 		)
 		(pin "3"
-			(uuid "b81b790e-fbce-4d9c-867d-b3d99905c188")
+			(uuid "b81b790e-fbce-4d9c-867d-b3d99905c189")
 		)
 		(pin "1"
 			(uuid "6a4eac79-cc09-4084-a9e5-604c294a4695")
@@ -11582,10 +11762,10 @@
 			(uuid "b8c55120-b9e0-433a-824b-cf4b9a9cb037")
 		)
 		(pin "5"
-			(uuid "c26dfd88-7bd7-4900-910a-2cc327ae39fb")
+			(uuid "c26dfd88-7bd7-4900-910a-2cc327ae39fc")
 		)
 		(pin "4"
-			(uuid "ed889ddd-ba5c-4543-b3a9-897b8f88c13d")
+			(uuid "ed889ddd-ba5c-4543-b3a9-897b8f88c13e")
 		)
 		(instances
 			(project "CPR Machine Schematic"
@@ -11856,6 +12036,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 163.83 93.98 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3bf91ade-f098-4f06-bae8-f245efb4f2c3")
 		)
@@ -11993,6 +12182,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 175.26 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8add93f0-5eda-4367-81f5-65eb825cae8c")
 		)
@@ -12051,6 +12249,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 133.35 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 133.35 93.98 0)
 			(effects
 				(font
@@ -12138,6 +12345,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 50.8 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f81686b4-0667-4cbb-b123-53d56dafa722")
 		)
@@ -12208,6 +12424,15 @@
 			)
 		)
 		(property "digikey" "RMCF1206FT2K00CT-ND"
+			(at 123.19 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 123.19 107.95 0)
 			(effects
 				(font
@@ -12353,6 +12578,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 161.29 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5f8e1ab1-b839-4549-bcef-6ead71205e0f")
 		)
@@ -12415,6 +12649,15 @@
 		)
 		(property "Description" "Omron G5Q relay, Miniature Single Pole, SPST-NO, 10A"
 			(at 151.13 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
+			(at 151.13 99.06 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12506,6 +12749,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 29.21 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c9c48d19-8194-4f3c-8b43-e11eb798a8b8")
 		)
@@ -12566,6 +12818,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 199.39 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 199.39 63.5 0)
 			(effects
 				(font
@@ -12702,6 +12963,15 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
+			(at 266.7 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 266.7 26.67 0)
 			(effects
 				(font
@@ -12857,7 +13127,7 @@
 		(at 153.67 161.29 0)
 		(unit 2)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "7fecfe94-de9c-4f60-b838-7ae56040bbc3")
@@ -12946,6 +13216,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 153.67 161.29 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "6"
 			(uuid "c597f74a-ec6c-4a3a-b455-e788d6f2de07")
 		)
@@ -13020,6 +13299,15 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
+			(at 266.7 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 266.7 16.51 0)
 			(effects
 				(font
@@ -13176,7 +13464,7 @@
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "8af0ec7d-b387-488c-adf9-26d9147796c3")
@@ -13226,6 +13514,15 @@
 			)
 		)
 		(property "digikey" "RMCF1206JG1K50CT-ND"
+			(at 135.89 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 135.89 48.26 0)
 			(effects
 				(font
@@ -13311,6 +13608,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 107.95 102.87 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "dc8db348-94e7-4d89-a83b-4ddb88036624")
 		)
@@ -13331,7 +13637,7 @@
 		(at 156.21 171.45 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "8d153d19-ade0-4bc6-bb5d-c4866cb23032")
@@ -13381,6 +13687,15 @@
 			)
 		)
 		(property "digikey" "A129830CT-ND"
+			(at 156.21 171.45 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 156.21 171.45 90)
 			(effects
 				(font
@@ -13515,6 +13830,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 199.39 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 199.39 43.18 0)
 			(effects
 				(font
@@ -13737,6 +14061,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 105.41 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "26f83e82-cbaf-4818-a3dd-c5836bfc40d8")
 		)
@@ -13884,6 +14217,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" "Have: 2"
+			(at 173.99 55.88 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "79099ee3-dc8c-417d-8984-8e0c29e1e50c")
 		)
@@ -14012,6 +14354,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 86.36 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "5"
 			(uuid "ec4f6b82-0fc4-43b1-8724-2916feb1221b")
 		)
@@ -14077,7 +14428,7 @@
 		(at 40.64 179.07 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -14128,6 +14479,15 @@
 			)
 		)
 		(property "digikey" "311-9.53KFRCT-ND"
+			(at 40.64 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 40.64 179.07 0)
 			(effects
 				(font
@@ -14404,6 +14764,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 137.16 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "88e37841-da8d-497b-a61f-fe82aa99791c")
 		)
@@ -14612,6 +14981,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" "Have: 1"
+			(at 60.96 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1f59cd0b-6b2a-456c-bcc5-b60fbd497cb9")
 		)
@@ -14719,6 +15097,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 222.25 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "5"
 			(uuid "3845790f-3860-4051-a32e-4034ee1a0414")
 		)
@@ -14817,6 +15204,15 @@
 			)
 		)
 		(property "digikey" "118-SRU8043-6R8YCT-ND"
+			(at 43.18 95.25 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 43.18 95.25 90)
 			(effects
 				(font
@@ -15091,6 +15487,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 149.86 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "6b4457c4-a125-4007-b69b-5c4eb3015ab1")
 		)
@@ -15302,6 +15707,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" "Have: 4"
+			(at 74.93 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "68b3cb16-bd70-4aae-8d23-9642f12b9c7d")
 		)
@@ -15437,6 +15851,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 199.39 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f3406d9b-7f54-41b2-a6cc-4b54c0536448")
 		)
@@ -15516,6 +15939,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 49.53 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7c3c6d20-f253-4a3a-9227-fbcb9172bf69")
 		)
@@ -15586,6 +16018,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 149.86 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c8576986-532b-43fc-a710-182739095fda")
 		)
@@ -15603,7 +16044,7 @@
 		(at 29.21 168.91 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "c4e4139e-173c-4fc2-acbf-2338bcc27bf2")
@@ -15653,6 +16094,15 @@
 			)
 		)
 		(property "digikey" "1292-1206N470J102CT-ND"
+			(at 29.21 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 29.21 168.91 0)
 			(effects
 				(font
@@ -15732,6 +16182,15 @@
 			)
 		)
 		(property "digikey" "490-17674-1-ND"
+			(at 110.49 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" "Have: 4"
 			(at 110.49 166.37 0)
 			(effects
 				(font
@@ -15959,7 +16418,7 @@
 		(at 55.88 20.32 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "ccf63960-4a03-4261-8c0a-136eeb4d59fd")
@@ -16007,6 +16466,15 @@
 			)
 		)
 		(property "digikey" "5923-0685T4000-01CT-ND"
+			(at 55.88 20.32 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 55.88 20.32 90)
 			(effects
 				(font
@@ -16094,6 +16562,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 35.56 90.17 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e4c145fe-4e9a-4a46-bfa1-e7d3a64afccc")
 		)
@@ -16165,6 +16642,15 @@
 			)
 		)
 		(property "digikey" "490-GRM3195C1H104JA05DCT-ND"
+			(at 60.96 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 60.96 182.88 0)
 			(effects
 				(font
@@ -16459,7 +16945,7 @@
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "d7659793-e6ae-492e-9bc6-ac5fce79e8dc")
@@ -16509,6 +16995,15 @@
 			)
 		)
 		(property "digikey" "311-665FRCT-ND"
+			(at 148.59 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 148.59 48.26 0)
 			(effects
 				(font
@@ -16669,7 +17164,7 @@
 		(at 81.28 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "dacf6e0b-6b69-4fc5-aca7-9962edeeb2ea")
@@ -16719,6 +17214,15 @@
 			)
 		)
 		(property "digikey" "A129830CT-ND"
+			(at 81.28 45.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 81.28 45.72 90)
 			(effects
 				(font
@@ -16789,6 +17293,15 @@
 			)
 		)
 		(property "Description" "test point"
+			(at 162.56 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 162.56 22.86 0)
 			(effects
 				(font
@@ -16874,6 +17387,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" "Have: 2"
+			(at 135.89 55.88 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "0d12c758-6e76-47c4-9415-da7dfccd5c7e")
 		)
@@ -16934,6 +17456,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 170.18 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 170.18 106.68 0)
 			(effects
 				(font
@@ -17028,7 +17559,7 @@
 		(at 78.74 35.56 0)
 		(unit 2)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "ef87d501-c083-4779-8e84-00e889fdcbb9")
@@ -17117,23 +17648,32 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 78.74 35.56 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "6"
-			(uuid "c597f74a-ec6c-4a3a-b455-e788d6f2de07")
+			(uuid "c597f74a-ec6c-4a3a-b455-e788d6f2de08")
 		)
 		(pin "3"
-			(uuid "b81b790e-fbce-4d9c-867d-b3d99905c189")
+			(uuid "b81b790e-fbce-4d9c-867d-b3d99905c18a")
 		)
 		(pin "1"
-			(uuid "ad22bcc3-2a9a-4033-91cc-17e0da6718d6")
+			(uuid "ad22bcc3-2a9a-4033-91cc-17e0da6718d7")
 		)
 		(pin "2"
-			(uuid "c07800e2-b36a-4215-988a-770177fae6ee")
+			(uuid "c07800e2-b36a-4215-988a-770177fae6ef")
 		)
 		(pin "5"
-			(uuid "c26dfd88-7bd7-4900-910a-2cc327ae39fc")
+			(uuid "c26dfd88-7bd7-4900-910a-2cc327ae39fd")
 		)
 		(pin "4"
-			(uuid "ed889ddd-ba5c-4543-b3a9-897b8f88c13e")
+			(uuid "ed889ddd-ba5c-4543-b3a9-897b8f88c13f")
 		)
 		(instances
 			(project "CPR Machine Schematic"
@@ -17191,6 +17731,15 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
+			(at 173.99 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 173.99 48.26 0)
 			(effects
 				(font
@@ -17268,6 +17817,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 63.5 45.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "78d50495-721a-4c05-b07c-d1f7fee5befc")
 		)
@@ -17330,6 +17888,15 @@
 		)
 		(property "Description" "Resistor, US symbol"
 			(at 138.43 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
+			(at 138.43 171.45 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17418,6 +17985,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" "Have: 2"
+			(at 148.59 55.88 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "a96ac0d8-5183-4307-b65f-e84c09e10164")
 		)
@@ -17480,6 +18056,15 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
+			(at 266.7 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 266.7 21.59 0)
 			(effects
 				(font
@@ -17552,6 +18137,15 @@
 			)
 		)
 		(property "digikey" "B220A-FDICT-ND"
+			(at 50.8 99.06 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 50.8 99.06 90)
 			(effects
 				(font
@@ -17698,6 +18292,15 @@
 			)
 		)
 		(property "digikey" "490-5312-1-ND"
+			(at 31.75 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 31.75 156.21 0)
 			(effects
 				(font

@@ -1750,6 +1750,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 158.75 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "dfa403a4-fe6b-453b-a133-9c4972d44c0b")
 		)
@@ -1776,7 +1785,7 @@
 		(at 106.68 55.88 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -1827,6 +1836,15 @@
 			)
 		)
 		(property "digikey" "277-1667-ND"
+			(at 106.68 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 106.68 55.88 0)
 			(effects
 				(font
@@ -1895,6 +1913,15 @@
 		)
 		(property "Description" "Resistor, US symbol"
 			(at 134.62 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
+			(at 134.62 59.69 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1976,6 +2003,15 @@
 			)
 		)
 		(property "digikey" "T2N7002BKLMCT-ND"
+			(at 143.51 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 143.51 99.06 0)
 			(effects
 				(font
@@ -2121,6 +2157,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 78.74 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "947412e5-90a5-4bdb-a7a9-967daac710c3")
 		)
@@ -2141,7 +2186,7 @@
 		(at 134.62 46.99 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "54a8f86b-9748-41cf-8c9b-66ae6e4d5f1e")
@@ -2197,6 +2242,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 134.62 46.99 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "34b715f8-e0b3-4563-9096-1b2b5e228fd9")
 		)
@@ -2217,7 +2271,7 @@
 		(at 138.43 86.36 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "614e1a96-e85e-4d93-8d21-68f2549bb2c8")
@@ -2265,6 +2319,15 @@
 			)
 		)
 		(property "digikey" "311-49.9FRCT-ND"
+			(at 138.43 86.36 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 138.43 86.36 90)
 			(effects
 				(font
@@ -2341,6 +2404,15 @@
 			)
 		)
 		(property "digikey" "RMCF1206ZT0R00CT-ND"
+			(at 97.79 48.26 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 97.79 48.26 90)
 			(effects
 				(font
@@ -2681,6 +2753,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 85.09 63.5 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "8f207f48-1d87-4645-a39b-acfd235c01c4")
 		)
@@ -2946,6 +3027,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 134.62 99.06 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1ca90814-2957-4cd9-a14a-b10ca676ad7d")
 		)
@@ -3005,6 +3095,15 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
+			(at 129.54 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 129.54 63.5 0)
 			(effects
 				(font
@@ -3087,6 +3186,15 @@
 			)
 		)
 		(property "digikey" "T2N7002BKLMCT-ND"
+			(at 95.25 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 95.25 63.5 0)
 			(effects
 				(font
@@ -3246,6 +3354,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 143.51 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "5ec00149-4700-4917-bb57-0d2724f3248e")
 		)
@@ -3316,6 +3433,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 128.27 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d71a370a-6a0c-42e4-85a2-d58e724ebd45")
 		)
@@ -3377,6 +3503,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated"
+			(at 158.75 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 158.75 88.9 0)
 			(effects
 				(font

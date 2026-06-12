@@ -1490,7 +1490,7 @@
 		(at 74.93 54.61 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp yes)
 		(fields_autoplaced yes)
@@ -1541,6 +1541,15 @@
 			)
 		)
 		(property "digikey" "1292-1206N470J102CT-ND"
+			(at 74.93 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 74.93 54.61 0)
 			(effects
 				(font
@@ -1612,6 +1621,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 35.56 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 35.56 21.59 0)
 			(effects
 				(font
@@ -1904,6 +1922,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" "Have: 1"
+			(at 102.87 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "3"
 			(uuid "22d61035-17ec-41f3-bf66-679a0f38471c")
 		)
@@ -1933,7 +1960,7 @@
 		(at 40.64 86.36 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "28294664-4e0b-4363-bd0f-20e453300806")
@@ -1981,6 +2008,15 @@
 			)
 		)
 		(property "digikey" "277-1667-ND"
+			(at 40.64 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 40.64 86.36 0)
 			(effects
 				(font
@@ -2075,7 +2111,7 @@
 		(at 58.42 80.01 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -2124,6 +2160,15 @@
 			)
 		)
 		(property "digikey" "1292-1206N470J102CT-ND"
+			(at 58.42 80.01 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 58.42 80.01 90)
 			(effects
 				(font
@@ -2350,7 +2395,7 @@
 		(at 58.42 69.85 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -2399,6 +2444,15 @@
 			)
 		)
 		(property "digikey" "311-80.6FRCT-ND"
+			(at 58.42 69.85 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 58.42 69.85 90)
 			(effects
 				(font
@@ -2543,6 +2597,15 @@
 			)
 		)
 		(property "digikey" "MCP6004T-I/SLCT-ND"
+			(at 59.69 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" "Have: 1"
 			(at 59.69 48.26 0)
 			(effects
 				(font
@@ -2696,6 +2759,15 @@
 				(hide yes)
 			)
 		)
+		(property "Notes" ""
+			(at 34.29 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "7a8f8c4a-b158-4cae-bfd6-bde16ac52c7c")
 		)
@@ -2716,7 +2788,7 @@
 		(at 34.29 41.91 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -2767,6 +2839,15 @@
 			)
 		)
 		(property "digikey" "13-RT1206DRE0790KLCT-ND"
+			(at 34.29 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Notes" ""
 			(at 34.29 41.91 0)
 			(effects
 				(font

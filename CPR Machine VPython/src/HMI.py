@@ -17,6 +17,7 @@ PAUSE_LED_PIN = 23
 # Laser PWM Output
 LASER_PIN     = 24
 
+# Declare paths for images and audio files relative to this script's directory
 IMAGES = Path(__file__).parent / "Images"
 AUDIO = Path(__file__).parent / "Audio"
 

@@ -1,18 +1,23 @@
 # main.py
 
+# External imports
 import time
 import sys
 import logging
-import sensing
-import actuation
-import HMI
-import multi_system
+from pathlib import Path
+
+# Internal imports
+import sensing, actuation, HMI, multi_system
 from error_codes import ErrorCode
 from states import CPRState
 
 # TODO: Optimize loop speed
 LOOP_TICK_SECONDS = 0.05  # 50ms per tick
-LOG_FILE          = "cpr_machine.log"
+
+# Initialize log directory and file
+LOG_DIR = Path(__file__).parent.parent / "Logs" # 2x parent to get to project root
+LOG_DIR.mkdir(parents=True, exist_ok=True) # Ensure logs directory exists
+LOG_FILE = LOG_DIR / "heartBridge.log"
 
 # Maps error codes to the state they should force the machine into
 ERROR_STATE_MAP = {
@@ -30,6 +35,7 @@ def configure_logging():
     # Write to both console and log file simultaneously.
     # Each line is prefixed with a timestamp and severity level, e.g.:
     #   2026-05-10 12:00:00 - INFO - Sensors initialized
+    # Severity levels: DEBUG < INFO < WARNING < ERROR < CRITICAL
     logging.basicConfig(
         level=logging.DEBUG,
         format="%(asctime)s - %(levelname)s - %(message)s",

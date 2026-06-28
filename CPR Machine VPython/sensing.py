@@ -1,0 +1,83 @@
+# sensing.py
+
+import pigpio
+import board
+import busio
+import logging
+import adafruit_vl53l0x
+import adafruit_bno08x
+from adafruit_bno08x.i2c import BNO08X_I2C
+from error_codes import ErrorCode
+
+_pi    = None
+_vl53  = None
+_bno   = None
+
+
+def get_pi():
+    """Returns the shared pigpio instance for use by hmi.py's button/LED/laser GPIO."""
+    return _pi
+
+
+def init_sensors() -> ErrorCode:
+    global _pi, _vl53, _bno
+
+    # pigpio is only used here for the shared GPIO instance passed to hmi.py.
+    # The sensors themselves use the Adafruit/Blinka I2C abstraction below.
+    # The pigpio daemon must be running before this is called:
+    #   sudo pigpiod
+    _pi = pigpio.pi()
+    if not _pi.connected:
+        logging.error("Failed to connect to pigpio daemon")
+        return ErrorCode.ERROR_INIT_FAILURE
+
+    # board.SCL and board.SDA refer to the Pi's default I2C pins (GPIO 3 and 2).
+    # Both sensors share this same I2C bus.
+    try:
+        i2c = busio.I2C(board.SCL, board.SDA)
+    except Exception as e:
+        logging.error(f"Failed to initialize I2C bus: {e}")
+        return ErrorCode.ERROR_INIT_FAILURE
+
+    # VL53L0X time-of-flight sensor
+    try:
+        _vl53 = adafruit_vl53l0x.VL53L0X(i2c)
+    except Exception as e:
+        logging.error(f"VL53L0X initialization failed: {e}")
+        return ErrorCode.ERROR_INIT_FAILURE
+
+    # BNO085 IMU
+    try:
+        _bno = BNO08X_I2C(i2c)
+        # Enable the accelerometer report used for kneel detection
+        _bno.enable_feature(adafruit_bno08x.BNO_REPORT_ACCELEROMETER)
+    except Exception as e:
+        logging.error(f"BNO085 initialization failed: {e}")
+        return ErrorCode.ERROR_INIT_FAILURE
+
+    logging.info("Sensors initialized")
+    return ErrorCode.NORMAL_OPERATION
+
+
+def battery_check() -> ErrorCode:
+    return ErrorCode.NORMAL_OPERATION
+
+
+def read_sensors_mech_zeroing() -> ErrorCode:
+    return ErrorCode.NORMAL_OPERATION
+
+
+def read_sensors_fine_zeroing() -> ErrorCode:
+    return ErrorCode.NORMAL_OPERATION
+
+
+def read_sensors_compressions() -> ErrorCode:
+    return ErrorCode.NORMAL_OPERATION
+
+
+def check_sensor_error() -> ErrorCode:
+    return ErrorCode.NORMAL_OPERATION
+
+
+def zero_chest_position() -> ErrorCode:
+    return ErrorCode.NORMAL_OPERATION

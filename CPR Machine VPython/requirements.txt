@@ -1,0 +1,8 @@
+pigpio
+pygame
+logging
+time
+sys
+adafruit-blinka
+adafruit-circuitpython-vl53l0x
+adafruit-circuitpython-bno08x

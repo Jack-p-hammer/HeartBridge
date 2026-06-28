@@ -15,7 +15,7 @@ from states import CPRState
 LOOP_TICK_SECONDS = 0.05  # 50ms per tick
 
 # Initialize log directory and file
-LOG_DIR = Path(__file__).parent.parent / "Logs" # 2x parent to get to project root
+LOG_DIR = Path(__file__).resolve().parent.parent / "Logs" # 2x parent to get to project root
 LOG_DIR.mkdir(parents=True, exist_ok=True) # Ensure logs directory exists
 LOG_FILE = LOG_DIR / "heartBridge.log"
 
@@ -131,7 +131,8 @@ def main():
                 HMI.set_screen_audio(HMI.Image.ZEROING, HMI.AudioPrompt.ZEROING)
                 
             # Loop
-            error = multi_system.zeroing()
+            error = actuation.zeroing()
+            
             if error == ErrorCode.ZEROING_FINISHED:
                 state = CPRState.COMPRESSION_PREP
 
@@ -140,26 +141,33 @@ def main():
             if state != prev_state:
                 HMI.disable_next_button()
                 HMI.disable_pause_button()
+                
                 error = actuation.init_compressions()
                 if error != ErrorCode.NORMAL_OPERATION: continue
+                
                 HMI.set_screen_audio(HMI.Image.COMPRESSION_PREP, HMI.AudioPrompt.COMPRESSION_PREP)
                 
             # Loop
             if HMI.audio_finished():
-                HMI.enable_pause_button()
                 state = CPRState.COMPRESSION
 
         elif state == CPRState.COMPRESSION:
+            # Setup
+            if state != prev_state:
+                HMI.enable_pause_button()
+                HMI.set_screen_audio(HMI.Image.COMPRESSION, HMI.AudioPrompt.COMPRESSION)
+                
             # Loop
             error = actuation.compressions()
+            
             if HMI.pause_button_pressed():
                 state = CPRState.PAUSE
 
         elif state == CPRState.PAUSE:
             # Setup
             if state != prev_state:
-                actuation.stop_compressions()
                 HMI.disable_pause_button()
+                actuation.stop_compressions()
                 HMI.enable_next_button()
                 HMI.set_screen_audio(HMI.Image.PAUSE, HMI.AudioPrompt.PAUSE)
                 

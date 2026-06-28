@@ -18,8 +18,8 @@ PAUSE_LED_PIN = 23
 LASER_PIN     = 24
 
 # Declare paths for images and audio files relative to this script's directory
-IMAGES = Path(__file__).parent / "Images"
-AUDIO = Path(__file__).parent / "Audio"
+IMAGES = Path(__file__).resolve().parent / "Images"
+AUDIO = Path(__file__).resolve().parent / "Audio"
 
 class Image(Enum):
     # Enum values are the image file paths
@@ -49,11 +49,12 @@ class AudioPrompt(Enum):
     ABORT            = ""   # TODO
     KNEEL_FAILURE    = ""   # TODO
 
-_screen = None
-_pi     = None
+# Global variables for shared instances, _pi is declared in sensing.py and passed to HMI.py for shared GPIO access
+_screen: pygame.Surface
+_pi: pigpio.pi
 
 
-def init_HMI(pi_instance) -> ErrorCode:
+def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
     """Initialize screens, audio, lasers, and buttons.
 
     Args:
@@ -143,6 +144,15 @@ def disable_lasers():
     """Disables alignment lasers
     """
     _pi.write(LASER_PIN, 0)
+    
+def audio_finished() -> bool:
+    """Check if audio playback has finished
+
+    Returns:
+        bool: True if audio finished, False otherwise
+    """
+    # TODO: Change such that returns if audio loop finished once, not if audio is still playing
+    return not pygame.mixer.get_busy()
 
 
 # The next and pause buttons each share a ground connection with their built-in LED.

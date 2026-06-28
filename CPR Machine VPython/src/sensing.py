@@ -9,9 +9,10 @@ import adafruit_bno08x
 from adafruit_bno08x.i2c import BNO08X_I2C
 from error_codes import ErrorCode
 
-_pi    = None
-_vl53  = None
-_bno   = None
+# Global variables for shared sensor instances
+_pi: pigpio.pi
+_vl53: adafruit_vl53l0x.VL53L0X
+_bno: BNO08X_I2C
 
 
 def get_pi():

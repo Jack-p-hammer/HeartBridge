@@ -26,6 +26,7 @@ FATAL_ERRORS = {ErrorCode.EXIT_UNKNOWN, ErrorCode.ERROR_UNKNOWN_IMAGE}
 
 
 def configure_logging():
+    """Configure console and file logging for the CPR machine runtime."""
     # Write to both console and log file simultaneously.
     # Each line is prefixed with a timestamp and severity level, e.g.:
     #   2026-05-10 12:00:00 - INFO - Sensors initialized
@@ -41,6 +42,7 @@ def configure_logging():
 
 
 def main():
+    """Run the main state-machine loop for the CPR machine."""
     configure_logging()
 
     # Start by defining initial state and error code. The state machine will update these as it runs.
@@ -124,7 +126,7 @@ def main():
                 
             # Loop
             error = multi_system.zeroing()
-            if error == ErrorCode.NORMAL_OPERATION:
+            if error == ErrorCode.ZEROING_FINISHED:
                 state = CPRState.COMPRESSION_PREP
 
         elif state == CPRState.COMPRESSION_PREP:

@@ -20,6 +20,7 @@ def get_pi():
 
 
 def init_sensors() -> ErrorCode:
+    """Initialize the shared GPIO and sensor hardware used by the system."""
     global _pi, _vl53, _bno
 
     # pigpio is only used here for the shared GPIO instance passed to hmi.py.
@@ -60,24 +61,40 @@ def init_sensors() -> ErrorCode:
 
 
 def battery_check() -> ErrorCode:
-    return ErrorCode.NORMAL_OPERATION
+    """Ensure sufficient charge for operation
 
-
-def read_sensors_mech_zeroing() -> ErrorCode:
+    Returns:
+        ErrorCode: Normal if battery is sufficient, otherwise ERROR_LOW_BATTERY
+    """
+    # TODO: Implement actual battery level checking logic
     return ErrorCode.NORMAL_OPERATION
 
 
 def read_sensors_fine_zeroing() -> ErrorCode:
+    """Read and validate sensor readings for zeroing-appropriate setpoints
+
+    Returns:
+        ErrorCode: Normal if readings are valid, otherwise ERROR_SENSOR_FAILURE
+    """
     return ErrorCode.NORMAL_OPERATION
 
 
 def read_sensors_compressions() -> ErrorCode:
+    """Read and validate sensor readings for zeroing-appropriate setpoints
+
+    Returns:
+        ErrorCode: Normal if readings are valid, otherwise ERROR_SENSOR_FAILURE
+    """
     return ErrorCode.NORMAL_OPERATION
 
 
-def check_sensor_error() -> ErrorCode:
-    return ErrorCode.NORMAL_OPERATION
+def check_sensor_error(sensor_setpoints: int) -> ErrorCode:
+    """Determines if any sensor readings are out of intended range
 
+    Args:
+        sensor_setpoints (int): Sensor setpoints, in order [Rotary, ToF, IMU, Force]
 
-def zero_chest_position() -> ErrorCode:
+    Returns:
+        ErrorCode: Normal if readings are valid, ERROR_KNEEL_FAILURE if IMU error, ERROR_SENSOR_FAILURE otherwise
+    """
     return ErrorCode.NORMAL_OPERATION

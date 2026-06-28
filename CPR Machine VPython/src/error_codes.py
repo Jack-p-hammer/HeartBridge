@@ -9,4 +9,6 @@ class ErrorCode(Enum):
     ERROR_SENSOR_FAILURE       = 0x03
     ERROR_IMU_KNEEL_FAILURE    = 0x04
     ERROR_ZEROING_FAILURE      = 0x05
+    ERROR_LOW_BATTERY          = 0x06
+    ZEROING_FINISHED           = 0x07
     NORMAL_OPERATION           = 0x7F

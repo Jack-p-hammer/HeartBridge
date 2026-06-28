@@ -1,5 +1,6 @@
 pigpio
 pygame
+pathlib 
 logging
 time
 sys

@@ -47,7 +47,7 @@ def init_sensors() -> ErrorCode:
         logging.error(f"VL53L0X initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
 
-    # BNO085 IMU
+    # BNO085 IMU TODO: Check if this is the one we have
     try:
         _bno = BNO08X_I2C(i2c)
         # Enable the accelerometer report used for kneel detection

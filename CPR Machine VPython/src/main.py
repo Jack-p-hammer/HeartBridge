@@ -41,7 +41,7 @@ def configure_logging():
     # Write to both console and log file simultaneously.
     # Each line is prefixed with a timestamp and severity level, e.g.:
     #   2026-05-10 12:00:00 - INFO - Sensors initialized
-    # Severity levels: DEBUG < INFO < WARNING < ERROR < CRITICAL
+    # Severity levels: DEBUG < WARNING < ERROR < CRITICAL
     logging.basicConfig(
         level=logging.DEBUG,
         format="%(asctime)s - %(levelname)s - %(message)s",

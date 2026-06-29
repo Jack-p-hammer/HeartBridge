@@ -5,3 +5,7 @@
 
 2. Run the following command:
     pip install -r requirements.txt
+
+### Other code writing notes
+
+Use logging.debug/.warning/.error instead of print statements! This will add the comments to the logs made by heartbridge instead of just the console

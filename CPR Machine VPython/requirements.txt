@@ -1,9 +1,9 @@
 pigpio
 pygame
+pytest
 pathlib 
+moteus
 logging
-time
-sys
 adafruit-blinka
 adafruit-circuitpython-vl53l0x
 adafruit-circuitpython-bno08x

@@ -9,45 +9,48 @@ from error_codes import ErrorCode
 
 # TODO: Set actual GPIO pin numbers to match the hardware hat
 # Button Inputs
-NEXT_BTN_PIN  = 17
+NEXT_BTN_PIN = 17
 PAUSE_BTN_PIN = 27
 # LED Outputs/Button Toggles
-NEXT_LED_PIN  = 22
+NEXT_LED_PIN = 22
 PAUSE_LED_PIN = 23
 # Laser PWM Output
-LASER_PIN     = 24
+LASER_PIN = 24
 
 # Declare paths for images and audio files relative to this script's directory
 IMAGES = Path(__file__).resolve().parent / "Images"
 AUDIO = Path(__file__).resolve().parent / "Audio"
 
+
 class Image(Enum):
     # Enum values are the image file paths
-    STARTUP          = ""          # TODO: add startup/911 image
-    UNFOLD           = IMAGES / "unfold.jpg"
-    CUT_CLOTHES      = IMAGES / "cutClothing.jpg"
-    ALIGNMENT        = IMAGES / "alignment.jpg"
-    ZEROING_PREP     = IMAGES / "zeroingPrep.jpg"
-    ZEROING          = ""          # TODO: Find zeroing image
+    STARTUP = ""          # TODO: add startup/911 image
+    UNFOLD = IMAGES / "unfold.jpg"
+    CUT_CLOTHES = IMAGES / "cutClothing.jpg"
+    ALIGNMENT = IMAGES / "alignment.jpg"
+    ZEROING_PREP = IMAGES / "zeroingPrep.jpg"
+    ZEROING = ""          # TODO: Find zeroing image
     COMPRESSION_PREP = IMAGES / "compressionsConfirm.jpg"
-    COMPRESSION      = IMAGES / "compressions.jpg"
-    PAUSE            = IMAGES / "paused.jpg"
-    ABORT            = IMAGES / "abort.jpg"
-    KNEEL_FAILURE    = IMAGES / "kneelFailure.jpg"
+    COMPRESSION = IMAGES / "compressions.jpg"
+    PAUSE = IMAGES / "paused.jpg"
+    ABORT = IMAGES / "abort.jpg"
+    KNEEL_FAILURE = IMAGES / "kneelFailure.jpg"
+
 
 class AudioPrompt(Enum):
     # Enum values are the audio file paths; empty string means no audio for that state
-    STARTUP          = AUDIO / "startup.wav"           
-    UNFOLD           = AUDIO / "unfoldExpose.wav"
-    CUT_CLOTHES      = AUDIO / "cutClothing.wav"
-    ALIGNMENT        = AUDIO / "alignment.wav"
-    ZEROING_PREP     = AUDIO / "zeroingPrep.wav"
-    ZEROING          = AUDIO / "zeroing.wav"
+    STARTUP = AUDIO / "startup.wav"
+    UNFOLD = AUDIO / "unfoldExpose.wav"
+    CUT_CLOTHES = AUDIO / "cutClothing.wav"
+    ALIGNMENT = AUDIO / "alignment.wav"
+    ZEROING_PREP = AUDIO / "zeroingPrep.wav"
+    ZEROING = AUDIO / "zeroing.wav"
     COMPRESSION_PREP = AUDIO / "compressionsPrep.wav"
-    COMPRESSION      = AUDIO / "compressions.wav"
-    PAUSE            = ""   # TODO
-    ABORT            = ""   # TODO
-    KNEEL_FAILURE    = ""   # TODO
+    COMPRESSION = AUDIO / "compressions.wav"
+    PAUSE = ""   # TODO
+    ABORT = ""   # TODO
+    KNEEL_FAILURE = ""   # TODO
+
 
 # Global variables for shared instances, _pi is declared in sensing.py and passed to HMI.py for shared GPIO access
 _screen: pygame.Surface
@@ -63,7 +66,7 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
     Returns:
         ErrorCode: Normal operation if successful, ERROR_INIT_FAILURE if failed
     """
-    
+
     # Initialize the global variables for screens and pigpio instance
     global _screen, _pi
     _pi = pi_instance
@@ -90,10 +93,10 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
 
     # Initialize GPIO pins for buttons, LEDs, and lasers
     try:
-        # Buttons as inputs with pull-downs
+        # Buttons as inputs with pull-ups
         _pi.set_mode(NEXT_BTN_PIN,  pigpio.INPUT)
         _pi.set_mode(PAUSE_BTN_PIN, pigpio.INPUT)
-        _pi.set_pull_up_down(NEXT_BTN_PIN,  pigpio.PUD_UP) # Buttons are active low, so use pull-up resistors
+        _pi.set_pull_up_down(NEXT_BTN_PIN,  pigpio.PUD_UP)
         _pi.set_pull_up_down(PAUSE_BTN_PIN, pigpio.PUD_UP)
 
         # LEDs and laser as outputs, start LOW
@@ -121,13 +124,13 @@ def set_screen_image(image: Image):
 
 def set_screen_audio(image: Image, prompt: AudioPrompt):
     """Sets the screen image and plays the audio prompt once. Call once on state entry.
-    
+
     Args:
         image (Image): Image enum for current state
         prompt (AudioPrompt): Audio prompt enum for current state
     """
     set_screen_image(image)
-    
+
     # TODO: Implement looping audio
     if prompt.value:
         pygame.mixer.Sound(prompt.value).play()
@@ -144,7 +147,8 @@ def disable_lasers():
     """Disables alignment lasers
     """
     _pi.write(LASER_PIN, 0)
-    
+
+
 def audio_finished() -> bool:
     """Check if audio playback has finished
 

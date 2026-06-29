@@ -3606,16 +3606,6 @@
 		)
 		(uuid "d4d8ccdf-b5d7-4f06-b627-ef7a64563c0c")
 	)
-	(label "GPIO19"
-		(at 120.65 105.41 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d828bfb0-dfb4-4998-8219-80f4cd6a84d8")
-	)
 	(label "GPIO13"
 		(at 198.12 127 180)
 		(effects
@@ -3712,6 +3702,17 @@
 			(justify right)
 		)
 		(uuid "a6073ba7-492a-4af3-9426-e10e040e8698")
+	)
+	(hierarchical_label "MUX Select"
+		(shape output)
+		(at 120.65 105.41 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f7cb1643-3ce1-40d5-aa5c-dda0b26b8dbe")
 	)
 	(symbol
 		(lib_id "power:+5V")

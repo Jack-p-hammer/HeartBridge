@@ -4,6 +4,7 @@
 import time
 import sys
 import logging
+from datetime import datetime
 from pathlib import Path
 
 # Internal imports
@@ -21,7 +22,8 @@ LOOP_TICK_SECONDS = 0.05  # 50ms per tick
 # 2x parent to get to project root
 LOG_DIR = Path(__file__).resolve().parent.parent / "Logs"
 LOG_DIR.mkdir(parents=True, exist_ok=True)  # Ensure logs directory exists
-LOG_FILE = LOG_DIR / "heartBridge.log"
+RUN_TIMESTAMP = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+LOG_FILE = LOG_DIR / f"heartBridge_{RUN_TIMESTAMP}.log"
 
 # Maps error codes to the state they should force the machine into
 ERROR_STATE_MAP = {

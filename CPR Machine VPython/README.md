@@ -1,4 +1,4 @@
-To install all required python modules/libraries:
+### To install all required python modules/libraries:
 
 1. Terminal (top bar) -> New terminal
     a. or: Ctrl + Shift + `

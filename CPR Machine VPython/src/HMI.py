@@ -9,13 +9,13 @@ from error_codes import ErrorCode
 
 # TODO: Set actual GPIO pin numbers to match the hardware hat
 # Button Inputs
-NEXT_BTN_PIN = 17
-PAUSE_BTN_PIN = 27
+NEXT_BTN_PIN = 23
+PAUSE_BTN_PIN = 25
 # LED Outputs/Button Toggles
-NEXT_LED_PIN = 22
-PAUSE_LED_PIN = 23
+NEXT_ENABLE_PIN = 24
+PAUSE_ENABLE_PIN = 26
 # Laser PWM Output
-LASER_PIN = 24
+LASER_PIN = 12
 
 # Declare paths for images and audio files relative to this script's directory
 IMAGES = Path(__file__).resolve().parent / "Images"
@@ -100,7 +100,7 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
         _pi.set_pull_up_down(PAUSE_BTN_PIN, pigpio.PUD_UP)
 
         # LEDs and laser as outputs, start LOW
-        for pin in (NEXT_LED_PIN, PAUSE_LED_PIN, LASER_PIN):
+        for pin in (NEXT_ENABLE_PIN, PAUSE_ENABLE_PIN, LASER_PIN):
             _pi.set_mode(pin, pigpio.OUTPUT)
             _pi.write(pin, 0)
     except Exception as e:
@@ -168,25 +168,25 @@ def audio_finished() -> bool:
 def enable_next_button():
     """Enable Next button and Next button LED
     """
-    _pi.write(NEXT_LED_PIN, 1)
+    _pi.write(NEXT_ENABLE_PIN, 1)
 
 
 def disable_next_button():
     """Disable Next button and Next button LED
     """
-    _pi.write(NEXT_LED_PIN, 0)
+    _pi.write(NEXT_ENABLE_PIN, 0)
 
 
 def enable_pause_button():
     """Enable Pause button and Pause button LED
     """
-    _pi.write(PAUSE_LED_PIN, 1)
+    _pi.write(PAUSE_ENABLE_PIN, 1)
 
 
 def disable_pause_button():
     """Disable Pause button and Pause button LED
     """
-    _pi.write(PAUSE_LED_PIN, 0)
+    _pi.write(PAUSE_ENABLE_PIN, 0)
 
 
 def next_button_pressed() -> bool:

@@ -13,6 +13,14 @@ from error_codes import ErrorCode
 _pi: pigpio.pi
 _vl53: adafruit_vl53l0x.VL53L0X
 _bno: BNO08X_I2C
+# Futureproofing for a possible MUX on our I2C ADC
+# Low - Force Sensor
+# High - Battery Voltage
+ADC_MUX_SIG_PIN = 19
+
+# I2C address for the analog-to-digital converter. TODO: Use the I2C_scanner.py script to verify this!
+ADC_ADDR = 0x48   # A0 variant: device code 1001 + address bits 000
+ADC_VDD = 5  # 5V reference voltage for the ADC, used to convert the raw ADC reading to a voltage value
 
 
 def get_pi():

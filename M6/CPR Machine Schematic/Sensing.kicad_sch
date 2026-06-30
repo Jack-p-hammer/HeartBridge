@@ -4851,7 +4851,11 @@
 				(hide yes)
 			)
 		)
+<<<<<<< Updated upstream
 		(property "Datasheet" ""
+=======
+		(property "Datasheet" "https://www.onsemi.com/pdf/datasheet/nc7sz157-d.pdf"
+>>>>>>> Stashed changes
 			(at 111.1991 41.8924 0)
 			(effects
 				(font

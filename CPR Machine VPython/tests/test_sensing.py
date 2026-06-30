@@ -3,7 +3,6 @@ import sys
 
 from conftest import install_fake_hardware_modules, install_fake_pigpio
 
-
 def test_sensing_init_returns_error_when_pigpio_connection_fails(monkeypatch):
     """Ensure sensor initialization fails gracefully when pigpio is unavailable.
 
@@ -54,6 +53,6 @@ def test_sensor_helper_functions_are_placeholder_safe():
     import sensing
 
     assert sensing.battery_check() == sensing.ErrorCode.NORMAL_OPERATION
-    assert sensing.read_sensors_fine_zeroing() == sensing.ErrorCode.NORMAL_OPERATION
+    assert sensing.read_sensors_zeroing() == sensing.ErrorCode.NORMAL_OPERATION
     assert sensing.read_sensors_compressions() == sensing.ErrorCode.NORMAL_OPERATION
     assert sensing.check_sensor_error(1) == sensing.ErrorCode.NORMAL_OPERATION

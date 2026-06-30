@@ -5,5 +5,5 @@ pathlib
 moteus
 logging
 adafruit-blinka
-adafruit-circuitpython-vl53l0x
+adafruit-circuitpython-vl6180x
 adafruit-circuitpython-bno08x

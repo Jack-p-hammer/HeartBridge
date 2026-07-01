@@ -2,6 +2,7 @@ pigpio
 pygame
 pytest
 pathlib 
+asyncio
 moteus
 logging
 adafruit-blinka

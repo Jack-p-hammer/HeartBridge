@@ -102,7 +102,7 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
         # LEDs and laser as outputs, start LOW
         for pin in (NEXT_ENABLE_PIN, PAUSE_ENABLE_PIN, LASER_PIN):
             _pi.set_mode(pin, pigpio.OUTPUT)
-            _pi.write(pin, 0)
+            _pi.set_pull_up_down(pin, pigpio.PUD_DOWN)
     except Exception as e:
         logging.error(f"HMI GPIO initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE

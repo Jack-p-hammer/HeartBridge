@@ -3,7 +3,7 @@
 
 Unfortunately, the python moteus API is written entirely on top of asyncio, and everything else is synchronous. Part of setup will involve creating a dedicated moteus thread that runs the asyncio event loop, and then we can use asyncio.run_coroutine_threadsafe to call async functions from synchronous code.
 """
-
+# External imports
 import moteus
 import asyncio
 import dataclasses
@@ -13,8 +13,10 @@ import time
 import logging
 from typing import List, Optional
 from numpy import long
-from error_codes import ErrorCode
-from control_modes import ControlMode
+
+# Internal imports
+from Enums.error_codes import ErrorCode
+from Enums.control_modes import ControlMode
 
 CONTROLLER_ID: int = 1  # The ID of the moteus-x1 controller on the CAN bus
 COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
@@ -228,7 +230,7 @@ class MoteusThread:
             feedforward_torque=feedforward_torque, 
             velocity_limit=velocity_limit, 
             maximum_torque=maximum_torque
-            )
+        )
         
         return ErrorCode.NORMAL_OPERATION
 
@@ -236,5 +238,5 @@ class MoteusThread:
         return self._state
 
     def get_last_error(self) -> ErrorCode:
-        """Returns the ErrorCode describing the failure. Never raises."""
+        """Returns the ErrorCode describing the failure/lack thereof from the motor controller thread"""
         return self._last_error

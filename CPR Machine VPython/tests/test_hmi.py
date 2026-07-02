@@ -2,7 +2,7 @@ import importlib
 from typing import Any, cast
 
 from conftest import FakePi, install_fake_pigpio, install_fake_pygame
-from error_codes import ErrorCode
+from Enums.error_codes import ErrorCode
 
 
 def test_hmi_init_sets_up_gpio_and_display(monkeypatch):

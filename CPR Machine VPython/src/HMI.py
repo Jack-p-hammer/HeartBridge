@@ -1,11 +1,14 @@
 # hmi.py
 
+# External imports
 import pigpio
 from pathlib import Path
 import pygame
 import logging
 from enum import Enum
-from error_codes import ErrorCode
+
+# Internal imports
+from Enums.error_codes import ErrorCode
 
 # TODO: Set actual GPIO pin numbers to match the hardware hat
 # Button Inputs

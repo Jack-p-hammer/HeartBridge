@@ -2,8 +2,8 @@ import importlib
 import sys
 
 from conftest import install_fake_main_modules
-from error_codes import ErrorCode
-from states import CPRState
+from Enums.error_codes import ErrorCode
+from Enums.states import CPRState
 
 
 def test_main_transitions_from_startup_to_alignment(monkeypatch):

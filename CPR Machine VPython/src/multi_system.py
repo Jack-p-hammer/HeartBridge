@@ -3,5 +3,5 @@
 import sensing
 import actuation
 import HMI
-from error_codes import ErrorCode
+from Enums.error_codes import ErrorCode
 

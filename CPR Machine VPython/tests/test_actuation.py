@@ -1,7 +1,7 @@
 import sys
 import types
 
-from error_codes import ErrorCode
+from Enums.error_codes import ErrorCode
 
 
 def test_actuation_placeholders_return_normal_operation(monkeypatch):

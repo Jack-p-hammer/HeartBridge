@@ -1,13 +1,16 @@
 # sensing.py
 
+# External imports
 import pigpio
 import board
 import busio
 import logging
 import adafruit_vl6180x
 import adafruit_bno08x
-from error_codes import ErrorCode
 from adafruit_bno08x.i2c import BNO08X_I2C
+
+# Internal imports
+from Enums.error_codes import ErrorCode
 
 # Global variables for shared sensor instances
 _pi: pigpio.pi

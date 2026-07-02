@@ -3,12 +3,16 @@
 
 NOTE: ALL SETPOINTS ARE IN METERS, AND COMPRESSION SETPOINTS ARE RELATIVE TO ZEROED POSITION. DO NOT CONVERT TO ROTATIONS, THAT IS ALL DONE WITHIN THE MOTEUS THREAD
 """
+
+# External imports
 import logging
 import time
 import math
-from error_codes import ErrorCode
-from control_modes import ControlMode
-from motor import MoteusThread, CONTROLLER_ID, PINION_RADIUS
+
+# Internal imports
+from Enums.error_codes import ErrorCode
+from Enums.control_modes import ControlMode
+from motor import MoteusThread, CONTROLLER_ID
 
 
 COMPRESSION_DEPTH_CM: float = 7.0 # depth of compressions in cm
@@ -47,6 +51,7 @@ def init_zeroing() -> ErrorCode:
     """
     global zeroing_start_time
     zeroing_start_time = time.monotonic()
+    logging.debug("Zeroing initialized")
     
     return ErrorCode.NORMAL_OPERATION
 
@@ -71,6 +76,7 @@ def init_compressions() -> ErrorCode:
     """
     global compression_start_time
     compression_start_time = time.monotonic()
+    logging.debug("Compressions initialized")
     
     return ErrorCode.NORMAL_OPERATION
 
@@ -90,6 +96,7 @@ def stop_compressions() -> ErrorCode:
     Returns:
         ErrorCode: Normal operation if successful, ERROR_ZEROING_FAILURE if failed
     """
+    logging.debug("Stopping compressions")
     return ErrorCode.NORMAL_OPERATION
 
 def computeCompressionSetpoint() -> float:
@@ -112,6 +119,6 @@ def computeCompressionSetpoint() -> float:
         outputPos_cm = COMPRESSION_DEPTH_CM
     elif cycle_time < 0.56:
         outputPos_cm = COMPRESSION_DEPTH_CM * (1.0 - (cycle_time - 0.323) / (0.56 - 0.323))
-        
+    
     # Convert to meters and return
     return outputPos_cm / 100.0

@@ -1926,7 +1926,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "084aedce-6cd7-4a98-a07a-50f7babd8f33")
-		(property "Reference" "J10"
+		(property "Reference" "J7"
 			(at 154.432 39.37 0)
 			(effects
 				(font
@@ -1995,7 +1995,7 @@
 		(instances
 			(project ""
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/4742a649-a015-487c-b382-01878b0e2dd4"
-					(reference "J10")
+					(reference "J7")
 					(unit 1)
 				)
 			)
@@ -2011,7 +2011,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0b93aeeb-df24-45ac-8521-3fb2ea4c74a9")
-		(property "Reference" "J13"
+		(property "Reference" "J10"
 			(at 107.95 53.3399 0)
 			(effects
 				(font
@@ -2083,7 +2083,7 @@
 		(instances
 			(project ""
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/4742a649-a015-487c-b382-01878b0e2dd4"
-					(reference "J13")
+					(reference "J10")
 					(unit 1)
 				)
 			)
@@ -2098,7 +2098,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "12241734-578d-44c2-8dd4-e859c455f8d1")
-		(property "Reference" "R14"
+		(property "Reference" "R15"
 			(at 134.62 62.23 90)
 			(effects
 				(font
@@ -2159,7 +2159,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/4742a649-a015-487c-b382-01878b0e2dd4"
-					(reference "R14")
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -2335,7 +2335,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2d836d04-4086-40e1-8197-29350b04f48b")
-		(property "Reference" "C9"
+		(property "Reference" "C10"
 			(at 135.382 52.07 0)
 			(effects
 				(font
@@ -2389,7 +2389,7 @@
 		(instances
 			(project ""
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/4742a649-a015-487c-b382-01878b0e2dd4"
-					(reference "C9")
+					(reference "C10")
 					(unit 1)
 				)
 			)
@@ -3000,7 +3000,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "956509cc-2d9c-47a1-8039-88cdd5d867dc")
-		(property "Reference" "C10"
+		(property "Reference" "C11"
 			(at 135.382 95.25 0)
 			(effects
 				(font
@@ -3054,7 +3054,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/4742a649-a015-487c-b382-01878b0e2dd4"
-					(reference "C10")
+					(reference "C11")
 					(unit 1)
 				)
 			)
@@ -3485,7 +3485,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d9fdae2e-14bf-4ecd-83db-673dd03941e6")
-		(property "Reference" "R15"
+		(property "Reference" "R14"
 			(at 132.588 69.088 0)
 			(effects
 				(font
@@ -3546,7 +3546,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/4742a649-a015-487c-b382-01878b0e2dd4"
-					(reference "R15")
+					(reference "R14")
 					(unit 1)
 				)
 			)
@@ -3957,7 +3957,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "facf15a0-ef8f-4fb1-b9c5-2771c60c4ffc")
-		(property "Reference" "J11"
+		(property "Reference" "J8"
 			(at 154.432 78.74 0)
 			(effects
 				(font
@@ -4026,7 +4026,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/4742a649-a015-487c-b382-01878b0e2dd4"
-					(reference "J11")
+					(reference "J8")
 					(unit 1)
 				)
 			)

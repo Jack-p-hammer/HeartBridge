@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 1.9,
-          "height": 3.5,
-          "width": 3.5
+          "drill": 0.0,
+          "height": 1.8,
+          "width": 1.325
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -60,15 +60,15 @@
       ],
       "drc_exclusions": [
         [
-          "duplicate_footprints|159300000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|08371d48-5ec1-4fa3-81d3-50654f5bce1e",
+          "duplicate_footprints|159300000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|5cea6f29-600f-44b2-8578-960d572834b6",
+          ""
+        ],
+        [
+          "extra_footprint|135000000|97800000|5cea6f29-600f-44b2-8578-960d572834b6|00000000-0000-0000-0000-000000000000",
           ""
         ],
         [
           "extra_footprint|159300000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "extra_footprint|165098761|82992336|08371d48-5ec1-4fa3-81d3-50654f5bce1e|00000000-0000-0000-0000-000000000000",
           ""
         ],
         [
@@ -85,10 +85,6 @@
         ],
         [
           "lib_footprint_mismatch|142575400|88700000|566b4e74-131f-4ceb-8fb7-b0e14c4138a5|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|146900000|107100000|866a8025-e4e6-4ab7-afa4-894e2d8bf8d4|00000000-0000-0000-0000-000000000000",
           ""
         ],
         [

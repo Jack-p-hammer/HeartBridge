@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.0,
-          "height": 1.8,
-          "width": 1.325
+          "drill": 2.0,
+          "height": 4.0,
+          "width": 4.0
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -60,16 +60,24 @@
       ],
       "drc_exclusions": [
         [
-          "duplicate_footprints|159300000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|5cea6f29-600f-44b2-8578-960d572834b6",
+          "duplicate_footprints|158750000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|5cea6f29-600f-44b2-8578-960d572834b6",
           ""
         ],
         [
-          "extra_footprint|135000000|97800000|5cea6f29-600f-44b2-8578-960d572834b6|00000000-0000-0000-0000-000000000000",
+          "extra_footprint|135634761|98106336|5cea6f29-600f-44b2-8578-960d572834b6|00000000-0000-0000-0000-000000000000",
           ""
         ],
         [
-          "extra_footprint|159300000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|00000000-0000-0000-0000-000000000000",
+          "extra_footprint|158750000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|00000000-0000-0000-0000-000000000000",
           ""
+        ],
+        [
+          "lib_footprint_mismatch|112350000|114086000|21f84bf5-383e-48ce-bcde-66a68fa2b90e|00000000-0000-0000-0000-000000000000",
+          "Edited to prevent silkskreen-edge overlap"
+        ],
+        [
+          "lib_footprint_mismatch|112350000|99608000|9868c78a-eb4d-48da-bb74-bc1585f19e3c|00000000-0000-0000-0000-000000000000",
+          "Edited to remove silkscreen-edge overlap"
         ],
         [
           "lib_footprint_mismatch|131711900|88700000|f082c5ab-94d8-4157-b769-f6b14b999975|00000000-0000-0000-0000-000000000000",

@@ -7556,7 +7556,7 @@
 				(hide yes)
 			)
 		)
-		(property "digikey" "490-5312-1-ND"
+		(property "digikey" "490-GRM32ER71A476KE15KCT-ND"
 			(at 45.72 82.55 0)
 			(effects
 				(font
@@ -16733,7 +16733,7 @@
 				(hide yes)
 			)
 		)
-		(property "digikey" "490-5312-1-ND"
+		(property "digikey" "490-GRM32ER71A476KE15KCT-ND"
 			(at 31.75 82.55 0)
 			(effects
 				(font

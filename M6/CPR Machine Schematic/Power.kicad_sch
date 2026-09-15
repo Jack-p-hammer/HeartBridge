@@ -14271,7 +14271,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://www.passivecomponent.com/wp-content/uploads/datasheet/WTC_MLCC_Middle_and_High_Voltage.pdf"
+		(property "Datasheet" "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/885012008021/5453729"
 			(at 29.21 95.25 0)
 			(effects
 				(font
@@ -14289,7 +14289,7 @@
 				(hide yes)
 			)
 		)
-		(property "digikey" "1292-1206N470J102CT-ND"
+		(property "digikey" "732-7874-1-ND"
 			(at 29.21 95.25 0)
 			(effects
 				(font

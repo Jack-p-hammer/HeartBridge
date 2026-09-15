@@ -2364,7 +2364,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP3021A0T-E_OT"
+		(property "Value" "MCP3021A5T-E_OT"
 			(at 82.55 25.4 0)
 			(effects
 				(font
@@ -2372,7 +2372,7 @@
 				)
 			)
 		)
-		(property "Footprint" "2679:IC_MCP3021A0T-E_OT"
+		(property "Footprint" "2679:IC_MCP3021A5T-E_OT"
 			(at 82.55 35.56 0)
 			(effects
 				(font
@@ -2382,7 +2382,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001805C.pdf"
+		(property "Datasheet" "https://www.digikey.com/en/products/detail/microchip-technology/MCP3021A5T-E-OT/593685"
 			(at 82.55 35.56 0)
 			(effects
 				(font
@@ -2400,7 +2400,7 @@
 				(hide yes)
 			)
 		)
-		(property "DigiKey_Part_Number" "MCP3021A0T-E/OTCT-ND"
+		(property "DigiKey_Part_Number" "MCP3021A5T-E/OTCT-ND"
 			(at 82.55 35.56 0)
 			(effects
 				(font

@@ -11,12 +11,11 @@ from pathlib import Path
 import sensing
 import actuation
 import HMI
-import multi_system
-from error_codes import ErrorCode
-from states import CPRState
+from Enums.error_codes import ErrorCode
+from Enums.states import CPRState
 
 # TODO: Optimize loop speed
-LOOP_TICK_SECONDS = 0.05  # 50ms per tick
+LOOP_TICK_SEC = 0.05  # 50ms per tick, 20 Hz
 
 # Initialize log directory and file
 # 2x parent to get to project root
@@ -27,10 +26,12 @@ LOG_FILE = LOG_DIR / f"heartBridge_{RUN_TIMESTAMP}.log"
 
 # Maps error codes to the state they should force the machine into
 ERROR_STATE_MAP = {
-    ErrorCode.ERROR_INIT_FAILURE:          CPRState.ABORT,
-    ErrorCode.ERROR_SENSOR_FAILURE:        CPRState.ABORT,
-    ErrorCode.ERROR_IMU_KNEEL_FAILURE:  CPRState.KNEEL_FAILURE,
-    ErrorCode.ERROR_ZEROING_FAILURE:    CPRState.ABORT,
+    ErrorCode.ERROR_INIT_FAILURE:           CPRState.ABORT,
+    ErrorCode.ERROR_SENSOR_FAILURE:         CPRState.ABORT,
+    ErrorCode.ERROR_IMU_KNEEL_FAILURE:      CPRState.KNEEL_FAILURE,
+    ErrorCode.ERROR_ZEROING_FAILURE:        CPRState.ABORT,
+    ErrorCode.ERROR_LOW_BATTERY:            CPRState.ABORT,
+    ErrorCode.ERROR_MOTOR_FAILURE:          CPRState.ABORT,
 }
 
 FATAL_ERRORS = {ErrorCode.EXIT_UNKNOWN, ErrorCode.ERROR_UNKNOWN_IMAGE}
@@ -69,6 +70,7 @@ def main():
         # If an error occurred, override the current state
         # Whenever an error occurs, system must be forced back to this point via continue
         if error in ERROR_STATE_MAP:
+            logging.warning(f"Error occurred: {error}, forcing state to {ERROR_STATE_MAP[error]}")
             state = ERROR_STATE_MAP[error]
             error = ErrorCode.NORMAL_OPERATION
 
@@ -76,151 +78,158 @@ def main():
         # Each state checks (state != prev_state) to detect first entry, and runs
         # one-time setup (screen, audio, button enables) only on that first tick.
         # All other logic runs every tick until the exit condition is met.
+        match(state):
+            case(CPRState.STARTUP):
+                # Setup
+                if state != prev_state:
+                    # continue jumps back to the top of the while loop, so if any
+                    # init step fails its error code is caught on the next iteration
+                    error = actuation.init_motor()
+                    if error != ErrorCode.NORMAL_OPERATION:
+                        continue
+                    error = sensing.init_sensors()
+                    if error != ErrorCode.NORMAL_OPERATION:
+                        continue
+                    error = HMI.init_HMI(sensing.get_pi())
+                    if error != ErrorCode.NORMAL_OPERATION:
+                        continue
+                    error = actuation.battery_check()
+                    if error != ErrorCode.NORMAL_OPERATION:
+                        continue
 
-        if state == CPRState.STARTUP:
-            # Setup
-            if state != prev_state:
-                # continue jumps back to the top of the while loop, so if any
-                # init step fails its error code is caught on the next iteration
-                error = sensing.init_sensors()
-                if error != ErrorCode.NORMAL_OPERATION:
-                    continue
-                error = actuation.init_motor()
-                if error != ErrorCode.NORMAL_OPERATION:
-                    continue
-                error = HMI.init_HMI(sensing.get_pi())
-                if error != ErrorCode.NORMAL_OPERATION:
-                    continue
-                error = sensing.battery_check()
-                if error != ErrorCode.NORMAL_OPERATION:
-                    continue
+                    HMI.set_screen_audio(
+                        HMI.Image.STARTUP, HMI.AudioPrompt.STARTUP)
+                    HMI.enable_next_button()
 
-                HMI.set_screen_audio(
-                    HMI.Image.STARTUP, HMI.AudioPrompt.STARTUP)
-                HMI.enable_next_button()
+                # Loop
+                if HMI.next_button_pressed():
+                    state = CPRState.UNFOLD_CUT_CLOTHES
 
-            # Loop
-            if HMI.next_button_pressed():
-                state = CPRState.UNFOLD_CUT_CLOTHES
+            case(CPRState.UNFOLD_CUT_CLOTHES):
+                # Setup
+                if state != prev_state:
+                    HMI.set_screen_audio(HMI.Image.UNFOLD, HMI.AudioPrompt.UNFOLD)
+                    HMI.enable_next_button()
 
-        elif state == CPRState.UNFOLD_CUT_CLOTHES:
-            # Setup
-            if state != prev_state:
-                HMI.set_screen_audio(HMI.Image.UNFOLD, HMI.AudioPrompt.UNFOLD)
-                HMI.enable_next_button()
+                # Loop
+                if HMI.next_button_pressed():
+                    state = CPRState.ALIGNMENT
 
-            # Loop
-            if HMI.next_button_pressed():
-                state = CPRState.ALIGNMENT
+            case(CPRState.ALIGNMENT):
+                # Setup
+                if state != prev_state:
+                    HMI.enable_lasers()
+                    HMI.set_screen_audio(HMI.Image.ALIGNMENT,
+                                        HMI.AudioPrompt.ALIGNMENT)
+                    HMI.enable_next_button()
 
-        elif state == CPRState.ALIGNMENT:
-            # Setup
-            if state != prev_state:
-                HMI.enable_lasers()
-                HMI.set_screen_audio(HMI.Image.ALIGNMENT,
-                                     HMI.AudioPrompt.ALIGNMENT)
-                HMI.enable_next_button()
+                # Loop
+                if HMI.next_button_pressed():
+                    HMI.disable_lasers()
+                    state = CPRState.ZEROING_PREP
 
-            # Loop
-            if HMI.next_button_pressed():
-                HMI.disable_lasers()
-                state = CPRState.ZEROING_PREP
+            case(CPRState.ZEROING_PREP):
+                # Setup
+                if state != prev_state:
+                    HMI.set_screen_audio(HMI.Image.ZEROING_PREP,
+                                        HMI.AudioPrompt.ZEROING_PREP)
+                    HMI.enable_next_button()
 
-        elif state == CPRState.ZEROING_PREP:
-            # Setup
-            if state != prev_state:
-                HMI.set_screen_audio(HMI.Image.ZEROING_PREP,
-                                     HMI.AudioPrompt.ZEROING_PREP)
-                HMI.enable_next_button()
+                # Loop
+                if HMI.next_button_pressed():
+                    state = CPRState.ZEROING
 
-            # Loop
-            if HMI.next_button_pressed():
-                state = CPRState.ZEROING
+            case(CPRState.ZEROING):
+                # Setup
+                if state != prev_state:
+                    HMI.disable_next_button()
+                    HMI.set_screen_audio(HMI.Image.ZEROING,
+                                        HMI.AudioPrompt.ZEROING)
+                    error = actuation.init_zeroing()
 
-        elif state == CPRState.ZEROING:
-            # Setup
-            if state != prev_state:
-                HMI.disable_next_button()
-                HMI.set_screen_audio(HMI.Image.ZEROING,
-                                     HMI.AudioPrompt.ZEROING)
+                # Loop
+                error = actuation.zeroing()
 
-            # Loop
-            error = actuation.zeroing()
+                if error == ErrorCode.ZEROING_FINISHED:
+                    error = sensing.zero_position()
+                    state = CPRState.COMPRESSION_PREP
 
-            if error == ErrorCode.ZEROING_FINISHED:
-                state = CPRState.COMPRESSION_PREP
+            case(CPRState.COMPRESSION_PREP):
+                # Setup
+                if state != prev_state:
+                    HMI.disable_next_button()
+                    HMI.disable_pause_button()
 
-        elif state == CPRState.COMPRESSION_PREP:
-            # Setup
-            if state != prev_state:
-                HMI.disable_next_button()
-                HMI.disable_pause_button()
+                    error = actuation.init_compressions()
+                    if error != ErrorCode.NORMAL_OPERATION:
+                        continue
 
-                error = actuation.init_compressions()
-                if error != ErrorCode.NORMAL_OPERATION:
-                    continue
+                    HMI.set_screen_audio(HMI.Image.COMPRESSION_PREP,
+                                        HMI.AudioPrompt.COMPRESSION_PREP)
 
-                HMI.set_screen_audio(HMI.Image.COMPRESSION_PREP,
-                                     HMI.AudioPrompt.COMPRESSION_PREP)
+                # Loop
+                if HMI.audio_finished():
+                    state = CPRState.COMPRESSION
 
-            # Loop
-            if HMI.audio_finished():
-                state = CPRState.COMPRESSION
+            case(CPRState.COMPRESSION):
+                # Setup
+                if state != prev_state:
+                    HMI.enable_pause_button()
+                    HMI.set_screen_audio(HMI.Image.COMPRESSION,
+                                        HMI.AudioPrompt.COMPRESSION)
 
-        elif state == CPRState.COMPRESSION:
-            # Setup
-            if state != prev_state:
-                HMI.enable_pause_button()
-                HMI.set_screen_audio(HMI.Image.COMPRESSION,
-                                     HMI.AudioPrompt.COMPRESSION)
+                # Loop
+                error = actuation.compressions()
 
-            # Loop
-            error = actuation.compressions()
+                if HMI.pause_button_pressed():
+                    state = CPRState.PAUSE
 
-            if HMI.pause_button_pressed():
-                state = CPRState.PAUSE
+            case(CPRState.PAUSE):
+                # Setup
+                if state != prev_state:
+                    HMI.disable_pause_button()
+                    actuation.pause_compressions()
+                    HMI.enable_next_button()
+                    HMI.set_screen_audio(HMI.Image.PAUSE, HMI.AudioPrompt.PAUSE)
+                    logging.debug("Device Paused")
 
-        elif state == CPRState.PAUSE:
-            # Setup
-            if state != prev_state:
-                HMI.disable_pause_button()
-                actuation.stop_compressions()
-                HMI.enable_next_button()
-                HMI.set_screen_audio(HMI.Image.PAUSE, HMI.AudioPrompt.PAUSE)
+                # Loop
+                error = actuation.abort_compressions()
+                
+                if HMI.next_button_pressed():
+                    state = CPRState.COMPRESSION_PREP
 
-            # Loop
-            if HMI.next_button_pressed():
-                state = CPRState.COMPRESSION_PREP
+            case(CPRState.KNEEL_FAILURE):
+                # Setup
+                if state != prev_state:
+                    actuation.pause_compressions()
+                    HMI.disable_pause_button()
+                    HMI.enable_next_button()
+                    HMI.set_screen_audio(HMI.Image.KNEEL_FAILURE,
+                                        HMI.AudioPrompt.KNEEL_FAILURE)
+                    logging.warning(f"Kneel failure tripped: {error}")
 
-        elif state == CPRState.KNEEL_FAILURE:
-            # Setup
-            if state != prev_state:
-                actuation.stop_compressions()
-                HMI.disable_pause_button()
-                HMI.enable_next_button()
-                HMI.set_screen_audio(HMI.Image.KNEEL_FAILURE,
-                                     HMI.AudioPrompt.KNEEL_FAILURE)
+                # Loop
+                if HMI.next_button_pressed():
+                    state = CPRState.ALIGNMENT  # must re-confirm position before resuming
 
-            # Loop
-            if HMI.next_button_pressed():
-                state = CPRState.ALIGNMENT  # must re-confirm position before resuming
+            case(CPRState.ABORT):
+                # Setup
+                if state != prev_state:
+                    actuation.abort_compressions()
+                    HMI.disable_next_button()
+                    HMI.disable_pause_button()
+                    HMI.set_screen_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT)
+                    logging.error(f"Abort state tripped: {error}")
+                # Halt — only a power cycle exits this state
 
-        elif state == CPRState.ABORT:
-            # Setup
-            if state != prev_state:
-                actuation.stop_compressions()
-                HMI.disable_next_button()
-                HMI.disable_pause_button()
-                HMI.set_screen_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT)
-            # Halt — only a power cycle exits this state
-
-        else:
-            error = ErrorCode.EXIT_UNKNOWN
+            case(_):
+                error = ErrorCode.EXIT_UNKNOWN
 
         # Record the previous state and sleep for the remainder of the tick duration
         prev_state = state
         elapsed = time.monotonic() - loop_start
-        time.sleep(max(0, LOOP_TICK_SECONDS - elapsed))
+        time.sleep(max(0, LOOP_TICK_SEC - elapsed))
 
     logging.critical(f"Fatal error: {error}")
     sys.exit(1)

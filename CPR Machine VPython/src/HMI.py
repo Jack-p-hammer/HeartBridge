@@ -1,21 +1,25 @@
 # hmi.py
-
+"""Library of functions for Human-Machine Interface (HMI) operations, including screen display, audio prompts, button handling, and laser control.
+"""
+# External imports
 import pigpio
 from pathlib import Path
 import pygame
 import logging
 from enum import Enum
-from error_codes import ErrorCode
+
+# Internal imports
+from Enums.error_codes import ErrorCode
 
 # TODO: Set actual GPIO pin numbers to match the hardware hat
 # Button Inputs
-NEXT_BTN_PIN = 17
-PAUSE_BTN_PIN = 27
+NEXT_BTN_PIN = 23
+PAUSE_BTN_PIN = 25
 # LED Outputs/Button Toggles
-NEXT_LED_PIN = 22
-PAUSE_LED_PIN = 23
+NEXT_ENABLE_PIN = 24
+PAUSE_ENABLE_PIN = 26
 # Laser PWM Output
-LASER_PIN = 24
+LASER_PIN = 12
 
 # Declare paths for images and audio files relative to this script's directory
 IMAGES = Path(__file__).resolve().parent / "Images"
@@ -66,9 +70,9 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
     Returns:
         ErrorCode: Normal operation if successful, ERROR_INIT_FAILURE if failed
     """
-
-    # Initialize the global variables for screens and pigpio instance
     global _screen, _pi
+    
+    # Initialize the global variable for the pigpio instance
     _pi = pi_instance
 
     # Initialize Pygame and audio mixer for sound playback
@@ -100,9 +104,9 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
         _pi.set_pull_up_down(PAUSE_BTN_PIN, pigpio.PUD_UP)
 
         # LEDs and laser as outputs, start LOW
-        for pin in (NEXT_LED_PIN, PAUSE_LED_PIN, LASER_PIN):
+        for pin in (NEXT_ENABLE_PIN, PAUSE_ENABLE_PIN, LASER_PIN):
             _pi.set_mode(pin, pigpio.OUTPUT)
-            _pi.write(pin, 0)
+            _pi.set_pull_up_down(pin, pigpio.PUD_DOWN)
     except Exception as e:
         logging.error(f"HMI GPIO initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
@@ -116,6 +120,7 @@ def set_screen_image(image: Image):
     Args:
         image (Image): Image enum for current state
     """
+    global _screen
     surf = pygame.image.load(image.value)
     surf = pygame.transform.scale(surf, _screen.get_size())
     _screen.blit(surf, (0, 0))
@@ -139,6 +144,7 @@ def set_screen_audio(image: Image, prompt: AudioPrompt):
 def enable_lasers():
     """Enables alignment lasers
     """
+    global _pi
     # TODO: Implement PWM
     _pi.write(LASER_PIN, 1)
 
@@ -146,6 +152,7 @@ def enable_lasers():
 def disable_lasers():
     """Disables alignment lasers
     """
+    global _pi
     _pi.write(LASER_PIN, 0)
 
 
@@ -168,44 +175,52 @@ def audio_finished() -> bool:
 def enable_next_button():
     """Enable Next button and Next button LED
     """
-    _pi.write(NEXT_LED_PIN, 1)
+    global _pi
+    _pi.write(NEXT_ENABLE_PIN, 1)
 
 
 def disable_next_button():
     """Disable Next button and Next button LED
     """
-    _pi.write(NEXT_LED_PIN, 0)
+    global _pi
+    _pi.write(NEXT_ENABLE_PIN, 0)
 
 
 def enable_pause_button():
     """Enable Pause button and Pause button LED
     """
-    _pi.write(PAUSE_LED_PIN, 1)
+    global _pi
+    _pi.write(PAUSE_ENABLE_PIN, 1)
 
 
 def disable_pause_button():
     """Disable Pause button and Pause button LED
     """
-    _pi.write(PAUSE_LED_PIN, 0)
+    global _pi
+    _pi.write(PAUSE_ENABLE_PIN, 0)
 
 
 def next_button_pressed() -> bool:
-    """Return whether the next button is currently being pressed. Non-blocking.
+    """Return state of next button. Non-blocking.
 
     Returns:
         bool: True if button press detected, False otherwise
     """
+    global _pi
     # pygame.event.pump() must be called regularly to keep the pygame window
     # responsive and prevent the OS from marking it as unresponsive
+    # TODO: Move this to a better location
     pygame.event.pump()
     return bool(_pi.read(NEXT_BTN_PIN))
 
 
 def pause_button_pressed() -> bool:
-    """Return whether the pause button is currently being pressed. Non-blocking.
+    """Return state of pause button. Non-blocking.
 
     Returns:
         bool: True if button press detected, False otherwise
     """
+    global _pi
+    # TODO: Move this to a better location
     pygame.event.pump()
     return bool(_pi.read(PAUSE_BTN_PIN))

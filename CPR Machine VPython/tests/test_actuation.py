@@ -1,7 +1,7 @@
 import sys
 import types
 
-from error_codes import ErrorCode
+from Enums.error_codes import ErrorCode
 
 
 def test_actuation_placeholders_return_normal_operation(monkeypatch):
@@ -19,7 +19,7 @@ def test_actuation_placeholders_return_normal_operation(monkeypatch):
     assert actuation.zeroing() == ErrorCode.NORMAL_OPERATION
     assert actuation.init_compressions() == ErrorCode.NORMAL_OPERATION
     assert actuation.compressions() == ErrorCode.NORMAL_OPERATION
-    assert actuation.stop_compressions() == ErrorCode.NORMAL_OPERATION
+    assert actuation.abort_compressions() == ErrorCode.NORMAL_OPERATION
 
 
 def test_actuation_placeholder_results_are_members_of_error_code(monkeypatch):
@@ -34,7 +34,7 @@ def test_actuation_placeholder_results_are_members_of_error_code(monkeypatch):
         actuation.zeroing,
         actuation.init_compressions,
         actuation.compressions,
-        actuation.stop_compressions,
+        actuation.abort_compressions,
     ]:
         result = func()
         assert isinstance(result, ErrorCode)

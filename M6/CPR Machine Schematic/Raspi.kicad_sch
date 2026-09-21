@@ -3016,6 +3016,16 @@
 		)
 		(uuid "d8a890fc-7fce-40fd-b1b6-192800a0a75f")
 	)
+	(text "3V3 disconnected because of seperate 3V3 source on hat"
+		(exclude_from_sim no)
+		(at 173.228 72.136 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f938668a-5f61-4486-a533-d66c24dfe139")
+	)
 	(junction
 		(at 143.51 143.51)
 		(diameter 0)
@@ -3556,6 +3566,16 @@
 		)
 		(uuid "b08083c2-9098-4b12-99e7-49d2af6984aa")
 	)
+	(label "GPIO19"
+		(at 120.65 105.41 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bc303ef9-03b5-4e2a-9912-92730ea8b3d3")
+	)
 	(label "GPIO11"
 		(at 161.29 123.19 0)
 		(effects
@@ -3605,16 +3625,6 @@
 			(justify left bottom)
 		)
 		(uuid "d4d8ccdf-b5d7-4f06-b627-ef7a64563c0c")
-	)
-	(label "GPIO19"
-		(at 120.65 105.41 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d828bfb0-dfb4-4998-8219-80f4cd6a84d8")
 	)
 	(label "GPIO13"
 		(at 198.12 127 180)
@@ -3857,7 +3867,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "434593c4-dfa4-4ebb-bd55-d4a389e09256")
-		(property "Reference" "J13"
+		(property "Reference" "J11"
 			(at 148.1933 74.93 0)
 			(effects
 				(font
@@ -3903,6 +3913,51 @@
 			)
 		)
 		(property "Notes" ""
+			(at 140.97 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 140.97 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 140.97 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 140.97 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 140.97 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER" ""
 			(at 140.97 110.49 0)
 			(effects
 				(font
@@ -4034,7 +4089,7 @@
 		(instances
 			(project ""
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/7b515552-6db1-403d-b6a0-a1579d4772aa"
-					(reference "J13")
+					(reference "J11")
 					(unit 1)
 				)
 			)
@@ -4445,7 +4500,7 @@
 		(at 135.89 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -4504,7 +4559,52 @@
 				(hide yes)
 			)
 		)
-		(property "Notes" ""
+		(property "Notes" "Have: 5"
+			(at 135.89 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 135.89 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 135.89 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 135.89 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 135.89 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER" ""
 			(at 135.89 72.39 0)
 			(effects
 				(font
@@ -4672,7 +4772,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e221d26f-ed96-42f7-ab55-9557a089df9a")
-		(property "Reference" "J15"
+		(property "Reference" "J5"
 			(at 204.47 80.01 0)
 			(effects
 				(font
@@ -4716,6 +4816,51 @@
 			)
 		)
 		(property "Notes" ""
+			(at 203.2 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 203.2 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 203.2 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 203.2 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 203.2 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SUPPLIER" ""
 			(at 203.2 109.22 0)
 			(effects
 				(font
@@ -4847,7 +4992,7 @@
 		(instances
 			(project ""
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/7b515552-6db1-403d-b6a0-a1579d4772aa"
-					(reference "J15")
+					(reference "J5")
 					(unit 1)
 				)
 			)

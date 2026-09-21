@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.0,
-          "height": 1.8,
-          "width": 1.325
+          "drill": 2.0,
+          "height": 4.0,
+          "width": 4.0
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -60,19 +60,19 @@
       ],
       "drc_exclusions": [
         [
-          "duplicate_footprints|159300000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|08371d48-5ec1-4fa3-81d3-50654f5bce1e",
+          "extra_footprint|137222336|100839240|5cea6f29-600f-44b2-8578-960d572834b6|00000000-0000-0000-0000-000000000000",
           ""
         ],
         [
-          "extra_footprint|159300000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|00000000-0000-0000-0000-000000000000",
+          "extra_footprint|158750000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|00000000-0000-0000-0000-000000000000",
           ""
         ],
         [
-          "extra_footprint|165098761|82992336|08371d48-5ec1-4fa3-81d3-50654f5bce1e|00000000-0000-0000-0000-000000000000",
-          ""
+          "lib_footprint_mismatch|116532000|114086000|21f84bf5-383e-48ce-bcde-66a68fa2b90e|00000000-0000-0000-0000-000000000000",
+          "Edited to prevent silkscreen overlap"
         ],
         [
-          "lib_footprint_mismatch|130453833|103975000|58969b1a-561e-4aa3-bc45-691048e4bee2|00000000-0000-0000-0000-000000000000",
+          "lib_footprint_mismatch|116532000|99608000|9868c78a-eb4d-48da-bb74-bc1585f19e3c|00000000-0000-0000-0000-000000000000",
           ""
         ],
         [
@@ -92,12 +92,8 @@
           ""
         ],
         [
-          "lib_footprint_mismatch|146900000|107100000|866a8025-e4e6-4ab7-afa4-894e2d8bf8d4|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
           "lib_footprint_mismatch|154800000|107100000|53197291-2cd5-4843-b9b0-f8f00843f2b1|00000000-0000-0000-0000-000000000000",
-          ""
+          "Changed ID pos"
         ],
         [
           "starved_thermal|148212500|106000000|2e7c7677-4870-4651-8be7-023a069b446b|27724dbf-760a-493f-a7cb-537935f30690|F.Cu",
@@ -129,7 +125,8 @@
         "footprint_symbol_mismatch": "warning",
         "footprint_type_mismatch": "ignore",
         "hole_clearance": "error",
-        "hole_to_hole": "warning",
+        "hole_near_hole": "error",
+        "hole_to_hole": "error",
         "holes_co_located": "warning",
         "invalid_outline": "error",
         "isolated_copper": "warning",
@@ -542,9 +539,12 @@
         "wire_width": 6
       },
       {
+        "bus_width": 12,
         "clearance": 0.2,
         "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
+        "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "Raspi Power",
@@ -553,7 +553,8 @@
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.37,
         "via_diameter": 2.74,
-        "via_drill": 1.37
+        "via_drill": 1.37,
+        "wire_width": 6
       }
     ],
     "meta": {
@@ -622,7 +623,7 @@
           "group_by": true,
           "label": "Exclude from BOM",
           "name": "${EXCLUDE_FROM_BOM}",
-          "show": false
+          "show": true
         },
         {
           "group_by": true,
@@ -791,6 +792,12 @@
           "label": "Notes",
           "name": "Notes",
           "show": true
+        },
+        {
+          "group_by": false,
+          "label": "gobilda",
+          "name": "gobilda",
+          "show": false
         }
       ],
       "filter_string": "",
@@ -798,7 +805,7 @@
       "include_excluded_from_bom": false,
       "name": "",
       "sort_asc": false,
-      "sort_field": "digikey"
+      "sort_field": "Reference"
     },
     "connection_grid_size": 50.0,
     "drawing": {

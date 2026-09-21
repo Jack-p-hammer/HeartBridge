@@ -3252,12 +3252,12 @@
 	(footprint "Images:MIT"
 		(layer "F.Cu")
 		(uuid "29e24467-2e3b-4afa-a042-cdf0cbef2ee0")
-		(at 149.4 88.5)
+		(at 149.606 87.884)
 		(property "Reference" "G***1"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "92bc112e-c316-4e0a-a6f5-3d68cc6ee653")
+			(uuid "b2f35a9f-67a0-4047-8941-36e6de4bab7f")
 			(effects
 				(font
 					(size 1.5 1.5)
@@ -3269,7 +3269,7 @@
 			(at 0.75 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "fff0244a-deea-45bb-ad5d-871f9f0ab09d")
+			(uuid "6e47722c-71a6-49f2-9925-d1181d4d012e")
 			(effects
 				(font
 					(size 1.5 1.5)
@@ -3281,7 +3281,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "df24eb18-8e92-4db1-a14b-5d8ab5d1b671")
+			(uuid "cec59921-4348-4a73-86d1-d74aae4e7893")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3293,7 +3293,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "46ac61be-1ce5-4140-b0a8-b0708dcf2c25")
+			(uuid "09187990-a4d5-45b4-a584-78aa6e7f931c")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6525,7 +6525,7 @@
 	(footprint "Images:LilGuy"
 		(layer "F.Cu")
 		(uuid "5279b932-6099-4496-ac57-2cc7b7b7e7bb")
-		(at 170.1 89.8)
+		(at 162.052 84.074)
 		(property "Reference" "G***2"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -15468,13 +15468,13 @@
 	(footprint "MAX42402AFLB_:Untitled"
 		(layer "F.Cu")
 		(uuid "a10b1fb4-055f-4a48-861a-dbab412fb489")
-		(at 158.75 88.3)
+		(at 158.496 87.884)
 		(property "Reference" "REF**2"
 			(at 0 -0.5 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "e5a5cd11-95f3-4af9-86ce-905d3ec2b8fd")
+			(uuid "65b5bd44-d74f-46da-9bff-42ad3ce46189")
 			(effects
 				(font
 					(size 1 1)
@@ -15486,7 +15486,7 @@
 			(at 0 1 0)
 			(unlocked yes)
 			(layer "F.Fab")
-			(uuid "52c3c610-a8a4-4286-b0df-b2cab3ec89dc")
+			(uuid "d3fd0db5-4610-42cf-827a-50108c29818c")
 			(effects
 				(font
 					(size 1 1)
@@ -15499,7 +15499,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "bb70cdc4-7a9f-4402-a873-26860cec86f6")
+			(uuid "c922d73d-fa5c-4905-b8a5-39a1a9388c87")
 			(effects
 				(font
 					(size 1 1)
@@ -15512,7 +15512,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "55d400cb-1b44-4445-85c8-470805b7801c")
+			(uuid "274477be-5229-4609-b904-87de0aad8748")
 			(effects
 				(font
 					(size 1 1)
@@ -28247,7 +28247,7 @@
 	(footprint "Images:Occam"
 		(layer "F.Cu")
 		(uuid "fb84a175-94aa-4e26-82d2-e60912100309")
-		(at 165.3 85)
+		(at 167.64 87.63)
 		(property "Reference" "G***3"
 			(at 0 0 0)
 			(layer "F.SilkS")
@@ -30775,7 +30775,7 @@
 		)
 	)
 	(gr_text "Daniel Gliksberg\nHB Main Board v3"
-		(at 145 85.1 0)
+		(at 145.288 84.582 0)
 		(layer "F.SilkS")
 		(uuid "a1922457-5441-4426-844d-dca0ef3c1689")
 		(effects
@@ -30934,13 +30934,13 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "{dblquote}Can we get rid of Canada?{dblquote}"
-		(at 144.9 92.3 0)
+	(gr_text "{dblquote}You sound like Wario if he was Mexican{dblquote}"
+		(at 145.288 92.3 0)
 		(layer "F.SilkS")
 		(uuid "e55aaee2-56c6-4da6-826a-4bfc00941dc6")
 		(effects
 			(font
-				(size 1 1)
+				(size 0.8 0.8)
 				(thickness 0.15)
 			)
 			(justify left bottom)

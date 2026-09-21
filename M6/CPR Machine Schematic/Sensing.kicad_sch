@@ -2071,7 +2071,7 @@
 	)
 	(rectangle
 		(start 14.605 84.455)
-		(end 76.2 106.045)
+		(end 64.135 106.045)
 		(stroke
 			(width 0)
 			(type default)
@@ -2126,7 +2126,7 @@
 		(uuid "16672d0a-8951-4f3d-8a1d-cfbac2db4255")
 	)
 	(junction
-		(at 33.02 88.9)
+		(at 26.67 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "48961d70-c940-4c36-a488-86d1c5aba992")
@@ -2150,7 +2150,7 @@
 		(uuid "a5a24e74-06fb-43b4-9cba-02887e4e00a3")
 	)
 	(junction
-		(at 33.02 101.6)
+		(at 26.67 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a98f6bde-025e-4397-bb04-0f07d0810ad3")
@@ -2183,17 +2183,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 91.44) (xy 57.15 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1b87a59c-90a6-4301-b864-941276cbef66")
-	)
-	(wire
-		(pts
-			(xy 33.02 101.6) (xy 31.75 101.6)
+			(xy 26.67 102.87) (xy 25.4 102.87)
 		)
 		(stroke
 			(width 0)
@@ -2203,7 +2193,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 101.6) (xy 33.02 101.6)
+			(xy 39.37 102.87) (xy 26.67 102.87)
 		)
 		(stroke
 			(width 0)
@@ -2233,7 +2223,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 96.52) (xy 57.15 96.52)
+			(xy 39.37 97.79) (xy 48.26 97.79)
 		)
 		(stroke
 			(width 0)
@@ -2243,7 +2233,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 91.44) (xy 49.53 93.98)
+			(xy 41.91 92.71) (xy 41.91 95.25)
 		)
 		(stroke
 			(width 0)
@@ -2273,7 +2263,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 88.9) (xy 45.72 96.52)
+			(xy 39.37 90.17) (xy 39.37 97.79)
 		)
 		(stroke
 			(width 0)
@@ -2293,7 +2283,7 @@
 	)
 	(wire
 		(pts
-			(xy 33.02 88.9) (xy 45.72 88.9)
+			(xy 26.67 90.17) (xy 39.37 90.17)
 		)
 		(stroke
 			(width 0)
@@ -2323,7 +2313,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 88.9) (xy 33.02 88.9)
+			(xy 25.4 90.17) (xy 26.67 90.17)
 		)
 		(stroke
 			(width 0)
@@ -2383,7 +2373,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 99.06) (xy 45.72 101.6)
+			(xy 39.37 100.33) (xy 39.37 102.87)
 		)
 		(stroke
 			(width 0)
@@ -2413,7 +2403,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 99.06) (xy 57.15 99.06)
+			(xy 39.37 100.33) (xy 48.26 100.33)
 		)
 		(stroke
 			(width 0)
@@ -2473,7 +2463,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 93.98) (xy 57.15 93.98)
+			(xy 41.91 95.25) (xy 48.26 95.25)
 		)
 		(stroke
 			(width 0)
@@ -2535,7 +2525,7 @@
 	)
 	(hierarchical_label "I2C_SCL"
 		(shape input)
-		(at 31.75 101.6 180)
+		(at 25.4 102.87 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2546,7 +2536,7 @@
 	)
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
-		(at 31.75 88.9 180)
+		(at 25.4 90.17 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2557,7 +2547,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x04_Pin")
-		(at 62.23 93.98 0)
+		(at 53.34 95.25 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2567,7 +2557,7 @@
 		(fields_autoplaced yes)
 		(uuid "0721c988-55a0-4bab-9a2c-2ff0fecb5035")
 		(property "Reference" "J6"
-			(at 63.5 93.9799 0)
+			(at 54.61 95.2499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2576,7 +2566,7 @@
 			)
 		)
 		(property "Value" "I2C Port"
-			(at 63.5 96.5199 0)
+			(at 54.61 97.7899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2585,7 +2575,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
-			(at 62.23 93.98 0)
+			(at 53.34 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2594,7 +2584,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 62.23 93.98 0)
+			(at 53.34 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2603,7 +2593,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated"
-			(at 62.23 93.98 0)
+			(at 53.34 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2612,7 +2602,7 @@
 			)
 		)
 		(property "Notes" ""
-			(at 62.23 93.98 0)
+			(at 53.34 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2621,7 +2611,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 62.23 93.98 0)
+			(at 53.34 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2630,7 +2620,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 62.23 93.98 0)
+			(at 53.34 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2639,7 +2629,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 62.23 93.98 0)
+			(at 53.34 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2648,7 +2638,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 62.23 93.98 0)
+			(at 53.34 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2657,7 +2647,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 62.23 93.98 0)
+			(at 53.34 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3628,7 +3618,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 49.53 91.44 180)
+		(at 41.91 92.71 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3637,7 +3627,7 @@
 		(fields_autoplaced yes)
 		(uuid "4e51d078-fbdb-4119-929f-1b8894fdc616")
 		(property "Reference" "#PWR033"
-			(at 49.53 85.09 0)
+			(at 41.91 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3646,7 +3636,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 49.53 86.36 0)
+			(at 41.91 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3654,7 +3644,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 49.53 91.44 0)
+			(at 41.91 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3663,7 +3653,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 49.53 91.44 0)
+			(at 41.91 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3672,7 +3662,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 49.53 91.44 0)
+			(at 41.91 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4404,7 +4394,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 33.02 101.6 0)
+		(at 26.67 102.87 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -4413,7 +4403,7 @@
 		(fields_autoplaced yes)
 		(uuid "afb6761b-5c9f-4955-aed8-9c9de465cd8c")
 		(property "Reference" "TP8"
-			(at 35.56 97.0279 0)
+			(at 29.21 98.2979 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4422,7 +4412,7 @@
 			)
 		)
 		(property "Value" "SCL"
-			(at 35.56 99.5679 0)
+			(at 29.21 100.8379 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4431,7 +4421,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 38.1 101.6 0)
+			(at 31.75 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4440,7 +4430,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 38.1 101.6 0)
+			(at 31.75 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4449,7 +4439,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 33.02 101.6 0)
+			(at 26.67 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4458,7 +4448,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 33.02 101.6 0)
+			(at 26.67 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4467,7 +4457,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 33.02 101.6 0)
+			(at 26.67 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4476,7 +4466,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 33.02 101.6 0)
+			(at 26.67 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4485,7 +4475,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 33.02 101.6 0)
+			(at 26.67 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4494,7 +4484,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 33.02 101.6 0)
+			(at 26.67 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4969,7 +4959,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 33.02 88.9 180)
+		(at 26.67 90.17 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -4978,7 +4968,7 @@
 		(fields_autoplaced yes)
 		(uuid "da36abf1-acc9-4aff-8f56-df9f26a5913e")
 		(property "Reference" "TP7"
-			(at 35.56 90.9319 0)
+			(at 29.21 92.2019 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4987,7 +4977,7 @@
 			)
 		)
 		(property "Value" "SDA"
-			(at 35.56 93.4719 0)
+			(at 29.21 94.7419 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4996,7 +4986,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 27.94 88.9 0)
+			(at 21.59 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5005,7 +4995,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 27.94 88.9 0)
+			(at 21.59 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5014,7 +5004,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 33.02 88.9 0)
+			(at 26.67 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5023,7 +5013,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 33.02 88.9 0)
+			(at 26.67 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5032,7 +5022,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 33.02 88.9 0)
+			(at 26.67 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5041,7 +5031,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 33.02 88.9 0)
+			(at 26.67 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5050,7 +5040,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 33.02 88.9 0)
+			(at 26.67 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5059,7 +5049,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 33.02 88.9 0)
+			(at 26.67 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5081,7 +5071,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 55.88 91.44 0)
+		(at 48.26 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5090,7 +5080,7 @@
 		(fields_autoplaced yes)
 		(uuid "dac00ee6-eb9b-4af7-869e-0468cacde4cb")
 		(property "Reference" "#PWR032"
-			(at 55.88 95.25 0)
+			(at 48.26 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5099,7 +5089,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 55.88 86.36 0)
+			(at 48.26 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5107,7 +5097,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 55.88 91.44 0)
+			(at 48.26 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5116,7 +5106,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 55.88 91.44 0)
+			(at 48.26 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5125,7 +5115,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 55.88 91.44 0)
+			(at 48.26 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -3321,7 +3321,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://www.passivecomponent.com/wp-content/uploads/datasheet/WTC_MLCC_Middle_and_High_Voltage.pdf"
+		(property "Datasheet" "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/885012008021/5453729"
 			(at 53.34 67.31 0)
 			(effects
 				(font
@@ -3339,7 +3339,7 @@
 				(hide yes)
 			)
 		)
-		(property "digikey" "1292-1206N470J102CT-ND"
+		(property "digikey" "732-7874-1-ND"
 			(at 53.34 67.31 90)
 			(effects
 				(font
@@ -4645,12 +4645,13 @@
 				)
 			)
 		)
-		(property "Value" "47 pF"
-			(at 71.882 49.53 0)
+		(property "Value" "+3V3"
+			(at 36.83 36.8299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
@@ -4705,15 +4706,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 36.83 36.8299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 			)
 		)
 		(property "OC_NEWARK" ""
@@ -5152,12 +5144,13 @@
 				)
 			)
 		)
-		(property "Value" "0.1 uF"
-			(at 127.762 41.91 0)
+		(property "Value" "+3V3"
+			(at 59.69 39.3699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
@@ -5212,15 +5205,6 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 59.69 39.3699 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 			)
 		)
 		(property "OC_NEWARK" ""

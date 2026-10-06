@@ -171,8 +171,8 @@ class FakeI2C:
         buffer[:n] = self.adc_bytes[:n]
 
 
-class FakeVL6180X:
-    """Stand-in for the adafruit_vl6180x.VL6180X time-of-flight sensor.
+class FakeVL53L0X:
+    """Stand-in for the adafruit_vl53l0x.VL53L0X time-of-flight sensor.
 
     `range` is a property (not a plain attribute) so `raise_on_read` can
     simulate the sensor disconnecting mid-operation, after a previously
@@ -345,7 +345,7 @@ class HardwareHarness:
     def __init__(self):
         self.pi = FakePi()
         self.i2c = FakeI2C()
-        self.tof = FakeVL6180X()
+        self.tof = FakeVL53L0X()
         self.imu = FakeBNO08X_I2C()
         self.moteus_controller = FakeMoteusController()
         self.pygame = PygameHarness()
@@ -380,13 +380,13 @@ def _make_busio_module(harness: HardwareHarness) -> types.ModuleType:
     return _fake_module("busio", I2C=I2C)
 
 
-def _make_vl6180x_module(harness: HardwareHarness) -> types.ModuleType:
-    def VL6180X(i2c):
+def _make_vl53l0x_module(harness: HardwareHarness) -> types.ModuleType:
+    def VL53L0X(i2c):
         if harness.tof_connect_error is not None:
             raise harness.tof_connect_error
         return harness.tof
 
-    return _fake_module("adafruit_vl6180x", VL6180X=VL6180X)
+    return _fake_module("adafruit_vl53l0x", VL53L0X=VL53L0X)
 
 
 def _make_bno08x_modules(harness: HardwareHarness) -> tuple[types.ModuleType, types.ModuleType]:
@@ -497,7 +497,7 @@ def install_fake_hardware_modules(harness: Optional[HardwareHarness] = None) -> 
     sys.modules["pigpio"] = _make_pigpio_module(harness)
     sys.modules["board"] = _make_board_module()
     sys.modules["busio"] = _make_busio_module(harness)
-    sys.modules["adafruit_vl6180x"] = _make_vl6180x_module(harness)
+    sys.modules["adafruit_vl53l0x"] = _make_vl53l0x_module(harness)
     bno_mod, bno_i2c_mod = _make_bno08x_modules(harness)
     sys.modules["adafruit_bno08x"] = bno_mod
     sys.modules["adafruit_bno08x.i2c"] = bno_i2c_mod
@@ -515,15 +515,16 @@ def hardware():
 
     Usage:
         def test_something(hardware):
-            hardware.pi.connected = False
+            hardware.i2c_connect_error = RuntimeError("i2c bus unavailable")
             import actuation, sensing
             actuation.init_motor()
-            assert sensing.init_sensors(actuation.get_motor_controller()) == ErrorCode.ERROR_INIT_FAILURE
+            assert sensing.init_sensors(actuation.get_motor_controller(), hardware.pi) == ErrorCode.ERROR_INIT_FAILURE
 
     Note that sensing.init_sensors() takes the shared MoteusThread instance as
     a parameter (it zeroes the rotary encoder by reading from it directly), so
     call `actuation.init_motor()` first and pass `actuation.get_motor_controller()`
-    in, matching what main.py does.
+    in, matching what main.py does. It also takes the shared pigpio.pi instance,
+    which main.py gets from HMI.init_Pi()/HMI.get_pi(); pass `hardware.pi` here.
     """
     harness = install_fake_hardware_modules()
     yield harness
@@ -562,8 +563,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
 
     sensing_mod = _fake_module(
         "sensing",
-        init_sensors=lambda motor_controller: ErrorCode.NORMAL_OPERATION,
-        get_pi=lambda: FakePi(),
+        init_sensors=lambda motor_controller, pi: ErrorCode.NORMAL_OPERATION,
         zero_position=lambda: ErrorCode.NORMAL_OPERATION,
         battery_check=lambda: ErrorCode.NORMAL_OPERATION,
     )
@@ -610,6 +610,8 @@ def install_fake_main_modules(monkeypatch) -> dict:
         "HMI",
         Image=hmi_image,
         AudioPrompt=hmi_audio_prompt,
+        init_Pi=lambda: ErrorCode.NORMAL_OPERATION,
+        get_pi=lambda: FakePi(),
         init_HMI=lambda pi_instance: ErrorCode.NORMAL_OPERATION,
         pump_events=lambda: ErrorCode.NORMAL_OPERATION,
         set_image_audio=lambda image, prompt: ErrorCode.NORMAL_OPERATION,

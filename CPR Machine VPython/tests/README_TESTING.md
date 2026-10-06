@@ -22,6 +22,8 @@ If you only want to run the tests in this folder, that same command will do it.
 Format: `case -> result`.
 
 ### HMI tests
+- init_Pi(): pigpio daemon connected -> NORMAL_OPERATION, get_pi() returns
+  the shared instance. daemon unavailable -> ERROR_INIT_FAILURE.
 - init_HMI(): healthy GPIO -> pins configured (Next/Pause input+pullup,
   LED/laser output+pulldown), laser PWM off. pygame/mixer failure ->
   ERROR_PYGAME_INIT_FAILURE. display failure -> ERROR_INIT_FAILURE. button/
@@ -53,7 +55,7 @@ Format: `case -> result`.
   True. audio-less state -> True. no prompt ever played -> True.
 
 ### Sensing tests
-- init_sensors(): pigpio/I2C/ToF/IMU unavailable -> ERROR_INIT_FAILURE.
+- init_sensors(): I2C/ToF (VL53L0X)/IMU unavailable -> ERROR_INIT_FAILURE.
   healthy hardware -> NORMAL_OPERATION, absolute-zero positions captured.
 - read_force_sensor()/read_ToF_sensor()/read_IMU(): raw ADC bytes/ToF
   range/IMU accel -> matching converted value.

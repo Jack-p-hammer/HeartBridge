@@ -37,6 +37,22 @@ import pytest
 from Enums.error_codes import ErrorCode
 
 
+# -------------------- init_Pi --------------------
+
+def test_init_pi_connects_and_shares_instance(hardware):
+    import HMI
+
+    assert HMI.init_Pi() == ErrorCode.NORMAL_OPERATION
+    assert HMI.get_pi() is hardware.pi
+
+
+def test_init_pi_fails_when_pigpio_unavailable(hardware):
+    hardware.pi.connected = False
+    import HMI
+
+    assert HMI.init_Pi() == ErrorCode.ERROR_INIT_FAILURE
+
+
 # -------------------- init_HMI --------------------
 
 def test_init_hmi_sets_up_display_and_gpio(hardware):

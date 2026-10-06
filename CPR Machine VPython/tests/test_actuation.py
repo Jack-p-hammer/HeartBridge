@@ -100,7 +100,7 @@ def test_zeroing_succeeds_when_sensors_healthy(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller())
+    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
     actuation.init_zeroing()
 
     # zeroing() checks get_last_error(), which only reflects NORMAL_OPERATION
@@ -165,7 +165,7 @@ def test_compressions_normal_operation(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller())
+    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
 
     # compressions() checks get_last_error(), which only reflects NORMAL_OPERATION
     # once the background command loop has completed its first tick.
@@ -183,7 +183,7 @@ def test_compressions_fails_on_sensor_error(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller())
+    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
     hardware.moteus_controller.position = 1.0  # ~62.8mm of rotary travel
     hardware.tof.range = 0  # ToF disagrees by ~63mm, far past the 2mm threshold
     time.sleep(0.05)  # let the background command loop pick up the new position
@@ -198,7 +198,7 @@ def test_compressions_propagates_imu_kneel_failure(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller())
+    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
     hardware.imu.acceleration = (0.0, 0.0, 20.0)  # exceeds the compression accel limit
 
     assert actuation.compressions() == ErrorCode.ERROR_IMU_KNEEL_FAILURE
@@ -209,7 +209,7 @@ def test_compressions_fails_on_motor_error(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller())
+    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
 
     hardware.moteus_controller.raise_on_set_position = RuntimeError("comm lost")
     time.sleep(0.05)
@@ -224,7 +224,7 @@ def test_pause_compressions_normal_operation(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller())
+    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
 
     # pause_compressions() checks get_last_error(), which only reflects
     # NORMAL_OPERATION once the background command loop has completed its
@@ -241,7 +241,7 @@ def test_pause_compressions_fails_on_sensor_error(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller())
+    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
     hardware.moteus_controller.position = 1.0
     hardware.tof.range = 0
     time.sleep(0.05)  # let the background command loop pick up the new position
@@ -255,7 +255,7 @@ def test_pause_compressions_propagates_imu_kneel_failure(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller())
+    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
     hardware.imu.acceleration = (0.0, 0.0, 20.0)
 
     assert actuation.pause_compressions() == ErrorCode.ERROR_IMU_KNEEL_FAILURE
@@ -266,7 +266,7 @@ def test_pause_compressions_fails_on_motor_error(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller())
+    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
 
     hardware.moteus_controller.raise_on_set_position = RuntimeError("comm lost")
     time.sleep(0.05)
@@ -280,6 +280,6 @@ def test_abort_compressions_does_not_require_sensing_init(hardware):
     """Abort intentionally skips sensor reads to return to zero as fast as possible."""
     import actuation
     actuation.init_motor()
-    # Deliberately skip sensing.init_sensors() -- abort must not depend on it.
+    # Deliberately skip sensing.init_sensors(, hardware.pi) -- abort must not depend on it.
 
     assert actuation.abort_compressions() == ErrorCode.NORMAL_OPERATION

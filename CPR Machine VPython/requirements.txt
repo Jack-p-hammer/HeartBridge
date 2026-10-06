@@ -1,5 +1,5 @@
 pigpio
-pygame
+pygame-ce
 pytest
 pathlib 
 asyncio

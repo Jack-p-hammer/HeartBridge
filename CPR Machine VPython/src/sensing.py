@@ -12,7 +12,7 @@ import pigpio
 import board
 import busio
 import logging
-import adafruit_vl6180x
+import adafruit_vl53l0x
 import adafruit_bno08x
 import math
 from adafruit_bno08x.i2c import BNO08X_I2C
@@ -25,7 +25,7 @@ from moteus_thread import PINION_RADIUS_M
 
 # Global variables for shared sensor instances
 _pi: pigpio.pi
-_vl61: adafruit_vl6180x.VL6180X
+_vl61: adafruit_vl53l0x.VL53L0X
 _bno: BNO08X_I2C
 _i2c: busio.I2C
 _motor_controller: MoteusThread
@@ -102,11 +102,11 @@ def init_sensors(motor_controller: MoteusThread, pi: pigpio.pi) -> ErrorCode:
         logging.error(f"Failed to initialize I2C bus: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
 
-    # VL6180X time-of-flight sensor
+    # VL53L0X time-of-flight sensor
     try:
-        _vl61 = adafruit_vl6180x.VL6180X(_i2c)
+        _vl61 = adafruit_vl53l0x.VL53L0X(_i2c)
     except Exception as e:
-        logging.error(f"VL6180X initialization failed: {e}")
+        logging.error(f"VL53L0X initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
 
     # BNO085 IMU TODO: Check if this is the one we have

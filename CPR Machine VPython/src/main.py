@@ -99,11 +99,13 @@ def main():
                 if state != prev_state:
                     # continue jumps back to the top of the while loop, so if any
                     # init step fails its error code is caught on the next iteration
+                    error = HMI.init_Pi()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     error = actuation.init_motor()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = sensing.init_sensors(actuation.get_motor_controller())
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.init_HMI(sensing.get_pi())
+                    error = HMI.init_HMI(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = sensing.battery_check()
                     if error != ErrorCode.NORMAL_OPERATION: continue

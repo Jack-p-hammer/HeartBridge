@@ -77,12 +77,6 @@ compression_limits = SensorLimits(
 )
 
 
-def get_pi():
-    """Returns the shared pigpio instance for use by hmi.py's button/LED/laser GPIO."""
-    global _pi
-    return _pi
-
-
 def init_sensors(motor_controller: MoteusThread) -> ErrorCode:
     """Initialize the shared GPIO and sensor hardware used by the system."""
     global _pi, _vl61, _bno, _i2c
@@ -94,15 +88,6 @@ def init_sensors(motor_controller: MoteusThread) -> ErrorCode:
     
     # Pull the shared moteus controller instance from actuation.py
     _motor_controller = motor_controller
-
-    # pigpio is only used here for the shared GPIO instance passed to hmi.py.
-    # The sensors themselves use the Adafruit/Blinka I2C abstraction below.
-    # The pigpio daemon must be running before this is called:
-    #   sudo pigpiod
-    _pi = pigpio.pi()
-    if not _pi.connected:
-        logging.error("Failed to connect to pigpio daemon")
-        return ErrorCode.ERROR_INIT_FAILURE
 
     # Initialize MUX selector (does nothing for now)
     _pi.set_mode(ADC_MUX_SIG_PIN, pigpio.OUTPUT)
@@ -278,6 +263,8 @@ def battery_check() -> ErrorCode:
         ErrorCode: Normal if battery is sufficient, otherwise ERROR_LOW_BATTERY
     """
     global _motor_controller
+    logging.debug("Checking battery voltage...")
+    
     try:
         battery_voltage: float = _motor_controller.get_battery_voltage()
     except Exception as e:

@@ -73,6 +73,32 @@ _audio_cache: dict = {}       # AudioPrompt -> loaded pygame.mixer.Sound
 _audio_start_time: float = 0.0    # time.monotonic() when current audio loop started
 _audio_length: float = 0.0    # length in seconds of the currently playing prompt
 
+def init_Pi() -> ErrorCode:
+    """Initialize pigpio daemon and return the pi instance.
+
+    Returns:
+        ErrorCode: Normal operation if successful, ERROR_INIT_FAILURE if failed
+    """
+    global _pi
+    logging.debug("Initializing pigpio...")
+    
+    # pigpio is only used here for the shared GPIO instance passed to hmi.py.
+    # The sensors themselves use the Adafruit/Blinka I2C abstraction below.
+    # The pigpio daemon must be running before this is called:
+    #   sudo pigpiod
+    _pi = pigpio.pi()
+    if not _pi.connected:
+        logging.error("Failed to connect to pigpio daemon")
+        return ErrorCode.ERROR_INIT_FAILURE
+    
+    return ErrorCode.NORMAL_OPERATION
+
+
+def get_pi():
+    """Returns the shared pigpio instance for use by hmi.py's button/LED/laser GPIO."""
+    global _pi
+    return _pi
+
 
 def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
     """Initialize screens, audio, lasers, and buttons.

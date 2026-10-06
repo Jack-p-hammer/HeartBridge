@@ -90,6 +90,8 @@ def init_sensors(motor_controller: MoteusThread) -> ErrorCode:
     global rotary_zero_position, ToF_zero_position
     global _motor_controller
     
+    logging.debug("Initializing sensors...")
+    
     # Pull the shared moteus controller instance from actuation.py
     _motor_controller = motor_controller
 

@@ -84,7 +84,8 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
         ErrorCode: Normal operation if successful, ERROR_INIT_FAILURE if failed
     """
     global _screen, _pi, _audio_channel
-
+    logging.debug("Initializing HMI...")
+    
     # Initialize the global variable for the pigpio instance
     _pi = pi_instance
 
@@ -153,7 +154,7 @@ def pump_events() -> ErrorCode:
         pygame.event.pump()
     except Exception as e:
         # Pump should only fail if pygame is uninitialized, which should never happen after init_HMI() succeeds
-        logging.warning(f"Pygame event pump failed: {e}\n\tThis should only happen once, before init_HMI() is called.")
+        logging.warning(f"Pygame event pump failed: {e}\n\tThis should happen once and only once, before init_HMI() is called.")
         return ErrorCode.WARNING_PYGAME_PUMP_FAILURE
     return ErrorCode.NORMAL_OPERATION
 

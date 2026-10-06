@@ -39,7 +39,7 @@ def init_motor() -> ErrorCode:
         ErrorCode: Normal operation if successful, ERROR_INIT_FAILURE if failed
     """
     global _motor_controller 
-    logging.debug("Initializing motor driver")
+    logging.debug("Initializing motor...")
     
     _motor_controller = MoteusThread(controller_id=CONTROLLER_ID)
     motor_error: ErrorCode = _motor_controller.start()

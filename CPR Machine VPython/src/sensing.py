@@ -77,12 +77,12 @@ compression_limits = SensorLimits(
 )
 
 
-def init_sensors(motor_controller: MoteusThread) -> ErrorCode:
+def init_sensors(motor_controller: MoteusThread, pi: pigpio.pi) -> ErrorCode:
     """Initialize the shared GPIO and sensor hardware used by the system."""
     global _pi, _vl61, _bno, _i2c
     global rotary_absolute_zero_position, ToF_absolute_zero_position, force_zero_value
     global rotary_zero_position, ToF_zero_position
-    global _motor_controller
+    global _motor_controller, _pi
     
     logging.debug("Initializing sensors...")
     

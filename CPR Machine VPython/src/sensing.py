@@ -88,6 +88,7 @@ def init_sensors(motor_controller: MoteusThread, pi: pigpio.pi) -> ErrorCode:
     
     # Pull the shared moteus controller instance from actuation.py
     _motor_controller = motor_controller
+    _pi = pi
 
     # Initialize MUX selector (does nothing for now)
     _pi.set_mode(ADC_MUX_SIG_PIN, pigpio.OUTPUT)

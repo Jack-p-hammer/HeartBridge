@@ -25,7 +25,7 @@ from moteus_thread import PINION_RADIUS_M
 
 # Global variables for shared sensor instances
 _pi: pigpio.pi
-_vl61: adafruit_vl53l0x.VL53L0X
+_vl53: adafruit_vl53l0x.VL53L0X
 _bno: BNO08X_I2C
 _i2c: busio.I2C
 _motor_controller: MoteusThread
@@ -79,7 +79,7 @@ compression_limits = SensorLimits(
 
 def init_sensors(motor_controller: MoteusThread, pi: pigpio.pi) -> ErrorCode:
     """Initialize the shared GPIO and sensor hardware used by the system."""
-    global _pi, _vl61, _bno, _i2c
+    global _pi, _vl53, _bno, _i2c
     global rotary_absolute_zero_position, ToF_absolute_zero_position, force_zero_value
     global rotary_zero_position, ToF_zero_position
     global _motor_controller, _pi
@@ -104,7 +104,7 @@ def init_sensors(motor_controller: MoteusThread, pi: pigpio.pi) -> ErrorCode:
 
     # VL53L0X time-of-flight sensor
     try:
-        _vl61 = adafruit_vl53l0x.VL53L0X(_i2c)
+        _vl53 = adafruit_vl53l0x.VL53L0X(_i2c)
     except Exception as e:
         logging.error(f"VL53L0X initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
@@ -375,8 +375,8 @@ def read_ToF_sensor() -> int:
     Returns:
         int: ToF sensor reading in millimeters
     """
-    global _vl61
-    return _vl61.range
+    global _vl53
+    return _vl53.range
 
 
 def read_IMU() -> tuple[float, float, float] | None:

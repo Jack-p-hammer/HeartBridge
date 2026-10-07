@@ -37,12 +37,12 @@ AUDIO = Path(__file__).resolve().parent / "Audio"
 
 class Image(Enum):
     # Enum values are the image file paths
-    STARTUP = ""          # TODO: add startup/911 image
+    STARTUP = IMAGES / "StartUp.jpg"          
     UNFOLD = IMAGES / "unfold.jpg"
     CUT_CLOTHES = IMAGES / "cutClothing.jpg"
     ALIGNMENT = IMAGES / "alignment.jpg"
     ZEROING_PREP = IMAGES / "zeroingPrep.jpg"
-    ZEROING = ""          # TODO: Find zeroing image
+    ZEROING = IMAGES / "zeroing.jpg"          
     COMPRESSION_PREP = IMAGES / "compressionsConfirm.jpg"
     COMPRESSION = IMAGES / "compressions.jpg"
     PAUSE = IMAGES / "paused.jpg"
@@ -60,9 +60,9 @@ class AudioPrompt(Enum):
     ZEROING = AUDIO / "zeroing.wav"
     COMPRESSION_PREP = AUDIO / "compressionsPrep.wav"
     COMPRESSION = AUDIO / "compressions.wav"
-    PAUSE = ""   # TODO
-    ABORT = ""   # TODO
-    KNEEL_FAILURE = ""   # TODO
+    PAUSE = AUDIO / "paused.wav"   # TODO
+    ABORT = AUDIO / "abort.wav"   # TODO
+    KNEEL_FAILURE = AUDIO / "kneelFailure.wav"   # TODO
 
 
 # Global variables for shared instances, _pi is declared in sensing.py and passed to HMI.py for shared GPIO access

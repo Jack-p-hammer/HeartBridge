@@ -60,9 +60,9 @@ class AudioPrompt(Enum):
     ZEROING = AUDIO / "zeroing.wav"
     COMPRESSION_PREP = AUDIO / "compressionsPrep.wav"
     COMPRESSION = AUDIO / "compressions.wav"
-    PAUSE = AUDIO / "paused.wav"   # TODO
-    ABORT = AUDIO / "abort.wav"   # TODO
-    KNEEL_FAILURE = AUDIO / "kneelFailure.wav"   # TODO
+    PAUSE = AUDIO / "paused.wav"  
+    ABORT = AUDIO / "abort.wav"   
+    KNEEL_FAILURE = AUDIO / "kneelFailure.wav"   
 
 
 # Global variables for shared instances, _pi is declared in sensing.py and passed to HMI.py for shared GPIO access

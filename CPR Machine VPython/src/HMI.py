@@ -3,6 +3,8 @@
 """
 # External imports
 import pigpio
+import os
+import sys
 from pathlib import Path
 import pygame
 import logging
@@ -100,6 +102,22 @@ def get_pi():
     return _pi
 
 
+def _use_local_display() -> None:
+    """Point pygame at the Pi's own desktop when launched without one (e.g. over SSH).
+
+    A terminal on the Pi's desktop already sets these, so they are only filled in when missing.
+    XDG_RUNTIME_DIR also lets the audio mixer reach the desktop's sound server.
+    """
+    if not sys.platform.startswith("linux"):
+        return
+    if os.environ.get("WAYLAND_DISPLAY") or os.environ.get("DISPLAY"):
+        return
+    logging.debug("No display set, defaulting to the Pi's local desktop")
+    os.environ.setdefault("XDG_RUNTIME_DIR", f"/run/user/{os.getuid()}")
+    os.environ["WAYLAND_DISPLAY"] = "wayland-0"
+    os.environ["DISPLAY"] = ":0"    # X11 fallback (older desktops / Xwayland)
+
+
 def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
     """Initialize screens, audio, lasers, and buttons.
 
@@ -117,6 +135,7 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
 
     # Initialize Pygame and audio mixer for sound playback
     try:
+        _use_local_display()
         pygame.init()
         pygame.mixer.init(frequency=44100, channels=1, buffer=2048)
         # Reserve a dedicated channel for audio prompts

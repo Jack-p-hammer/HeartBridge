@@ -8,8 +8,8 @@ J_m = 2.367e-6 % Motor Intertia
 K_v = 276.994 % Rpm / V
 K_torque = (3/2)*(1/sqrt(3))*(60/(2*pi))/K_v % Nm/A
 
-b = 0 % 286.8; % Rotational damping coefficient (includes back emf)
-k = 0 %10490; % Spring constant of chest
+b = 286.8; % Chest damping
+k = 10490; % Spring constant of chest
 
 %% Motor Controller Setup
 
@@ -35,6 +35,8 @@ w_n_pll = 2*pi*f_pll/2.48; % rad/s
 
 %% System Setup
 F_max = 500; % N
+R_phase = 0; % Ohms, motor winding resistance placeholder
+V_batt = 18; % V, minimum for conservative estimate
 
 % Ball screw
 D_ball = 0.25*0.0254; % Ball screw diameter
@@ -45,6 +47,7 @@ L_ball = 12.7*1e-3; % m, Ball screw lead
 p_ball = L_ball/(2*pi); % Ball screw transmission ratio
 J_ball = (pi*rho_ball*length_ball*D_ball^4)/32;
 m_ball = 2; % Nut + end effector, kg
+J_eff_ball = J_m + J_ball + m_ball*p_ball^2/eta_ball;
 
 
 tau_max_ball = F_max*L_ball/(2*pi*eta_ball); % Nm

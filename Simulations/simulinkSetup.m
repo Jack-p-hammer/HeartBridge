@@ -24,7 +24,7 @@ pid_dq_hz = 100;
 
 tau_d = 1.5*Ts; % PWM Delay, s
 
-accel_limit = 1.358e4;      % rad/s^2
+accel_limit = -1;      % rad/s^2
 vel_limit = -1;      % rad/s, example
 
 %% Moteus PLL Filter
@@ -49,7 +49,10 @@ J_ball = (pi*rho_ball*length_ball*D_ball^4)/32;
 m_ball = 2; % Nut + end effector, kg
 J_eff_ball = J_m + J_ball + m_ball*p_ball^2/eta_ball;
 
-tau_max_ball = F_max*p_ball/eta_ball - 0.5*J_eff_ball*accel_limit; % Nm
+accel_limit = 1.358e4;      % rad/s^2
+vel_limit = 41.6666667e-2/p_ball;
+
+tau_max_ball = F_max*p_ball/eta_ball; % Nm
 % tau_max_ball = inf;
 
 % Rack & Pinion

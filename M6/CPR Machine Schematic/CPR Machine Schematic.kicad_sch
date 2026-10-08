@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20250114)
+	(version 20260306)
 	(generator "eeschema")
-	(generator_version "9.0")
+	(generator_version "10.0")
 	(uuid "8991fc77-975f-4978-a089-6b2a5e33f59b")
 	(paper "A4")
 	(lib_symbols)
@@ -88,11 +88,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "2e704a40-db78-4cf7-9f7e-cfc586f5aeb3")
 		(property "Sheetname" "Sensing"
 			(at 57.15 67.2334 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -102,6 +104,8 @@
 		)
 		(property "Sheetfile" "Sensing.kicad_sch"
 			(at 57.15 96.4696 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -150,11 +154,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "390cafbd-c317-4387-95c3-e11405a1139f")
 		(property "Sheetname" "Power"
 			(at 57.15 25.9584 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -164,6 +170,8 @@
 		)
 		(property "Sheetfile" "Power.kicad_sch"
 			(at 57.15 53.9246 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -192,11 +200,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "4742a649-a015-487c-b382-01878b0e2dd4")
 		(property "Sheetname" "HMI_Raspi"
 			(at 176.53 58.3434 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -206,6 +216,8 @@
 		)
 		(property "Sheetfile" "HMI_Raspi.kicad_sch"
 			(at 176.53 106.6296 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -284,11 +296,13 @@
 			(type solid)
 		)
 		(fill
-			(color 0 0 0 0.0000)
+			(color 0 0 0 0)
 		)
 		(uuid "7b515552-6db1-403d-b6a0-a1579d4772aa")
 		(property "Sheetname" "Raspi"
 			(at 120.65 58.3434 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -298,6 +312,8 @@
 		)
 		(property "Sheetfile" "Raspi.kicad_sch"
 			(at 120.65 106.6296 0)
+			(show_name no)
+			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)

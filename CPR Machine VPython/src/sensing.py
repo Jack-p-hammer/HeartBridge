@@ -107,9 +107,9 @@ def init_sensors() -> ErrorCode:
 
     # VL6180X time-of-flight sensor
     try:
-        _vl61 = adafruit_vl6180x.VL6180X(_i2c)
+        _vl61 = adafruit_vl53l0x.VL53l0X(_i2c)
     except Exception as e:
-        logging.error(f"VL6180X initialization failed: {e}")
+        logging.error(f"VL53l0X initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
 
     # BNO085 IMU TODO: Check if this is the one we have

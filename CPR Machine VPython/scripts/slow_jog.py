@@ -47,6 +47,8 @@ async def run(speed_in_per_s: float, travel_in: float) -> None:
     speed_rev_s: float = inches_to_rev(abs(speed_in_per_s))
     period_s: float = 2.0 * abs(travel_rev) / speed_rev_s  # out and back
     t0: float = time.monotonic()
+    last_print: float = 0.0
+    print(f"Start position {start_rev:.3f} rev, travel {travel_rev:.3f} rev at {speed_rev_s:.3f} rev/s")
 
     try:
         while not stop_pressed.done():
@@ -57,11 +59,24 @@ async def run(speed_in_per_s: float, travel_in: float) -> None:
             else:
                 frac, direction = 2.0 - 2.0 * phase, -1.0
 
-            await controller.set_position(
-                position=start_rev + frac * travel_rev,
+            target: float = start_rev + frac * travel_rev
+            result = await controller.set_position(
+                position=target,
                 velocity=direction * math.copysign(speed_rev_s, travel_rev),
                 maximum_torque=MAX_TORQUE_NM,
+                query=True,
             )
+
+            # Mode 10 = position control. Anything else (esp. 1 = fault) means it isn't moving.
+            mode = result.values[moteus.Register.MODE]
+            fault = result.values[moteus.Register.FAULT]
+            if time.monotonic() - last_print > 1.0:
+                last_print = time.monotonic()
+                print(f"target {target:.3f}  pos {result.values[moteus.Register.POSITION]:.3f}  "
+                      f"mode {mode}  fault {fault}  {result.values[moteus.Register.VOLTAGE]:.1f} V")
+            if fault:
+                print(f"Controller fault {fault} -- stopping (press Enter to exit). See moteus docs 'fault' register.")
+                break
             await asyncio.sleep(COMMAND_PERIOD_S)
     finally:
         await controller.set_stop()

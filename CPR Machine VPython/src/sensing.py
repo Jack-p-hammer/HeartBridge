@@ -12,7 +12,7 @@ import pigpio
 import board
 import busio
 import logging
-import adafruit_vl53L0x
+import adafruit_vl53l0x
 import adafruit_bno08x
 import math
 from adafruit_bno08x.i2c import BNO08X_I2C

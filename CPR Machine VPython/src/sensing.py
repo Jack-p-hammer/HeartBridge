@@ -12,7 +12,7 @@ import pigpio
 import board
 import busio
 import logging
-import adafruit_vl6180x
+import adafruit_vl53l0x
 import adafruit_bno08x
 import math
 from adafruit_bno08x.i2c import BNO08X_I2C
@@ -26,7 +26,7 @@ from moteus_thread import PINION_RADIUS_M
 
 # Global variables for shared sensor instances
 _pi: pigpio.pi
-_vl61: adafruit_vl6180x.VL6180X
+_vl61: adafruit_vl53l0x.VL53L0X
 _bno: BNO08X_I2C
 _i2c: busio.I2C
 

@@ -1,21 +1,24 @@
 """
-Slow back-and-forth jog test for the plunger motor.
+Slow jog test for the plunger motor, with optional alignment lasers.
 
-Moves the rack TRAVEL_IN inches from wherever it is when started and back
-again, over and over, at SPEED_IN_PER_S. Press Enter to start moving, then
-Enter again to stop (motor is put in stop/coast mode).
+Sequence (each step is one press of Enter):
+    1st Enter: lower the plunger LOWER_IN inches and hold there
+    2nd Enter: cycle down TRAVEL_IN inches and back up, over and over
+    3rd Enter: stop the motor (stop/coast mode), turn off the lasers, exit
 
 Standalone on purpose -- it talks to the moteus directly instead of importing
 src/, so it runs without the force sensor / I2C hardware attached.
 
 Usage:
-    python slow_jog.py              # default snail's pace
-    python slow_jog.py --speed 0.5  # inches per second
+    python slow_jog.py                     # lasers off, default snail's pace
+    python slow_jog.py --laser on          # lasers on for the whole run
+    python slow_jog.py --speed 0.5         # inches per second
 """
 
 import argparse
 import asyncio
 import math
+import subprocess
 import time
 
 import moteus
@@ -24,8 +27,10 @@ CONTROLLER_ID: int = 1  # same as moteus_thread.py
 PINION_RADIUS_M: float = 0.01  # same as moteus_thread.py
 MAX_TORQUE_NM: float = 2.0  # kept low for bench testing (main code allows 5.0)
 COMMAND_PERIOD_S: float = 0.01  # 100 Hz, well under the moteus watchdog timeout
+LASER_PIN: int = 12  # BCM numbering, same as HMI.py. High -> Q5 on -> lasers on
 
-TRAVEL_IN: float = 2.0  # positive = down on the rack, negative = up
+LOWER_IN: float = 1.0  # first move, positive = down on the rack
+TRAVEL_IN: float = 2.0  # cycle stroke below the lowered position
 SPEED_IN_PER_S: float = 0.1  # snail's pace
 
 
@@ -34,35 +39,83 @@ def inches_to_rev(inches: float) -> float:
     return inches * 0.0254 / (2.0 * math.pi * PINION_RADIUS_M)
 
 
-async def run(speed_in_per_s: float, travel_in: float) -> None:
-    controller = moteus.Controller(id=CONTROLLER_ID)
-    await controller.set_stop()  # clear any latched fault before commanding
-
-    loop = asyncio.get_running_loop()
-    await loop.run_in_executor(None, input, "Press Enter to start moving...")
-    stop_pressed = loop.run_in_executor(None, input, "Moving. Press Enter to stop.\n")
-
-    start_rev: float = (await controller.query()).values[moteus.Register.POSITION]
-    travel_rev: float = inches_to_rev(travel_in)
-    speed_rev_s: float = inches_to_rev(abs(speed_in_per_s))
-    period_s: float = 2.0 * abs(travel_rev) / speed_rev_s  # out and back
-    t0: float = time.monotonic()
-    last_print: float = 0.0
-    print(f"Start position {start_rev:.3f} rev, travel {travel_rev:.3f} rev at {speed_rev_s:.3f} rev/s")
+def set_lasers(on: bool) -> None:
+    """Drive the laser GPIO. Uses pigpio like HMI.py; falls back to pinctrl
+    (Pi 5, or pigpiod not running). Never raises -- a laser problem shouldn't
+    stop the motor test."""
+    try:
+        import pigpio
+        pi = pigpio.pi()
+        if pi.connected:
+            pi.set_mode(LASER_PIN, pigpio.OUTPUT)
+            pi.write(LASER_PIN, int(on))
+            pi.stop()
+            print(f"Lasers {'on' if on else 'off'} (pigpio)")
+            return
+    except ImportError:
+        pass
 
     try:
-        while not stop_pressed.done():
-            # Triangle wave: start -> start + travel -> start, constant speed
-            phase: float = ((time.monotonic() - t0) % period_s) / period_s
-            if phase < 0.5:
-                frac, direction = 2.0 * phase, 1.0
-            else:
-                frac, direction = 2.0 - 2.0 * phase, -1.0
+        subprocess.run(["pinctrl", "set", str(LASER_PIN), "op", "dh" if on else "dl"], check=True)
+        print(f"Lasers {'on' if on else 'off'} (pinctrl)")
+    except (OSError, subprocess.CalledProcessError) as e:
+        print(f"Could not set lasers {'on' if on else 'off'}: {e}")
 
-            target: float = start_rev + frac * travel_rev
+
+async def run(speed_in_per_s: float, lower_in: float, travel_in: float, lasers_on: bool) -> None:
+    controller = moteus.Controller(id=CONTROLLER_ID)
+    await controller.set_stop()  # clear any latched fault before commanding
+    set_lasers(lasers_on)
+
+    loop = asyncio.get_running_loop()
+    await loop.run_in_executor(None, input, f"Press Enter to lower {lower_in} in...")
+    press = loop.run_in_executor(None, input, "Lowering. Press Enter to start cycling.\n")
+
+    start_rev: float = (await controller.query()).values[moteus.Register.POSITION]
+    lower_rev: float = inches_to_rev(lower_in)
+    travel_rev: float = inches_to_rev(travel_in)
+    speed_rev_s: float = inches_to_rev(abs(speed_in_per_s))
+    base_rev: float = start_rev + lower_rev  # top of the cycle stroke
+    lower_s: float = abs(lower_rev) / speed_rev_s
+    period_s: float = 2.0 * abs(travel_rev) / speed_rev_s  # down and back up
+    print(f"Start position {start_rev:.3f} rev, lowering to {base_rev:.3f} rev at {speed_rev_s:.3f} rev/s")
+
+    stage: str = "lowering"  # -> "cycle_requested" -> "cycling"
+    t0: float = time.monotonic()
+    t_cycle: float = 0.0
+    last_print: float = 0.0
+
+    try:
+        while True:
+            now: float = time.monotonic()
+            if press.done():
+                if stage != "lowering":
+                    break  # 3rd Enter
+                stage = "cycle_requested"
+                press = loop.run_in_executor(None, input, "Press Enter to stop and turn off lasers.\n")
+            # Don't start cycling until the 1" move has finished, so there's no jump
+            if stage == "cycle_requested" and now - t0 >= lower_s:
+                stage, t_cycle = "cycling", now
+                print(f"Cycling {travel_in} in below {base_rev:.3f} rev")
+
+            if stage == "cycling":
+                # Triangle wave: base -> base + travel -> base, constant speed
+                phase: float = ((now - t_cycle) % period_s) / period_s
+                if phase < 0.5:
+                    frac, direction = 2.0 * phase, 1.0
+                else:
+                    frac, direction = 2.0 - 2.0 * phase, -1.0
+                target: float = base_rev + frac * travel_rev
+                velocity: float = direction * math.copysign(speed_rev_s, travel_rev)
+            elif now - t0 < lower_s:
+                target = start_rev + lower_rev * (now - t0) / lower_s
+                velocity = math.copysign(speed_rev_s, lower_rev)
+            else:
+                target, velocity = base_rev, 0.0  # hold at the lowered position
+
             result = await controller.set_position(
                 position=target,
-                velocity=direction * math.copysign(speed_rev_s, travel_rev),
+                velocity=velocity,
                 maximum_torque=MAX_TORQUE_NM,
                 query=True,
             )
@@ -70,9 +123,9 @@ async def run(speed_in_per_s: float, travel_in: float) -> None:
             # Mode 10 = position control. Anything else (esp. 1 = fault) means it isn't moving.
             mode = result.values[moteus.Register.MODE]
             fault = result.values[moteus.Register.FAULT]
-            if time.monotonic() - last_print > 1.0:
-                last_print = time.monotonic()
-                print(f"target {target:.3f}  pos {result.values[moteus.Register.POSITION]:.3f}  "
+            if now - last_print > 1.0:
+                last_print = now
+                print(f"[{stage}] target {target:.3f}  pos {result.values[moteus.Register.POSITION]:.3f}  "
                       f"mode {mode}  fault {fault}  {result.values[moteus.Register.VOLTAGE]:.1f} V")
             if fault:
                 print(f"Controller fault {fault} -- stopping (press Enter to exit). See moteus docs 'fault' register.")
@@ -81,14 +134,17 @@ async def run(speed_in_per_s: float, travel_in: float) -> None:
     finally:
         await controller.set_stop()
         print("Motor stopped.")
+        set_lasers(False)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("-laser", "--laser", choices=("on", "off"), default="off", help="alignment lasers during the run")
     parser.add_argument("--speed", type=float, default=SPEED_IN_PER_S, help="inches per second")
-    parser.add_argument("--travel", type=float, default=TRAVEL_IN, help="inches (positive = down)")
+    parser.add_argument("--lower", type=float, default=LOWER_IN, help="first move, inches (positive = down)")
+    parser.add_argument("--travel", type=float, default=TRAVEL_IN, help="cycle stroke, inches (positive = down)")
     args = parser.parse_args()
-    asyncio.run(run(args.speed, args.travel))
+    asyncio.run(run(args.speed, args.lower, args.travel, args.laser == "on"))
 
 
 if __name__ == "__main__":

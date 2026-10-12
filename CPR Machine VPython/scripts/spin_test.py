@@ -16,7 +16,6 @@ Usage:
 import argparse
 import asyncio
 import time
-
 import moteus
 
 CONTROLLER_ID: int = 1  # same as moteus_thread.py
@@ -24,7 +23,7 @@ MAX_TORQUE_NM: float = 2.0  # kept low for bench testing (main code allows 5.0)
 COMMAND_PERIOD_S: float = 0.01  # 100 Hz, well under the moteus watchdog timeout
 
 TURNS: float = 10.0  # positive spins the "down" direction first
-SPEED_REV_S: float = 0.5  # rotations per second -> 20 s each way
+SPEED_REV_S: float = 2.0  # rotations per second -> 5 s each way
 
 
 async def run(turns: float, speed_rev_s: float) -> None:

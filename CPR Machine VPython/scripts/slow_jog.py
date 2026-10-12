@@ -26,7 +26,7 @@ import moteus
 CONTROLLER_ID: int = 1  # same as moteus_thread.py
 PINION_RADIUS_M: float = 0.01  # same as moteus_thread.py
 MAX_TORQUE_NM: float = 2.0  # kept low for bench testing (main code allows 5.0)
-COMMAND_PERIOD_S: float = 0.01  # 100 Hz, well under the moteus watchdog timeout
+COMMAND_PERIOD_S: float = 0.001  # 100 Hz, well under the moteus watchdog timeout
 LASER_PIN: int = 12  # BCM numbering, same as HMI.py. High -> Q5 on -> lasers on
 
 LOWER_IN: float = 1.0  # first move, positive = down on the rack

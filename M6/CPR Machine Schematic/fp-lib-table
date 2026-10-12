@@ -1,5 +1,6 @@
 (fp_lib_table
-  (version 7)
-  (lib (name "Images")(type "KiCad")(uri "${KIPRJMOD}/Images.pretty")(options "")(descr ""))
-  (lib (name "Imports")(type "KiCad")(uri "${KIPRJMOD}/Imports.pretty")(options "")(descr ""))
+	(version 7)
+	(lib (name "Images") (type "KiCad") (uri "${KIPRJMOD}/Images.pretty") (options "") (descr ""))
+	(lib (name "Imports") (type "KiCad") (uri "${KIPRJMOD}/Imports.pretty") (options "") (descr ""))
+	(lib (name "ESD321DYAR") (type "KiCad") (uri "${KIPRJMOD}/Part Library/ESD321DYAR/KiCADv6/footprints.pretty") (options "") (descr ""))
 )

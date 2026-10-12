@@ -57,13 +57,15 @@ async def run(turns: float, speed_rev_s: float) -> None:
                 position=target, velocity=velocity, maximum_torque=MAX_TORQUE_NM, query=True,
             )
 
+            # Fault register holds a limit code (96-103) while running; only mode 1 is a real fault
+            mode = result.values[moteus.Register.MODE]
             fault = result.values[moteus.Register.FAULT]
             if time.monotonic() - last_print > 1.0:
                 last_print = time.monotonic()
                 print(f"target {target:.3f}  pos {result.values[moteus.Register.POSITION]:.3f}  "
-                      f"mode {result.values[moteus.Register.MODE]}  fault {fault}")
-            if fault:
-                print(f"Controller fault {fault} -- stopping.")
+                      f"mode {mode}  fault {fault}")
+            if mode in (1, 11):
+                print(f"Controller {'fault ' + str(fault) if mode == 1 else 'watchdog timeout'} -- stopping.")
                 break
             await asyncio.sleep(COMMAND_PERIOD_S)
     finally:

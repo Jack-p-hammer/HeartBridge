@@ -84,6 +84,7 @@ async def run(speed_in_per_s: float, lower_in: float, travel_in: float, lasers_o
     t0: float = time.monotonic()
     t_cycle: float = 0.0
     last_print: float = 0.0
+    last_limit: int = 0
 
     try:
         while True:
@@ -120,15 +121,22 @@ async def run(speed_in_per_s: float, lower_in: float, travel_in: float, lasers_o
                 query=True,
             )
 
-            # Mode 10 = position control. Anything else (esp. 1 = fault) means it isn't moving.
+            # Mode 10 = position control, 1 = fault, 11 = watchdog timeout.
+            # In a running mode the fault register holds a limit code instead (96-103,
+            # e.g. 102 = hit maximum_torque) -- that's informational, not a fault.
             mode = result.values[moteus.Register.MODE]
             fault = result.values[moteus.Register.FAULT]
+            if mode != 1 and fault != last_limit:  # only print when the limit code changes
+                last_limit = fault
+                print(f"[{stage}] limit code {fault}{' (cleared)' if not fault else ''}  "
+                      f"target {target:.3f}  pos {result.values[moteus.Register.POSITION]:.3f}")
             if now - last_print > 1.0:
                 last_print = now
                 print(f"[{stage}] target {target:.3f}  pos {result.values[moteus.Register.POSITION]:.3f}  "
                       f"mode {mode}  fault {fault}  {result.values[moteus.Register.VOLTAGE]:.1f} V")
-            if fault:
-                print(f"Controller fault {fault} -- stopping (press Enter to exit). See moteus docs 'fault' register.")
+            if mode in (1, 11):
+                print(f"Controller {'fault ' + str(fault) if mode == 1 else 'watchdog timeout'} "
+                      "-- stopping (press Enter to exit). See moteus docs 'fault' register.")
                 break
             await asyncio.sleep(COMMAND_PERIOD_S)
     finally:

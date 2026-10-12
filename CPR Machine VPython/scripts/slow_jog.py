@@ -27,6 +27,7 @@ CONTROLLER_ID: int = 1  # same as moteus_thread.py
 PINION_RADIUS_M: float = 0.01  # same as moteus_thread.py
 MAX_TORQUE_NM: float = 2.0  # kept low for bench testing (main code allows 5.0)
 COMMAND_PERIOD_S: float = 0.001  # 100 Hz, well under the moteus watchdog timeout
+REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1 s watchdog
 LASER_PIN: int = 12  # BCM numbering, same as HMI.py. High -> Q5 on -> lasers on
 
 LOWER_IN: float = 1.0  # first move, positive = down on the rack
@@ -85,6 +86,8 @@ async def run(speed_in_per_s: float, lower_in: float, travel_in: float, lasers_o
     t_cycle: float = 0.0
     last_print: float = 0.0
     last_limit: int = 0
+    sent: int = 0  # replies received since the last status line
+    missed: int = 0  # total commands that got no reply
 
     try:
         while True:
@@ -114,12 +117,20 @@ async def run(speed_in_per_s: float, lower_in: float, travel_in: float, lasers_o
             else:
                 target, velocity = base_rev, 0.0  # hold at the lowered position
 
-            result = await controller.set_position(
-                position=target,
-                velocity=velocity,
-                maximum_torque=MAX_TORQUE_NM,
-                query=True,
-            )
+            # A lost CAN reply can make this await hang forever, which freezes the
+            # script and lets the controller's watchdog stop the motor silently.
+            try:
+                result = await asyncio.wait_for(controller.set_position(
+                    position=target,
+                    velocity=velocity,
+                    maximum_torque=MAX_TORQUE_NM,
+                    query=True,
+                ), timeout=REPLY_TIMEOUT_S)
+            except asyncio.TimeoutError:
+                missed += 1
+                print(f"[{stage}] no reply from controller ({missed} missed so far)")
+                continue
+            sent += 1
 
             # Mode 10 = position control, 1 = fault, 11 = watchdog timeout.
             # In a running mode the fault register holds a limit code instead (96-103,
@@ -131,9 +142,12 @@ async def run(speed_in_per_s: float, lower_in: float, travel_in: float, lasers_o
                 print(f"[{stage}] limit code {fault}{' (cleared)' if not fault else ''}  "
                       f"target {target:.3f}  pos {result.values[moteus.Register.POSITION]:.3f}")
             if now - last_print > 1.0:
-                last_print = now
+                # cmds/s shows the loop is alive; torque near MAX_TORQUE_NM with pos lagging
+                # target means the motor can't keep up
                 print(f"[{stage}] target {target:.3f}  pos {result.values[moteus.Register.POSITION]:.3f}  "
-                      f"mode {mode}  fault {fault}  {result.values[moteus.Register.VOLTAGE]:.1f} V")
+                      f"torque {result.values[moteus.Register.TORQUE]:.2f} Nm  mode {mode}  fault {fault}  "
+                      f"{result.values[moteus.Register.VOLTAGE]:.1f} V  {sent / (now - last_print):.0f} cmds/s")
+                last_print, sent = now, 0
             if mode in (1, 11):
                 print(f"Controller {'fault ' + str(fault) if mode == 1 else 'watchdog timeout'} "
                       "-- stopping (press Enter to exit). See moteus docs 'fault' register.")

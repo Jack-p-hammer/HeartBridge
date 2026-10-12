@@ -1,0 +1,15 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP NE555DR
+D Single Precision Timer
+K
+F http://www.ti.com/lit/ds/symlink/ne555.pdf
+$ENDCMP
+#
+$CMP AEV20E-BP
+D DC Contactor, 20A, 12VDC Coil,48Ohms 250 mA 3W PCB Terminals Through Hole -40C ~ 85C
+K
+F https://www.altranmagnetics.com/media/2024/07/AEV20E_DataSheet_26May2024.pdf
+$ENDCMP
+#
+#End Doc Library

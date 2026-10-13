@@ -14,7 +14,6 @@ k = 10490; % Spring constant of chest
 %% Motor Controller Setup
 
 iRateLimit = -1;
-iLimit = 10;
 
 servo_max_current = 120; % A
 servo_pwm_rate_hz = 15000;
@@ -53,6 +52,8 @@ accel_limit = 1.358e4;      % rad/s^2
 vel_limit = 41.6666667e-2/p_ball;
 
 tau_max_ball = F_max*p_ball/eta_ball; % Nm
+iLimit = 1.2*tau_max_ball;
+
 % tau_max_ball = inf;
 
 % Rack & Pinion

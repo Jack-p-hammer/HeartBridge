@@ -39,9 +39,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.8,
-          "height": 1.27,
-          "width": 1.27
+          "drill": 2.7,
+          "height": 3.8,
+          "width": 3.8
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -661,7 +661,7 @@
         "uuid": "070ed92a-1612-4f32-b689-998b796912af"
       }
     ],
-    "used_designators": "Contactor1-2,C1-6,J1-7,CIN1-2,COUT1-2,D1-7,Flyback1-2,F1-3,H1-4,J_EXT1-5,L1,LED1-4,Q1-4,R1-11,SW1-2,TP1-5,U1-3,#PWR1-2",
+    "used_designators": "Contactor1-2,C1-6,J1-7,CIN1-2,COUT1-2,D1-8,Flyback1-2,F1-3,H1-4,J_EXT1-5,L1,LED1-4,Q1-4,R1-11,SW1-2,TP1-5,U1-3,#PWR1-2,#PWR9,#PWR34-37,#PWR62",
     "variants": []
   },
   "sheets": [

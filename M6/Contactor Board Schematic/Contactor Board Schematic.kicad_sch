@@ -188,6 +188,172 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:D_TVS"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "D_TVS"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Bidirectional transient-voltage-suppression diode"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "diode TVS thyrector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "D_TVS_0_1"
+				(polyline
+					(pts
+						(xy -2.54 1.27) (xy -2.54 -1.27) (xy 2.54 1.27) (xy 2.54 -1.27) (xy -2.54 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.508 1.27) (xy 0 1.27) (xy 0 -1.27) (xy -0.508 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "D_TVS_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "A1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:D_Zener"
 			(pin_numbers
 				(hide yes)
@@ -1483,8 +1649,8 @@
 		)
 	)
 	(rectangle
-		(start 20.955 26.67)
-		(end 29.845 36.195)
+		(start 13.335 26.67)
+		(end 22.225 36.195)
 		(stroke
 			(width 0)
 			(type default)
@@ -1496,7 +1662,7 @@
 	)
 	(text "Screw terminal\nto EC5 Connector"
 		(exclude_from_sim no)
-		(at 24.892 38.608 0)
+		(at 20.828 38.862 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1511,6 +1677,12 @@
 		(uuid "0522cb34-3b87-4293-9f07-2a7caee3bb41")
 	)
 	(junction
+		(at 63.5 43.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1196ca8e-d86e-4b1e-861c-872b7860ab7b")
+	)
+	(junction
 		(at 53.34 39.37)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1521,6 +1693,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4f5137bb-3275-411e-a48f-3530b4709914")
+	)
+	(junction
+		(at 34.29 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "535f0453-466d-4244-90b4-38e2dbde098a")
 	)
 	(junction
 		(at 36.83 39.37)
@@ -1535,10 +1713,10 @@
 		(uuid "592f0b96-1c8f-4294-b758-173869ac095b")
 	)
 	(junction
-		(at 40.64 71.12)
+		(at 53.34 19.05)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "65ebb5fc-dfe6-4eef-b2e9-2c4fb3ecb9f2")
+		(uuid "5b30cb51-e4c0-430f-97a6-d6e4878ebf01")
 	)
 	(junction
 		(at 63.5 29.21)
@@ -1563,12 +1741,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a8db657c-86a3-425a-81d0-2d9ebecb4f41")
-	)
-	(junction
-		(at 46.99 68.58)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a90851a4-8a89-4dc2-9dcc-42792dbb1e7b")
 	)
 	(junction
 		(at 102.87 35.56)
@@ -1598,13 +1770,23 @@
 	)
 	(wire
 		(pts
-			(xy 54.61 21.59) (xy 44.45 21.59)
+			(xy 55.88 16.51) (xy 53.34 16.51)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "0af0f844-3a77-4b40-838d-61f844483b0b")
+	)
+	(wire
+		(pts
+			(xy 54.61 19.05) (xy 53.34 19.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0b76ac12-560d-44ba-8805-e4eae9948081")
 	)
 	(wire
 		(pts
@@ -1658,7 +1840,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 68.58) (xy 46.99 68.58)
+			(xy 22.86 64.77) (xy 49.53 64.77)
 		)
 		(stroke
 			(width 0)
@@ -1718,16 +1900,6 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 29.21) (xy 34.29 29.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "614ee091-d562-4ec6-b7fa-793f5bb8c3e2")
-	)
-	(wire
-		(pts
 			(xy 34.29 21.59) (xy 41.91 21.59)
 		)
 		(stroke
@@ -1735,16 +1907,6 @@
 			(type default)
 		)
 		(uuid "6442a532-d98c-4ee5-a4a2-89e8164c23e0")
-	)
-	(wire
-		(pts
-			(xy 44.45 71.12) (xy 44.45 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6553ded1-0b1a-4936-aad0-6e14d749ad9d")
 	)
 	(wire
 		(pts
@@ -1768,7 +1930,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 71.12) (xy 44.45 71.12)
+			(xy 22.86 85.09) (xy 49.53 85.09)
 		)
 		(stroke
 			(width 0)
@@ -1785,6 +1947,26 @@
 			(type default)
 		)
 		(uuid "85a56f05-7747-4e0c-8eec-d0641d888a3a")
+	)
+	(wire
+		(pts
+			(xy 53.34 21.59) (xy 44.45 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "89f7aa57-c28f-4b62-a3c4-3785ae819021")
+	)
+	(wire
+		(pts
+			(xy 53.34 19.05) (xy 53.34 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8f6e7cf5-c19f-49de-b23d-dd9446548dc5")
 	)
 	(wire
 		(pts
@@ -1808,7 +1990,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 29.21) (xy 63.5 36.83)
+			(xy 63.5 29.21) (xy 63.5 43.18)
 		)
 		(stroke
 			(width 0)
@@ -1848,23 +2030,13 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 33.02) (xy 60.96 36.83)
+			(xy 60.96 33.02) (xy 60.96 44.45)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "a9b7ba62-0b6f-41a9-ba6c-d20354874c26")
-	)
-	(wire
-		(pts
-			(xy 44.45 88.9) (xy 62.23 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "af466176-f708-4d69-833d-44cb2e0b925d")
 	)
 	(wire
 		(pts
@@ -1888,6 +2060,16 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 43.18) (xy 63.5 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc1ae226-64bf-4898-8248-21f7def6bda7")
+	)
+	(wire
+		(pts
 			(xy 102.87 29.21) (xy 102.87 35.56)
 		)
 		(stroke
@@ -1898,7 +2080,17 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 31.75) (xy 34.29 31.75)
+			(xy 21.59 29.21) (xy 34.29 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7113b23-3285-4279-b544-00dedc66f9d5")
+	)
+	(wire
+		(pts
+			(xy 21.59 31.75) (xy 34.29 31.75)
 		)
 		(stroke
 			(width 0)
@@ -1958,6 +2150,16 @@
 	)
 	(wire
 		(pts
+			(xy 53.34 16.51) (xy 53.34 19.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eea98bb1-56a5-4f68-8b4e-d46df2e15114")
+	)
+	(wire
+		(pts
 			(xy 102.87 22.86) (xy 106.68 22.86)
 		)
 		(stroke
@@ -1966,18 +2168,8 @@
 		)
 		(uuid "f6fbbd65-9c73-4de4-920f-a941c2d8e074")
 	)
-	(wire
-		(pts
-			(xy 46.99 68.58) (xy 62.23 68.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f913cadb-2fad-4fcf-b2b7-242feb1d0a3b")
-	)
 	(label "Contactor"
-		(at 35.56 71.12 0)
+		(at 22.86 85.09 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1985,16 +2177,6 @@
 			(justify left bottom)
 		)
 		(uuid "42d48d84-d8ab-44e9-b316-d2df324dd62f")
-	)
-	(label "To Contactor"
-		(at 44.45 88.9 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "66e1e9e0-d9fc-4b7f-a2b1-168709b1d03f")
 	)
 	(label "Battery +"
 		(at 66.04 29.21 0)
@@ -2027,7 +2209,7 @@
 		(uuid "d9fae292-7594-407e-a2f8-12e57f46cd5c")
 	)
 	(label "Switch"
-		(at 35.56 68.58 0)
+		(at 22.86 64.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2037,7 +2219,7 @@
 		(uuid "ead7d1b0-7bdf-450f-9be8-89014bfbdfd1")
 	)
 	(label "Switch"
-		(at 54.61 21.59 0)
+		(at 55.88 16.51 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2045,6 +2227,84 @@
 			(justify left bottom)
 		)
 		(uuid "f2d841cf-7e95-467a-84b1-6fead038d5be")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 71.12 43.18 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "06cf8578-8db5-4e30-8a64-56bbaacdff0e")
+		(property "Reference" "#PWR036"
+			(at 77.47 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 76.2 43.18 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 71.12 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 71.12 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 71.12 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "82693ca7-8775-475d-b401-f6262c443bab")
+		)
+		(instances
+			(project "Contactor Board Schematic"
+				(path "/070ed92a-1612-4f32-b689-998b796912af"
+					(reference "#PWR036")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Relay:G5Q-1A")
@@ -2212,7 +2472,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Socket")
-		(at 60.96 41.91 90)
+		(at 60.96 49.53 90)
 		(mirror x)
 		(unit 1)
 		(body_style 1)
@@ -2222,8 +2482,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0b011b49-efa8-47e5-9e5f-16138e5f9cca")
-		(property "Reference" "J_EXT3"
-			(at 68.58 41.275 0)
+		(property "Reference" "J_EXT4"
+			(at 68.58 48.895 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2234,7 +2494,7 @@
 			)
 		)
 		(property "Value" "Motor Driver"
-			(at 61.976 43.18 90)
+			(at 61.976 50.8 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2244,7 +2504,7 @@
 			)
 		)
 		(property "Footprint" "Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical"
-			(at 60.96 41.91 0)
+			(at 60.96 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2255,7 +2515,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.gobilda.com/right-angle-pcb-mount-xt30-connector-mh-fc-2-pack/"
-			(at 60.96 41.91 0)
+			(at 60.96 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2266,7 +2526,7 @@
 			)
 		)
 		(property "Description" "XT-30 RC Connector"
-			(at 60.96 41.91 0)
+			(at 60.96 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2277,7 +2537,7 @@
 			)
 		)
 		(property "Notes" ""
-			(at 60.96 41.91 0)
+			(at 60.96 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2288,7 +2548,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 60.96 41.91 0)
+			(at 60.96 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2299,7 +2559,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 60.96 41.91 0)
+			(at 60.96 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2310,7 +2570,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 60.96 41.91 0)
+			(at 60.96 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2321,7 +2581,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 60.96 41.91 0)
+			(at 60.96 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2332,7 +2592,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 60.96 41.91 0)
+			(at 60.96 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2351,7 +2611,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "J_EXT3")
+					(reference "J_EXT4")
 					(unit 1)
 				)
 			)
@@ -2460,98 +2720,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:D_Zener")
-		(at 40.64 74.93 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "1e107ad3-09a1-4f88-8829-1ff0bce2d57b")
-		(property "Reference" "D6"
-			(at 36.576 73.914 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SMCJ15A"
-			(at 30.48 75.946 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_SMC"
-			(at 40.64 74.93 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.littelfuse.com/assetdocs/littelfuse_tvs_diode_smcj_datasheet.pdf?assetguid=37388813-0d6d-4329-969b-1aa8b7614ac1"
-			(at 40.64 74.93 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Zener diode"
-			(at 40.64 74.93 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "SMCJ15ALFCT-ND"
-			(at 40.64 74.93 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "036739bf-06ed-416c-a693-441f1b713cb1")
-		)
-		(pin "2"
-			(uuid "a8717ade-43ca-46eb-8199-eb26dca32599")
-		)
-		(instances
-			(project "Contactor Board Schematic"
-				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "D6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:Fuse")
 		(at 58.42 29.21 90)
 		(unit 1)
@@ -2562,7 +2730,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "2cbc7063-3a08-4eed-ac81-ac79fd0828ea")
-		(property "Reference" "F3"
+		(property "Reference" "F1"
 			(at 58.42 27.178 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2701,7 +2869,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "F3")
+					(reference "F1")
 					(unit 1)
 				)
 			)
@@ -2741,7 +2909,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_2.7mm_Pad"
 			(at 106.68 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -2788,7 +2956,7 @@
 	)
 	(symbol
 		(lib_id "Device:D_Zener")
-		(at 46.99 72.39 270)
+		(at 30.48 21.59 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2796,32 +2964,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2e0da69e-690f-4ab1-a0ab-35de4c39a28b")
-		(property "Reference" "D7"
-			(at 49.53 71.1199 90)
+		(uuid "31237dc7-e00f-44d2-a3d5-2697fd2a851e")
+		(property "Reference" "D2"
+			(at 25.908 16.764 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "SMCJ28A"
-			(at 49.53 73.6599 90)
+			(at 25.908 19.304 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SMC"
-			(at 46.99 72.39 0)
+			(at 30.48 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2832,7 +2999,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.littelfuse.com/assetdocs/littelfuse_tvs_diode_smcj_datasheet.pdf?assetguid=37388813-0d6d-4329-969b-1aa8b7614ac1"
-			(at 46.99 72.39 0)
+			(at 30.48 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2843,7 +3010,7 @@
 			)
 		)
 		(property "Description" "Zener diode"
-			(at 46.99 72.39 0)
+			(at 30.48 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2854,7 +3021,7 @@
 			)
 		)
 		(property "digikey" "SMCJ28ALFCT-ND"
-			(at 46.99 72.39 90)
+			(at 30.48 21.59 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2865,15 +3032,93 @@
 			)
 		)
 		(pin "1"
-			(uuid "5bb8a1ed-0f2c-4877-b542-e192f0b8c9a4")
+			(uuid "f1473821-ae26-47ee-b50d-e22ffc901600")
 		)
 		(pin "2"
-			(uuid "961d78b9-13d0-4459-89cd-69d0ce800ed0")
+			(uuid "5ef3b2c2-21dd-4eec-890f-d1cb54f362f7")
 		)
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "D7")
+					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 26.67 21.59 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3917a550-8467-4de3-8d14-f14b49952230")
+		(property "Reference" "#PWR035"
+			(at 20.32 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 21.59 21.59 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 26.67 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 26.67 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 26.67 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "dd240546-87a2-411b-ab64-a35c0fc9f370")
+		)
+		(instances
+			(project "Contactor Board Schematic"
+				(path "/070ed92a-1612-4f32-b689-998b796912af"
+					(reference "#PWR035")
 					(unit 1)
 				)
 			)
@@ -2890,7 +3135,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "51c1b1d3-74a7-4d6c-97b1-c6110097e313")
-		(property "Reference" "J_EXT5"
+		(property "Reference" "J_EXT2"
 			(at 49.53 17.145 0)
 			(hide yes)
 			(show_name no)
@@ -3019,7 +3264,99 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "J_EXT5")
+					(reference "J_EXT2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_TVS")
+		(at 67.31 43.18 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "5ff719ea-325e-45a8-919f-421bc72255c1")
+		(property "Reference" "D6"
+			(at 64.77 37.846 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SMCJ28CA"
+			(at 64.77 40.386 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SMC"
+			(at 67.31 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://toshiba.semicon-storage.com/info/DF2B36FU_datasheet_en_20260705.pdf?did=36248&prodName=DF2B36FU"
+			(at 67.31 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "TVS DIODE 28VWM 45.4VC DO214AB"
+			(at 67.31 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "SMCJ28CALFCT-ND"
+			(at 67.31 43.18 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a2684a64-c79d-4d7e-9454-9be5d447f9ec")
+		)
+		(pin "2"
+			(uuid "feff82d8-f6c3-449c-9c04-0eb698eb4eed")
+		)
+		(instances
+			(project "Contactor Board Schematic"
+				(path "/070ed92a-1612-4f32-b689-998b796912af"
+					(reference "D6")
 					(unit 1)
 				)
 			)
@@ -3037,7 +3374,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6bdc9dc7-b7f3-4775-b006-ca741e626901")
-		(property "Reference" "J_EXT2"
+		(property "Reference" "J_EXT3"
 			(at 81.915 24.13 0)
 			(hide yes)
 			(show_name no)
@@ -3166,85 +3503,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "J_EXT2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 46.99 76.2 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6e01427b-fce6-466f-a8e4-cb19c5bad15e")
-		(property "Reference" "#PWR035"
-			(at 46.99 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 46.99 81.28 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 46.99 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 46.99 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 46.99 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "05acfce8-e03f-42f1-a4e7-e81a1c89d58c")
-		)
-		(instances
-			(project "Contactor Board Schematic"
-				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "#PWR035")
+					(reference "J_EXT3")
 					(unit 1)
 				)
 			)
@@ -3284,7 +3543,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_2.7mm_Pad"
 			(at 106.68 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -3408,86 +3667,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 40.64 78.74 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9e0b43c4-344a-46ca-8977-41d3c10ce679")
-		(property "Reference" "#PWR036"
-			(at 40.64 85.09 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 40.64 83.82 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 40.64 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 40.64 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 40.64 78.74 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e48f9bd0-104d-458d-82f4-d50be1efa661")
-		)
-		(instances
-			(project "Contactor Board Schematic"
-				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "#PWR036")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Regulator_Switching:TSR_1-24120")
-		(at 64.77 78.74 90)
+		(at 52.07 74.93 90)
 		(mirror x)
 		(unit 1)
 		(body_style 1)
@@ -3498,8 +3679,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a3678363-4566-4611-8144-874ac899be79")
-		(property "Reference" "U2"
-			(at 58.42 77.4699 90)
+		(property "Reference" "U1"
+			(at 45.72 73.6599 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3510,7 +3691,7 @@
 			)
 		)
 		(property "Value" "12V Buck"
-			(at 58.42 80.0099 90)
+			(at 45.72 76.1999 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3521,7 +3702,7 @@
 			)
 		)
 		(property "Footprint" "Converter_DCDC:Converter_DCDC_TRACO_TSR-1_THT"
-			(at 68.58 78.74 0)
+			(at 55.88 74.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3534,7 +3715,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.tracopower.com/products/tsr1.pdf"
-			(at 64.77 78.74 0)
+			(at 52.07 74.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3545,7 +3726,7 @@
 			)
 		)
 		(property "Description" "1A step-down regulator module, fixed 12V output voltage, 5-36V input voltage, -40°C to +85°C temperature range, TO-220 compatible LM78xx replacement"
-			(at 64.77 78.74 0)
+			(at 52.07 74.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3556,7 +3737,7 @@
 			)
 		)
 		(property "digikey" "1951-2739-ND"
-			(at 64.77 78.74 90)
+			(at 52.07 74.93 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3567,7 +3748,7 @@
 			)
 		)
 		(property "Notes" "Have: 0"
-			(at 64.77 78.74 90)
+			(at 52.07 74.93 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3578,7 +3759,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 64.77 78.74 90)
+			(at 52.07 74.93 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3589,7 +3770,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 64.77 78.74 90)
+			(at 52.07 74.93 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3600,7 +3781,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 64.77 78.74 90)
+			(at 52.07 74.93 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3611,7 +3792,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 64.77 78.74 90)
+			(at 52.07 74.93 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3622,7 +3803,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 64.77 78.74 90)
+			(at 52.07 74.93 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3644,7 +3825,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "U2")
+					(reference "U1")
 					(unit 1)
 				)
 			)
@@ -3684,7 +3865,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_2.7mm_Pad"
 			(at 106.68 20.32 0)
 			(hide yes)
 			(show_name no)
@@ -3809,7 +3990,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Socket")
-		(at 24.13 31.75 180)
+		(at 16.51 31.75 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3819,7 +4000,7 @@
 		(dnp no)
 		(uuid "dafa733b-2819-471c-aa5b-72b9cf0af1e0")
 		(property "Reference" "J_EXT1"
-			(at 24.765 24.13 0)
+			(at 17.145 24.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3830,7 +4011,7 @@
 			)
 		)
 		(property "Value" "Battery"
-			(at 25.146 34.544 0)
+			(at 17.526 34.544 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3840,7 +4021,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 24.13 31.75 0)
+			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3851,7 +4032,7 @@
 			)
 		)
 		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 24.13 31.75 0)
+			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3862,7 +4043,7 @@
 			)
 		)
 		(property "Description" "Screw Terminal to EC5 Connector"
-			(at 24.13 31.75 0)
+			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3873,7 +4054,7 @@
 			)
 		)
 		(property "digikey" "277-1667-ND"
-			(at 24.13 31.75 0)
+			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3884,7 +4065,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 24.13 31.75 0)
+			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3895,7 +4076,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 24.13 31.75 0)
+			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3906,7 +4087,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 24.13 31.75 0)
+			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3917,7 +4098,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 24.13 31.75 0)
+			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3928,7 +4109,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 24.13 31.75 0)
+			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3939,7 +4120,7 @@
 			)
 		)
 		(property "Field11" ""
-			(at 24.13 31.75 0)
+			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3966,7 +4147,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 69.85 78.74 0)
+		(at 62.23 19.05 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3974,9 +4155,10 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "ee8795d8-726c-450b-ae6b-d6b60c98c426")
-		(property "Reference" "#PWR09"
-			(at 69.85 85.09 0)
+		(fields_autoplaced yes)
+		(uuid "de145e30-7b7e-4059-a7e5-95d82023ea9e")
+		(property "Reference" "#PWR037"
+			(at 68.58 19.05 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3987,18 +4169,17 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 67.818 82.55 0)
+			(at 67.31 19.05 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 69.85 78.74 0)
+			(at 62.23 19.05 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4009,7 +4190,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 69.85 78.74 0)
+			(at 62.23 19.05 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4020,7 +4201,85 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 69.85 78.74 0)
+			(at 62.23 19.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ec627d78-c86d-406d-a4bf-55d7f8cd33e1")
+		)
+		(instances
+			(project "Contactor Board Schematic"
+				(path "/070ed92a-1612-4f32-b689-998b796912af"
+					(reference "#PWR037")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 57.15 74.93 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ee8795d8-726c-450b-ae6b-d6b60c98c426")
+		(property "Reference" "#PWR09"
+			(at 57.15 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 55.118 78.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 57.15 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 57.15 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 57.15 74.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4076,7 +4335,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_2.7mm_Pad"
 			(at 106.68 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -4116,6 +4375,98 @@
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
 					(reference "H2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Zener")
+		(at 58.42 19.05 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "fc8dcabc-f4e6-4267-a4a5-af313b8643ad")
+		(property "Reference" "D4"
+			(at 63.5 18.034 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SMCJ28A"
+			(at 62.992 21.336 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SMC"
+			(at 58.42 19.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.littelfuse.com/assetdocs/littelfuse_tvs_diode_smcj_datasheet.pdf?assetguid=37388813-0d6d-4329-969b-1aa8b7614ac1"
+			(at 58.42 19.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Zener diode"
+			(at 58.42 19.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "SMCJ28ALFCT-ND"
+			(at 58.42 19.05 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "3bea5a9b-8178-468d-8507-2bcf117b4905")
+		)
+		(pin "2"
+			(uuid "247e8a8f-db1c-42db-92cc-865a31e0a9a4")
+		)
+		(instances
+			(project "Contactor Board Schematic"
+				(path "/070ed92a-1612-4f32-b689-998b796912af"
+					(reference "D4")
 					(unit 1)
 				)
 			)

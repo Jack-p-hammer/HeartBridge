@@ -19,7 +19,7 @@ w_n_pll = 2*pi*f_pll/2.48; % rad/s, filter natural frequency (not an angle)
 
 %% System Setup
 F_max = 500; % N
-R_phase = 0; % Ohms, motor winding resistance placeholder
+R_phase = 0.047; % Ohms, motor winding resistance placeholder
 V_batt = 18; % V, minimum for conservative estimate
 
 % Ball screw
@@ -45,8 +45,8 @@ m = 2*.343; % Mass of rack and plunger
 % output, rotor_to_output_ratio = 1). The plant stays in SI (rad, m).
 
 % servo.pid_position
-pid_kp = 9.4248;   % Nm/rev       (was 1.5 Nm/rad)
-pid_kd = 0.090478; % Nm/(rev/s)   (was 0.0144 Nm/(rad/s))
+pid_kp = 9.5;   % Nm/rev       (was 1.5 Nm/rad)
+pid_kd = 0.04; % Nm/(rev/s)   (was 0.0144 Nm/(rad/s))
 pid_ki = 0;        % Nm/s per rev
 iRateLimit = -1;   % Nm/s, <0 = no limit (servo.pid_position.iratelimit)
 

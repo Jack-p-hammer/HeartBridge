@@ -4,7 +4,7 @@ Software, electronics, mechanical parts and simulation for HeartBridge, an autom
 
 ## Repository layout
 
-| Folder | What's in it |
+| Folder | Contents |
 |---|---|
 | [`Raspberry Pi code/`](Raspberry%20Pi%20code/) | The Python controller that runs on the Raspberry Pi: state machine, sensing, motor control (moteus), screen and audio prompts, tests and bench scripts. See its [README](Raspberry%20Pi%20code/README.md) for setup. |
 | `hardware/pcb/main-board/` | KiCad project for the main CPR machine board, plus its fab outputs in `production/` |

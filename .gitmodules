@@ -1,3 +1,0 @@
-[submodule "CPR Machine V2/vcpkg"]
-	path = CPR Machine V2/vcpkg
-	url = https://github.com/microsoft/vcpkg.git

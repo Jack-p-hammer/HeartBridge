@@ -5,7 +5,7 @@ __pycache__/
 .pytest_cache/
 .vscode/*
 !.vscode/settings.json
-logs/
+Logs/
 *.log
 .venv/
 venv/

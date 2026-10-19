@@ -5,7 +5,7 @@ This folder contains simple tests for the parts of the project that can be check
 The machine depends on sensors, buttons, LEDs, and a motor controller. Those pieces are hard to test on a laptop, so these tests use small fake versions of the hardware interfaces instead.
 
 ## How to run the tests
-From the project root, run:
+From the `Raspberry Pi code/` folder, with its virtual environment active, run:
 
 ```bash
 python -m pytest -q

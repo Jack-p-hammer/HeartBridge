@@ -18,7 +18,8 @@ f_pll = 400; % Hz (motor_position.sources.X.pll_filter_hz)
 w_n_pll = 2*pi*f_pll/2.48; % rad/s, filter natural frequency (not an angle)
 
 %% System Setup
-F_max = 500; % N
+F_max = 600; % N
+g = -9.81; % m/s^2, gravity along x (vertical axis, x < 0 is down into the chest)
 R_phase = 0.047; % Ohms, motor winding resistance placeholder
 V_batt = 18; % V, minimum for conservative estimate
 
@@ -45,8 +46,8 @@ m = 2*.343; % Mass of rack and plunger
 % output, rotor_to_output_ratio = 1). The plant stays in SI (rad, m).
 
 % servo.pid_position
-pid_kp = 9.5;   % Nm/rev       (was 1.5 Nm/rad)
-pid_kd = 0.04; % Nm/(rev/s)   (was 0.0144 Nm/(rad/s))
+pid_kp = 6;   % Nm/rev       (was 1.5 Nm/rad)
+pid_kd = 0.05; % Nm/(rev/s)   (was 0.0144 Nm/(rad/s))
 pid_ki = 0;        % Nm/s per rev
 iRateLimit = -1;   % Nm/s, <0 = no limit (servo.pid_position.iratelimit)
 
@@ -60,5 +61,5 @@ tau_d = 1.5*Ts; % PWM Delay, s
 
 accel_limit = 16.5/L_ball;   % rev/s^2, NaN = no limit (servo.default_accel_limit)
 vel_limit = 0.6/L_ball; % rev/s (0.6 m/s at the nut), NaN = no limit (servo.default_velocity_limit)
-tau_max_ball = F_max*p_ball/eta_ball; % Nm
+tau_max_ball = (F_max + m_ball*g)*p_ball/eta_ball; % Nm
 iLimit = 1.2*tau_max_ball; % Nm (servo.pid_position.ilimit)

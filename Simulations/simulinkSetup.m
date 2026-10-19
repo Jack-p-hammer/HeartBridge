@@ -51,7 +51,7 @@ pid_kd = 0.05; % Nm/(rev/s)   (was 0.0144 Nm/(rad/s))
 pid_ki = 0;        % Nm/s per rev
 iRateLimit = -1;   % Nm/s, <0 = no limit (servo.pid_position.iratelimit)
 
-servo_max_current = 120; % A
+servo_max_current = 40; % A
 servo_pwm_rate_hz = 15000;
 Ts = 1/servo_pwm_rate_hz;
 

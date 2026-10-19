@@ -50,6 +50,9 @@ fp-info-cache
 *.slx.r*
 *.mdl.r*
 *.bak
+*.slx.original
+.DS_Store   
+Thumbs.db
 
 # Derived content-obscured files
 *.p
@@ -77,3 +80,7 @@ codegen/
 
 # Cloud based storage dotfile
 .MATLABDriveTag
+
+## VSCode
+.vscode/*
+!.vscode/settings.json

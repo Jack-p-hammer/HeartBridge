@@ -11,7 +11,7 @@ Software, electronics, mechanical parts and simulation for HeartBridge, an autom
 | `hardware/pcb/mcu-board/` | KiCad project for the MCU board |
 | `hardware/pcb/contactor-board/` | KiCad project for the contactor board |
 | `hardware/pcb/single-pager-legacy/` | Earlier single-sheet version of main board, kept for reference |
-| `hardware/mechanical/` | 3D-print sources (`.step`, `.3mf`) for the enclosure, brackets and mounts |
+| `hardware/mechanical/` | 3D-print sources (`.step`, `.3mf`) for the current HeartBridge iteration |
 | `simulation/` | Simulink model (`Heartbridge.slx`) and supporting MATLAB scripts. `legacy-m4/` holds the force sensor calibration from the class project. |
 | `docs/` | Project documentation |
 

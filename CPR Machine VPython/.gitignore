@@ -3,7 +3,8 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
-.vscode/
+.vscode/*
+!.vscode/settings.json
 logs/
 *.log
 .venv/

@@ -1,10 +1,7 @@
 pigpio
-pygame
-pytest
-pathlib 
-asyncio
+pygame-ce
+pytest   
 moteus
-logging
 adafruit-blinka
-adafruit-circuitpython-vl6180x
+adafruit-circuitpython-vl53l0x
 adafruit-circuitpython-bno08x

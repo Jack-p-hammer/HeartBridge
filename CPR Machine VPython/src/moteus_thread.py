@@ -16,7 +16,6 @@ from typing import Optional
 # Internal imports
 from Enums.error_codes import ErrorCode
 from Enums.control_modes import ControlMode
-import sensing
 
 CONTROLLER_ID: int = 1  # The ID of the moteus-x1 controller on the CAN bus
 COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
@@ -165,7 +164,7 @@ class MoteusThread:
 
     # --- public, non-blocking API --------------------------------------
 
-    def set_target(self, control_mode: ControlMode, compressionSetpoint: float = 0) -> ErrorCode:
+    def set_target(self, control_mode: ControlMode, zero_position: float, abs_zero_position: float, compressionSetpoint: float = 0) -> ErrorCode:
         """Set the target values for the motor controller. The MoteusThread will pick up these values in its next loop and send them to the motor controller.
         
             Returns:
@@ -182,7 +181,7 @@ class MoteusThread:
                 velocity_limit: float = ZEROING_VELOCITY_MPS # meters per second, downwards
                 maximum_torque: float = TORQUE_LIMIT_NM
             case ControlMode.COMPRESSIONS:
-                position: float = compressionSetpoint + sensing.get_rotary_zero_position() # meters, relative to zeroed position
+                position: float = compressionSetpoint + zero_position # meters, relative to zeroed position
                 velocity: float = math.nan # meters per second, downwards
                 kp_scale: float = 1.0
                 kd_scale: float = 1.0
@@ -198,7 +197,7 @@ class MoteusThread:
                 velocity_limit: float = math.nan
                 maximum_torque: float = TORQUE_LIMIT_NM # TODO: Change to 1.5x min torque to hold plunger against gravity
             case ControlMode.PAUSE_RETRACT:
-                position: float = sensing.get_rotary_zero_position() # meters, retract to zeroed position
+                position: float = zero_position # meters, retract to zeroed position
                 velocity: float = math.nan # meters per second, upwards
                 kp_scale: float = 1.0
                 kd_scale: float = 1.0
@@ -207,7 +206,7 @@ class MoteusThread:
                 maximum_torque: float = TORQUE_LIMIT_NM
                 query: bool = True
             case ControlMode.ABORT_RETRACT:
-                position: float = sensing.get_rotary_absolute_zero_position() # meters, retract to absolute zero
+                position: float = abs_zero_position # meters, retract to absolute zero
                 velocity: float = math.nan # meters per second, upwards
                 kp_scale: float = 1.0
                 kd_scale: float = 1.0

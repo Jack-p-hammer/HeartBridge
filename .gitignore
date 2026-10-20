@@ -154,3 +154,7 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# If you cloned a copy of vcpkg directly inside your project directory
+# (Classic mode / submodule setup)
+vcpkg

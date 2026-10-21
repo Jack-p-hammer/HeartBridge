@@ -25,7 +25,7 @@ from moteus_thread import PINION_RADIUS_M
 
 # Global variables for shared sensor instances
 _pi: pigpio.pi
-_vl61: adafruit_vl53l0x.VL53l0X
+_vl61: adafruit_vl53l0x.vl53l0x
 _bno: BNO08X_I2C
 _i2c: busio.I2C
 _motor_controller: MoteusThread

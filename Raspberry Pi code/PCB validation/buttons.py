@@ -43,18 +43,23 @@ def setup():
 def loop():
     global _pi, current_time, prev_cycle
     # Constantly poll button inputs, print if press detected
-    if _pi.read(NEXT_BTN_PIN) != 1:
+    current_time = time.time()
+    cycle_time = current_time - prev_cycle
+    last_print = 0
+    print_delay = 1
+    
+    if _pi.read(NEXT_BTN_PIN) != 1 and current_time - last_print > print_delay:
         print("NEXT")
+        last_print = current_time
     elif _pi.read(PAUSE_BTN_PIN) != 1:
         print("PAUSE")
+        last_print = current_time
     
     # One cycle is 20 sec
     # 5 sec Next ON
     # 5 sec all OFF
     # 5 sec Pause ON
     # 5 sec all OFF
-    current_time = time.time()
-    cycle_time = current_time - prev_cycle
     if cycle_time >= 15:
         _pi.write(PAUSE_ENABLE_PIN, 0)
         _pi.write(NEXT_ENABLE_PIN, 0)

@@ -24,7 +24,7 @@ NEXT_ENABLE_PIN = 24
 PAUSE_ENABLE_PIN = 26
 # After a press is accepted, ignore both buttons for this long so a single
 # press (or a held button) cannot skip through several instructions
-BUTTON_TIMEOUT_SEC = 1.0
+BUTTON_TIMEOUT_SEC: float = 1.0
 
 # Images and audio are shared with the full build in ../src so there is one copy of each
 SRC = Path(__file__).resolve().parent.parent / "src"

@@ -30,6 +30,9 @@ LASER_PWM_SCALE: int = 1000000
 LASER_PWM_FREQUENCY:int = 25000
 LASER_PWM_DUTY_CYCLE: float = 0.5  # 50% duty cycle for now
 
+# After a press is accepted, ignore both buttons for a time
+BUTTON_TIMEOUT_SEC: float = 1.0
+
 # Declare paths for images and audio files relative to this script's directory
 IMAGES = Path(__file__).resolve().parent / "Images"
 AUDIO = Path(__file__).resolve().parent / "Audio"
@@ -74,6 +77,9 @@ _audio_channel: pygame.mixer.Channel
 _audio_cache: dict = {}       # AudioPrompt -> loaded pygame.mixer.Sound
 _audio_start_time: float = 0.0    # time.monotonic() when current audio loop started
 _audio_length: float = 0.0    # length in seconds of the currently playing prompt
+
+# Button lockout state
+_last_press_time: float = 0.0   # time.monotonic() of the last accepted button press
 
 def init_Pi() -> ErrorCode:
     """Initialize pigpio daemon and return the pi instance.
@@ -406,13 +412,24 @@ def disable_pause_button() -> ErrorCode:
     return ErrorCode.NORMAL_OPERATION
 
 
+def _button_timed_out() -> bool:
+    """Check whether the post-press lockout has expired. Shared by both buttons,
+    so a press on either one locks out both.
+
+    Returns:
+        bool: True if presses can be accepted, False if still inside the lockout
+    """
+    global _last_press_time
+    return (time.monotonic() - _last_press_time) >= BUTTON_TIMEOUT_SEC
+
+
 def next_button_pressed() -> tuple[ErrorCode, bool]:
     """Return state of next button. Non-blocking.
 
     Returns:
         tuple[ErrorCode, bool]: A tuple containing the error code and the button state
     """
-    global _pi
+    global _pi, _last_press_time
     
     try:
         read_val = not bool(_pi.read(NEXT_BTN_PIN)) # Button is active low, so invert the read value
@@ -420,6 +437,11 @@ def next_button_pressed() -> tuple[ErrorCode, bool]:
         logging.error(f"Failed to read Next button state: {e}")
         return ErrorCode.ERROR_PI_DAEMON_FAILURE, False
 
+    if read_val:
+        if not _button_timed_out():
+            return ErrorCode.NORMAL_OPERATION, False
+        _last_press_time = time.monotonic()
+        
     return ErrorCode.NORMAL_OPERATION, read_val
 
 def pause_button_pressed() -> tuple[ErrorCode, bool]:
@@ -428,7 +450,7 @@ def pause_button_pressed() -> tuple[ErrorCode, bool]:
     Returns:
         tuple[ErrorCode, bool]: A tuple containing the error code and the button state
     """
-    global _pi
+    global _pi, _last_press_time
     
     try:
         read_val = not bool(_pi.read(PAUSE_BTN_PIN)) # Button is active low, so invert the read value
@@ -436,4 +458,9 @@ def pause_button_pressed() -> tuple[ErrorCode, bool]:
         logging.error(f"Failed to read Pause button state: {e}")
         return ErrorCode.ERROR_PI_DAEMON_FAILURE, False
 
+    if read_val:
+        if not _button_timed_out():
+            return ErrorCode.NORMAL_OPERATION, False
+        _last_press_time = time.monotonic()
+        
     return ErrorCode.NORMAL_OPERATION, read_val

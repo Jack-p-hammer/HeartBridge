@@ -415,7 +415,7 @@ def next_button_pressed() -> tuple[ErrorCode, bool]:
     global _pi
     
     try:
-        read_val = bool(_pi.read(NEXT_BTN_PIN))
+        read_val = not bool(_pi.read(NEXT_BTN_PIN))
     except Exception as e:
         logging.error(f"Failed to read Next button state: {e}")
         return ErrorCode.ERROR_PI_DAEMON_FAILURE, False

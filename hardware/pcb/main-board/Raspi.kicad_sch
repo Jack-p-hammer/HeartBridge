@@ -4728,7 +4728,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "3A"
+		(property "Value" "2.6A"
 			(at 138.43 73.6599 0)
 			(show_name no)
 			(do_not_autoplace no)

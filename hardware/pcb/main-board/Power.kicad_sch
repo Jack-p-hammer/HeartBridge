@@ -6052,6 +6052,46 @@
 		)
 		(uuid "f6d8a804-17e1-44b2-ae99-bc93f93f8933")
 	)
+	(text_box "Total Power Budget:\n\nBLDC Motor: 62 W\nStepper Motor: 8 W x2\nLasers: 20 mW\nIMU: 40 mW x2\nCamera:\nLinear Sensor:\nADC:\nForce Amp:\nRaspi: 13 W\nScreens:\nButtons:"
+		(exclude_from_sim no)
+		(at 58.42 124.46 0)
+		(size 27.305 28.4838)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "30f955ae-9c43-438c-b9b4-fb1b8d222dbb")
+	)
+	(text_box "5V Current Budget:\nSupply: 3.5 A\n\nRaspi: 2.6 A\nScreens: 0.51 A x2\nHDMI Splitter:\nToF: 0.019 A\nIMU: 0.012 A\nLasers: 0.006 A\nForce Amp: 0.0003 A\nADC: 0.00025 A\nTotal: 3.66 A"
+		(exclude_from_sim no)
+		(at 86.995 124.46 0)
+		(size 27.305 26.4392)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "fa5b5303-1df2-4a56-adc5-d92c28ea279f")
+	)
 	(junction
 		(at 26.67 142.24)
 		(diameter 0)

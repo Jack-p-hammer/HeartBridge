@@ -5,4 +5,5 @@
 	(lib (name "74HC125") (type "KiCad") (uri "C:/Users/danie/Downloads/74HC125/74HC125.kicad_sym") (options "") (descr ""))
 	(lib (name "NC7SZ157P6X") (type "KiCad") (uri "C:/Users/danie/Downloads/NC7SZ157P6X/NC7SZ157P6X.kicad_sym") (options "") (descr ""))
 	(lib (name "ESD321DYAR") (type "KiCad") (uri "${KIPRJMOD}/Part Library/ESD321DYAR/KiCADv6/2026-10-12_15-08-40.kicad_sym") (options "") (descr ""))
+	(lib (name "DRV8436PWPR") (type "KiCad") (uri "${KIPRJMOD}/Part Library/DRV8436PWPR/KiCADv6/2026-10-22_13-15-09.kicad_sym") (options "") (descr ""))
 )

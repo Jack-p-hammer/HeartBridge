@@ -3,4 +3,5 @@
 	(lib (name "Images") (type "KiCad") (uri "${KIPRJMOD}/Images.pretty") (options "") (descr ""))
 	(lib (name "Imports") (type "KiCad") (uri "${KIPRJMOD}/Imports.pretty") (options "") (descr ""))
 	(lib (name "ESD321DYAR") (type "KiCad") (uri "${KIPRJMOD}/Part Library/ESD321DYAR/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "DRV8436PWPR") (type "KiCad") (uri "${KIPRJMOD}/Part Library/DRV8436PWPR/KiCADv6/footprints.pretty") (options "") (descr ""))
 )

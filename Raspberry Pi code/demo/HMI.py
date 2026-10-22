@@ -1,6 +1,6 @@
 # hmi.py
-"""UI-only HMI library for the demo build: screen display, audio prompts and button handling.
-Lasers have been removed along with all sensing and actuation.
+"""HMI library for the demo build: screen display, audio prompts, button handling, and laser control.
+All sensing and actuation has been removed.
 """
 # External imports
 import pigpio
@@ -25,6 +25,14 @@ PAUSE_ENABLE_PIN = 26
 # After a press is accepted, ignore both buttons for this long so a single
 # press (or a held button) cannot skip through several instructions
 BUTTON_TIMEOUT_SEC: float = 1.0
+
+# Laser PWM Output
+LASER_PIN = 12
+# Duty Cycle Scale: 0-1M
+LASER_PWM_SCALE: int = 1000000
+# For now, 25 kHz PWM
+LASER_PWM_FREQUENCY:int = 25000
+LASER_PWM_DUTY_CYCLE: float = 0.5  # 50% duty cycle for now
 
 # Images and audio are shared with the full build in ../src so there is one copy of each
 SRC = Path(__file__).resolve().parent.parent / "src"
@@ -153,7 +161,7 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
         logging.error(f"Display initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
 
-    # Initialize GPIO pins for buttons and LEDs
+    # Initialize GPIO pins for buttons, LEDs, and lasers
     try:
         # Buttons as inputs with pull-ups
         _pi.set_mode(NEXT_BTN_PIN,  pigpio.INPUT)
@@ -161,15 +169,27 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
         _pi.set_pull_up_down(NEXT_BTN_PIN,  pigpio.PUD_UP)
         _pi.set_pull_up_down(PAUSE_BTN_PIN, pigpio.PUD_UP)
 
-        # LEDs as outputs, start LOW
-        for pin in (NEXT_ENABLE_PIN, PAUSE_ENABLE_PIN):
+        # LEDs and laser as outputs, start LOW
+        for pin in (NEXT_ENABLE_PIN, PAUSE_ENABLE_PIN, LASER_PIN):
             _pi.set_mode(pin, pigpio.OUTPUT)
             _pi.set_pull_up_down(pin, pigpio.PUD_DOWN)
-        
+
     except Exception as e:
         logging.error(f"HMI GPIO initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
-    
+
+    try:
+        # Initialize laser PWM
+        # Duty cycle ranges from 0-1M
+        # Initialize to off
+        error_num = _pi.hardware_PWM(LASER_PIN, 0, 0*LASER_PWM_SCALE)
+        if error_num < 0:
+            logging.error(f"Failed to initialize laser PWM: {error_num}")
+            return ErrorCode.ERROR_INIT_FAILURE
+    except Exception as e:
+        logging.error(f"Failed to communicate with pigpio daemon: {e}")
+        return ErrorCode.ERROR_PI_DAEMON_FAILURE
+
     return ErrorCode.NORMAL_OPERATION
 
 
@@ -264,7 +284,47 @@ def set_image_audio(image: Image, prompt: AudioPrompt) -> ErrorCode:
     if error != ErrorCode.NORMAL_OPERATION:
         return error
     return set_audio(prompt)
-    
+
+
+
+def enable_lasers() -> ErrorCode:
+    """Enables alignment lasers
+
+    Returns:
+        ErrorCode: NORMAL_OPERATION if successful, ERROR_PI_DAEMON_FAILURE if failed
+    """
+    global _pi
+
+    try:
+        # Enable lasers by giving nonzero duty cycle and PWM frequency
+        error_num = _pi.hardware_PWM(LASER_PIN, LASER_PWM_FREQUENCY, int(LASER_PWM_DUTY_CYCLE * LASER_PWM_SCALE))
+        if error_num < 0:
+            logging.error(f"Failed to enable lasers: {error_num}")
+            return ErrorCode.ERROR_PI_DAEMON_FAILURE
+    except Exception as e:
+        logging.error(f"Failed to communicate with pigpio daemon: {e}")
+        return ErrorCode.ERROR_PI_DAEMON_FAILURE
+    return ErrorCode.NORMAL_OPERATION
+
+
+def disable_lasers() -> ErrorCode:
+    """Disables alignment lasers
+
+    Returns:
+        ErrorCode: NORMAL_OPERATION if successful, ERROR_PI_DAEMON_FAILURE if failed
+    """
+    global _pi
+
+    try:
+        # Disable lasers by setting duty cycle and PWM frequency to zero
+        error_num = _pi.hardware_PWM(LASER_PIN, 0, 0*LASER_PWM_SCALE)
+        if error_num < 0:
+            logging.error(f"Failed to disable lasers: {error_num}")
+            return ErrorCode.ERROR_PI_DAEMON_FAILURE
+    except Exception as e:
+        logging.error(f"Failed to communicate with pigpio daemon: {e}")
+        return ErrorCode.ERROR_PI_DAEMON_FAILURE
+    return ErrorCode.NORMAL_OPERATION
 
 
 def audio_finished() -> bool:

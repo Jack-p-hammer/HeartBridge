@@ -1,9 +1,10 @@
 # main.py
 
 # UI-only demo of the CPR state machine. Shows the same images, plays the same
-# audio prompts and uses the same buttons as src/main.py, but all sensing and
-# actuation (motor, sensors, battery check, lasers) has been removed. Button
-# presses only advance to the next image and audio prompt.
+# audio prompts, uses the same buttons and runs the alignment lasers as
+# src/main.py, but all sensing and actuation (motor, sensors, battery check)
+# has been removed. Button presses only advance to the next image and audio
+# prompt, plus turning the lasers on/off around the alignment step.
 
 # External imports
 import time
@@ -129,6 +130,8 @@ def main():
             case(CPRState.ALIGNMENT):
                 # Setup
                 if state != prev_state:
+                    error = HMI.enable_lasers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.set_image_audio(HMI.Image.ALIGNMENT, HMI.AudioPrompt.ALIGNMENT)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
@@ -138,6 +141,8 @@ def main():
                 error, next_pressed = HMI.next_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 if next_pressed:
+                    error = HMI.disable_lasers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.ZEROING_PREP
 
             case(CPRState.ZEROING_PREP):

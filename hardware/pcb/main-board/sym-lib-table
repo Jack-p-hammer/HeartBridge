@@ -6,4 +6,7 @@
 	(lib (name "NC7SZ157P6X") (type "KiCad") (uri "C:/Users/danie/Downloads/NC7SZ157P6X/NC7SZ157P6X.kicad_sym") (options "") (descr ""))
 	(lib (name "ESD321DYAR") (type "KiCad") (uri "${KIPRJMOD}/Part Library/ESD321DYAR/KiCADv6/2026-10-12_15-08-40.kicad_sym") (options "") (descr ""))
 	(lib (name "DRV8436PWPR") (type "KiCad") (uri "${KIPRJMOD}/Part Library/DRV8436PWPR/KiCADv6/2026-10-22_13-15-09.kicad_sym") (options "") (descr ""))
+	(lib (name "MCP2517FDT-H/SL") (type "KiCad") (uri "${KIPRJMOD}/Part Library/MCP2517FDT_H_SL/KiCADv6/2026-10-22_16-01-40.kicad_sym") (options "") (descr ""))
+	(lib (name "ATA6563_GAQW1") (type "KiCad") (uri "${KIPRJMOD}/Part Library/ATA6563_GAQW1/KiCADv6/2026-10-22_16-05-03.kicad_sym") (options "") (descr ""))
+	(lib (name "MMBZ27VCLT1G") (type "KiCad") (uri "${KIPRJMOD}/Part Library/MMBZ27VCLT1G/KiCADv6/2026-10-22_16-16-03.kicad_sym") (options "") (descr ""))
 )

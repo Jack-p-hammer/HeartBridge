@@ -20,8 +20,8 @@ w_n_pll = 2*pi*f_pll/2.48; % rad/s, filter natural frequency (not an angle)
 %% System Setup
 F_max = 600; % N
 g = -9.81; % m/s^2, gravity along x (vertical axis, x < 0 is down into the chest)
-R_phase = 0.047; % Ohms, motor winding resistance placeholder
-V_batt = 18; % V, minimum for conservative estimate
+R_phase = 0.047; % Ohms, motor winding resistance
+V_batt = 22.2; % V, minimum for conservative estimate
 
 % Ball screw
 D_ball = 0.25*0.0254; % Ball screw diameter

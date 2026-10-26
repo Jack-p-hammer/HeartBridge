@@ -3171,8 +3171,16 @@
 		(uuid "fa1c6d43-02ee-4aad-bc1e-91511f3ced57")
 	)
 	(no_connect
+		(at 210.82 93.98)
+		(uuid "12b4b377-2f45-4c64-b6cf-e13cd2910bba")
+	)
+	(no_connect
 		(at 210.82 106.68)
 		(uuid "385eb112-3e9f-402c-83ee-d81b6d8f9588")
+	)
+	(no_connect
+		(at 210.82 96.52)
+		(uuid "4089797e-9ea4-411e-a835-ecfcd6a1b975")
 	)
 	(no_connect
 		(at 198.12 91.44)
@@ -3191,6 +3199,10 @@
 		(uuid "98108bd0-d9b3-40a9-a543-f6ddded1c190")
 	)
 	(no_connect
+		(at 210.82 129.54)
+		(uuid "c1b0d6d9-56a8-41d2-b009-6faa903f30fd")
+	)
+	(no_connect
 		(at 210.82 111.76)
 		(uuid "c9c9b89c-f52f-492d-9abc-2bd344b85aec")
 	)
@@ -3201,6 +3213,10 @@
 	(no_connect
 		(at 210.82 104.14)
 		(uuid "d565489b-8eca-445f-8ecd-b038383167a3")
+	)
+	(no_connect
+		(at 198.12 99.06)
+		(uuid "e9596d09-5a44-4870-8f8f-c7179c72ce4e")
 	)
 	(no_connect
 		(at 143.51 77.47)
@@ -3316,16 +3332,6 @@
 		)
 		(uuid "e2050c36-01e8-4a83-ace7-18006e2bb744")
 	)
-	(label "GPIO16"
-		(at 210.82 129.54 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "007786ca-8af2-441a-beb7-cd6d19de9a5f")
-	)
 	(label "GPIO22"
 		(at 120.65 115.57 180)
 		(effects
@@ -3346,16 +3352,6 @@
 		)
 		(uuid "01034dc8-2f8f-423f-a1a6-ed76eb1fc1d9")
 	)
-	(label "GPIO17"
-		(at 198.12 99.06 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "035a9814-22bd-4841-a341-dd6625514208")
-	)
 	(label "GPIO13"
 		(at 161.29 130.81 0)
 		(effects
@@ -3365,16 +3361,6 @@
 			(justify left bottom)
 		)
 		(uuid "0a82b677-38dd-4525-a6f4-f903f472537f")
-	)
-	(label "GPIO16"
-		(at 120.65 95.25 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0ad740d8-286d-42f1-8cf1-9018df3d5c34")
 	)
 	(label "GPIO20"
 		(at 210.82 132.08 0)
@@ -3395,16 +3381,6 @@
 			(justify left bottom)
 		)
 		(uuid "0c493e48-7a72-4ed2-8651-188082526473")
-	)
-	(label "GPIO10"
-		(at 161.29 120.65 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10eb203a-04f6-42ee-bb0c-b1085bf2fcad")
 	)
 	(label "GPIO0"
 		(at 198.12 119.38 180)
@@ -3435,16 +3411,6 @@
 			(justify left bottom)
 		)
 		(uuid "2eeb519f-919f-4537-b752-e2a8da9f0e72")
-	)
-	(label "GPIO9"
-		(at 161.29 118.11 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "33be8ee4-6e41-44c9-b51e-9627bbe487aa")
 	)
 	(label "GPIO0"
 		(at 161.29 87.63 0)
@@ -3485,16 +3451,6 @@
 			(justify left bottom)
 		)
 		(uuid "3c0fcea2-f803-49c7-bdfa-832a2a171dae")
-	)
-	(label "GPIO17"
-		(at 120.65 97.79 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "3ebfe2c2-7a67-4abc-89fb-60f54e582516")
 	)
 	(label "GPIO7"
 		(at 161.29 113.03 0)
@@ -3576,36 +3532,6 @@
 		)
 		(uuid "81872844-a63f-45f0-ba19-27d8dc1c9f94")
 	)
-	(label "GPIO15"
-		(at 210.82 96.52 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8305d42a-4f79-4a01-8c09-2a9c494bd7fe")
-	)
-	(label "GPIO15"
-		(at 120.65 90.17 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "832d780e-38d0-4c37-9258-153d64cf20f2")
-	)
-	(label "GPIO14"
-		(at 210.82 93.98 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8e5759a0-5856-4173-ba9d-3af0f5302316")
-	)
 	(label "GPIO8"
 		(at 210.82 114.3 0)
 		(effects
@@ -3615,16 +3541,6 @@
 			(justify left bottom)
 		)
 		(uuid "944c4b0e-1909-4fb1-abac-5ecacc59f896")
-	)
-	(label "GPIO14"
-		(at 120.65 87.63 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "97e96dbb-8d7f-419f-9356-c8dbe8155fd8")
 	)
 	(label "GPIO20"
 		(at 120.65 107.95 180)
@@ -3666,16 +3582,6 @@
 		)
 		(uuid "bc303ef9-03b5-4e2a-9912-92730ea8b3d3")
 	)
-	(label "GPIO11"
-		(at 161.29 123.19 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c0fc320a-c8d5-4ca1-a43f-d56e6f1f80f2")
-	)
 	(label "GPIO22"
 		(at 198.12 104.14 180)
 		(effects
@@ -3706,16 +3612,6 @@
 		)
 		(uuid "d131fa11-9408-495e-b3e2-c7c579c63be8")
 	)
-	(label "GPIO8"
-		(at 161.29 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d4d8ccdf-b5d7-4f06-b627-ef7a64563c0c")
-	)
 	(label "GPIO13"
 		(at 198.12 127 180)
 		(effects
@@ -3736,6 +3632,28 @@
 		)
 		(uuid "ff9e25ff-7d0f-4a49-bd43-de90fd79c5f0")
 	)
+	(hierarchical_label "Stepper Enable"
+		(shape output)
+		(at 120.65 87.63 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "05ad13f0-f73d-4b34-8df0-966a5c4b236a")
+	)
+	(hierarchical_label "SCK"
+		(shape output)
+		(at 161.29 123.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1469545c-8082-4fcc-92d5-1d4d30eb9752")
+	)
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
 		(at 161.29 95.25 0)
@@ -3746,6 +3664,17 @@
 			(justify left)
 		)
 		(uuid "3055e3a0-5ba3-4bbf-b45f-f67c5ed9f370")
+	)
+	(hierarchical_label "Stepper Sleep"
+		(shape output)
+		(at 120.65 90.17 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "31fba46a-6521-488f-a055-c5c730d3df2c")
 	)
 	(hierarchical_label "Go_Button"
 		(shape output)
@@ -3769,6 +3698,17 @@
 		)
 		(uuid "3a7d1641-0105-4061-b9d2-93e24c8dde96")
 	)
+	(hierarchical_label "CS"
+		(shape output)
+		(at 161.29 115.57 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4d6baa6b-2e14-486f-9b81-976ca5b2876d")
+	)
 	(hierarchical_label "I2C_SCL"
 		(shape bidirectional)
 		(at 161.29 97.79 0)
@@ -3791,6 +3731,17 @@
 		)
 		(uuid "58913ec8-2d9f-47fc-9b42-8af5259b1308")
 	)
+	(hierarchical_label "Dir"
+		(shape output)
+		(at 120.65 95.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "61926180-93bf-491c-b020-401b021f010a")
+	)
 	(hierarchical_label "Stop_Button"
 		(shape output)
 		(at 120.65 123.19 180)
@@ -3802,6 +3753,17 @@
 		)
 		(uuid "63e50245-72c5-41e1-b1bc-06b4ed8217cc")
 	)
+	(hierarchical_label "MISO"
+		(shape input)
+		(at 161.29 118.11 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "98a959bf-15a4-4aa9-870d-89cc235067e6")
+	)
 	(hierarchical_label "Stop_Enable"
 		(shape output)
 		(at 120.65 125.73 180)
@@ -3812,6 +3774,28 @@
 			(justify right)
 		)
 		(uuid "a6073ba7-492a-4af3-9426-e10e040e8698")
+	)
+	(hierarchical_label "MOSI"
+		(shape output)
+		(at 161.29 120.65 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "af2e325e-68d6-49d8-b864-278765c15ce3")
+	)
+	(hierarchical_label "Step"
+		(shape output)
+		(at 120.65 97.79 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b3a8e39a-68a5-4bf8-8cf0-b251d5032dc2")
 	)
 	(symbol
 		(lib_id "power:+5V")

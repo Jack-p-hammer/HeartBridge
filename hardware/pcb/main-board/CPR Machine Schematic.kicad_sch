@@ -5,6 +5,28 @@
 	(uuid "8991fc77-975f-4978-a089-6b2a5e33f59b")
 	(paper "A4")
 	(lib_symbols)
+	(rectangle
+		(start 149.86 104.14)
+		(end 154.94 120.65)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "b6d55aac-1c7d-41a5-ba3c-40cdb9b4fc01")
+	)
+	(text "TODO: Check This!!"
+		(exclude_from_sim no)
+		(at 164.592 107.696 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "76612daf-bfa7-46d7-a124-c79f34d0f003")
+	)
 	(wire
 		(pts
 			(xy 138.43 105.41) (xy 138.43 119.38)
@@ -57,23 +79,33 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 105.41) (xy 152.4 119.38)
+			(xy 151.13 105.41) (xy 151.13 119.38)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "22c95193-8755-4026-b452-de8c55c2f38a")
+		(uuid "2f345c4b-920b-46ea-a008-ee2c803574a0")
 	)
 	(wire
 		(pts
-			(xy 147.32 105.41) (xy 147.32 119.38)
+			(xy 148.59 105.41) (xy 148.59 119.38)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "81793c95-f9c8-413a-94f6-ad17e9a79ea8")
+		(uuid "33c52b55-c1ab-43f3-b5f7-eaefafb0bf8e")
+	)
+	(wire
+		(pts
+			(xy 153.67 105.41) (xy 153.67 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75530953-bb60-47bc-bce0-3fa2e53847de")
 	)
 	(wire
 		(pts
@@ -107,16 +139,6 @@
 	)
 	(wire
 		(pts
-			(xy 154.94 105.41) (xy 154.94 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c63aade5-ea5f-4f7b-97cc-2c17e28f091f")
-	)
-	(wire
-		(pts
 			(xy 110.49 80.01) (xy 120.65 80.01)
 		)
 		(stroke
@@ -134,16 +156,6 @@
 			(type default)
 		)
 		(uuid "e4fe22fd-510d-42b1-9af8-b5663be1d5a1")
-	)
-	(wire
-		(pts
-			(xy 149.86 105.41) (xy 149.86 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f4ed79d8-ea85-4582-8eed-4d7070b967dd")
 	)
 	(wire
 		(pts
@@ -511,9 +523,9 @@
 				(justify left)
 			)
 		)
-		(pin "MISO" input
-			(at 149.86 105.41 270)
-			(uuid "f070d381-2479-4000-87f7-f29a1e5e7173")
+		(pin "CAN Standby" output
+			(at 148.59 105.41 270)
+			(uuid "e7e12a84-398e-4314-ad46-957986f33d86")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -521,9 +533,9 @@
 				(justify left)
 			)
 		)
-		(pin "MOSI" output
-			(at 152.4 105.41 270)
-			(uuid "9f39638c-6387-464e-a2d6-8b76e0177888")
+		(pin "RX_CAN" input
+			(at 153.67 105.41 270)
+			(uuid "24e8b040-6303-402f-9b12-7e0d11155e33")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -531,19 +543,9 @@
 				(justify left)
 			)
 		)
-		(pin "SCK" output
-			(at 154.94 105.41 270)
-			(uuid "979a25fa-ac23-4707-b9ca-2b23c57cf3d6")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "CS" output
-			(at 147.32 105.41 270)
-			(uuid "8f9a2ac5-a744-403d-8280-7371a7a1d729")
+		(pin "TX_CAN" input
+			(at 151.13 105.41 270)
+			(uuid "edecdef6-c803-4a23-88b2-424ba9dbc7d0")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -637,9 +639,9 @@
 				(justify right)
 			)
 		)
-		(pin "CS" input
-			(at 147.32 119.38 90)
-			(uuid "facba2ed-db0d-4c80-bed5-4d8cd923931e")
+		(pin "CAN Standby" input
+			(at 148.59 119.38 90)
+			(uuid "05c36dc9-eace-4d26-8866-377475bad632")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -647,9 +649,9 @@
 				(justify right)
 			)
 		)
-		(pin "MISO" output
-			(at 149.86 119.38 90)
-			(uuid "9a3b9909-5219-453b-b02f-b1199d33a6d7")
+		(pin "RX_CAN" input
+			(at 151.13 119.38 90)
+			(uuid "07d10455-46c5-45bf-9d45-7d2d03d0bb59")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -657,19 +659,9 @@
 				(justify right)
 			)
 		)
-		(pin "MOSI" input
-			(at 152.4 119.38 90)
-			(uuid "3aa17ec6-295c-47a6-97a2-bc1c0d3517ed")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "SCK" input
-			(at 154.94 119.38 90)
-			(uuid "1eb1c02a-471d-4285-a820-9a7cd10f941e")
+		(pin "TX_CAN" output
+			(at 153.67 119.38 90)
+			(uuid "c2a43e9f-d79d-4f6a-a150-95943d9f1e3a")
 			(effects
 				(font
 					(size 1.27 1.27)

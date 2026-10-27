@@ -6072,7 +6072,7 @@
 		)
 		(uuid "30f955ae-9c43-438c-b9b4-fb1b8d222dbb")
 	)
-	(text_box "5V Current Budget:\nSupply: 3.5 A\n\nRaspi: 2.6 A\nScreens: 0.51 A x2\nHDMI Splitter:\nToF: 0.019 A\nIMU: 0.012 A\nLasers: 0.006 A\nForce Amp: 0.0003 A\nADC: 0.00025 A\nTotal: 3.66 A"
+	(text_box "5V OLD Current Budget:\nSupply: 3.5 A\n\nRaspi: 2.6 A\nScreens: 0.51 A x2\nHDMI Splitter:\nToF: 0.019 A\nIMU: 0.012 A\nLasers: 0.006 A\nForce Amp: 0.0003 A\nADC: 0.00025 A\nTotal: 3.66 A"
 		(exclude_from_sim no)
 		(at 86.995 124.46 0)
 		(size 27.305 26.4392)

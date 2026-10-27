@@ -3074,18 +3074,6 @@
 			(embedded_fonts no)
 		)
 	)
-	(rectangle
-		(start 13.335 13.335)
-		(end 83.82 15.875)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(uuid "e12356a4-6b61-41a6-ae34-c6af1aeaee89")
-	)
 	(text "Spare GPIO\nHeader"
 		(exclude_from_sim no)
 		(at 204.47 139.446 0)
@@ -3095,16 +3083,6 @@
 			)
 		)
 		(uuid "9826ff92-52cd-4c58-b9bf-674c1540138e")
-	)
-	(text "Screens and Motor Driver connected via HDMI and USB Ports, not GPIO"
-		(exclude_from_sim no)
-		(at 48.514 14.986 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "d8a890fc-7fce-40fd-b1b6-192800a0a75f")
 	)
 	(text "3V3 disconnected because of seperate 3V3 source on hat"
 		(exclude_from_sim no)
@@ -3643,17 +3621,6 @@
 		)
 		(uuid "05ad13f0-f73d-4b34-8df0-966a5c4b236a")
 	)
-	(hierarchical_label "SCK"
-		(shape output)
-		(at 161.29 123.19 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "1469545c-8082-4fcc-92d5-1d4d30eb9752")
-	)
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
 		(at 161.29 95.25 0)
@@ -3698,16 +3665,16 @@
 		)
 		(uuid "3a7d1641-0105-4061-b9d2-93e24c8dde96")
 	)
-	(hierarchical_label "CS"
-		(shape output)
-		(at 161.29 115.57 0)
+	(hierarchical_label "TX_CAN"
+		(shape input)
+		(at 161.29 120.65 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "4d6baa6b-2e14-486f-9b81-976ca5b2876d")
+		(uuid "4ed5ce3a-5fb4-47e0-8ab9-797e4193ed98")
 	)
 	(hierarchical_label "I2C_SCL"
 		(shape bidirectional)
@@ -3753,7 +3720,7 @@
 		)
 		(uuid "63e50245-72c5-41e1-b1bc-06b4ed8217cc")
 	)
-	(hierarchical_label "MISO"
+	(hierarchical_label "RX_CAN"
 		(shape input)
 		(at 161.29 118.11 0)
 		(effects
@@ -3762,7 +3729,7 @@
 			)
 			(justify left)
 		)
-		(uuid "98a959bf-15a4-4aa9-870d-89cc235067e6")
+		(uuid "959f9326-ae9f-433a-b94d-a5435b732c4d")
 	)
 	(hierarchical_label "Stop_Enable"
 		(shape output)
@@ -3775,17 +3742,6 @@
 		)
 		(uuid "a6073ba7-492a-4af3-9426-e10e040e8698")
 	)
-	(hierarchical_label "MOSI"
-		(shape output)
-		(at 161.29 120.65 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "af2e325e-68d6-49d8-b864-278765c15ce3")
-	)
 	(hierarchical_label "Step"
 		(shape output)
 		(at 120.65 97.79 180)
@@ -3796,6 +3752,17 @@
 			(justify right)
 		)
 		(uuid "b3a8e39a-68a5-4bf8-8cf0-b251d5032dc2")
+	)
+	(hierarchical_label "CAN Standby"
+		(shape output)
+		(at 161.29 123.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "cb455e85-263c-435b-bf2f-4741de4ca9da")
 	)
 	(symbol
 		(lib_id "power:+5V")

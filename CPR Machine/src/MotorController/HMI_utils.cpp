@@ -181,6 +181,7 @@ void HMI_util_setup() {
     Serial.println("RA8875 Not Found!");
     while (1);
   }
+  spi_speed = RA8875_SPI_SPEED; // begin() leaves it at 4 MHz
 
   Serial.println("Found RA8875");
 

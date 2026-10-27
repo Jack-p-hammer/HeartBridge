@@ -17,6 +17,11 @@ extern const int RA8875_RESET;
 // Display object
 extern Adafruit_RA8875 tft;
 
+// RA8875 SPI clock. The library defaults to 4 MHz on Teensy; 12 MHz is
+// within the RA8875's limit for both register reads and writes.
+#define RA8875_SPI_SPEED 12000000
+extern uint32_t spi_speed; // defined in Adafruit_RA8875.cpp
+
 // Button state variables
 extern bool buttonState;
 extern bool lastButtonReading;

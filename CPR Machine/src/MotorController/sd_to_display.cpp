@@ -6,7 +6,7 @@
 #include <Adafruit_GFX.h>
 #include "sd_to_display.h"
 
-#define BUFFPIXEL 85
+#define MAX_ROW_PIXELS 800 // RA8875 800x480 panel width
 
 
 void bmpDraw(Adafruit_RA8875 *tft, const char *filename, int x, int y, volatile bool *abortFlag) {
@@ -15,15 +15,13 @@ void bmpDraw(Adafruit_RA8875 *tft, const char *filename, int x, int y, volatile 
   uint8_t  bmpDepth;              // Bit depth (currently must be 24)
   uint32_t bmpImageoffset;        // Start of image data in file
   uint32_t rowSize;               // Not always = bmpWidth; may have padding
-  uint8_t  sdbuffer[3*BUFFPIXEL]; // pixel in buffer (R+G+B per pixel)
-  uint16_t lcdbuffer[BUFFPIXEL];  // pixel out buffer (16-bit per pixel)
-  uint8_t  buffidx = sizeof(sdbuffer); // Current position in sdbuffer
+  static uint8_t sdbuffer[3*MAX_ROW_PIXELS];  // one scanline in (B+G+R per pixel)
+  static uint8_t lcdbuffer[2*MAX_ROW_PIXELS]; // one scanline out (RGB565, MSB first)
   boolean  goodBmp = false;       // Set to true on valid header parse
   boolean  flip    = true;        // BMP is stored bottom-to-top
-  int      w, h, row, col, xpos, ypos;
+  int      w, h, row, col;
   uint8_t  r, g, b;
   uint32_t pos = 0, startTime = millis();
-  uint8_t  lcdidx = 0;
 
   if((x >= tft->width()) || (y >= tft->height())) return;
 
@@ -80,58 +78,40 @@ void bmpDraw(Adafruit_RA8875 *tft, const char *filename, int x, int y, volatile 
         if((x+w-1) >= tft->width())  w = tft->width()  - x;
         if((y+h-1) >= tft->height()) h = tft->height() - y;
 
-        // Set TFT address window to clipped image bounds
-        ypos = y;
+        // Write pixels left-to-right. Set once here instead of on every
+        // drawPixels() call, which also did a register read each time.
+        tft->writeReg(RA8875_MWCR0,
+          (tft->readReg(RA8875_MWCR0) & ~RA8875_MWCR0_DIRMASK) | RA8875_MWCR0_LRTD);
+
         for (row=0; row<h; row++) { // For each scanline...
-          // Seek to start of scan line.  It might seem labor-
-          // intensive to be doing this on every line, but this
-          // method covers a lot of gritty details like cropping
-          // and scanline padding.  Also, the seek only takes
-          // place if the file position actually needs to change
-          // (avoids a lot of cluster math in SD library).
           if(flip) // Bitmap is stored bottom-to-top order (normal BMP)
             pos = bmpImageoffset + (bmpHeight - 1 - row) * rowSize;
           else     // Bitmap is stored top-to-bottom
             pos = bmpImageoffset + row * rowSize;
 
-          if (bmpFile.position() != pos) { // Need seek?
-            bmpFile.seek(pos);
-            buffidx = sizeof(sdbuffer); // Force buffer reload
+          if (bmpFile.position() != pos) bmpFile.seek(pos);
+          bmpFile.read(sdbuffer, w * 3); // Whole scanline in one read
+
+          // Convert BGR888 to RGB565, high byte first as the RA8875 expects
+          for (col=0; col<w; col++) {
+            b = sdbuffer[col*3];
+            g = sdbuffer[col*3 + 1];
+            r = sdbuffer[col*3 + 2];
+            uint16_t c = color565(r,g,b);
+            lcdbuffer[col*2]     = c >> 8;
+            lcdbuffer[col*2 + 1] = c & 0xFF;
           }
-          xpos = x;
-          for (col=0; col<w; col++) { // For each column...
-            // Time to read more pixel data?
-            if (buffidx >= sizeof(sdbuffer)) { // Indeed
-              // Push LCD buffer to the display first
-              if(lcdidx > 0) {
-                tft->drawPixels(lcdbuffer, lcdidx, xpos, ypos);
-                xpos += lcdidx;
-                lcdidx = 0;
-              }
 
-              bmpFile.read(sdbuffer, sizeof(sdbuffer));
-              buffidx = 0; // Set index to beginning
-            }
-
-            // Convert pixel from BMP to TFT format
-            b = sdbuffer[buffidx++];
-            g = sdbuffer[buffidx++];
-            r = sdbuffer[buffidx++];
-            lcdbuffer[lcdidx++] = color565(r,g,b);
-            if (lcdidx >= sizeof(lcdbuffer) || (xpos - x + lcdidx) >= w) {
-              tft->drawPixels(lcdbuffer, lcdidx, xpos, ypos);
-              lcdidx = 0;
-              xpos += lcdidx;
-            }
-          } // end pixel
-            ypos++;
+          // Send the whole scanline in one SPI burst
+          tft->setXY(x, y + row);
+          tft->writeCommand(RA8875_MRWC);
+          SPI.beginTransaction(SPISettings(spi_speed, MSBFIRST, SPI_MODE0));
+          digitalWrite(RA8875_CS, LOW);
+          SPI.transfer(RA8875_DATAWRITE);
+          SPI.transfer(lcdbuffer, nullptr, w * 2);
+          digitalWrite(RA8875_CS, HIGH);
+          SPI.endTransaction();
         } // end scanline
-
-        // Write any remaining data to LCD
-        if(lcdidx > 0) {
-          tft->drawPixels(lcdbuffer, lcdidx, xpos, ypos);
-          xpos += lcdidx;
-        }
 
         Serial.print(F("Loaded in "));
         Serial.print(millis() - startTime);

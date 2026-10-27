@@ -5,28 +5,6 @@
 	(uuid "8991fc77-975f-4978-a089-6b2a5e33f59b")
 	(paper "A4")
 	(lib_symbols)
-	(rectangle
-		(start 149.86 104.14)
-		(end 154.94 120.65)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(uuid "b6d55aac-1c7d-41a5-ba3c-40cdb9b4fc01")
-	)
-	(text "TODO: Check This!!"
-		(exclude_from_sim no)
-		(at 164.592 107.696 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "76612daf-bfa7-46d7-a124-c79f34d0f003")
-	)
 	(wire
 		(pts
 			(xy 138.43 105.41) (xy 138.43 119.38)
@@ -534,7 +512,7 @@
 			)
 		)
 		(pin "RX_CAN" input
-			(at 153.67 105.41 270)
+			(at 151.13 105.41 270)
 			(uuid "24e8b040-6303-402f-9b12-7e0d11155e33")
 			(effects
 				(font
@@ -544,7 +522,7 @@
 			)
 		)
 		(pin "TX_CAN" input
-			(at 151.13 105.41 270)
+			(at 153.67 105.41 270)
 			(uuid "edecdef6-c803-4a23-88b2-424ba9dbc7d0")
 			(effects
 				(font

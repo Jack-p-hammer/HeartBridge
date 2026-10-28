@@ -273,7 +273,7 @@
 			(color 0 0 0 0)
 		)
 		(uuid "4742a649-a015-487c-b382-01878b0e2dd4")
-		(property "Sheetname" "HMI_Raspi"
+		(property "Sheetname" "HMI"
 			(at 176.53 58.3434 0)
 			(show_name no)
 			(do_not_autoplace no)

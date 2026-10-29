@@ -900,7 +900,7 @@
         "uuid": "8991fc77-975f-4978-a089-6b2a5e33f59b"
       }
     ],
-    "used_designators": "D1-13,#PWR34-38,#PWR77-83,#PWR87-136,R24-39,J12-15,C12-30,U6-10,Y1",
+    "used_designators": "D1-13,#PWR34-38,#PWR62,#PWR77-83,#PWR87-161,R24-45,J2,J12-15,J17-19,C12-34,U2,U6-10,Y1",
     "variants": []
   },
   "sheets": [

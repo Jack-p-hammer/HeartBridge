@@ -10,4 +10,5 @@
 	(lib (name "ATA6563_GAQW1") (type "KiCad") (uri "${KIPRJMOD}/Part Library/ATA6563_GAQW1/KiCADv6/2026-10-22_16-05-03.kicad_sym") (options "") (descr ""))
 	(lib (name "MMBZ27VCLT1G") (type "KiCad") (uri "${KIPRJMOD}/Part Library/MMBZ27VCLT1G/KiCADv6/2026-10-22_16-16-03.kicad_sym") (options "") (descr ""))
 	(lib (name "THVD1429DT") (type "KiCad") (uri "${KIPRJMOD}/Part Library/THVD1429DT/KiCADv6/2026-10-28_14-01-04.kicad_sym") (options "") (descr ""))
+	(lib (name "2026-10-29_17-21-07") (type "KiCad") (uri "${KIPRJMOD}/Part Library/LSM6DSV16XTR/KiCADv6/2026-10-29_17-21-07.kicad_sym") (options "") (descr ""))
 )

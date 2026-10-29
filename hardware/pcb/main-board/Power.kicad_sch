@@ -1824,6 +1824,471 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Connector:USB_C_Receptacle_PowerOnly_6P"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 16.51 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Value" "USB_C_Receptacle_PowerOnly_6P"
+				(at 0 13.97 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Footprint" ""
+				(at 3.81 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "USB Power-Only 6P Type-C Receptacle connector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "usb universal serial bus type-C power-only charging-only 6P 6C"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "USB*C*Receptacle*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "USB_C_Receptacle_PowerOnly_6P_0_0"
+				(rectangle
+					(start -0.254 -12.7)
+					(end 0.254 -11.684)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 10.16 7.874)
+					(end 9.144 7.366)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 10.16 -4.826)
+					(end 9.144 -5.334)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 10.16 -7.366)
+					(end 9.144 -7.874)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "USB_C_Receptacle_PowerOnly_6P_0_1"
+				(rectangle
+					(start -10.16 12.7)
+					(end 10.16 -12.7)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -8.89 -1.27) (xy -8.89 6.35)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -7.62 -1.27)
+					(end -6.35 6.35)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(arc
+					(start -7.62 6.35)
+					(mid -6.985 6.9823)
+					(end -6.35 6.35)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -7.62 6.35)
+					(mid -6.985 6.9823)
+					(end -6.35 6.35)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(arc
+					(start -8.89 6.35)
+					(mid -6.985 8.2467)
+					(end -5.08 6.35)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -5.08 -1.27)
+					(mid -6.985 -3.1667)
+					(end -8.89 -1.27)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -6.35 -1.27)
+					(mid -6.985 -1.9023)
+					(end -7.62 -1.27)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -6.35 -1.27)
+					(mid -6.985 -1.9023)
+					(end -7.62 -1.27)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 6.35) (xy -5.08 -1.27)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center -2.54 3.683)
+					(radius 0.635)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 6.858) (xy 0 9.398) (xy 1.27 6.858) (xy -1.27 6.858)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0.508) (xy 2.54 3.048) (xy 2.54 4.318)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -0.762) (xy -2.54 1.778) (xy -2.54 3.048)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -3.302) (xy 0 6.858)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 -3.302)
+					(radius 1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 1.905 4.318)
+					(end 3.175 5.588)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+			)
+			(symbol "USB_C_Receptacle_PowerOnly_6P_1_1"
+				(pin bidirectional line
+					(at 15.24 -5.08 180)
+					(length 5.08)
+					(name "CC1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 15.24 7.62 180)
+					(length 5.08)
+					(name "VBUS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -17.78 90)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 15.24 -7.62 180)
+					(length 5.08)
+					(name "CC2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 15.24 7.62 180)
+					(length 5.08)
+					(hide yes)
+					(name "VBUS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -17.78 90)
+					(length 5.08)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -7.62 -17.78 90)
+					(length 5.08)
+					(name "SHIELD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "SH"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Custom_Parts:LTST-C170GKT"
 			(body_styles demorgan)
 			(pin_names
@@ -4332,162 +4797,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Regulator_Switching:TSR_1-24120"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "U"
-				(at -7.62 6.35 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "TSR_1-24120"
-				(at -1.27 6.35 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "Converter_DCDC:Converter_DCDC_TRACO_TSR-1_THT"
-				(at 0 -3.81 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(italic yes)
-					)
-					(justify left)
-				)
-			)
-			(property "Datasheet" "http://www.tracopower.com/products/tsr1.pdf"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "1A step-down regulator module, fixed 12V output voltage, 5-36V input voltage, -40°C to +85°C temperature range, TO-220 compatible LM78xx replacement"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "dc-dc traco buck"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "Converter*DCDC*TRACO*TSR?1*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "TSR_1-24120_0_1"
-				(rectangle
-					(start -7.62 5.08)
-					(end 7.62 -2.54)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "TSR_1-24120_1_1"
-				(pin power_in line
-					(at -10.16 2.54 0)
-					(length 2.54)
-					(name "Vin"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -5.08 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 10.16 2.54 180)
-					(length 2.54)
-					(name "Vout"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Regulator_Switching:TSR_1-2433"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -5857,6 +6166,18 @@
 		(uuid "a62d62f6-26bb-4bdb-8c19-e16a819a025b")
 	)
 	(rectangle
+		(start 186.69 68.326)
+		(end 275.082 110.49)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "b806b3ae-29a8-45a0-8d27-658095cb2eb8")
+	)
+	(rectangle
 		(start 130.81 31.75)
 		(end 185.42 73.66)
 		(stroke
@@ -6022,6 +6343,16 @@
 		)
 		(uuid "8d59bb14-e266-4157-b6da-ba7459716abc")
 	)
+	(text "Screen Power Ports"
+		(exclude_from_sim no)
+		(at 196.596 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "aae9a403-1eb5-44d8-96d7-c3fcffc029b7")
+	)
 	(text "Placeholder 3V3 Converter"
 		(exclude_from_sim no)
 		(at 113.792 15.24 0)
@@ -6127,12 +6458,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1566d550-a585-45b1-bec3-abbb56d09d25")
-	)
-	(junction
-		(at 34.29 35.56)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "18f402d6-6d4b-41e4-877b-b4510fcb5cf5")
 	)
 	(junction
 		(at 140.97 93.98)
@@ -6285,6 +6610,12 @@
 		(uuid "91692eba-4416-43d1-a931-1edbe2f5b98a")
 	)
 	(junction
+		(at 240.03 95.25)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "941d0c9b-c582-4177-95e0-22b85e6ab639")
+	)
+	(junction
 		(at 45.72 78.74)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6307,12 +6638,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "aa9f6588-7c03-4a4a-b5c3-05c47a1c8c82")
-	)
-	(junction
-		(at 27.94 38.1)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ab3a1a64-ac7b-4e61-aa45-9d2badb3bb95")
 	)
 	(junction
 		(at 200.66 27.94)
@@ -6417,12 +6742,6 @@
 		(uuid "dea18e9f-713c-443e-beff-7dc891d6f1fe")
 	)
 	(junction
-		(at 49.53 55.88)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e47049ea-1e0e-47b3-8fc1-3c1049de3f46")
-	)
-	(junction
 		(at 63.5 20.32)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6451,6 +6770,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "efac468d-f2a7-4761-a2c9-9f80a23e747c")
+	)
+	(junction
+		(at 195.58 95.25)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "efcb5cb2-8a17-4ebf-99a3-224cc26d88fd")
 	)
 	(junction
 		(at 26.67 157.48)
@@ -6552,6 +6877,16 @@
 	)
 	(wire
 		(pts
+			(xy 195.58 95.25) (xy 195.58 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12b2b78b-a5a8-47bd-b0db-dbf1e79e17e8")
+	)
+	(wire
+		(pts
 			(xy 110.49 88.9) (xy 106.68 88.9)
 		)
 		(stroke
@@ -6612,13 +6947,13 @@
 	)
 	(wire
 		(pts
-			(xy 22.86 35.56) (xy 34.29 35.56)
+			(xy 194.31 95.25) (xy 195.58 95.25)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1f113e12-2e9d-416f-9544-79425ceb16c8")
+		(uuid "1db1bcc9-a4ee-4ac1-8a73-7ee1c358b2d2")
 	)
 	(wire
 		(pts
@@ -6659,16 +6994,6 @@
 			(type default)
 		)
 		(uuid "234320bf-a024-459e-a6aa-bdfb976c3bc4")
-	)
-	(wire
-		(pts
-			(xy 22.86 38.1) (xy 31.75 38.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "250657de-4eb8-4c0f-8c2c-cfa9d2e7b9ef")
 	)
 	(wire
 		(pts
@@ -6852,6 +7177,16 @@
 	)
 	(wire
 		(pts
+			(xy 203.2 95.25) (xy 204.47 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "433e2f01-81c0-4393-988e-2f993ca2afe2")
+	)
+	(wire
+		(pts
 			(xy 31.75 91.44) (xy 40.64 91.44)
 		)
 		(stroke
@@ -6882,6 +7217,16 @@
 	)
 	(wire
 		(pts
+			(xy 238.76 95.25) (xy 240.03 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b66db9b-1e17-4e38-a6b1-40a999973e5c")
+	)
+	(wire
+		(pts
 			(xy 71.12 40.64) (xy 63.5 40.64)
 		)
 		(stroke
@@ -6889,6 +7234,16 @@
 			(type default)
 		)
 		(uuid "4bdaa876-67d4-480b-b8c0-4637c7a83a91")
+	)
+	(wire
+		(pts
+			(xy 247.65 97.79) (xy 248.92 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4cb66240-ed01-46d5-9349-50e5915e020d")
 	)
 	(wire
 		(pts
@@ -6979,16 +7334,6 @@
 			(type default)
 		)
 		(uuid "5a046a33-6ba5-4e1d-9efd-f116db743099")
-	)
-	(wire
-		(pts
-			(xy 31.75 38.1) (xy 31.75 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5a7125e5-a4eb-488f-8169-53eedb310509")
 	)
 	(wire
 		(pts
@@ -7302,16 +7647,6 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 35.56) (xy 49.53 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "887d44e3-7c97-4131-ac69-1598151c3ba5")
-	)
-	(wire
-		(pts
 			(xy 44.45 157.48) (xy 44.45 158.75)
 		)
 		(stroke
@@ -7439,16 +7774,6 @@
 			(type default)
 		)
 		(uuid "9a6ea97e-e6a5-401d-8914-e0436db4cf20")
-	)
-	(wire
-		(pts
-			(xy 31.75 55.88) (xy 49.53 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9aeb01e0-a5f8-4ff6-b4d4-6b0f5f3ad9a5")
 	)
 	(wire
 		(pts
@@ -7622,6 +7947,16 @@
 	)
 	(wire
 		(pts
+			(xy 247.65 95.25) (xy 248.92 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b752c96f-3b53-4366-af5a-a2433455b884")
+	)
+	(wire
+		(pts
 			(xy 60.96 64.77) (xy 60.96 81.28)
 		)
 		(stroke
@@ -7659,6 +7994,16 @@
 			(type default)
 		)
 		(uuid "bc7ac7c1-aebc-44cb-8acf-aaaa0bc1631b")
+	)
+	(wire
+		(pts
+			(xy 240.03 95.25) (xy 240.03 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bcb38d44-354f-4c78-be54-ddb49e51f78b")
 	)
 	(wire
 		(pts
@@ -7822,16 +8167,6 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 55.88) (xy 49.53 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dcf11cbe-4d06-4a5c-bdd3-7bfeec6ee391")
-	)
-	(wire
-		(pts
 			(xy 59.69 20.32) (xy 63.5 20.32)
 		)
 		(stroke
@@ -7982,6 +8317,16 @@
 	)
 	(wire
 		(pts
+			(xy 203.2 97.79) (xy 204.47 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f00b2394-6f51-4edf-85ac-77d545391575")
+	)
+	(wire
+		(pts
 			(xy 148.59 52.07) (xy 148.59 55.88)
 		)
 		(stroke
@@ -8090,16 +8435,6 @@
 		)
 		(uuid "029ec762-4feb-494f-801e-ca52f7288074")
 	)
-	(label "To Contactor"
-		(at 31.75 55.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1aa23f4c-0b3f-4cc0-bdcf-0133446ddce5")
-	)
 	(label "Battery +"
 		(at 173.99 93.98 0)
 		(effects
@@ -8129,16 +8464,6 @@
 			(justify left bottom)
 		)
 		(uuid "2eeb17a5-ee70-4d7f-a032-6cfc25bab7e5")
-	)
-	(label "From Switch"
-		(at 34.29 35.56 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "332be6e9-87d0-4242-9150-5598b6d0f963")
 	)
 	(label "Battery +"
 		(at 29.21 20.32 0)
@@ -8794,6 +9119,85 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+5V")
+		(at 204.47 82.55 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "17b2385c-fae1-43f8-a266-05dcc7a4f807")
+		(property "Reference" "#PWR0141"
+			(at 208.28 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 200.66 82.5499 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 204.47 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 204.47 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 204.47 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "13431f4c-7daa-453b-b633-c32cb311d6db")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "#PWR0141")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:D_Zener")
 		(at 204.47 26.67 270)
 		(unit 1)
@@ -9037,6 +9441,154 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
 					(reference "#PWR012")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 243.84 95.25 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "29f062ec-49ec-42db-a221-2360a28afa7d")
+		(property "Reference" "R40"
+			(at 242.57 89.916 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "22 kOhm"
+			(at 244.856 84.836 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 243.586 94.234 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 243.84 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 243.84 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Notes" ""
+			(at 243.84 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 243.84 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 243.84 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 243.84 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 243.84 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 243.84 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2bd218f5-b497-4e76-8557-3d9d4f373183")
+		)
+		(pin "2"
+			(uuid "2ecfab31-133a-4823-9cb8-702160116f92")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "R40")
 					(unit 1)
 				)
 			)
@@ -9602,6 +10154,164 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 227.33 107.95 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3075b760-11e4-4e3f-bf55-cb5b803294f7")
+		(property "Reference" "#PWR0138"
+			(at 220.98 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 223.52 107.9499 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 227.33 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 227.33 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 227.33 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e8d28a52-e110-45a4-99d6-5669c11efdf9")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "#PWR0138")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 238.76 95.25 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "33a06d85-e183-45e7-a4c7-0e8009b91d83")
+		(property "Reference" "#PWR0143"
+			(at 242.57 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 234.95 95.2499 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 238.76 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 238.76 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 238.76 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4a3ae61a-f4c5-47df-bea2-8ab0754719b0")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "#PWR0143")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Custom_Parts:LTST-C170GKT")
 		(at 161.29 55.88 270)
 		(unit 1)
@@ -9916,162 +10626,6 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
 					(reference "CIN1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 17.78 38.1 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "380d277d-4994-492a-950a-725a646ed811")
-		(property "Reference" "J2"
-			(at 18.415 30.48 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Power Switch"
-			(at 23.876 33.02 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_AMASS:AMASS_XT30PW-F_1x02_P2.50mm_Horizontal"
-			(at 17.78 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.gobilda.com/right-angle-pcb-mount-xt30-connector-mh-fc-2-pack/"
-			(at 17.78 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "XT-30 RC Connector"
-			(at 17.78 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "gobilda" "3803-0033-0002 "
-			(at 17.78 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Notes" ""
-			(at 17.78 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MPN" ""
-			(at 17.78 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "OC_FARNELL" ""
-			(at 17.78 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "OC_NEWARK" ""
-			(at 17.78 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "PACKAGE" ""
-			(at 17.78 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SUPPLIER" ""
-			(at 17.78 38.1 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "570f1665-0870-446b-898d-5d044308bd5d")
-		)
-		(pin "2"
-			(uuid "cfb6969e-7b50-45f9-af27-83b8a5c8a774")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -10453,55 +11007,41 @@
 		)
 	)
 	(symbol
-		(lib_id "Regulator_Switching:TSR_1-24120")
-		(at 52.07 45.72 90)
+		(lib_id "Device:R_US")
+		(at 243.84 97.79 90)
 		(mirror x)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "42e0d7d6-794b-4859-99d3-718461d8b95d")
-		(property "Reference" "U2"
-			(at 45.72 44.4499 90)
+		(uuid "4379d3c5-47b4-47d1-b941-d5aab27bab18")
+		(property "Reference" "R41"
+			(at 245.11 103.124 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Value" "12V Buck"
-			(at 45.72 46.9899 90)
+		(property "Value" "22 kOhm"
+			(at 242.824 108.204 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "Converter_DCDC:Converter_DCDC_TRACO_TSR-1_THT"
-			(at 55.88 45.72 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-			)
-		)
-		(property "Datasheet" "http://www.tracopower.com/products/tsr1.pdf"
-			(at 52.07 45.72 0)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 244.094 98.806 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10511,8 +11051,8 @@
 				)
 			)
 		)
-		(property "Description" "1A step-down regulator module, fixed 12V output voltage, 5-36V input voltage, -40°C to +85°C temperature range, TO-220 compatible LM78xx replacement"
-			(at 52.07 45.72 0)
+		(property "Datasheet" ""
+			(at 243.84 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10522,8 +11062,8 @@
 				)
 			)
 		)
-		(property "digikey" "1951-2739-ND"
-			(at 52.07 45.72 90)
+		(property "Description" "Resistor, US symbol"
+			(at 243.84 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10533,8 +11073,8 @@
 				)
 			)
 		)
-		(property "Notes" "Have: 0"
-			(at 52.07 45.72 90)
+		(property "Notes" ""
+			(at 243.84 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10545,7 +11085,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 52.07 45.72 90)
+			(at 243.84 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10556,7 +11096,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 52.07 45.72 90)
+			(at 243.84 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10567,7 +11107,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 52.07 45.72 90)
+			(at 243.84 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10578,7 +11118,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 52.07 45.72 90)
+			(at 243.84 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10589,7 +11129,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 52.07 45.72 90)
+			(at 243.84 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10599,19 +11139,16 @@
 				)
 			)
 		)
-		(pin "2"
-			(uuid "46b264ea-9b57-421b-b01d-3c6a5ac15765")
-		)
 		(pin "1"
-			(uuid "2e652850-2f2f-475d-8382-a1c8432aecdf")
+			(uuid "65aa7852-9823-402b-bbdd-0a2c391f4b0d")
 		)
-		(pin "3"
-			(uuid "97ecc59a-4d55-46b1-b73e-8b72e67ecb64")
+		(pin "2"
+			(uuid "dda5ce59-098c-4bb5-809b-32f25b056e82")
 		)
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "U2")
+					(reference "R41")
 					(unit 1)
 				)
 			)
@@ -10690,6 +11227,101 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
 					(reference "#PWR037")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:USB_C_Receptacle_PowerOnly_6P")
+		(at 219.71 90.17 0)
+		(mirror y)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "46ee6f89-4653-45ad-8a44-46a33b9323ad")
+		(property "Reference" "J19"
+			(at 219.71 72.39 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Screen 2 Power"
+			(at 219.71 74.93 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 215.9 87.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip"
+			(at 219.71 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "USB Power-Only 6P Type-C Receptacle connector"
+			(at 219.71 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "SH"
+			(uuid "49020d57-0199-4020-87b4-887a0f4932b7")
+		)
+		(pin "A9"
+			(uuid "5fd61f99-e0dc-4ad2-bc4f-e4c13643a103")
+		)
+		(pin "A5"
+			(uuid "785f261b-ebd0-47cb-83fc-bed61f4fbb2e")
+		)
+		(pin "B9"
+			(uuid "690eb189-084c-40b8-aa91-d041dafbb4de")
+		)
+		(pin "B12"
+			(uuid "b5f62f0e-12d3-422e-9478-b1b0c392f201")
+		)
+		(pin "A12"
+			(uuid "5cea95cf-20aa-41ec-bf42-3b841e533bc6")
+		)
+		(pin "B5"
+			(uuid "09cdc9bd-7383-4a54-90c2-eb02f3b7185c")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "J19")
 					(unit 1)
 				)
 			)
@@ -11865,7 +12497,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 57.15 45.72 0)
+		(at 271.78 107.95 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11873,9 +12505,10 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "5175d20f-ad9d-4b46-8602-f934443265ad")
-		(property "Reference" "#PWR09"
-			(at 57.15 52.07 0)
+		(fields_autoplaced yes)
+		(uuid "523c9576-30d6-4478-b95b-c629a2fd7f57")
+		(property "Reference" "#PWR0137"
+			(at 265.43 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11886,18 +12519,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 55.118 49.53 0)
+			(at 267.97 107.9499 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 57.15 45.72 0)
+			(at 271.78 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11908,7 +12541,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 57.15 45.72 0)
+			(at 271.78 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11919,7 +12552,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 57.15 45.72 0)
+			(at 271.78 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11930,12 +12563,160 @@
 			)
 		)
 		(pin "1"
-			(uuid "c6ea8cf8-b94d-402b-a274-33ed17bc176f")
+			(uuid "4389d2d5-5f1f-442c-bb06-fe2cbebe578c")
 		)
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "#PWR09")
+					(reference "#PWR0137")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 199.39 97.79 90)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "5267ef96-ba5d-48a5-9ba3-c39c8af6e92d")
+		(property "Reference" "R42"
+			(at 200.66 103.124 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "22 kOhm"
+			(at 198.374 108.204 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 199.644 98.806 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 199.39 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 199.39 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Notes" ""
+			(at 199.39 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 199.39 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 199.39 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 199.39 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 199.39 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 199.39 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4bba96f5-ef2e-4af6-be90-f8ec111dbb1d")
+		)
+		(pin "2"
+			(uuid "40f26808-5ae8-43d7-be54-d8bb51d21352")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "R42")
 					(unit 1)
 				)
 			)
@@ -12098,85 +12879,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+12V")
-		(at 50.8 55.88 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "58d2225f-a3fc-40f7-a64d-17f2f562b26b")
-		(property "Reference" "#PWR062"
-			(at 46.99 55.88 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+12V"
-			(at 54.61 55.8799 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 50.8 55.88 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 50.8 55.88 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 50.8 55.88 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "0588d7c3-a669-46f7-91e9-5e17e25b7d4f")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "#PWR062")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector:TestPoint")
 		(at 166.37 22.86 180)
 		(unit 1)
@@ -12316,98 +13018,6 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
 					(reference "TP3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D_Zener")
-		(at 27.94 41.91 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "5e3bfc7c-763e-4e64-b861-4276d00d960f")
-		(property "Reference" "D6"
-			(at 23.876 40.894 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SMCJ15A"
-			(at 17.78 42.926 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_SMC"
-			(at 27.94 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.littelfuse.com/assetdocs/littelfuse_tvs_diode_smcj_datasheet.pdf?assetguid=37388813-0d6d-4329-969b-1aa8b7614ac1"
-			(at 27.94 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Zener diode"
-			(at 27.94 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "SMCJ15ALFCT-ND"
-			(at 27.94 41.91 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c5a49993-a8c2-4a68-973f-fa918b63f12c")
-		)
-		(pin "2"
-			(uuid "842f4b73-8fcb-4b9b-a945-b9de8ebac754")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "D6")
 					(unit 1)
 				)
 			)
@@ -12555,6 +13165,85 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
 					(reference "J_EXT1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 264.16 107.95 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5fe08742-371d-4c74-9302-39c5b01e6bec")
+		(property "Reference" "#PWR062"
+			(at 257.81 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 260.35 107.9499 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 264.16 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 264.16 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 264.16 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "95c4f254-bcbf-46b1-9564-f907a4abd0c9")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "#PWR062")
 					(unit 1)
 				)
 			)
@@ -12799,6 +13488,85 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
 					(reference "J4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 194.31 95.25 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6cbccb34-0c77-4ebd-bd94-0f986a3b8565")
+		(property "Reference" "#PWR0142"
+			(at 198.12 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 190.5 95.2499 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 194.31 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 194.31 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 194.31 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "efce7d6e-6b48-4b79-ae24-95cd4918aa92")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "#PWR0142")
 					(unit 1)
 				)
 			)
@@ -13991,84 +14759,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 27.94 45.72 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8b2ef509-1c2a-48ae-a7a9-2a0757cb11f5")
-		(property "Reference" "#PWR036"
-			(at 27.94 52.07 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 27.94 50.8 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 27.94 45.72 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 27.94 45.72 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 27.94 45.72 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "727c18d7-0ab7-49f8-a4fb-2b70261ee140")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "#PWR036")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_US")
 		(at 44.45 162.56 0)
 		(unit 1)
@@ -14299,99 +14989,6 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
 					(reference "#PWR034")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:D_Zener")
-		(at 34.29 39.37 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "91861c91-b1d3-44be-ab68-901282713e70")
-		(property "Reference" "D7"
-			(at 36.83 38.0999 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SMCJ28A"
-			(at 36.83 40.6399 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_SMC"
-			(at 34.29 39.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.littelfuse.com/assetdocs/littelfuse_tvs_diode_smcj_datasheet.pdf?assetguid=37388813-0d6d-4329-969b-1aa8b7614ac1"
-			(at 34.29 39.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Zener diode"
-			(at 34.29 39.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "SMCJ28ALFCT-ND"
-			(at 34.29 39.37 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e4964e9d-d422-4230-b21d-6ef6cc9d8005")
-		)
-		(pin "2"
-			(uuid "5c0a1f58-07b9-4131-9524-b7ebdbe7186d")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "D7")
 					(unit 1)
 				)
 			)
@@ -16477,6 +17074,154 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R_US")
+		(at 199.39 95.25 270)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b0eac933-a082-4981-83b7-6e41c0941724")
+		(property "Reference" "R43"
+			(at 198.12 89.916 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "22 kOhm"
+			(at 200.406 84.836 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 199.136 94.234 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 199.39 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 199.39 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Notes" ""
+			(at 199.39 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 199.39 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 199.39 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 199.39 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 199.39 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 199.39 95.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ffe9474e-bc47-47c9-b502-7518e7ef427a")
+		)
+		(pin "2"
+			(uuid "bbb1347c-7198-49d7-b3ec-ed94a853ce9b")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "R43")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Switch:SW_SPST")
 		(at 149.86 86.36 0)
 		(unit 1)
@@ -16617,6 +17362,101 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
 					(reference "SW1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:USB_C_Receptacle_PowerOnly_6P")
+		(at 264.16 90.17 0)
+		(mirror y)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b4a51ce1-75c2-4b84-aaab-316e06b548e7")
+		(property "Reference" "J18"
+			(at 264.16 72.39 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Screen 1 Power"
+			(at 264.16 74.93 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 260.35 87.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip"
+			(at 264.16 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "USB Power-Only 6P Type-C Receptacle connector"
+			(at 264.16 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "SH"
+			(uuid "53480bac-4274-4101-8aaf-b1fbf50f2544")
+		)
+		(pin "A9"
+			(uuid "67bdc3f2-3d7f-4fff-b95e-fc5d27f1fa42")
+		)
+		(pin "A5"
+			(uuid "4d312d80-1af5-411d-8007-2aa559e3dea9")
+		)
+		(pin "B9"
+			(uuid "088c95a8-66b1-4e68-9377-ea6e7bfb2559")
+		)
+		(pin "B12"
+			(uuid "b6e419e5-04a5-45f3-bc37-a117842b52e4")
+		)
+		(pin "A12"
+			(uuid "95969452-1cf3-4188-8d70-2c1776f511a4")
+		)
+		(pin "B5"
+			(uuid "6a6c1c37-2282-4505-bc48-ac2c637d813d")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "J18")
 					(unit 1)
 				)
 			)
@@ -18041,6 +18881,85 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+5V")
+		(at 248.92 82.55 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cc39bfcd-a53b-450d-8ceb-c98410de7571")
+		(property "Reference" "#PWR0140"
+			(at 252.73 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 245.11 82.5499 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 248.92 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 248.92 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 248.92 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "045965c9-546e-491a-9e2c-a491dde3c295")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "#PWR0140")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:Fuse")
 		(at 55.88 20.32 90)
 		(unit 1)
@@ -18350,6 +19269,85 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
 					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 219.71 107.95 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cfc21cbf-59f2-445b-a214-907edfd0aa69")
+		(property "Reference" "#PWR0139"
+			(at 213.36 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 215.9 107.9499 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 219.71 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 219.71 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 219.71 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d5c056f3-43ce-41f2-a749-5d1a03be3f60")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
+					(reference "#PWR0139")
 					(unit 1)
 				)
 			)
@@ -19519,84 +20517,6 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
 					(reference "LED2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 34.29 43.18 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e7bfc1b9-108d-4e7f-8a96-501e33db61f8")
-		(property "Reference" "#PWR035"
-			(at 34.29 49.53 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 34.29 48.26 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 34.29 43.18 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 34.29 43.18 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 34.29 43.18 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d789d1ed-c1d0-42c9-96f3-0b783525a109")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "#PWR035")
 					(unit 1)
 				)
 			)

@@ -19,7 +19,7 @@ import time
 import moteus
 
 CONTROLLER_ID: int = 1  # same as moteus_thread.py
-MAX_TORQUE_NM: float = 2.0  # kept low for bench testing (main code allows 5.0)
+MAX_TORQUE_NM: float = 0.4  # kept low for bench testing (main code allows TORQUE_LIMIT_NM, ~0.8 Nm for 500 N)
 COMMAND_PERIOD_S: float = 0.01  # 100 Hz, well under the moteus watchdog timeout
 
 TURNS: float = 10.0  # positive spins the "down" direction first

@@ -10,6 +10,7 @@ the `hardware` fixture's docstring in conftest.py.
 import pytest
 
 from Enums.error_codes import ErrorCode
+from conftest import init_sensing
 
 
 # -------------------- init_motor / get_motor_controller --------------------
@@ -26,6 +27,49 @@ def test_init_motor_failure_when_moteus_construction_fails(hardware):
     import actuation
 
     assert actuation.init_motor() == ErrorCode.ERROR_INIT_FAILURE
+
+
+def test_command_loop_without_controller_reports_init_failure(hardware, caplog):
+    """The command loop's guard for a missing moteus controller reports an init failure and returns, rather than raising."""
+    import asyncio
+    from moteus_thread import MoteusThread
+    thread = MoteusThread()  # never started, so no controller was constructed
+    thread._last_error = ErrorCode.NORMAL_OPERATION  # so the check can't pass on the initial value alone
+
+    asyncio.run(thread._command_loop())
+
+    assert thread.get_last_error() == ErrorCode.ERROR_INIT_FAILURE
+    assert "Moteus controller not initialized" in caplog.text
+
+
+def _daemon_gone(*args, **kwargs):
+    """Stand-in for a pigpio call that raises, e.g. the daemon or its socket going away."""
+    raise RuntimeError("daemon gone")
+
+
+@pytest.mark.parametrize("pigpio_method, pin_name", [
+    ("set_mode", None),
+    ("write", "STEPPER_STEP_PIN"),
+    ("write", "STEPPER_DIR_PIN"),
+    ("write", "STEPPER_ENABLE_PIN"),
+    ("wave_clear", None),
+])
+def test_init_steppers_reports_pigpio_failure(hardware, monkeypatch, caplog, pigpio_method, pin_name):
+    """Each pigpio call while setting up the steppers that raises is an init failure, not an exception.
+    pin_name picks out which of the write() calls fails."""
+    import actuation
+    import stepper
+
+    if pin_name is None:
+        monkeypatch.setattr(hardware.pi, pigpio_method, _daemon_gone)
+    else:
+        failing_pin = getattr(stepper, pin_name)
+        real_write = hardware.pi.write
+        monkeypatch.setattr(hardware.pi, "write",
+                            lambda pin, value: _daemon_gone() if pin == failing_pin else real_write(pin, value))
+
+    assert actuation.init_steppers(hardware.pi) == ErrorCode.ERROR_INIT_FAILURE
+    assert "Stepper GPIO initialization failed" in caplog.text
 
 
 def test_get_motor_controller_returns_same_instance_after_init(hardware):
@@ -86,13 +130,128 @@ def test_zeroing_fails_on_motor_error(hardware):
 def test_zeroing_fails_on_max_extension(hardware):
     import time
     import actuation
+    import stepper
     actuation.init_motor()
+    actuation.init_steppers(hardware.pi)
     actuation.init_zeroing()
 
-    hardware.moteus_controller.position = actuation.EXTENSION_STROKE_LIMIT_M + 1.0
+    # Carriage reached the end of the lead screws without finding the chest
+    stepper.position_steps = round(actuation.EXTENSION_STROKE_LIMIT_M * stepper.STEPS_PER_M)
     time.sleep(0.05)
 
     assert actuation.zeroing() == ErrorCode.ERROR_ZEROING_FAILURE
+
+
+def test_zeroing_lowers_carriage_with_steppers(hardware):
+    import time
+    import actuation
+    actuation.init_motor()
+    actuation.init_steppers(hardware.pi)
+    actuation.init_zeroing()
+    time.sleep(0.05)
+
+    for _ in range(5):
+        actuation.zeroing()
+
+    assert actuation.stepper.get_position() > 0.0
+
+
+@pytest.mark.parametrize("position_m, velocity_mps, log_text", [
+    (-0.01, 0.04, "Invalid stepper target"),                        # above home
+    (1e6, 0.04, "Invalid stepper target"),                          # past the end of the lead screws
+    (float("nan"), 0.04, "Invalid stepper target"),
+    (0.05, 0.0, "Invalid stepper target"),
+    (0.05, float("nan"), "Invalid stepper target"),
+    ("0.05", 0.04, "Stepper target could not be checked"),          # wrong type raises in the range check
+])
+def test_stepper_set_target_rejects_invalid_targets(hardware, caplog, position_m, velocity_mps, log_text):
+    """Invalid stepper targets report a motor failure instead of raising or being accepted."""
+    import stepper
+    stepper.init_steppers(hardware.pi)
+
+    assert stepper.set_target(position_m, velocity_mps) == ErrorCode.ERROR_MOTOR_FAILURE
+    assert log_text in caplog.text
+    assert stepper.get_setpoint() == 0.0  # previous setpoint kept
+
+
+def test_zeroing_reports_stepper_failure_and_halts(hardware, caplog):
+    """A pigpio failure while lowering the carriage is a motor failure, and the steppers stop."""
+    import time
+    import actuation
+    import stepper
+    actuation.init_motor()
+    actuation.init_steppers(hardware.pi)
+    actuation.init_zeroing()
+    time.sleep(0.05)
+    hardware.pi.raise_on_write = RuntimeError("daemon gone")
+
+    assert actuation.zeroing() == ErrorCode.ERROR_MOTOR_FAILURE
+    assert stepper.get_setpoint() == stepper.get_position()
+    assert "Failed to build stepper waveform" in caplog.text
+
+
+def test_stepper_update_reports_rejected_waveform(hardware, monkeypatch, caplog):
+    """pigpio rejecting a waveform (negative wave_create status) is a motor failure, not an exception."""
+    import stepper
+    stepper.init_steppers(hardware.pi)
+    stepper.set_target(0.05, stepper.ZEROING_VELOCITY_MPS)
+    monkeypatch.setattr(hardware.pi, "wave_create", lambda: -1)
+
+    assert stepper.update() == ErrorCode.ERROR_MOTOR_FAILURE
+    assert "wave_create failed" in caplog.text
+
+
+@pytest.mark.parametrize("pigpio_method, log_text", [
+    ("wave_tx_at", "Failed to read the playing stepper waveform"),
+    ("wave_delete", "Failed to delete stepper waveform"),
+    ("write", "Failed to build stepper waveform"),
+    ("wave_add_generic", "Failed to build stepper waveform"),
+    ("wave_create", "Failed to build stepper waveform"),
+    ("wave_send_using_mode", "Failed to send stepper waveform"),
+])
+def test_stepper_update_reports_pigpio_failure(hardware, monkeypatch, caplog, pigpio_method, log_text):
+    """Each pigpio call in update() that raises is a motor failure, not an exception."""
+    import stepper
+    stepper.init_steppers(hardware.pi)
+    stepper.chunk_queue = [(0, 1)]  # a finished chunk to retire (fake daemon reports nothing playing)
+    stepper.set_target(0.05, stepper.ZEROING_VELOCITY_MPS)  # and more steps to queue
+    monkeypatch.setattr(hardware.pi, pigpio_method, _daemon_gone)
+
+    assert stepper.update() == ErrorCode.ERROR_MOTOR_FAILURE
+    assert log_text in caplog.text
+
+
+@pytest.mark.parametrize("actuation_fn_name", ["compressions", "pause_compressions"])
+def test_compressions_and_pause_report_stepper_failure(hardware, monkeypatch, actuation_fn_name, caplog):
+    """A pigpio failure while the steppers finish their last queued chunk is a motor failure in compressions/pause."""
+    import time
+    import actuation
+    import sensing
+    import stepper
+    actuation.init_motor()
+    actuation.init_steppers(hardware.pi)
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    stepper.chunk_queue = [(0, 1)]  # a chunk still playing out from zeroing
+
+    def daemon_gone():
+        raise RuntimeError("daemon gone")
+
+    monkeypatch.setattr(hardware.pi, "wave_tx_at", daemon_gone)
+    time.sleep(0.05)  # let the background command loop report a healthy motor first
+
+    assert getattr(actuation, actuation_fn_name)() == ErrorCode.ERROR_MOTOR_FAILURE
+    assert "Failed to read the playing stepper waveform" in caplog.text
+
+
+def test_retract_carriage_reports_pigpio_failure(hardware):
+    """A pigpio failure while retracting surfaces as a motor failure rather than raising."""
+    import actuation
+    import stepper
+    actuation.init_steppers(hardware.pi)
+    stepper.position_steps = round(0.05 * stepper.STEPS_PER_M)  # carriage lowered, so retracting needs new steps
+    hardware.pi.raise_on_write = RuntimeError("daemon gone")
+
+    assert actuation.retract_carriage() == ErrorCode.ERROR_MOTOR_FAILURE
 
 
 def test_zeroing_succeeds_when_sensors_healthy(hardware):
@@ -100,7 +259,8 @@ def test_zeroing_succeeds_when_sensors_healthy(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
+    actuation.init_steppers(hardware.pi)
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
     actuation.init_zeroing()
 
     # zeroing() checks get_last_error(), which only reflects NORMAL_OPERATION
@@ -165,7 +325,7 @@ def test_compressions_normal_operation(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
 
     # compressions() checks get_last_error(), which only reflects NORMAL_OPERATION
     # once the background command loop has completed its first tick.
@@ -183,9 +343,9 @@ def test_compressions_fails_on_sensor_error(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
-    hardware.moteus_controller.position = 1.0  # ~62.8mm of rotary travel
-    hardware.tof.range = 0  # ToF disagrees by ~63mm, far past the 2mm threshold
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    hardware.moteus_controller.position = 1.0  # 10mm of ball screw travel
+    hardware.tof.range = 0  # ToF disagrees by 10mm, far past the 2mm threshold
     time.sleep(0.05)  # let the background command loop pick up the new position
 
     assert actuation.compressions() == ErrorCode.ERROR_SENSOR_FAILURE
@@ -198,7 +358,7 @@ def test_compressions_propagates_imu_kneel_failure(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
     hardware.imu.acceleration = (0.0, 0.0, 20.0)  # exceeds the compression accel limit
 
     assert actuation.compressions() == ErrorCode.ERROR_IMU_KNEEL_FAILURE
@@ -209,7 +369,7 @@ def test_compressions_fails_on_motor_error(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
 
     hardware.moteus_controller.raise_on_set_position = RuntimeError("comm lost")
     time.sleep(0.05)
@@ -224,7 +384,7 @@ def test_pause_compressions_normal_operation(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
 
     # pause_compressions() checks get_last_error(), which only reflects
     # NORMAL_OPERATION once the background command loop has completed its
@@ -241,7 +401,7 @@ def test_pause_compressions_fails_on_sensor_error(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
     hardware.moteus_controller.position = 1.0
     hardware.tof.range = 0
     time.sleep(0.05)  # let the background command loop pick up the new position
@@ -255,7 +415,7 @@ def test_pause_compressions_propagates_imu_kneel_failure(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
     hardware.imu.acceleration = (0.0, 0.0, 20.0)
 
     assert actuation.pause_compressions() == ErrorCode.ERROR_IMU_KNEEL_FAILURE
@@ -266,7 +426,7 @@ def test_pause_compressions_fails_on_motor_error(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    sensing.init_sensors(actuation.get_motor_controller(), hardware.pi)
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
 
     hardware.moteus_controller.raise_on_set_position = RuntimeError("comm lost")
     time.sleep(0.05)
@@ -280,6 +440,6 @@ def test_abort_compressions_does_not_require_sensing_init(hardware):
     """Abort intentionally skips sensor reads to return to zero as fast as possible."""
     import actuation
     actuation.init_motor()
-    # Deliberately skip sensing.init_sensors(, hardware.pi) -- abort must not depend on it.
+    # Deliberately skip init_sensing() -- abort must not depend on it.
 
     assert actuation.abort_compressions() == ErrorCode.NORMAL_OPERATION

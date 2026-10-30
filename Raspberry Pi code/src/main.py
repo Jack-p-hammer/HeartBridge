@@ -103,6 +103,8 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = actuation.init_motor()
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    error = actuation.init_steppers(HMI.get_pi())
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.init_HMI(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = sensing.init_sensors(actuation.get_motor_controller(), HMI.get_pi())
@@ -282,6 +284,12 @@ def main():
                     error = HMI.set_image_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     logging.error(f"Abort state tripped: {error}")
+
+                # Loop
+                # The steppers only move while being updated, so keep retracting the carriage every tick
+                # No continue on failure: the error is still routed back to ABORT next tick, but prev_state is
+                # recorded first so ABORT's setup doesn't re-run, and the tick still sleeps
+                error = actuation.retract_carriage()
                 # Halt — only a power cycle exits this state
 
             case(_):

@@ -11,11 +11,11 @@ its original description assumed: "audio_finished handles missing files
 gracefully" (expecting a dedicated ERROR_UNKNOWN_AUDIO code). No such code
 exists, and audio_finished() returns a plain bool -- it never touches
 pygame or loads a file, so it structurally can't fail this way. The intent
-is instead covered by set_audio()'s empty-path branch (HMI.py lines
-194-198): a state with no audio configured yet (the PAUSE/ABORT/
-KNEEL_FAILURE prompts are still "TODO" placeholders) stops playback and
-reports NORMAL_OPERATION rather than erroring, which is what
-test_set_audio_with_no_prompt_stops_channel checks. A genuinely missing
+is instead covered by set_audio()'s empty-path branch: a state with no
+audio configured stops playback and reports NORMAL_OPERATION rather than
+erroring, which is what test_set_audio_with_no_prompt_stops_channel checks.
+Every real AudioPrompt currently has a file, so that test uses a stand-in
+prompt with an empty path (_NO_AUDIO_PROMPT). A genuinely missing
 *file* (a real path that doesn't resolve) instead hits set_audio()'s
 pygame.mixer.Sound() call and is covered by
 test_set_audio_plays_prompt_and_reports_failures, returning the existing
@@ -32,6 +32,9 @@ a valid value (0, 0.25, 0.5, 1.0) is scaled through to hardware_PWM() and
 reports NORMAL_OPERATION, an out-of-range one (-0.1, 1.5) is rejected by
 real pigpio via a negative return code and reports ERROR_PI_DAEMON_FAILURE.
 """
+import types
+from typing import cast
+
 import pytest
 
 from Enums.error_codes import ErrorCode
@@ -166,25 +169,49 @@ def test_button_enable_disable_is_idempotent(hardware):
 
 # -------------------- button readers --------------------
 
-def test_button_readers_respond_to_fake_gpio_input(hardware):
-    """Button readers should reflect whatever the fake GPIO pins report."""
+def _fake_button_clock(monkeypatch, HMI) -> dict:
+    """Patch HMI's time.monotonic() with a settable fake clock, starting past the
+    press timeout so the first press is always accepted. Advance `["t"]` by
+    HMI.BUTTON_TIMEOUT_SEC to get out of the post-press lockout."""
+    fake_now = {"t": 100.0}
+    monkeypatch.setattr(HMI.time, "monotonic", lambda: fake_now["t"])
+    return fake_now
+
+
+def test_button_readers_respond_to_fake_gpio_input(hardware, monkeypatch):
+    """Buttons are active low: a LOW pin is pressed, a HIGH pin is released."""
     import HMI
     HMI.init_HMI(hardware.pi)
-
-    hardware.pi.reads[HMI.NEXT_BTN_PIN] = 0
-    error, pressed = HMI.next_button_pressed()
-    assert error == ErrorCode.NORMAL_OPERATION
-    assert pressed is False
+    fake_now = _fake_button_clock(monkeypatch, HMI)
 
     hardware.pi.reads[HMI.NEXT_BTN_PIN] = 1
-    error, pressed = HMI.next_button_pressed()
-    assert error == ErrorCode.NORMAL_OPERATION
-    assert pressed is True
-
     hardware.pi.reads[HMI.PAUSE_BTN_PIN] = 1
-    error, pressed = HMI.pause_button_pressed()
-    assert error == ErrorCode.NORMAL_OPERATION
-    assert pressed is True
+    assert HMI.next_button_pressed() == (ErrorCode.NORMAL_OPERATION, False)
+    assert HMI.pause_button_pressed() == (ErrorCode.NORMAL_OPERATION, False)
+
+    hardware.pi.reads[HMI.NEXT_BTN_PIN] = 0
+    assert HMI.next_button_pressed() == (ErrorCode.NORMAL_OPERATION, True)
+
+    hardware.pi.reads[HMI.NEXT_BTN_PIN] = 1
+    hardware.pi.reads[HMI.PAUSE_BTN_PIN] = 0
+    fake_now["t"] += HMI.BUTTON_TIMEOUT_SEC  # past the lockout from the Next press
+    assert HMI.pause_button_pressed() == (ErrorCode.NORMAL_OPERATION, True)
+
+
+def test_button_press_ignored_inside_timeout(hardware, monkeypatch):
+    """A held or repeated press is ignored until BUTTON_TIMEOUT_SEC after the last accepted one."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    fake_now = _fake_button_clock(monkeypatch, HMI)
+    hardware.pi.reads[HMI.NEXT_BTN_PIN] = 0
+
+    assert HMI.next_button_pressed() == (ErrorCode.NORMAL_OPERATION, True)
+
+    fake_now["t"] += HMI.BUTTON_TIMEOUT_SEC / 2
+    assert HMI.next_button_pressed() == (ErrorCode.NORMAL_OPERATION, False)
+
+    fake_now["t"] += HMI.BUTTON_TIMEOUT_SEC / 2  # exactly one timeout after the accepted press
+    assert HMI.next_button_pressed() == (ErrorCode.NORMAL_OPERATION, True)
 
 
 @pytest.mark.parametrize("reader_fn_name", ["next_button_pressed", "pause_button_pressed"])
@@ -200,18 +227,20 @@ def test_button_reader_failure_reports_pi_daemon_error(hardware, reader_fn_name)
     assert pressed is False
 
 
-def test_both_buttons_pressed_simultaneously(hardware):
-    """Next and Pause are read independently, so both can report pressed at once."""
+def test_both_buttons_pressed_simultaneously(hardware, monkeypatch):
+    """The press timeout is shared by both buttons: with both held, the first one
+    read wins and the other is locked out until the timeout expires."""
     import HMI
     HMI.init_HMI(hardware.pi)
-    hardware.pi.reads[HMI.NEXT_BTN_PIN] = 1
-    hardware.pi.reads[HMI.PAUSE_BTN_PIN] = 1
+    fake_now = _fake_button_clock(monkeypatch, HMI)
+    hardware.pi.reads[HMI.NEXT_BTN_PIN] = 0
+    hardware.pi.reads[HMI.PAUSE_BTN_PIN] = 0
 
-    next_error, next_pressed = HMI.next_button_pressed()
-    pause_error, pause_pressed = HMI.pause_button_pressed()
+    assert HMI.next_button_pressed() == (ErrorCode.NORMAL_OPERATION, True)
+    assert HMI.pause_button_pressed() == (ErrorCode.NORMAL_OPERATION, False)
 
-    assert (next_error, next_pressed) == (ErrorCode.NORMAL_OPERATION, True)
-    assert (pause_error, pause_pressed) == (ErrorCode.NORMAL_OPERATION, True)
+    fake_now["t"] += HMI.BUTTON_TIMEOUT_SEC
+    assert HMI.pause_button_pressed() == (ErrorCode.NORMAL_OPERATION, True)
 
 
 # -------------------- laser control --------------------
@@ -379,6 +408,12 @@ def test_set_audio_reports_failure_when_playback_fails(hardware):
     assert HMI.set_audio(HMI.AudioPrompt.UNFOLD) == ErrorCode.ERROR_PYGAME_FAILURE
 
 
+# Every real AudioPrompt currently has a file, so the no-audio (empty path)
+# branch of set_audio() is exercised with this stand-in. set_audio() only
+# reads `.value` (and `.name` for logging) off the prompt.
+_NO_AUDIO_PROMPT = types.SimpleNamespace(name="NO_AUDIO", value="")
+
+
 def test_set_audio_with_no_prompt_stops_channel(hardware):
     """States with no audio prompt (empty path) should stop whatever was playing."""
     import HMI
@@ -387,7 +422,7 @@ def test_set_audio_with_no_prompt_stops_channel(hardware):
     HMI.set_audio(HMI.AudioPrompt.UNFOLD)
     assert hardware.pygame.channel.sound is not None
 
-    assert HMI.set_audio(HMI.AudioPrompt.PAUSE) == ErrorCode.NORMAL_OPERATION
+    assert HMI.set_audio(cast("HMI.AudioPrompt", _NO_AUDIO_PROMPT)) == ErrorCode.NORMAL_OPERATION
     assert hardware.pygame.channel.sound is None
 
 
@@ -446,7 +481,7 @@ def test_audio_finished_true_when_no_prompt_is_set(hardware):
     import HMI
     HMI.init_HMI(hardware.pi)
 
-    HMI.set_audio(HMI.AudioPrompt.PAUSE)  # empty-path prompt
+    HMI.set_audio(cast("HMI.AudioPrompt", _NO_AUDIO_PROMPT))
 
     assert HMI.audio_finished() is True
 

@@ -283,6 +283,28 @@ def test_main_abort_state_is_terminal(monkeypatch):
     assert abort_entries == 1
 
 
+def test_main_abort_keeps_retracting_after_retract_failure(monkeypatch):
+    """ABORT's loop feeds retract_carriage() failures into the error system, which
+    routes back to ABORT without re-running its setup, and keeps retracting."""
+    modules = install_fake_main_modules(monkeypatch)
+    setattr(modules["actuation"], "init_motor", lambda: ErrorCode.ERROR_INIT_FAILURE)
+    retract_failures = _fail_n_times(3, ErrorCode.ERROR_MOTOR_FAILURE)
+    retract_calls = {"count": 0}
+
+    def retract():
+        retract_calls["count"] += 1
+        return retract_failures()
+
+    setattr(modules["actuation"], "retract_carriage", retract)
+    set_image_audio = _cascade_fakes(modules)
+
+    import main
+    _run_main_for_ticks(monkeypatch, main, max_ticks=10)
+
+    assert set_image_audio.calls.count((main.HMI.Image.ABORT, main.HMI.AudioPrompt.ABORT)) == 1
+    assert retract_calls["count"] > 3
+
+
 def test_main_advances_from_startup_when_next_pressed(monkeypatch):
     """With the Next button held down, each state's setup should run once and advance."""
     modules = install_fake_main_modules(monkeypatch)

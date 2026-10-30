@@ -59,7 +59,7 @@ def _no_main_log_files(monkeypatch):
 # Modules from src/ that need to be re-imported fresh once fake hardware/main
 # modules are (re)installed, so they pick up the fakes instead of any
 # previously cached real/fake versions.
-_APP_MODULES = ["sensing", "actuation", "moteus_thread", "HMI", "main"]
+_APP_MODULES = ["sensing", "actuation", "moteus_thread", "stepper", "HMI", "main"]
 
 # Shared keys used by both the fake moteus.Register namespace and the values
 # dict FakeMoteusController hands back, so `result.values[moteus.Register.X]`
@@ -97,6 +97,7 @@ def _fake_module(name: str, **attrs) -> types.ModuleType:
 # cycle outside its valid range of 0 to PWM_REALRANGE (1_000_000).
 PI_BAD_HPWM_DUTY = -97
 PWM_REALRANGE = 1_000_000
+PI_NO_TX_WAVE = 9998  # wave_tx_at() return value when no wave is playing
 
 
 class FakePi:
@@ -148,6 +149,32 @@ class FakePi:
         if not (0 <= duty_cycle <= PWM_REALRANGE):
             return PI_BAD_HPWM_DUTY
         return 0
+
+    # Waveforms (stepper.py). Every sent wave finishes instantly: wave_tx_at()
+    # reports nothing playing, so the next update() counts all queued steps.
+    def wave_clear(self):
+        self.pending_pulses = []
+
+    def wave_add_generic(self, pulses):
+        self.pending_pulses = getattr(self, "pending_pulses", []) + list(pulses)
+
+    def wave_create(self):
+        self.waves = getattr(self, "waves", {})
+        self.next_wave_id = getattr(self, "next_wave_id", 0)
+        wave_id = self.next_wave_id
+        self.waves[wave_id] = self.pending_pulses
+        self.pending_pulses = []
+        self.next_wave_id += 1
+        return wave_id
+
+    def wave_send_using_mode(self, wave_id, mode):
+        self.sent_waves = getattr(self, "sent_waves", []) + [wave_id]
+
+    def wave_tx_at(self):
+        return PI_NO_TX_WAVE
+
+    def wave_delete(self, wave_id):
+        getattr(self, "waves", {}).pop(wave_id, None)
 
 
 class FakeI2C:
@@ -363,6 +390,8 @@ def _make_pigpio_module(harness: HardwareHarness) -> types.ModuleType:
         OUTPUT=1,
         PUD_UP=2,
         PUD_DOWN=3,
+        WAVE_MODE_ONE_SHOT_SYNC=2,
+        pulse=lambda gpio_on, gpio_off, delay: (gpio_on, gpio_off, delay),
         pi=lambda: harness.pi,
     )
 
@@ -386,7 +415,8 @@ def _make_vl53l0x_module(harness: HardwareHarness) -> types.ModuleType:
             raise harness.tof_connect_error
         return harness.tof
 
-    return _fake_module("adafruit_vl53l0x", VL53L0X=VL53L0X)
+    # sensing.py constructs the sensor as `VL53l0X` (lowercase L), so expose both spellings
+    return _fake_module("adafruit_vl53l0x", VL53L0X=VL53L0X, VL53l0X=VL53L0X)
 
 
 def _make_bno08x_modules(harness: HardwareHarness) -> tuple[types.ModuleType, types.ModuleType]:
@@ -540,6 +570,22 @@ def hardware():
     _clear_app_modules()
 
 
+def init_sensing(sensing, motor_controller, harness: HardwareHarness):
+    """Call sensing.init_sensors() the way main.py does, with the ToF sensor pre-wired.
+
+    sensing.init_sensors() stores the ToF sensor it constructs in a local
+    (`_vl61`), while read_ToF_sensor() reads the module global `_vl53`, which
+    nothing in sensing.py assigns. Seed that global with the fake ToF sensor
+    first so init_sensors() (which reads the ToF to capture its absolute zero)
+    and every later ToF read see the harness's sensor.
+
+    Use this instead of calling sensing.init_sensors() directly, e.g.:
+        init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    """
+    setattr(sensing, "_vl53", harness.tof)
+    return sensing.init_sensors(motor_controller, harness.pi)
+
+
 # -------------------- Whole-module fakes for main.py tests --------------------
 
 def install_fake_main_modules(monkeypatch) -> dict:
@@ -572,6 +618,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
     actuation_mod = _fake_module(
         "actuation",
         init_motor=lambda: ErrorCode.NORMAL_OPERATION,
+        init_steppers=lambda pi: ErrorCode.NORMAL_OPERATION,
         get_motor_controller=lambda: None,
         init_zeroing=lambda: ErrorCode.NORMAL_OPERATION,
         zeroing=lambda: ErrorCode.NORMAL_OPERATION,
@@ -579,6 +626,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
         compressions=lambda: ErrorCode.NORMAL_OPERATION,
         pause_compressions=lambda: ErrorCode.NORMAL_OPERATION,
         abort_compressions=lambda: ErrorCode.NORMAL_OPERATION,
+        retract_carriage=lambda: ErrorCode.NORMAL_OPERATION,
     )
     monkeypatch.setitem(sys.modules, "actuation", actuation_mod)
 

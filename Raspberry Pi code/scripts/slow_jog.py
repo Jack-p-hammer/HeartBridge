@@ -24,20 +24,21 @@ import time
 import moteus
 
 CONTROLLER_ID: int = 1  # same as moteus_thread.py
-PINION_RADIUS_M: float = 0.01  # same as moteus_thread.py
-MAX_TORQUE_NM: float = 2.0  # kept low for bench testing (main code allows 5.0)
+BALL_SCREW_LEAD_M: float = 0.01  # same as moteus_thread.py, meters of plunger travel per ball screw revolution
+BLDC_GEAR_RATIO: float = 1.0  # same as moteus_thread.py, 1:1 gear train
+MAX_TORQUE_NM: float = 0.4  # kept low for bench testing (main code allows TORQUE_LIMIT_NM, ~0.8 Nm for 500 N)
 COMMAND_PERIOD_S: float = 0.001  # 100 Hz, well under the moteus watchdog timeout
 REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1 s watchdog
 LASER_PIN: int = 12  # BCM numbering, same as HMI.py. High -> Q5 on -> lasers on
 
-LOWER_IN: float = 1.0  # first move, positive = down on the rack
+LOWER_IN: float = 1.0  # first move, positive = down on the ball screw
 TRAVEL_IN: float = 2.0  # cycle stroke below the lowered position
 SPEED_IN_PER_S: float = 0.1  # snail's pace
 
 
 def inches_to_rev(inches: float) -> float:
-    """Convert linear rack travel to motor revolutions through the pinion."""
-    return inches * 0.0254 / (2.0 * math.pi * PINION_RADIUS_M)
+    """Convert linear plunger travel to motor revolutions through the ball screw."""
+    return inches * 0.0254 / BALL_SCREW_LEAD_M * BLDC_GEAR_RATIO
 
 
 def set_lasers(on: bool) -> None:

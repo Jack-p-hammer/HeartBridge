@@ -12,6 +12,7 @@ import sys
 import logging
 from datetime import datetime
 from pathlib import Path
+import pygame
 
 # Internal imports
 import HMI
@@ -58,6 +59,33 @@ def configure_logging():
     )
 
 
+def quit_requested() -> bool:
+    """Check whether the user pressed Esc or Q, or closed the window.
+
+    HMI.pump_events() keeps the window alive but never reads keys, so the
+    fullscreen window would otherwise have no way to exit back to the terminal.
+    """
+    # The display doesn't exist until HMI.init_HMI() runs on the first tick
+    if not pygame.display.get_init():
+        return False
+    for event in pygame.event.get((pygame.QUIT, pygame.KEYDOWN)):
+        if event.type == pygame.QUIT:
+            return True
+        if event.key in (pygame.K_ESCAPE, pygame.K_q):
+            return True
+    return False
+
+
+def shutdown_demo():
+    """Turn off lasers and button LEDs, close the window and exit cleanly."""
+    logging.info("Exit requested, shutting down demo")
+    HMI.disable_lasers()
+    HMI.disable_next_button()
+    HMI.disable_pause_button()
+    pygame.quit()
+    sys.exit(0)
+
+
 def main():
     """Run the UI-only state-machine loop."""
     configure_logging()
@@ -83,6 +111,9 @@ def main():
         # Neither error code returned by pump_events will cause an actual error, so no check
         error = HMI.pump_events()
 
+        # Esc or Q (or closing the window) exits back to the terminal from any state
+        if quit_requested():
+            shutdown_demo()
 
         # --- State machine ---
         # Each state checks (state != prev_state) to detect first entry, and runs
@@ -229,7 +260,7 @@ def main():
                     error = HMI.set_image_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     logging.error(f"Abort state tripped: {error}")
-                # Halt — only a power cycle exits this state
+                # Halt — only a power cycle (or Esc/Q) exits this state
 
             case(_):
                 error = ErrorCode.EXIT_UNKNOWN

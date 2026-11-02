@@ -3994,6 +3994,17 @@
 		)
 		(uuid "b3a8e39a-68a5-4bf8-8cf0-b251d5032dc2")
 	)
+	(hierarchical_label "Chest_Switch"
+		(shape input)
+		(at 55.88 156.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b3c03253-49f2-4cb0-a04e-f4a55c37ae36")
+	)
 	(hierarchical_label "CAN Standby"
 		(shape output)
 		(at 161.29 123.19 0)
@@ -4004,6 +4015,17 @@
 			(justify left)
 		)
 		(uuid "cb455e85-263c-435b-bf2f-4741de4ca9da")
+	)
+	(hierarchical_label "Force_AIn"
+		(shape input)
+		(at 54.61 160.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "cc51e914-cda6-44a3-a1f3-79a6d33ba115")
 	)
 	(symbol
 		(lib_id "power:+3.3V")

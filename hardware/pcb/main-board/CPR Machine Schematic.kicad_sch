@@ -87,6 +87,16 @@
 	)
 	(wire
 		(pts
+			(xy 110.49 74.93) (xy 120.65 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9dfc2404-d9f4-4cd6-9772-6ea0f5c0fcdf")
+	)
+	(wire
+		(pts
 			(xy 135.89 105.41) (xy 135.89 119.38)
 		)
 		(stroke
@@ -134,6 +144,16 @@
 			(type default)
 		)
 		(uuid "e4fe22fd-510d-42b1-9af8-b5663be1d5a1")
+	)
+	(wire
+		(pts
+			(xy 110.49 72.39) (xy 120.65 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f4f9a21c-5280-4e0a-9043-e66fa52642cd")
 	)
 	(wire
 		(pts
@@ -196,6 +216,26 @@
 		(pin "I2C_SDA" bidirectional
 			(at 110.49 83.82 0)
 			(uuid "6b1999c8-d6ae-43eb-a6c9-6482f9496040")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "Chest_Switch" output
+			(at 110.49 72.39 0)
+			(uuid "3a632895-c412-487e-8f27-7405fabe2787")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "Force_AIn" output
+			(at 110.49 74.93 0)
+			(uuid "8b5fce7e-e4b0-4047-9847-d8255c2019e0")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -524,6 +564,26 @@
 		(pin "TX_CAN" input
 			(at 153.67 105.41 270)
 			(uuid "edecdef6-c803-4a23-88b2-424ba9dbc7d0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "Chest_Switch" input
+			(at 120.65 72.39 180)
+			(uuid "0557de52-8274-4bb8-9e51-ab139af228c0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "Force_AIn" input
+			(at 120.65 74.93 180)
+			(uuid "c0d03e5f-5e94-4e01-8d7a-149c1f601ea8")
 			(effects
 				(font
 					(size 1.27 1.27)

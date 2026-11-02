@@ -294,7 +294,7 @@ def test_main_advances_from_startup_when_next_pressed(monkeypatch):
     _run_main_for_ticks(monkeypatch, main, max_ticks=3)
 
     assert (main.HMI.Image.STARTUP, main.HMI.AudioPrompt.STARTUP) in set_image_audio.calls
-    assert (main.HMI.Image.UNFOLD, main.HMI.AudioPrompt.UNFOLD) in set_image_audio.calls
+    assert (main.HMI.Image.UNFOLD_1, main.HMI.AudioPrompt.UNFOLD) in set_image_audio.calls
 
 
 # -------------------- flow: remaining happy-path edges --------------------

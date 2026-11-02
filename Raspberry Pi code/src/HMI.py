@@ -41,7 +41,11 @@ AUDIO = Path(__file__).resolve().parent / "Audio"
 class Image(Enum):
     # Enum values are the image file paths
     STARTUP = IMAGES / "StartUp.jpg"          
-    UNFOLD = IMAGES / "unfold.jpg"
+    # Unfold step is a 4-frame animation, cycled by main.py
+    UNFOLD_1 = IMAGES / "unfold_1.jpg"
+    UNFOLD_2 = IMAGES / "unfold_2.jpg"
+    UNFOLD_3 = IMAGES / "unfold_3.jpg"
+    UNFOLD_4 = IMAGES / "unfold_4.jpg"
     CUT_CLOTHES = IMAGES / "cutClothing.jpg"
     ALIGNMENT = IMAGES / "alignment.jpg"
     ZEROING_PREP = IMAGES / "zeroingPrep.jpg"

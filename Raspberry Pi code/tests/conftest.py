@@ -584,7 +584,10 @@ def install_fake_main_modules(monkeypatch) -> dict:
 
     hmi_image = types.SimpleNamespace(
         STARTUP="startup",
-        UNFOLD="unfold",
+        UNFOLD_1="unfold_1",
+        UNFOLD_2="unfold_2",
+        UNFOLD_3="unfold_3",
+        UNFOLD_4="unfold_4",
         ALIGNMENT="alignment",
         ZEROING_PREP="zeroing_prep",
         ZEROING="zeroing",
@@ -615,6 +618,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
         init_HMI=lambda pi_instance: ErrorCode.NORMAL_OPERATION,
         pump_events=lambda: ErrorCode.NORMAL_OPERATION,
         set_image_audio=lambda image, prompt: ErrorCode.NORMAL_OPERATION,
+        set_image=lambda image: ErrorCode.NORMAL_OPERATION,
         enable_next_button=lambda: ErrorCode.NORMAL_OPERATION,
         disable_next_button=lambda: ErrorCode.NORMAL_OPERATION,
         enable_pause_button=lambda: ErrorCode.NORMAL_OPERATION,

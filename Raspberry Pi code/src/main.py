@@ -17,6 +17,10 @@ from Enums.states import CPRState
 # TODO: Optimize loop speed
 LOOP_TICK_SEC = 0.05  # 50ms per tick, 20 Hz
 
+# Frames cycled during the unfold step, and how long each one stays up
+UNFOLD_FRAMES = [HMI.Image.UNFOLD_1, HMI.Image.UNFOLD_2, HMI.Image.UNFOLD_3, HMI.Image.UNFOLD_4]
+UNFOLD_FRAME_SEC = 0.5  # 2 frames per second
+
 # Initialize log directory and file
 # 2x parent to get to project root
 LOG_DIR = Path(__file__).resolve().parent.parent / "Logs"
@@ -124,12 +128,21 @@ def main():
             case(CPRState.UNFOLD_CUT_CLOTHES):
                 # Setup
                 if state != prev_state:
-                    error = HMI.set_image_audio(HMI.Image.UNFOLD, HMI.AudioPrompt.UNFOLD)
+                    frame_idx = 0
+                    last_frame_time = time.monotonic()
+                    error = HMI.set_image_audio(UNFOLD_FRAMES[frame_idx], HMI.AudioPrompt.UNFOLD)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
 
                 # Loop
+                # Advance the animation. set_image only, so the audio prompt isn't restarted
+                if time.monotonic() - last_frame_time >= UNFOLD_FRAME_SEC:
+                    frame_idx = (frame_idx + 1) % len(UNFOLD_FRAMES)
+                    last_frame_time = time.monotonic()
+                    error = HMI.set_image(UNFOLD_FRAMES[frame_idx])
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+
                 error, next_pressed = HMI.next_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 if next_pressed:

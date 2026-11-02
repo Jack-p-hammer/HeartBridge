@@ -322,10 +322,10 @@ def test_set_image_success_and_failure(hardware):
     import HMI
     HMI.init_HMI(hardware.pi)
 
-    assert HMI.set_image(HMI.Image.UNFOLD) == ErrorCode.NORMAL_OPERATION
+    assert HMI.set_image(HMI.Image.UNFOLD_1) == ErrorCode.NORMAL_OPERATION
 
     hardware.pygame.image_load_error = RuntimeError("missing asset")
-    assert HMI.set_image(HMI.Image.UNFOLD) == ErrorCode.ERROR_UNKNOWN_IMAGE
+    assert HMI.set_image(HMI.Image.UNFOLD_1) == ErrorCode.ERROR_UNKNOWN_IMAGE
 
 
 def test_set_audio_plays_prompt_and_reports_failures(hardware):
@@ -397,7 +397,7 @@ def test_set_image_audio_short_circuits_on_image_failure(hardware):
     HMI.init_HMI(hardware.pi)
     hardware.pygame.image_load_error = RuntimeError("missing asset")
 
-    error = HMI.set_image_audio(HMI.Image.UNFOLD, HMI.AudioPrompt.UNFOLD)
+    error = HMI.set_image_audio(HMI.Image.UNFOLD_1, HMI.AudioPrompt.UNFOLD)
 
     assert error == ErrorCode.ERROR_UNKNOWN_IMAGE
     assert hardware.pygame.channel.sound is None
@@ -410,7 +410,7 @@ def test_set_image_audio_propagates_audio_failure_when_image_succeeds(hardware):
     HMI.init_HMI(hardware.pi)
     hardware.pygame.audio_load_error = RuntimeError("missing asset")
 
-    error = HMI.set_image_audio(HMI.Image.UNFOLD, HMI.AudioPrompt.UNFOLD)
+    error = HMI.set_image_audio(HMI.Image.UNFOLD_1, HMI.AudioPrompt.UNFOLD)
 
     assert error == ErrorCode.ERROR_PYGAME_FAILURE
 

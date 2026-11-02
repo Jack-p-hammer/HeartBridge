@@ -52,7 +52,7 @@ class Image(Enum):
     ALIGNMENT = IMAGES / "alignment.jpg"
     ZEROING_PREP = IMAGES / "zeroingPrep.jpg"
     ZEROING = IMAGES / "zeroing.jpg"          
-    COMPRESSION_PREP = IMAGES / "compressionsConfirm.jpg"
+    COMPRESSION_PREP = IMAGES / "zeroing.jpg"
     COMPRESSION = IMAGES / "compressions.jpg"
     PAUSE = IMAGES / "paused.jpg"
     ABORT = IMAGES / "abort.jpg"

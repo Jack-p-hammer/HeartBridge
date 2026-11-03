@@ -1660,7 +1660,7 @@
 		)
 		(uuid "c8cfc367-2415-4ea6-9916-416bed7c9dfe")
 	)
-	(text "Screw terminal\nto EC5 Connector"
+	(text "XT60 plug\nto EC5 Connector"
 		(exclude_from_sim no)
 		(at 20.828 38.862 0)
 		(effects
@@ -2449,6 +2449,17 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 44.45 34.29 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5823934e-df41-4bbd-baf4-e5c3c44fcd8b")
 		)
@@ -2602,6 +2613,28 @@
 				)
 			)
 		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ23GG1R?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1"
+			(at 60.96 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 60.96 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "4acf9a6e-ad69-4af3-82c9-f7978c20df94")
 		)
@@ -2704,6 +2737,28 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 44.45 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "4878-US1MCT-ND"
+			(at 44.45 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "5cd80255-1fa6-4984-8ad9-3c83ad96fba1")
 		)
@@ -2776,6 +2831,17 @@
 			)
 		)
 		(property "Description" "Mounting Hole with connection"
+			(at 106.68 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
 			(at 106.68 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -2866,6 +2932,17 @@
 		)
 		(property "digikey" "SMCJ28ALFCT-ND"
 			(at 30.48 21.59 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 30.48 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3099,6 +3176,39 @@
 				)
 			)
 		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ23GG1R?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1"
+			(at 41.91 16.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field12" ""
+			(at 41.91 16.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 41.91 16.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "48715605-5fab-4d9d-9e8e-90196279c57b")
 		)
@@ -3182,6 +3292,17 @@
 		)
 		(property "digikey" "SMCJ28CALFCT-ND"
 			(at 67.31 43.18 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 67.31 43.18 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3338,6 +3459,28 @@
 				)
 			)
 		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ23GG1R?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1"
+			(at 82.55 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 82.55 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0a5e9db5-44fe-4e5a-9b10-9b985ec2a221")
 		)
@@ -3410,6 +3553,17 @@
 			)
 		)
 		(property "Description" "Mounting Hole with connection"
+			(at 106.68 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
 			(at 106.68 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -3657,6 +3811,17 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 52.07 74.93 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "8fb072c4-0cf4-47c4-b18c-bfff01f1ede5")
 		)
@@ -3732,6 +3897,17 @@
 			)
 		)
 		(property "Description" "Mounting Hole with connection"
+			(at 106.68 20.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
 			(at 106.68 20.32 0)
 			(hide yes)
 			(show_name no)
@@ -3897,7 +4073,7 @@
 				)
 			)
 		)
-		(property "digikey" "277-1667-ND"
+		(property "digikey" ""
 			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -3953,6 +4129,17 @@
 			)
 		)
 		(property "SUPPLIER" ""
+			(at 16.51 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ27PKHB?plpRedirect=mhFallback&ref=clp_hp_h_pc"
 			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -4212,6 +4399,17 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 106.68 26.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "11e732b4-1e0f-4245-a206-2240cef76083")
 		)
@@ -4365,6 +4563,17 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 27.94 29.21 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "9372d1ec-2b44-4c57-b596-ee4eed517f6f")
 		)
@@ -4448,6 +4657,17 @@
 		)
 		(property "digikey" "SMCJ28ALFCT-ND"
 			(at 58.42 19.05 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 58.42 19.05 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)

@@ -271,6 +271,19 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "558b209c-6f90-4b7b-af3c-4cbb4ee20451")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Converter*DCDC*TRACO*TSR?1*")
 		(path "/a3678363-4566-4611-8144-874ac899be79")
 		(sheetname "/")
@@ -497,7 +510,7 @@
 		(at 108.712 92.71)
 		(descr "Fuse SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf)")
 		(tags "fuse")
-		(property "Reference" "F2"
+		(property "Reference" "F1"
 			(at 0 1.778 0)
 			(layer "F.SilkS")
 			(uuid "a5f28488-c7f3-47bb-806d-29d737b8329a")
@@ -625,6 +638,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "95268620-d21e-4c1c-8fc1-22d55c2f6757")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1fc6c161-eab1-4438-b390-31e07c1c8a76")
 			(effects
 				(font
 					(size 1 1)
@@ -778,6 +804,19 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3449da16-0bac-45a2-90bd-2be4c4cc6390")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -966,6 +1005,32 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8b5d5700-eb6f-4188-abad-7465ee0563e3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ23GG1R?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3fe1f606-dfa6-4ef7-b222-5713b3848c79")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c8daed94-a938-4028-b88c-acd2f0574d14")
 			(effects
 				(font
 					(size 1 1)
@@ -1265,6 +1330,19 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "db3744ba-1776-4b4a-8e02-6afd7c8f7924")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "MountingHole*Pad*")
 		(path "/945f844a-91b2-4e23-96a9-872db5439c60")
 		(sheetname "/")
@@ -1384,6 +1462,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "87b1c586-5dc1-4f2c-a995-7fdc49319553")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "334022b2-2043-49a3-911a-426577ce49ba")
 			(effects
 				(font
 					(size 1 1)
@@ -1669,6 +1760,19 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "22f72657-6f4e-4f62-bf0f-d25ea2ff447e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "MountingHole*Pad*")
 		(path "/2d47ae84-0506-4bec-a322-a4ebc6bbab35")
 		(sheetname "/")
@@ -1783,7 +1887,7 @@
 				)
 			)
 		)
-		(property "digikey" "277-1667-ND"
+		(property "digikey" ""
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1867,6 +1971,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "79f1720f-d198-4431-b3fe-10a99ee84832")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ27PKHB?plpRedirect=mhFallback&ref=clp_hp_h_pc"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "09817c51-18e8-4a67-a844-d9320f056c2d")
 			(effects
 				(font
 					(size 1 1)
@@ -2248,6 +2365,32 @@
 				)
 			)
 		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ23GG1R?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fcc92784-0caa-4a15-ac2c-8ed8ec62697f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7504f347-3669-41b5-95cd-57c795070fc7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/0b011b49-efa8-47e5-9e5f-16138e5f9cca")
 		(sheetname "/")
@@ -2622,6 +2765,45 @@
 				)
 			)
 		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ23GG1R?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5f569093-baef-4951-bed6-2ae17c497899")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Field12" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6eff8b3f-48ab-4c20-858c-fcf3e0a553ce")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6257a177-2ddd-4c0a-9ecf-02a29982a763")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/51c1b1d3-74a7-4d6c-97b1-c6110097e313")
 		(sheetname "/")
@@ -2928,6 +3110,19 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b6530670-0798-4fd4-afc3-da25bcd4b909")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TO-???* *_Diode_* *SingleDiode* D_*")
 		(path "/31237dc7-e00f-44d2-a3d5-2697fd2a851e")
 		(sheetname "/")
@@ -3206,6 +3401,19 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d6bf4913-d318-4303-b131-6126c9712731")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "MountingHole*Pad*")
 		(path "/f143cbd3-8ea2-4804-b24a-7b698d738bd7")
 		(sheetname "/")
@@ -3400,6 +3608,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "cd6bc0aa-b8fa-45d8-93e8-d5d9acf94d4d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4ff2a7f7-2447-4715-a13a-a594c5362920")
 			(effects
 				(font
 					(size 1 1)
@@ -3720,6 +3941,20 @@
 				(justify mirror)
 			)
 		)
+		(property "Field11" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a0171cad-42df-4a4a-b167-68f29ce2e3d8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TO-???* *_Diode_* *SingleDiode* D_*")
 		(path "/5ff719ea-325e-45a8-919f-421bc72255c1")
 		(sheetname "/")
@@ -4026,6 +4261,34 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "a6da8544-ae18-434e-bfe2-14befa375754")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Field11" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5c5c6cc1-3825-4d52-8ad6-02abacdc7d6a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "digikey" "4878-US1MCT-ND"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "12f9cc9a-6068-4bb0-b0ac-50fa5dc74917")
 			(effects
 				(font
 					(size 1 1)

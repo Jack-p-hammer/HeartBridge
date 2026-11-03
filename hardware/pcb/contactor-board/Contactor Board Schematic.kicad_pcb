@@ -1379,299 +1379,6 @@
 			)
 		)
 	)
-	(footprint "Diode_SMD:D_SMC"
-		(layer "F.Cu")
-		(uuid "620b0e35-c9de-4976-98f2-dd9a5720b6f1")
-		(at 107.188 95.25 90)
-		(descr "Diode SMC (DO-214AB)")
-		(tags "Diode SMC (DO-214AB)")
-		(property "Reference" "D5"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(uuid "c7017e0e-3fa8-40f5-94ed-3880759b2214")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "SMCJ28CA"
-			(at 0 4.2 90)
-			(layer "F.Fab")
-			(uuid "d60388ff-2cf0-482b-906c-a7666ed37895")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" "https://toshiba.semicon-storage.com/info/DF2B36FU_datasheet_en_20260705.pdf?did=36248&prodName=DF2B36FU"
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "a62c72ff-b6f7-4dbf-93ec-d92711d12883")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" "TVS DIODE 28VWM 45.4VC DO214AB"
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "9b52817f-643c-4e6c-8953-ed203c68eb26")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "digikey" "SMCJ28CALFCT-ND"
-			(at 0 0 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "59b9c330-edf9-4ecb-bd8c-6066ef264108")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property ki_fp_filters "TO-???* *_Diode_* *SingleDiode* D_*")
-		(sheetname "/")
-		(sheetfile "Contactor Board Schematic.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
-		(zone_connect 2)
-		(attr smd)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start -4.91 -3.25)
-			(end 3.6 -3.25)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "e79e5713-cc5c-477a-92bb-a256b688732d")
-		)
-		(fp_line
-			(start -4.91 3.25)
-			(end -4.91 -3.25)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "7eb9f869-9912-4447-b75b-6ce31b771a77")
-		)
-		(fp_line
-			(start -4.91 3.25)
-			(end 3.6 3.25)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "1825b269-9181-42a6-aaa9-38b5f49c4c09")
-		)
-		(fp_line
-			(start 4.9 -3.35)
-			(end 4.9 3.35)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "061127a3-441f-43ad-ab7c-0e2cc42a6aff")
-		)
-		(fp_line
-			(start -4.9 -3.35)
-			(end 4.9 -3.35)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "27d87eec-5184-4c18-ac9e-a6a40d8d3cd4")
-		)
-		(fp_line
-			(start 4.9 3.35)
-			(end -4.9 3.35)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "673cefc9-91dd-4be3-90fc-bb9881123c12")
-		)
-		(fp_line
-			(start -4.9 3.35)
-			(end -4.9 -3.35)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "ef235af7-f1ea-4e4b-9e39-d82cdbd84b93")
-		)
-		(fp_line
-			(start 3.55 -3.1)
-			(end -3.55 -3.1)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "c7ad1ba5-9f56-4a5f-9ba4-50764a54da8c")
-		)
-		(fp_line
-			(start 3.55 -3.1)
-			(end 3.55 3.1)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "1184ee28-3044-45d6-bf34-c0525925b352")
-		)
-		(fp_line
-			(start -0.64944 -0.79908)
-			(end -0.64944 0.80112)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "642874ea-8ef7-4726-b260-7d24481fccf4")
-		)
-		(fp_line
-			(start 0.50118 0.00102)
-			(end 1.4994 0.00102)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "9de575aa-d04d-426d-be79-110884dc83bf")
-		)
-		(fp_line
-			(start -0.64944 0.00102)
-			(end 0.50118 -0.79908)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "dfc88fb8-2ff2-4e98-b154-5f2507e60ffc")
-		)
-		(fp_line
-			(start -0.64944 0.00102)
-			(end -1.55114 0.00102)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "026c36cd-48d0-4620-8a89-5729c73bc86f")
-		)
-		(fp_line
-			(start -0.64944 0.00102)
-			(end 0.50118 0.75032)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "c7822514-19e7-4afa-a570-a6a5a04d6a04")
-		)
-		(fp_line
-			(start 0.50118 0.75032)
-			(end 0.50118 -0.79908)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "f3865f1c-1877-4ec2-ae22-97d01562a7c2")
-		)
-		(fp_line
-			(start 3.55 3.1)
-			(end -3.55 3.1)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "81e63b72-24aa-4c0f-9d91-eec368feec63")
-		)
-		(fp_line
-			(start -3.55 3.1)
-			(end -3.55 -3.1)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "18046c9d-fab6-4219-ba63-d599bc5cbdca")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 -1.9 90)
-			(layer "F.Fab")
-			(uuid "027ab598-7117-495c-ab78-ba374c8c6ea3")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(pad "1" smd roundrect
-			(at -3.4 0 180)
-			(size 3.3 2.5)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.1)
-			(net "GND")
-			(pinfunction "A1_1")
-			(pintype "passive")
-			(uuid "76989bdb-86b9-41b2-9bd2-85a1b1743e22")
-		)
-		(pad "2" smd roundrect
-			(at 3.4 0 180)
-			(size 3.3 2.5)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.1)
-			(net "Net-(D2-K)")
-			(pinfunction "A2_2")
-			(pintype "passive")
-			(uuid "ca1f582c-7917-40b3-824f-a1cd2ade1148")
-		)
-		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SMC.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
-	)
 	(footprint "MountingHole:MountingHole_2.7mm_Pad"
 		(layer "F.Cu")
 		(uuid "9099f998-11c0-40a0-aed1-2be44cf1f84f")
@@ -2150,7 +1857,7 @@
 			(drill 4.5)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net "Net-(D2-K)")
+			(net "Net-(J_EXT1-Pin_2)")
 			(pinfunction "Pin_2_2")
 			(pintype "passive")
 			(uuid "b3b732ac-aeb4-464b-8019-ea2913a1d725")
@@ -3326,7 +3033,7 @@
 		(property "Reference" "Contactor1"
 			(at 6.35 -8.3 0)
 			(layer "F.SilkS")
-			(uuid "49125288-9c6a-4d33-8782-3d046401b196")
+			(uuid "d3231760-ffee-4711-b484-547cade43754")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3338,7 +3045,7 @@
 			(at 6.35 -8.3 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "be36ae5a-0498-4487-9e44-441b943ce4fd")
+			(uuid "524c450a-19f1-45f5-940d-5b252ee68da6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3350,7 +3057,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "3c041a9f-7a4c-4b81-b1af-bbfebf178e7f")
+			(uuid "e37a62ab-fe37-4f66-82cf-b1beff5c5bf8")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3361,7 +3068,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "13a4cd34-70af-40bb-a48d-4ce895d7e9aa")
+			(uuid "22ebccb1-7e78-4d71-b3e0-f6d5226199cc")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3660,7 +3367,7 @@
 			(drill 2.82)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net "Net-(Contactor1-Pad2)")
+			(net "/Battery +")
 			(pintype "passive")
 			(zone_connect 2)
 			(uuid "671ecbac-23a3-46e7-a66f-f36911ce82e7")
@@ -3852,7 +3559,7 @@
 			)
 		)
 		(property ki_fp_filters "*Fuse*")
-		(path "/2cbc7063-3a08-4eed-ac81-ac79fd0828ea")
+		(path "/fa39b634-649e-4ab2-8002-5f212e8e18b2")
 		(sheetname "/")
 		(sheetfile "Contactor Board Schematic.kicad_sch")
 		(units
@@ -3922,7 +3629,6 @@
 			(size 1.25 1.75)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.2)
-			(net "Net-(Contactor1-Pad2)")
 			(pintype "passive")
 			(zone_connect 2)
 			(uuid "2d366370-c3da-41ab-9bcf-dce5cd8b60af")
@@ -3932,7 +3638,7 @@
 			(size 1.25 1.75)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.2)
-			(net "/Battery +")
+			(net "Net-(D2-K)")
 			(pintype "passive")
 			(zone_connect 2)
 			(uuid "5d78f04d-7451-464a-87a8-2f7bb48e3cc1")
@@ -5471,7 +5177,7 @@
 		)
 	)
 	(zone
-		(net "Net-(Contactor1-Pad2)")
+		(net "/Battery +")
 		(layer "B.Cu")
 		(uuid "d237e2c8-673d-492c-aaf4-ff2bddce5347")
 		(hatch edge 0.5)

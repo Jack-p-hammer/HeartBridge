@@ -99,6 +99,10 @@ def main():
     prev_state = None
     error = ErrorCode.NORMAL_OPERATION
 
+    # Total time spent in COMPRESSION across all runs. Pausing freezes it and
+    # resuming carries on from the same total, so it reads total CPR time.
+    cpr_elapsed_sec = 0.0
+
     while error not in FATAL_ERRORS:
         # Record the start time of each loop iteration to maintain a consistent tick rate
         loop_start = time.monotonic()
@@ -237,11 +241,25 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.set_image_audio(HMI.Image.COMPRESSION, HMI.AudioPrompt.COMPRESSION)
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    # Start of this run of compressions; the timer is drawn on the first loop tick
+                    compression_start = time.monotonic()
+                    shown_sec = None
 
                 # Loop
+                # Only redraw when the displayed second changes, not every tick
+                run_sec = time.monotonic() - compression_start
+                total_sec = int(cpr_elapsed_sec + run_sec)
+                if total_sec != shown_sec:
+                    error = HMI.draw_timer(total_sec)
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    shown_sec = total_sec
+
                 error, pause_pressed = HMI.pause_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 if pause_pressed:
+                    # Bank this run into the total so the timer resumes from here
+                    cpr_elapsed_sec += time.monotonic() - compression_start
+                    logging.info(f"CPR paused at {cpr_elapsed_sec:.1f} s total")
                     state = CPRState.PAUSE
 
             case(CPRState.PAUSE):

@@ -4518,14 +4518,6 @@
 		(uuid "1ba73f6b-f70d-4e65-9cac-567ae89b4895")
 	)
 	(segment
-		(start 107.2 90.51)
-		(end 109.31 90.51)
-		(width 2.5)
-		(layer "F.Cu")
-		(net "Net-(D2-K)")
-		(uuid "3d7c9a6b-b3ed-4223-b670-46757dac9063")
-	)
-	(segment
 		(start 108.545 112.395)
 		(end 109.255 112.395)
 		(width 3.175)

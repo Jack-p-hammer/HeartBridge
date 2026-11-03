@@ -1695,7 +1695,7 @@
 		(uuid "4f5137bb-3275-411e-a48f-3530b4709914")
 	)
 	(junction
-		(at 34.29 21.59)
+		(at 31.75 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "535f0453-466d-4244-90b4-38e2dbde098a")
@@ -1707,7 +1707,7 @@
 		(uuid "58640720-126a-410b-835b-a1eb4835129e")
 	)
 	(junction
-		(at 34.29 29.21)
+		(at 31.75 29.21)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "592f0b96-1c8f-4294-b758-173869ac095b")
@@ -1747,16 +1747,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "be2e9f87-5fce-4822-a6af-1cd956aada72")
-	)
-	(wire
-		(pts
-			(xy 34.29 29.21) (xy 36.83 29.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "08ee0ec6-9516-4711-b558-951bc2741ad8")
 	)
 	(wire
 		(pts
@@ -1890,16 +1880,6 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 21.59) (xy 41.91 21.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6442a532-d98c-4ee5-a4a2-89e8164c23e0")
-	)
-	(wire
-		(pts
 			(xy 54.61 33.02) (xy 60.96 33.02)
 		)
 		(stroke
@@ -1960,7 +1940,17 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 21.59) (xy 34.29 29.21)
+			(xy 27.94 21.59) (xy 41.91 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "90f57cad-8547-42d8-8f4a-7bd44d37a702")
+	)
+	(wire
+		(pts
+			(xy 31.75 21.59) (xy 31.75 29.21)
 		)
 		(stroke
 			(width 0)
@@ -2070,7 +2060,7 @@
 	)
 	(wire
 		(pts
-			(xy 21.59 29.21) (xy 24.13 29.21)
+			(xy 21.59 29.21) (xy 22.86 29.21)
 		)
 		(stroke
 			(width 0)
@@ -2130,7 +2120,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 29.21) (xy 34.29 29.21)
+			(xy 30.48 29.21) (xy 36.83 29.21)
 		)
 		(stroke
 			(width 0)
@@ -2800,7 +2790,7 @@
 	)
 	(symbol
 		(lib_id "Device:D_Zener")
-		(at 30.48 21.59 180)
+		(at 24.13 21.59 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2810,7 +2800,7 @@
 		(dnp no)
 		(uuid "31237dc7-e00f-44d2-a3d5-2697fd2a851e")
 		(property "Reference" "D2"
-			(at 25.908 16.764 0)
+			(at 19.558 16.764 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2821,7 +2811,7 @@
 			)
 		)
 		(property "Value" "SMCJ28A"
-			(at 25.908 19.304 0)
+			(at 19.558 19.304 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2832,7 +2822,7 @@
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SMC"
-			(at 30.48 21.59 0)
+			(at 24.13 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2843,7 +2833,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.littelfuse.com/assetdocs/littelfuse_tvs_diode_smcj_datasheet.pdf?assetguid=37388813-0d6d-4329-969b-1aa8b7614ac1"
-			(at 30.48 21.59 0)
+			(at 24.13 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2854,7 +2844,7 @@
 			)
 		)
 		(property "Description" "Zener diode"
-			(at 30.48 21.59 0)
+			(at 24.13 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2865,7 +2855,7 @@
 			)
 		)
 		(property "digikey" "SMCJ28ALFCT-ND"
-			(at 30.48 21.59 90)
+			(at 24.13 21.59 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2892,7 +2882,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 26.67 21.59 270)
+		(at 20.32 21.59 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2903,7 +2893,7 @@
 		(fields_autoplaced yes)
 		(uuid "3917a550-8467-4de3-8d14-f14b49952230")
 		(property "Reference" "#PWR035"
-			(at 20.32 21.59 0)
+			(at 13.97 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2914,7 +2904,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 21.59 21.59 0)
+			(at 15.24 21.59 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2924,7 +2914,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 26.67 21.59 0)
+			(at 20.32 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2935,7 +2925,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 26.67 21.59 0)
+			(at 20.32 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2946,7 +2936,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 26.67 21.59 0)
+			(at 20.32 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4226,7 +4216,7 @@
 	)
 	(symbol
 		(lib_id "Device:Fuse")
-		(at 27.94 29.21 90)
+		(at 26.67 29.21 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4235,8 +4225,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "fa39b634-649e-4ab2-8002-5f212e8e18b2")
-		(property "Reference" "F2"
-			(at 27.94 27.178 90)
+		(property "Reference" "F1"
+			(at 26.67 27.178 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4246,7 +4236,7 @@
 			)
 		)
 		(property "Value" "20A"
-			(at 27.94 31.496 90)
+			(at 26.67 31.496 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4256,7 +4246,7 @@
 			)
 		)
 		(property "Footprint" "Fuse:Fuse_1206_3216Metric"
-			(at 27.94 30.988 90)
+			(at 26.67 30.988 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4267,7 +4257,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-c1h-series.pdf"
-			(at 27.94 29.21 0)
+			(at 26.67 29.21 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4278,7 +4268,7 @@
 			)
 		)
 		(property "Description" "Fuse"
-			(at 27.94 29.21 0)
+			(at 26.67 29.21 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4289,7 +4279,7 @@
 			)
 		)
 		(property "digikey" "5923-0685H9200-01CT-ND"
-			(at 27.94 29.21 90)
+			(at 26.67 29.21 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4300,7 +4290,7 @@
 			)
 		)
 		(property "Notes" ""
-			(at 27.94 29.21 90)
+			(at 26.67 29.21 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4311,7 +4301,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 27.94 29.21 90)
+			(at 26.67 29.21 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4322,7 +4312,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 27.94 29.21 90)
+			(at 26.67 29.21 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4333,7 +4323,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 27.94 29.21 90)
+			(at 26.67 29.21 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4344,7 +4334,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 27.94 29.21 90)
+			(at 26.67 29.21 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4355,7 +4345,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 27.94 29.21 90)
+			(at 26.67 29.21 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4374,7 +4364,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "F2")
+					(reference "F1")
 					(unit 1)
 				)
 			)

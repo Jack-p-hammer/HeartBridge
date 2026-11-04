@@ -3069,15 +3069,45 @@
 		)
 		(uuid "d52534b1-d3f3-4bbe-bc9b-ee066d7d7abd")
 	)
-	(text "MCU"
+	(text "Boot Switch"
 		(exclude_from_sim no)
-		(at 18.796 54.864 0)
+		(at 194.056 16.002 0)
 		(effects
 			(font
-				(size 2.54 2.54)
+				(size 1.27 1.27)
 			)
 		)
-		(uuid "36c56642-94cd-4b9d-b270-07496cfc1023")
+		(uuid "4b3dc02f-d880-4baf-a308-d2bed691607c")
+	)
+	(text "MCU"
+		(exclude_from_sim no)
+		(at 16.51 54.102 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "79acf9eb-4785-457c-9596-6baead0e6251")
+	)
+	(text "Analog Filtering"
+		(exclude_from_sim no)
+		(at 124.968 16.51 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "88833a38-2ff6-4a75-bd97-673920ec1872")
+	)
+	(text "Decoupling Bus"
+		(exclude_from_sim no)
+		(at 22.098 16.256 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "e3e74ff1-e393-424d-af92-8429fb9753b4")
 	)
 	(text_box "Notes\n- VBAT attached to 3.3V (no direct battery connection).\n\nQuestions:\n- Will we need LSE, HSE, both?\n"
 		(exclude_from_sim no)

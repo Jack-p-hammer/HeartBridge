@@ -24,20 +24,17 @@ import time
 import moteus
 
 CONTROLLER_ID: int = 1  # same as moteus_thread.py
-PINION_RADIUS_M: float = 0.01  # same as moteus_thread.py
-MAX_TORQUE_NM: float = 2.0  # kept low for bench testing (main code allows 5.0)
+BALL_SCREW_LEAD_M: float = 0.01  # PLACEHOLDER, same as moteus_thread.py, meters of plunger travel per ball screw revolution
+BLDC_GEAR_RATIO: float = -1.0  # motor revolutions per ball screw revolution, 1:1 gear train that reverses rotation
+BLDC_ROTATIONS_PER_IN: float = 0.0254 * BLDC_GEAR_RATIO / BALL_SCREW_LEAD_M  # motor rotations per inch of plunger travel
+MAX_TORQUE_NM: float = 0.4  # kept low for bench testing (main code allows TORQUE_LIMIT_NM, ~0.8 Nm for 500 N)
 COMMAND_PERIOD_S: float = 0.001  # 100 Hz, well under the moteus watchdog timeout
 REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1 s watchdog
 LASER_PIN: int = 12  # BCM numbering, same as HMI.py. High -> Q5 on -> lasers on
 
-LOWER_IN: float = 1.0  # first move, positive = down on the rack
+LOWER_IN: float = 1.0  # first move, positive = down on the ball screw
 TRAVEL_IN: float = 2.0  # cycle stroke below the lowered position
 SPEED_IN_PER_S: float = 0.1  # snail's pace
-
-
-def inches_to_rev(inches: float) -> float:
-    """Convert linear rack travel to motor revolutions through the pinion."""
-    return inches * 0.0254 / (2.0 * math.pi * PINION_RADIUS_M)
 
 
 def set_lasers(on: bool) -> None:
@@ -73,9 +70,9 @@ async def run(speed_in_per_s: float, lower_in: float, travel_in: float, lasers_o
     press = loop.run_in_executor(None, input, "Lowering. Press Enter to start cycling.\n")
 
     start_rev: float = (await controller.query()).values[moteus.Register.POSITION]
-    lower_rev: float = inches_to_rev(lower_in)
-    travel_rev: float = inches_to_rev(travel_in)
-    speed_rev_s: float = inches_to_rev(abs(speed_in_per_s))
+    lower_rev: float = lower_in * BLDC_ROTATIONS_PER_IN
+    travel_rev: float = travel_in * BLDC_ROTATIONS_PER_IN
+    speed_rev_s: float = abs(speed_in_per_s * BLDC_ROTATIONS_PER_IN)  # magnitude, direction comes from lower_rev/travel_rev
     base_rev: float = start_rev + lower_rev  # top of the cycle stroke
     lower_s: float = abs(lower_rev) / speed_rev_s
     period_s: float = 2.0 * abs(travel_rev) / speed_rev_s  # down and back up

@@ -1,7 +1,13 @@
 # actuation.py
 """Functions that dictate actuation of the plunger, including zeroing and compressions. These functions are non-blocking.
 
-NOTE: ALL SETPOINTS ARE IN METERS, AND COMPRESSION SETPOINTS ARE RELATIVE TO ZEROED POSITION. DO NOT CONVERT TO ROTATIONS, THAT IS ALL DONE WITHIN THE MOTEUS THREAD
+The plunger is a nested two-stage actuator:
+- Two lead screws, driven by steppers sharing one STEP/DIR input (stepper.py), move the whole carriage. Used for zeroing (bringing the plunger down to the chest) and fully retracting on abort.
+- The moteus-driven BLDC moves the plunger along a ball screw within the carriage (moteus_thread.py). Used for compressions, with only enough travel for compressions plus safety room.
+
+The system is assumed to start fully retracted on both stages.
+
+NOTE: ALL SETPOINTS ARE IN METERS, AND COMPRESSION SETPOINTS ARE RELATIVE TO ZEROED POSITION. DO NOT CONVERT TO ROTATIONS OR STEPS, THAT IS ALL DONE WITHIN moteus_thread.py AND stepper.py
 """
 
 # External imports
@@ -13,16 +19,18 @@ import math
 import sensing
 from Enums.error_codes import ErrorCode
 from Enums.control_modes import ControlMode
-from moteus_thread import MoteusThread, CONTROLLER_ID, ZEROING_VELOCITY_MPS
+from moteus_thread import MoteusThread, CONTROLLER_ID
+import stepper
+from stepper import LEAD_SCREW_TRAVEL_M, ZEROING_VELOCITY_MPS, RETRACT_VELOCITY_MPS
 
 
 COMPRESSION_DEPTH_CM: float = 7.0 # depth of compressions in cm, because compression setpoint math is in cm
-EXTENSION_STROKE_LIMIT_M: float = 0.0254 * 8 # maximum extension of plunger in meters, sets extension limit for zeroing, 8" in meters
+EXTENSION_STROKE_LIMIT_M: float = LEAD_SCREW_TRAVEL_M # maximum carriage extension in meters, zeroing fails if the chest isn't found by here
 
-# TODO: Determine if this timeout should have extra buffer on top of time to take max extension
-ZEROING_TIMEOUT_SEC: float = EXTENSION_STROKE_LIMIT_M / ZEROING_VELOCITY_MPS # maximum time to spend zeroing, in seconds
+# 1.5x buffer on top of the time to reach max extension, for accel ramps. TODO: Tune
+ZEROING_TIMEOUT_SEC: float = 1.5 * EXTENSION_STROKE_LIMIT_M / ZEROING_VELOCITY_MPS # maximum time to spend zeroing, in seconds
 
-# See moteus_thread.py for hardware and velocity constants
+# See moteus_thread.py for BLDC/ball screw constants, stepper.py for stepper/lead screw constants
 # See sensing.py for force threshold constants
 
 zeroing_start_time: float = 0.0 # time.monotonic() of when zeroing started
@@ -46,6 +54,22 @@ def init_motor() -> ErrorCode:
     
     if motor_error != ErrorCode.NORMAL_OPERATION:
         logging.error(f"Motor controller initialization failed: {motor_error}")
+        return ErrorCode.ERROR_INIT_FAILURE
+
+    return ErrorCode.NORMAL_OPERATION
+
+def init_steppers(pi) -> ErrorCode:
+    """Initialize the lead screw steppers on the shared pigpio instance.
+
+    Args:
+        pi (pigpio.pi): The shared pigpio instance from HMI.init_Pi()
+
+    Returns:
+        ErrorCode: Normal operation if successful, ERROR_INIT_FAILURE if failed
+    """
+    error: ErrorCode = stepper.init_steppers(pi)
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Stepper initialization failed: {error}")
         return ErrorCode.ERROR_INIT_FAILURE
 
     return ErrorCode.NORMAL_OPERATION
@@ -76,16 +100,17 @@ def init_zeroing() -> ErrorCode:
 def zeroing() -> ErrorCode:
     """Perform the zeroing procedure. Non-blocking.
     The procedure is as follows:
-    1. Move the plunger down at a constant velocity
-    2. Repeatedly poll the force sensor (via read_sensors) until the force exceeds the threshold
-    3. Stop the plunger and set the current position as zero
+    1. Hold the plunger just below the top of its ball screw travel
+    2. Command the steppers towards max carriage extension at zeroing velocity
+    3. Repeatedly poll the force sensor (via read_sensors) until the force exceeds the threshold
+    4. Halt the steppers. The carriage holds there for the rest of compressions
 
     Returns:
         ErrorCode: Normal while zeroing, ZEROING_FINISHED when finished, ERROR_ZEROING_FAILURE if failed (timeout, max extension reached)
     """
     global ZEROING_TIMEOUT_SEC, EXTENSION_STROKE_LIMIT_M
-    global _motor_controller, zeroing_start_time, zeroed_position
-    
+    global _motor_controller, zeroing_start_time
+
     # Check for timeout
     if time.monotonic() - zeroing_start_time > ZEROING_TIMEOUT_SEC:
         logging.error("Zeroing failed: timeout")
@@ -97,24 +122,38 @@ def zeroing() -> ErrorCode:
         logging.error(f"Zeroing failed: motor error {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE
         
-    # Get motor state
-    motor_state = _motor_controller.get_state()
-    
+    # Hold the plunger in place on the ball screw, can be done repeatedly since it is non-blocking
+    error = _motor_controller.set_target(ControlMode.ZEROING,
+                                         sensing.get_rotary_zero_position(),
+                                         sensing.get_rotary_absolute_zero_position())
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Zeroing failed on motor command: {error}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+
     # Check for max extension
-    # TODO: Check if this returns in revolutions or meters, and convert if necessary
-    if motor_state.position > EXTENSION_STROKE_LIMIT_M:
+    if stepper.get_position() >= EXTENSION_STROKE_LIMIT_M:
         logging.error("Zeroing failed: max extension reached")
         return ErrorCode.ERROR_ZEROING_FAILURE
-    
-    # Set motor command to zeroing, can be done repeatedly since it is non-blocking
-    _motor_controller.set_target(ControlMode.ZEROING, 
-                                 sensing.get_rotary_zero_position(), 
-                                 sensing.get_rotary_absolute_zero_position())
-    
+
+    # Lower the carriage towards max extension, can be done repeatedly since it is non-blocking
+    error = stepper.set_target(EXTENSION_STROKE_LIMIT_M, ZEROING_VELOCITY_MPS)
+    if error == ErrorCode.NORMAL_OPERATION:
+        error = stepper.update()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Zeroing failed on stepper: {error}")
+        stepper.halt()
+        return ErrorCode.ERROR_MOTOR_FAILURE
+
     # Read sensors to determine if chest reached
     # ZEROING_FINISHED exists to transmit zeroing success to state machine, just pass along results of sensor read
     # All sensor reading logic is in sensing.py
-    return sensing.read_sensors(ControlMode.ZEROING)
+    result: ErrorCode = sensing.read_sensors(ControlMode.ZEROING)
+    if result != ErrorCode.NORMAL_OPERATION:
+        # Chest found (or a sensor failure), stop the carriage either way
+        stepper.halt()
+        if result == ErrorCode.ZEROING_FINISHED:
+            logging.info(f"Carriage zeroed at {stepper.get_position()} m")
+    return result
 
 
 def init_compressions() -> ErrorCode:
@@ -153,6 +192,12 @@ def compressions() -> ErrorCode:
         logging.error(f"Compressions failed on motor: {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE
 
+    # Carriage holds at its zeroed position, finish playing out any steps still queued from zeroing
+    error = stepper.update()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Compressions failed on stepper: {error}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+
     # Update compression setpoint
     error = _motor_controller.set_target(ControlMode.COMPRESSIONS, 
                                          sensing.get_rotary_zero_position(), 
@@ -187,7 +232,13 @@ def pause_compressions() -> ErrorCode:
     if error != ErrorCode.NORMAL_OPERATION:
         logging.error(f"Pause retract failed on motor: {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE
-    
+
+    # Carriage stays at its zeroed position so compressions can resume without re-zeroing
+    error = stepper.update()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Pause retract failed on stepper: {error}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+
     # Update motor command to pause retract
     # This works because motor setpoints are retained between calls
     error = _motor_controller.set_target(ControlMode.PAUSE_RETRACT, 
@@ -200,7 +251,8 @@ def pause_compressions() -> ErrorCode:
 
 
 def abort_compressions() -> ErrorCode:
-    """Return plunger to starting position for compressions abort. Non-blocking.
+    """Return plunger to the top of its ball screw travel for compressions abort. Non-blocking.
+    NOTE: This does not move the carriage, since PAUSE also calls this every tick. Use retract_carriage() to fully retract.
 
     Returns:
         ErrorCode: Normal operation if successful, ERROR_ZEROING_FAILURE if failed
@@ -222,6 +274,22 @@ def abort_compressions() -> ErrorCode:
     return ErrorCode.NORMAL_OPERATION
 
 
+def retract_carriage() -> ErrorCode:
+    """Retract the carriage to its home (startup) position with the steppers. Non-blocking, must be called every tick
+    until the carriage is home. Like abort_compressions(), does not read sensors.
+
+    Returns:
+        ErrorCode: Normal operation if successful, ERROR_MOTOR_FAILURE if failed
+    """
+    error = stepper.set_target(0.0, RETRACT_VELOCITY_MPS)
+    if error == ErrorCode.NORMAL_OPERATION:
+        error = stepper.update()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Carriage retract failed on stepper: {error}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+    return ErrorCode.NORMAL_OPERATION
+
+
 def computeCompressionSetpoint() -> float:
     """Computes the current compression setpoint from the trapezoidal waveform, returns position relative to zeroed position
 
@@ -234,7 +302,7 @@ def computeCompressionSetpoint() -> float:
     outputPos_cm: float = 0.0
     
     # Piecewise trapezoidal profile (periodic)
-    # Positive rotation of motor is down on rack, so down is positive up is negative
+    # Positive rotation of motor is down on ball screw, so down is positive up is negative
     if cycle_time < 0.12:
         outputPos_cm = 0.0
     elif cycle_time < 0.24:

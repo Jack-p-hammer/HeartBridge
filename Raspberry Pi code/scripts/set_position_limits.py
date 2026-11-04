@@ -2,12 +2,13 @@
 Set the moteus position limits (servopos.position_min / position_max) and save
 them to flash, without needing the interactive moteus_tool console.
 
-Limits are in motor rotations, positive = down on the rack. The defaults allow
-the full 8" stroke (~3.2 rev with the 10 mm pinion) starting from zero at the
+Limits are in motor rotations, positive = down on the ball screw. The defaults allow
+the full 10 cm ball screw travel (10 rev with the 10 mm lead, same as
+moteus_thread.py) starting from zero at the
 fully retracted (top) position.
 
 Usage:
-    python set_position_limits.py                 # -0.1 to 3.3 rev
+    python set_position_limits.py                 # -0.1 to 10.1 rev
     python set_position_limits.py --min nan --max nan   # disable limits
 """
 
@@ -43,7 +44,7 @@ async def run(position_min: str, position_max: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--min", default="-0.1", help="rotations, or nan for no limit")
-    parser.add_argument("--max", default="3.3", help="rotations, or nan for no limit")
+    parser.add_argument("--max", default="10.1", help="rotations, or nan for no limit")
     args = parser.parse_args()
     asyncio.run(run(args.min, args.max))
 

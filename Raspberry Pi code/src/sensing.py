@@ -14,14 +14,12 @@ import busio
 import logging
 import adafruit_vl53l0x
 import adafruit_bno08x
-import math
 from adafruit_bno08x.i2c import BNO08X_I2C
 
 # Internal imports
 from Enums.error_codes import ErrorCode
-from moteus_thread import MoteusThread
+from moteus_thread import MoteusThread, BLDC_ROTATIONS_PER_M
 from Enums.control_modes import ControlMode
-from moteus_thread import PINION_RADIUS_M
 
 # Global variables for shared sensor instances
 _pi: pigpio.pi
@@ -47,6 +45,10 @@ ZEROING_FORCE_THRESHOLD_N: float = 35.0  # Newtons, threshold for detecting cont
 COMPRESSION_FORCE_THRESHOLD_N: float = 500.0  # Newtons
 
 POSITION_DISAGREE_THRESHOLD_MM: int = 2 # Millimeters
+
+# Lead screw encoder tolerances, see check_lead_screw_position()
+STEPPER_POSITION_TOLERANCE_M: float = 0.001  # meters, max allowed disagreement between commanded and encoder position. TODO: Tune
+LEAD_SCREW_SYNC_TOLERANCE_M: float = 0.0005  # meters, max allowed disagreement between the two lead screws. TODO: Tune
 
 # Global variables for sensor starting positions
 rotary_absolute_zero_position: float = 0.0  # The absolute position of rotary encoder on startup
@@ -276,6 +278,43 @@ def battery_check() -> ErrorCode:
     if battery_voltage < BATTERY_THRESHOLD_V:
         return ErrorCode.ERROR_LOW_BATTERY
     return ErrorCode.NORMAL_OPERATION
+
+
+def check_lead_screw_position(position_m: float, setpoint_m: float, encoder_positions_m: tuple[float, ...]) -> ErrorCode:
+    """Validate the lead screw encoders against the stepper position, and against each other.
+    Catches missed steps/stalls (encoders lagging behind the position) and the two lead screws drifting out of sync (racking).
+
+    While steps are playing out, the carriage may be anywhere between its position and its setpoint, so encoders
+    are accepted anywhere in that range (plus tolerance).
+
+    Args:
+        position_m (float): Current carriage position from stepper.get_position(), in meters from home
+        setpoint_m (float): Carriage setpoint from stepper.get_setpoint(), in meters from home
+        encoder_positions_m (tuple[float, ...]): Position of each lead screw from its encoder, in meters from home
+
+    Returns:
+        ErrorCode: Normal if valid, ERROR_MOTOR_FAILURE if the steppers disagree with the encoders, ERROR_SENSOR_FAILURE if the encoder readings are unusable
+    """
+    lower_m: float = min(position_m, setpoint_m) - STEPPER_POSITION_TOLERANCE_M
+    upper_m: float = max(position_m, setpoint_m) + STEPPER_POSITION_TOLERANCE_M
+
+    for index, encoder_m in enumerate(encoder_positions_m):
+        if not (lower_m <= encoder_m <= upper_m):
+            logging.error(f"Lead screw {index} position error: Position {position_m} m, Setpoint {setpoint_m} m, Encoder {encoder_m} m")
+            return ErrorCode.ERROR_MOTOR_FAILURE
+
+    try:
+        encoder_spread_m: float = max(encoder_positions_m) - min(encoder_positions_m)
+    except Exception as e:
+        # e.g. no encoder readings at all
+        logging.error(f"Lead screw encoder spread could not be computed: {e}")
+        return ErrorCode.ERROR_SENSOR_FAILURE
+
+    if encoder_spread_m > LEAD_SCREW_SYNC_TOLERANCE_M:
+        logging.error(f"Lead screws out of sync: Encoders {encoder_positions_m} m")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+
+    return ErrorCode.NORMAL_OPERATION
     
 # -------- PRIVATE FUNCTIONS --------
 
@@ -316,7 +355,7 @@ def check_sensor_error(sensor_limits: SensorLimits, sensor_readings: tuple) -> E
         
     # Validate position sensors
     # TODO: This is placeholder logic
-    rotary_pos_m: float = (sensor_readings[1] - rotary_zero_position)*2*math.pi*PINION_RADIUS_M
+    rotary_pos_m: float = (sensor_readings[1] - rotary_zero_position) / BLDC_ROTATIONS_PER_M # Plunger travel along the ball screw
     rotary_pos_mm: float = rotary_pos_m*1000
     ToF_pos_mm: int = sensor_readings[2] - ToF_zero_position
     

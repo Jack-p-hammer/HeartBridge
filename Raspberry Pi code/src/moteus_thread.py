@@ -19,10 +19,19 @@ from Enums.control_modes import ControlMode
 
 CONTROLLER_ID: int = 1  # The ID of the moteus-x1 controller on the CAN bus
 COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
-ZEROING_VELOCITY_MPS: float = 0.04  # meters per second, velocity of the plunger during zeroing
-RETRACT_VELOCITY_MPS: float = 2*ZEROING_VELOCITY_MPS  # meters per second, velocity of the plunger during retract
-TORQUE_LIMIT_NM: float = 5.0 # Torque command should never exceed 5 Nm for max 500 N force out of rack
-PINION_RADIUS_M: float = 0.01 # meters, radius of the pinion gear on the motor shaft.
+RETRACT_VELOCITY_MPS: float = 0.08  # meters per second, velocity of the plunger along the ball screw during retract
+
+# --- Ball screw constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
+BALL_SCREW_LEAD_M: float = 0.01  # meters of plunger travel per ball screw revolution
+BLDC_GEAR_RATIO: float = 1.0  # motor revolutions per ball screw revolution, 1:1 gear train
+BLDC_ROTATIONS_PER_M: float = BLDC_GEAR_RATIO / BALL_SCREW_LEAD_M  # motor rotations per meter of plunger travel
+# Ball screw travel only covers compressions plus safety room at either end. Carriage travel is handled by the lead screw steppers (stepper.py)
+BALL_SCREW_TOP_CLEARANCE_M: float = 0.01  # meters, the plunger sits this far below the top of travel when zeroing, so pause/abort can lift off the chest
+BALL_SCREW_TRAVEL_M: float = 0.10  # meters, total usable ball screw travel down from the startup (absolute zero) position
+
+MAX_PLUNGER_FORCE_N: float = 500.0
+# Ideal (100% efficient) ball screw: F = 2*pi*T / lead. Real efficiency only lowers the force, so this limit is conservative
+TORQUE_LIMIT_NM: float = MAX_PLUNGER_FORCE_N * BALL_SCREW_LEAD_M / (2 * math.pi * BLDC_GEAR_RATIO)
 
 # --- data structures ---------------------------------------------------
 
@@ -38,7 +47,7 @@ class MotorTarget:
     kd_scale: float = 1.0
     feedforward_torque: float = 0.0
     velocity_limit: float = 0.0
-    maximum_torque: float = 5.0 # Torque command should never exceed 5 Nm for max 500 N force out of rack
+    maximum_torque: float = TORQUE_LIMIT_NM # Torque command should never exceed MAX_PLUNGER_FORCE_N out of the ball screw
 
 
 @dataclasses.dataclass(frozen=True)
@@ -166,28 +175,37 @@ class MoteusThread:
 
     def set_target(self, control_mode: ControlMode, zero_position: float, abs_zero_position: float, compressionSetpoint: float = 0) -> ErrorCode:
         """Set the target values for the motor controller. The MoteusThread will pick up these values in its next loop and send them to the motor controller.
-        
+        Setpoints come in as meters of ball screw travel and are converted to motor rotations here.
+
+            Args:
+                control_mode (ControlMode): What the plunger should be doing
+                zero_position (float): Zeroed (chest contact) motor position, in rotations
+                abs_zero_position (float): Startup (top of ball screw travel) motor position, in rotations
+                compressionSetpoint (float): Compression depth below zero_position, in meters. Only used for COMPRESSIONS
+
             Returns:
-                ErrorCode: ERROR_MOTOR_FAILURE if the control mode is invalid, NORMAL_OPERATION otherwise
+                ErrorCode: ERROR_MOTOR_FAILURE if the control mode is invalid or the target is outside the ball screw travel, NORMAL_OPERATION otherwise
         """
+        retract_velocity_rps: float = RETRACT_VELOCITY_MPS * BLDC_ROTATIONS_PER_M
         match control_mode:
-            # Positive rotation of motor is down on rack, so down is positive up is negative
+            # Positive rotation of motor is down on ball screw, so down is positive up is negative
             case ControlMode.ZEROING:
-                position: float = math.nan
-                velocity: float = ZEROING_VELOCITY_MPS # meters per second, downwards
-                kp_scale: float = 0.0 # Set kp_scale to 0.0 to disable position control
+                # The steppers lower the whole carriage during zeroing, the plunger just holds just below the top of its travel
+                position: float = abs_zero_position + BALL_SCREW_TOP_CLEARANCE_M * BLDC_ROTATIONS_PER_M # rotations
+                velocity: float = 0.0
+                kp_scale: float = 1.0
                 kd_scale: float = 1.0
                 feedforward_torque: float = 0.0
-                velocity_limit: float = ZEROING_VELOCITY_MPS # meters per second, downwards
+                velocity_limit: float = retract_velocity_rps # rotations per second
                 maximum_torque: float = TORQUE_LIMIT_NM
             case ControlMode.COMPRESSIONS:
-                position: float = compressionSetpoint + zero_position # meters, relative to zeroed position
-                velocity: float = math.nan # meters per second, downwards
+                position: float = zero_position + compressionSetpoint * BLDC_ROTATIONS_PER_M # rotations, relative to zeroed position
+                velocity: float = math.nan
                 kp_scale: float = 1.0
                 kd_scale: float = 1.0
                 feedforward_torque: float = 0.0
                 velocity_limit: float = math.nan
-                maximum_torque: float = TORQUE_LIMIT_NM # Torque command should never exceed 5 Nm for max 500 N force out of rack
+                maximum_torque: float = TORQUE_LIMIT_NM # Torque command should never exceed MAX_PLUNGER_FORCE_N out of the ball screw
             case ControlMode.HOLD_POSITION:
                 position: float = math.nan # TODO: Verify that NaN actually forces the controller to hold position
                 velocity: float = 0.0 
@@ -197,25 +215,30 @@ class MoteusThread:
                 velocity_limit: float = math.nan
                 maximum_torque: float = TORQUE_LIMIT_NM # TODO: Change to 1.5x min torque to hold plunger against gravity
             case ControlMode.PAUSE_RETRACT:
-                position: float = zero_position # meters, retract to zeroed position
-                velocity: float = math.nan # meters per second, upwards
+                position: float = zero_position # rotations, retract to zeroed position
+                velocity: float = math.nan
                 kp_scale: float = 1.0
                 kd_scale: float = 1.0
                 feedforward_torque: float = 0.0
-                velocity_limit: float = RETRACT_VELOCITY_MPS
+                velocity_limit: float = retract_velocity_rps # rotations per second
                 maximum_torque: float = TORQUE_LIMIT_NM
-                query: bool = True
             case ControlMode.ABORT_RETRACT:
-                position: float = abs_zero_position # meters, retract to absolute zero
-                velocity: float = math.nan # meters per second, upwards
+                position: float = abs_zero_position # rotations, retract to top of ball screw travel
+                velocity: float = math.nan
                 kp_scale: float = 1.0
                 kd_scale: float = 1.0
                 feedforward_torque: float = 0.0
-                velocity_limit: float = RETRACT_VELOCITY_MPS
+                velocity_limit: float = retract_velocity_rps # rotations per second
                 maximum_torque: float = TORQUE_LIMIT_NM
-                query: bool = True
             case _:
                 logging.error(f"Invalid control mode: {control_mode}")
+                return ErrorCode.ERROR_MOTOR_FAILURE
+
+        # Never command the plunger past either end of the ball screw
+        if not math.isnan(position):
+            travel_m: float = (position - abs_zero_position) / BLDC_ROTATIONS_PER_M
+            if not (0.0 <= travel_m <= BALL_SCREW_TRAVEL_M):
+                logging.error(f"Ball screw target out of travel: {travel_m} m, limit {BALL_SCREW_TRAVEL_M} m")
                 return ErrorCode.ERROR_MOTOR_FAILURE
         
         # Set the target values for the motor controller. The MoteusThread will pick up these values in its next loop and send them to the motor controller.

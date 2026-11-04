@@ -3669,6 +3669,16 @@
 		)
 		(uuid "4111119a-0923-4f7f-8330-09dda91487d4")
 	)
+	(label "ENC1_A"
+		(at 9.9364 4.6357 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "54813498-bce8-4d8b-868e-8c29d41367ca")
+	)
 	(label "GPIO4"
 		(at 198.12 93.98 180)
 		(effects
@@ -3719,6 +3729,16 @@
 		)
 		(uuid "944c4b0e-1909-4fb1-abac-5ecacc59f896")
 	)
+	(label "ENC1_A"
+		(at 7.3964 2.0957 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "96309e36-4686-4543-bfab-ef9f2860d21f")
+	)
 	(label "GPIO22"
 		(at 198.12 104.14 180)
 		(effects
@@ -3749,17 +3769,6 @@
 			(justify right)
 		)
 		(uuid "05ad13f0-f73d-4b34-8df0-966a5c4b236a")
-	)
-	(hierarchical_label "SPI1_SCLK"
-		(shape output)
-		(at 120.65 110.49 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "0a7080b7-27b6-47a4-a390-655f67e04881")
 	)
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
@@ -3805,8 +3814,8 @@
 		)
 		(uuid "3a7d1641-0105-4061-b9d2-93e24c8dde96")
 	)
-	(hierarchical_label "ENC2_CS"
-		(shape output)
+	(hierarchical_label "ENC2_Z"
+		(shape input)
 		(at 120.65 128.27 180)
 		(effects
 			(font
@@ -3871,18 +3880,18 @@
 		)
 		(uuid "63e50245-72c5-41e1-b1bc-06b4ed8217cc")
 	)
-	(hierarchical_label "SPI1_MISO"
+	(hierarchical_label "ENC2_A"
 		(shape input)
-		(at 120.65 105.41 180)
+		(at 120.65 107.95 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "78f2f5d8-bcbb-4c95-b218-743b74225ce9")
+		(uuid "8365db85-b64c-41e6-b769-b37045f5cd23")
 	)
-	(hierarchical_label "ENC1_FLAG"
+	(hierarchical_label "ENC1_B"
 		(shape input)
 		(at 161.29 105.41 0)
 		(effects
@@ -3903,17 +3912,6 @@
 			(justify left)
 		)
 		(uuid "959f9326-ae9f-433a-b94d-a5435b732c4d")
-	)
-	(hierarchical_label "SPI1_MOSI"
-		(shape output)
-		(at 120.65 107.95 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "a40d5710-d60d-496b-8d28-77bf4d193f30")
 	)
 	(hierarchical_label "Stop_Enable"
 		(shape output)
@@ -3948,6 +3946,17 @@
 		)
 		(uuid "b3c03253-49f2-4cb0-a04e-f4a55c37ae36")
 	)
+	(hierarchical_label "ENC1_A"
+		(shape input)
+		(at 120.65 105.41 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c007915d-525e-490e-b64a-da4a2e6952b9")
+	)
 	(hierarchical_label "CAN Standby"
 		(shape output)
 		(at 161.29 123.19 0)
@@ -3970,7 +3979,7 @@
 		)
 		(uuid "cc51e914-cda6-44a3-a1f3-79a6d33ba115")
 	)
-	(hierarchical_label "ENC2_FLAG"
+	(hierarchical_label "ENC2_B"
 		(shape input)
 		(at 161.29 107.95 0)
 		(effects
@@ -3981,8 +3990,8 @@
 		)
 		(uuid "d202b9c4-9344-416c-8fd6-fac0cde62c3d")
 	)
-	(hierarchical_label "ENC1_CS"
-		(shape output)
+	(hierarchical_label "ENC1_Z"
+		(shape input)
 		(at 120.65 100.33 180)
 		(effects
 			(font

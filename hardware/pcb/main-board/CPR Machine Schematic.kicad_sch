@@ -37,13 +37,13 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 154.94) (xy 196.85 154.94)
+			(xy 194.31 152.4) (xy 196.85 152.4)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0df462e8-1e4a-446a-95c6-d6db5f0ad11e")
+		(uuid "1206d0d2-69d6-4525-8dda-7384a333b09d")
 	)
 	(wire
 		(pts
@@ -117,26 +117,6 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 119.38) (xy 196.85 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3bccd6ca-3609-4eb5-a6d0-ece0fbb2faad")
-	)
-	(wire
-		(pts
-			(xy 194.31 129.54) (xy 196.85 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3e428121-f523-4499-8cc1-9481b2554592")
-	)
-	(wire
-		(pts
 			(xy 166.37 101.6) (xy 168.91 101.6)
 		)
 		(stroke
@@ -144,16 +124,6 @@
 			(type default)
 		)
 		(uuid "3f152135-df7e-4674-b176-895e428c3df4")
-	)
-	(wire
-		(pts
-			(xy 194.31 149.86) (xy 196.85 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5e52e452-55c1-425a-9418-18c5ca7fd9a3")
 	)
 	(wire
 		(pts
@@ -167,16 +137,6 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 147.32) (xy 196.85 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6af0495b-c0d2-42a8-bc7a-f20b4ab3fefe")
-	)
-	(wire
-		(pts
 			(xy 153.67 105.41) (xy 153.67 119.38)
 		)
 		(stroke
@@ -184,16 +144,6 @@
 			(type default)
 		)
 		(uuid "75530953-bb60-47bc-bce0-3fa2e53847de")
-	)
-	(wire
-		(pts
-			(xy 194.31 144.78) (xy 196.85 144.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "78f24e0d-fcfb-490e-8b77-b655bff01de5")
 	)
 	(wire
 		(pts
@@ -247,13 +197,13 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 152.4) (xy 196.85 152.4)
+			(xy 194.31 149.86) (xy 196.85 149.86)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bbd05584-ae47-423c-8bae-31efb6346143")
+		(uuid "bd108d30-695b-468e-943d-23dbe1b28e17")
 	)
 	(wire
 		(pts
@@ -267,16 +217,6 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 104.14) (xy 168.91 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c2c796aa-a222-42c3-abac-24439beeb910")
-	)
-	(wire
-		(pts
 			(xy 166.37 81.28) (xy 196.85 81.28)
 		)
 		(stroke
@@ -284,6 +224,16 @@
 			(type default)
 		)
 		(uuid "c34f54c5-1c6c-4bb3-8bf6-b3f71f858bcf")
+	)
+	(wire
+		(pts
+			(xy 194.31 147.32) (xy 196.85 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d96d671b-828c-4b0c-acbd-99b860e16cd7")
 	)
 	(wire
 		(pts
@@ -335,7 +285,17 @@
 		)
 		(uuid "f87ce5c9-560b-4e95-a6a8-30ab4eb9565f")
 	)
-	(label "SPI1_MISO"
+	(label "ENC1_A"
+		(at 168.91 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "17b3542d-b8cf-42b9-90d5-dfc52dd03fe1")
+	)
+	(label "ENC2_B"
 		(at 194.31 149.86 180)
 		(effects
 			(font
@@ -343,9 +303,19 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "311f840d-f20b-4b6b-9dee-d5327e05f531")
+		(uuid "1a1f0406-398a-4249-a1f5-2ffce3fa971d")
 	)
-	(label "ENC1_CS"
+	(label "ENC2_B"
+		(at 168.91 99.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3c57c74c-fb26-4000-9898-297de624d1a4")
+	)
+	(label "ENC1_Z"
 		(at 194.31 127 180)
 		(effects
 			(font
@@ -355,47 +325,17 @@
 		)
 		(uuid "41f51a3a-c442-4167-992b-0a3e0ddb8608")
 	)
-	(label "ENC1_FLAG"
-		(at 194.31 129.54 180)
+	(label "ENC2_Z"
+		(at 194.31 152.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "441a6fcb-528e-4c1a-a828-5bb261ad8a4b")
+		(uuid "427445eb-7f6e-43fe-b788-3ba96c15f517")
 	)
-	(label "ENC1_CS"
-		(at 168.91 96.52 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "54eb4850-acf8-4e5f-8eb7-1cd25bb17692")
-	)
-	(label "SPI1_SCLK"
-		(at 194.31 144.78 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "62509ff0-056a-43d2-bab5-e0daf89ffd3d")
-	)
-	(label "SPI1_MISO"
-		(at 168.91 93.98 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6634c545-167e-48bc-93d5-d51eb7868527")
-	)
-	(label "SPI1_MOSI"
+	(label "ENC2_A"
 		(at 194.31 147.32 180)
 		(effects
 			(font
@@ -403,49 +343,19 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "6acd7d80-5c06-49ba-b351-60a2d6382d43")
+		(uuid "7eb99dd3-ee67-42bb-b317-b7c6c7bc453f")
 	)
-	(label "SPI1_MOSI"
-		(at 168.91 91.44 0)
+	(label "ENC1_Z"
+		(at 168.91 93.98 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "6c85223a-1967-4d80-9cff-2ddb49256dfc")
+		(uuid "8b71406a-76d4-400c-a32c-84d571289a96")
 	)
-	(label "ENC2_CS"
-		(at 168.91 101.6 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "75598b11-2942-4c43-a238-071ea835e785")
-	)
-	(label "ENC1_FLAG"
-		(at 168.91 99.06 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7d114fbd-4ac4-4773-8f78-0d77e5ffd7dd")
-	)
-	(label "SPI1_SCLK"
-		(at 194.31 119.38 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9682a530-60e8-42c2-86b0-dfad0ca38f67")
-	)
-	(label "SPI1_MISO"
+	(label "ENC1_B"
 		(at 194.31 124.46 180)
 		(effects
 			(font
@@ -455,47 +365,37 @@
 		)
 		(uuid "9e58272c-f1b2-4e4d-bcda-c9ea41fe3517")
 	)
-	(label "ENC2_FLAG"
-		(at 194.31 154.94 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a2cf85ca-8fd8-4210-9ef3-a47feb201ccf")
-	)
-	(label "SPI1_SCLK"
-		(at 168.91 88.9 0)
+	(label "ENC2_Z"
+		(at 168.91 101.6 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "a627c506-f1b0-414f-a926-bbc447602016")
+		(uuid "a197a114-6b25-4bb3-8b76-60296d1f9900")
 	)
-	(label "ENC2_FLAG"
-		(at 168.91 104.14 0)
+	(label "ENC1_B"
+		(at 168.91 91.44 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "a670433c-35e7-43f0-a565-ab39ec1ea6d6")
+		(uuid "b6366468-6fb8-4f3a-9322-1f76c463d4b0")
 	)
-	(label "ENC2_CS"
-		(at 194.31 152.4 180)
+	(label "ENC2_A"
+		(at 168.91 96.52 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
-		(uuid "e87df1f7-e199-475b-a483-35b0c83258c9")
+		(uuid "ba8377cd-b5d3-4c98-bb78-be58d43842ce")
 	)
-	(label "SPI1_MOSI"
+	(label "ENC1_A"
 		(at 194.31 121.92 180)
 		(effects
 			(font
@@ -543,39 +443,9 @@
 				(justify left top)
 			)
 		)
-		(pin "SPI_SCLK" input
-			(at 196.85 119.38 180)
-			(uuid "446a3e80-ec18-4aee-b8b3-39ef002acbe7")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "SPI_MOSI" input
-			(at 196.85 121.92 180)
-			(uuid "6c6a9f89-630d-44d3-bba0-a1b429c0b91b")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "SPI_MISO" output
-			(at 196.85 124.46 180)
-			(uuid "f4ec3e6b-7a4a-479c-b17b-57e222eaf986")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "ENC_CS" input
+		(pin "ENC_Z" output
 			(at 196.85 127 180)
-			(uuid "1bf7ddba-4dbf-44c3-ad0b-d0cd42e7ef25")
+			(uuid "6cee4804-bd5c-4672-999c-d45ed1120f5b")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -583,9 +453,19 @@
 				(justify left)
 			)
 		)
-		(pin "ENC_FLAG" output
-			(at 196.85 129.54 180)
-			(uuid "ed683f1e-302c-413b-b6bf-478dbcc4a039")
+		(pin "ENC_B" output
+			(at 196.85 124.46 180)
+			(uuid "84528b5a-291e-42c9-975a-8f46b8d2311b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENC_A" output
+			(at 196.85 121.92 180)
+			(uuid "059a15d7-133a-488e-933a-5d0bbefc5a15")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1027,59 +907,9 @@
 				(justify left)
 			)
 		)
-		(pin "SPI1_SCLK" output
-			(at 166.37 88.9 0)
-			(uuid "01c1b216-4e36-43fd-bd18-0c3cf3f91b38")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "SPI1_MOSI" output
-			(at 166.37 91.44 0)
-			(uuid "acdbeeac-d309-4242-8a91-d8eb1c39d46c")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "SPI1_MISO" input
-			(at 166.37 93.98 0)
-			(uuid "3847300c-03b2-4a2d-89ee-34aa7a8c3ae2")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "ENC1_CS" output
-			(at 166.37 96.52 0)
-			(uuid "00066292-7e8f-4e23-812c-dcca3d69b7a3")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "ENC1_FLAG" input
-			(at 166.37 99.06 0)
-			(uuid "b3b5a2de-8771-4840-b51e-921aebca677c")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "ENC2_CS" output
+		(pin "ENC2_Z" input
 			(at 166.37 101.6 0)
-			(uuid "e46bf31b-c900-48eb-9d7b-1aab459cee40")
+			(uuid "3c4cd1e7-afdd-46ac-b1d5-a3b998798683")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1087,9 +917,49 @@
 				(justify right)
 			)
 		)
-		(pin "ENC2_FLAG" input
-			(at 166.37 104.14 0)
-			(uuid "786fb99c-bb3a-437d-9768-d3da04082d4c")
+		(pin "ENC1_B" input
+			(at 166.37 91.44 0)
+			(uuid "9e911881-72cc-47f6-a978-bb9116a985b5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENC2_B" input
+			(at 166.37 99.06 0)
+			(uuid "4a271536-8df1-4008-8cf2-1a4710591dce")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENC1_Z" input
+			(at 166.37 93.98 0)
+			(uuid "4543cdab-36f2-4ca5-b67e-793cfc1f879e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENC1_A" input
+			(at 166.37 88.9 0)
+			(uuid "075e253a-e908-4266-9456-91f230df9954")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENC2_A" input
+			(at 166.37 96.52 0)
+			(uuid "19665283-c0ad-4aef-b78b-4ba8eac679be")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1101,102 +971,6 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b"
 					(page "7")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 196.85 142.24)
-		(size 38.1 17.78)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "a63c88ce-01ab-4367-a328-6ec63a60f30b")
-		(property "Sheetname" "Encoder 2"
-			(at 196.85 141.5284 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "encoder.kicad_sch"
-			(at 196.85 160.6046 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "SPI_SCLK" input
-			(at 196.85 144.78 180)
-			(uuid "846e4e0f-007c-4198-ab13-0bdbe744b78f")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "SPI_MOSI" input
-			(at 196.85 147.32 180)
-			(uuid "5b67152b-0b35-4bbd-8c7f-37c87b2136cf")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "SPI_MISO" output
-			(at 196.85 149.86 180)
-			(uuid "e5103e9b-38f6-4b18-82bd-14f05bfd5a27")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "ENC_CS" input
-			(at 196.85 152.4 180)
-			(uuid "a9e075df-265c-4e39-8cf9-cffa6036e504")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "ENC_FLAG" output
-			(at 196.85 154.94 180)
-			(uuid "82f65c79-48ce-4374-8b86-120f0b873a5a")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b"
-					(page "4")
 				)
 			)
 		)
@@ -1313,6 +1087,82 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b"
 					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 196.85 142.24)
+		(size 38.1 17.78)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "f4f0e739-486f-42d2-b645-1e2e157e6ded")
+		(property "Sheetname" "Encoder 2"
+			(at 196.85 141.5284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "encoder.kicad_sch"
+			(at 196.85 160.6046 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "ENC_Z" output
+			(at 196.85 152.4 180)
+			(uuid "ad0675b7-4f41-494f-bfb3-96565eabf450")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENC_B" output
+			(at 196.85 149.86 180)
+			(uuid "a2425fad-be6e-4522-acd9-80b4894460c9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENC_A" output
+			(at 196.85 147.32 180)
+			(uuid "076a9092-6b6c-45cd-be8b-de4887b4265c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b"
+					(page "4")
 				)
 			)
 		)

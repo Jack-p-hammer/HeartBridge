@@ -901,7 +901,7 @@
         "uuid": "8991fc77-975f-4978-a089-6b2a5e33f59b"
       }
     ],
-    "used_designators": "#PWR9,#PWR34-38,#PWR62,#PWR77-83,#PWR87-163,C12-34,D1-15,J2,J12-19,R24-45,U2,U6-10,Y1",
+    "used_designators": "#PWR9,#PWR11,#PWR19-20,#PWR34-38,#PWR62,#PWR77-84,#PWR87-177,C12-34,D1-15,J2,J12-19,R24-45,U2,U6-10,Y1",
     "variants": []
   },
   "sheets": [
@@ -918,7 +918,7 @@
       "Encoder 1"
     ],
     [
-      "a63c88ce-01ab-4367-a328-6ec63a60f30b",
+      "f4f0e739-486f-42d2-b645-1e2e157e6ded",
       "Encoder 2"
     ],
     [

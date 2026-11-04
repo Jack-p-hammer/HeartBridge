@@ -108,6 +108,19 @@ def test_init_sensors_fails_when_tof_sensor_unreadable(hardware, caplog):
     assert "ToF absolute zeroing failed" in caplog.text
 
 
+def test_init_sensors_stores_tof_sensor_for_reads(hardware):
+    """Regression test: init_sensors() must construct the sensor as adafruit_vl53l0x.VL53L0X (the fake
+    library only has that exact name) and store it in the `_vl53` global that read_ToF_sensor() reads.
+    Both were once misspelled (`VL53l0X`, `_vl61`), which crashed init and every later ToF read."""
+    hardware.tof.range = 42
+    import sensing
+
+    assert init_sensing(sensing, _fake_controller(), hardware) == ErrorCode.NORMAL_OPERATION
+    assert getattr(sensing, "_vl53") is hardware.tof
+    assert sensing.ToF_absolute_zero_position == 42
+    assert sensing.read_ToF_sensor() == 42
+
+
 def test_init_sensors_fails_when_force_sensor_unreadable(hardware, caplog):
     """The force sensor zero read raising (ADC on the I2C bus) is an init failure, not an exception."""
     hardware.i2c.raise_on_read = TimeoutError("i2c bus timeout")

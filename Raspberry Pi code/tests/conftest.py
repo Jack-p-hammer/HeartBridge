@@ -296,8 +296,35 @@ class FakePygameSurface:
     def get_size(self):
         return self._size
 
-    def blit(self, source, dest):
+    def get_width(self):
+        return self._size[0]
+
+    def get_height(self):
+        return self._size[1]
+
+    def blit(self, source, dest, area=None):
         pass
+
+    def get_rect(self, **kwargs):
+        return FakePygameRect()
+
+
+class FakePygameRect:
+    """Stand-in for the pygame.Rect the CPR timer is drawn in."""
+
+    def union(self, other):
+        return self
+
+
+class FakePygameFont:
+    """Stand-in for pygame.font.Font. Records every string rendered in the harness's `rendered` list."""
+
+    def __init__(self, harness: "PygameHarness"):
+        self._harness = harness
+
+    def render(self, text, antialias, color):
+        self._harness.rendered.append(text)
+        return FakePygameSurface()
 
 
 class FakePygameSound:
@@ -350,6 +377,8 @@ class PygameHarness:
         self.ticks = 0
         self.sound_length_sec = 1.0
         self.sound_loads: list = []  # paths actually passed to mixer.Sound()
+        self.rendered: list = []  # strings rendered with pygame.font (the CPR timer)
+        self.display_updates: int = 0  # partial display.update() calls (the CPR timer)
 
         self.init_error: Optional[Exception] = None
         self.display_error: Optional[Exception] = None
@@ -415,8 +444,8 @@ def _make_vl53l0x_module(harness: HardwareHarness) -> types.ModuleType:
             raise harness.tof_connect_error
         return harness.tof
 
-    # sensing.py constructs the sensor as `VL53l0X` (lowercase L), so expose both spellings
-    return _fake_module("adafruit_vl53l0x", VL53L0X=VL53L0X, VL53l0X=VL53L0X)
+    # Only the real library's class name, so a misspelled constructor in sensing.py fails here too
+    return _fake_module("adafruit_vl53l0x", VL53L0X=VL53L0X)
 
 
 def _make_bno08x_modules(harness: HardwareHarness) -> tuple[types.ModuleType, types.ModuleType]:
@@ -480,9 +509,14 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
     def display_flip():
         pass
 
+    def display_update(rects=None):
+        pg.display_updates += 1
+
     display_ns = types.SimpleNamespace(
         Info=display_info, set_mode=display_set_mode, set_caption=display_set_caption, flip=display_flip,
+        update=display_update,
     )
+    font_ns = types.SimpleNamespace(Font=lambda name, size: FakePygameFont(pg))
 
     def image_load(path):
         if pg.image_load_error is not None:
@@ -506,6 +540,7 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
         init=pg_init,
         mixer=mixer_ns,
         display=display_ns,
+        font=font_ns,
         image=image_ns,
         transform=transform_ns,
         event=event_ns,
@@ -571,18 +606,15 @@ def hardware():
 
 
 def init_sensing(sensing, motor_controller, harness: HardwareHarness):
-    """Call sensing.init_sensors() the way main.py does, with the ToF sensor pre-wired.
+    """Call sensing.init_sensors() the way main.py does, on the harness's fake hardware.
 
-    sensing.init_sensors() stores the ToF sensor it constructs in a local
-    (`_vl61`), while read_ToF_sensor() reads the module global `_vl53`, which
-    nothing in sensing.py assigns. Seed that global with the fake ToF sensor
-    first so init_sensors() (which reads the ToF to capture its absolute zero)
-    and every later ToF read see the harness's sensor.
+    The ToF sensor is not pre-wired: init_sensors() must construct it and store it in
+    the `_vl53` global that read_ToF_sensor() reads, so these tests catch that wiring
+    breaking (see test_init_sensors_stores_tof_sensor_for_reads).
 
-    Use this instead of calling sensing.init_sensors() directly, e.g.:
+    e.g.:
         init_sensing(sensing, actuation.get_motor_controller(), hardware)
     """
-    setattr(sensing, "_vl53", harness.tof)
     return sensing.init_sensors(motor_controller, harness.pi)
 
 
@@ -667,6 +699,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
         pump_events=lambda: ErrorCode.NORMAL_OPERATION,
         set_image_audio=lambda image, prompt: ErrorCode.NORMAL_OPERATION,
         set_image=lambda image: ErrorCode.NORMAL_OPERATION,
+        draw_timer=lambda elapsed_sec: ErrorCode.NORMAL_OPERATION,
         enable_next_button=lambda: ErrorCode.NORMAL_OPERATION,
         disable_next_button=lambda: ErrorCode.NORMAL_OPERATION,
         enable_pause_button=lambda: ErrorCode.NORMAL_OPERATION,

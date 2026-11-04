@@ -23,7 +23,7 @@ from Enums.control_modes import ControlMode
 
 # Global variables for shared sensor instances
 _pi: pigpio.pi
-_vl61: adafruit_vl53l0x.VL53L0X
+_vl53: adafruit_vl53l0x.VL53L0X
 _bno: BNO08X_I2C
 _i2c: busio.I2C
 _motor_controller: MoteusThread
@@ -106,9 +106,9 @@ def init_sensors(motor_controller: MoteusThread, pi: pigpio.pi) -> ErrorCode:
 
     # VL53L0X time-of-flight sensor
     try:
-        _vl61 = adafruit_vl53l0x.VL53l0X(_i2c)
+        _vl53 = adafruit_vl53l0x.VL53L0X(_i2c)
     except Exception as e:
-        logging.error(f"VL53l0X initialization failed: {e}")
+        logging.error(f"VL53L0X initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
 
     # BNO085 IMU TODO: Check if this is the one we have

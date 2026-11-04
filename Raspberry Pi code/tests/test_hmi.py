@@ -499,3 +499,31 @@ def test_audio_finished_before_any_prompt_has_ever_played(hardware):
     HMI.init_HMI(hardware.pi)
 
     assert HMI.audio_finished() is True
+
+
+# -------------------- draw_timer --------------------
+
+def test_draw_timer_formats_elapsed_time_and_updates_only_its_area(hardware):
+    """The CPR timer shows MM:SS, switching to H:MM:SS past an hour, and only pushes its own
+    corner of the screen to the display instead of flipping the whole image."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    HMI.set_image(HMI.Image.COMPRESSION)
+
+    for elapsed in (0, 7.9, 754, 3900):
+        assert HMI.draw_timer(elapsed) == ErrorCode.NORMAL_OPERATION
+
+    assert hardware.pygame.rendered == ["00:00", "00:07", "12:34", "1:05:00"]
+    assert hardware.pygame.display_updates == 4
+
+
+def test_draw_timer_failure_reports_pygame_error(hardware, monkeypatch):
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    HMI.set_image(HMI.Image.COMPRESSION)
+
+    def broken_update(rect):
+        raise RuntimeError("display gone")
+    monkeypatch.setattr(HMI.pygame.display, "update", broken_update)
+
+    assert HMI.draw_timer(1) == ErrorCode.ERROR_PYGAME_FAILURE

@@ -73,6 +73,16 @@ def main():
     prev_state = None
     error = ErrorCode.NORMAL_OPERATION
 
+    # Total time spent in COMPRESSION across all runs. Pausing (or a kneel failure) freezes it and
+    # resuming carries on from the same total, so it reads total CPR time.
+    cpr_elapsed_sec: float = 0.0
+    compression_start: float | None = None  # time.monotonic() when the current run of compressions started, None while not compressing
+    shown_sec: int | None = None  # Whole seconds currently drawn on the timer, None to force a redraw
+
+    # Unfold animation position, reset when UNFOLD_CUT_CLOTHES is entered
+    frame_idx: int = 0
+    last_frame_time: float = 0.0  # time.monotonic() when the current frame was shown
+
     while error not in FATAL_ERRORS:
         # Record the start time of each loop iteration to maintain a consistent tick rate
         loop_start = time.monotonic()
@@ -107,6 +117,8 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = actuation.init_motor()
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    error = actuation.init_steppers(HMI.get_pi())
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.init_HMI(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = sensing.init_sensors(actuation.get_motor_controller(), HMI.get_pi())
@@ -123,7 +135,7 @@ def main():
                 error, next_pressed = HMI.next_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 if next_pressed:
-                    state = CPRState.ALIGNMENT
+                    state = CPRState.UNFOLD_CUT_CLOTHES
 
             case(CPRState.UNFOLD_CUT_CLOTHES):
                 # Setup
@@ -226,14 +238,33 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.set_image_audio(HMI.Image.COMPRESSION, HMI.AudioPrompt.COMPRESSION)
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    # Start of this run of compressions; the timer is drawn on the first loop tick
+                    compression_start = time.monotonic()
+                    shown_sec = None
 
                 # Loop
                 error = actuation.compressions()
                 if error != ErrorCode.NORMAL_OPERATION: continue
 
+                # Setup always sets this before the loop runs; this only narrows the type for the timer math below
+                if compression_start is None:
+                    compression_start = time.monotonic()
+
+                # Only redraw when the displayed second changes, not every tick
+                run_sec = time.monotonic() - compression_start
+                total_sec = int(cpr_elapsed_sec + run_sec)
+                if total_sec != shown_sec:
+                    error = HMI.draw_timer(total_sec)
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    shown_sec = total_sec
+
                 error, pause_pressed = HMI.pause_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 if pause_pressed:
+                    # Bank this run into the total so the timer resumes from here
+                    cpr_elapsed_sec += time.monotonic() - compression_start
+                    compression_start = None
+                    logging.info(f"CPR paused at {cpr_elapsed_sec:.1f} s total")
                     state = CPRState.PAUSE
 
             case(CPRState.PAUSE):
@@ -265,6 +296,12 @@ def main():
                 # Setup
                 if state != prev_state:
                     logging.warning(f"Kneel failure tripped: {error}")
+                    # Bank the interrupted run into the CPR timer, same as a pause. Skipped if compressions weren't running
+                    if compression_start is not None:
+                        cpr_elapsed_sec += time.monotonic() - compression_start
+                        compression_start = None
+                        logging.info(f"CPR stopped by kneel failure at {cpr_elapsed_sec:.1f} s total")
+
                     error = actuation.pause_compressions()
                     if error not in (ErrorCode.NORMAL_OPERATION, ErrorCode.ERROR_IMU_KNEEL_FAILURE): continue
 
@@ -295,6 +332,12 @@ def main():
                     error = HMI.set_image_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     logging.error(f"Abort state tripped: {error}")
+
+                # Loop
+                # The steppers only move while being updated, so keep retracting the carriage every tick
+                # No continue on failure: the error is still routed back to ABORT next tick, but prev_state is
+                # recorded first so ABORT's setup doesn't re-run, and the tick still sleeps
+                error = actuation.retract_carriage()
                 # Halt — only a power cycle exits this state
 
             case(_):

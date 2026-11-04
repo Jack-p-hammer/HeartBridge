@@ -283,6 +283,28 @@ def test_main_abort_state_is_terminal(monkeypatch):
     assert abort_entries == 1
 
 
+def test_main_abort_keeps_retracting_after_retract_failure(monkeypatch):
+    """ABORT's loop feeds retract_carriage() failures into the error system, which
+    routes back to ABORT without re-running its setup, and keeps retracting."""
+    modules = install_fake_main_modules(monkeypatch)
+    setattr(modules["actuation"], "init_motor", lambda: ErrorCode.ERROR_INIT_FAILURE)
+    retract_failures = _fail_n_times(3, ErrorCode.ERROR_MOTOR_FAILURE)
+    retract_calls = {"count": 0}
+
+    def retract():
+        retract_calls["count"] += 1
+        return retract_failures()
+
+    setattr(modules["actuation"], "retract_carriage", retract)
+    set_image_audio = _cascade_fakes(modules)
+
+    import main
+    _run_main_for_ticks(monkeypatch, main, max_ticks=10)
+
+    assert set_image_audio.calls.count((main.HMI.Image.ABORT, main.HMI.AudioPrompt.ABORT)) == 1
+    assert retract_calls["count"] > 3
+
+
 def test_main_advances_from_startup_when_next_pressed(monkeypatch):
     """With the Next button held down, each state's setup should run once and advance."""
     modules = install_fake_main_modules(monkeypatch)
@@ -631,3 +653,100 @@ def test_main_flow_sensor_failure_during_pause_routes_to_abort(monkeypatch):
     _run_main_for_ticks(monkeypatch, main, max_ticks=15)
 
     assert (main.HMI.Image.ABORT, main.HMI.AudioPrompt.ABORT) in set_image_audio.calls
+
+
+# -------------------- CPR timer --------------------
+
+def test_main_cpr_timer_holds_while_paused_and_resumes_from_total(monkeypatch):
+    """The CPR timer counts only while in COMPRESSION: pausing banks the time so far, and the
+    next run of compressions picks up from that total instead of restarting at zero."""
+    modules = install_fake_main_modules(monkeypatch)
+    set_image_audio = _cascade_fakes(modules, pause_pressed=False)
+
+    # Pause is pressed on every 3rd read, so each run of compressions lasts 3 ticks
+    pause_reads = {"count": 0}
+    def pause_button_pressed():
+        pause_reads["count"] += 1
+        return ErrorCode.NORMAL_OPERATION, pause_reads["count"] % 3 == 0
+    setattr(modules["HMI"], "pause_button_pressed", pause_button_pressed)
+
+    # Log timer draws, and mark where each run of compressions starts
+    events = []
+    def draw_timer(elapsed_sec):
+        events.append(elapsed_sec)
+        return ErrorCode.NORMAL_OPERATION
+    setattr(modules["HMI"], "draw_timer", draw_timer)
+    def record_image(image, prompt):
+        if image == modules["HMI"].Image.COMPRESSION:
+            events.append("run")
+        return set_image_audio(image, prompt)
+    setattr(modules["HMI"], "set_image_audio", record_image)
+
+    import main
+    # Fake clock: each tick takes exactly 1 s, so a 3-tick run of compressions banks 2 s
+    # (the time from its first tick to the tick Pause is read on)
+    clock = {"t": 0.0}
+    monkeypatch.setattr(main.time, "monotonic", lambda: clock["t"])
+    ticks = {"count": 0}
+    def fake_sleep(seconds):
+        clock["t"] += 1.0
+        ticks["count"] += 1
+        if ticks["count"] >= 30:
+            raise _StopMainLoop()
+    monkeypatch.setattr(main.time, "sleep", fake_sleep)
+    try:
+        main.main()
+    except _StopMainLoop:
+        pass
+
+    # Paused time (PAUSE and COMPRESSION_PREP ticks) never counts
+    assert events[:9] == ["run", 0, 1, 2, "run", 2, 3, 4, "run"]
+
+
+def test_main_cpr_timer_holds_through_kneel_failure_and_resumes_from_total(monkeypatch):
+    """A kneel failure stops the CPR timer the same way a pause does: the interrupted run is
+    banked, and once compressions restart (after re-alignment and zeroing) the timer
+    carries on from that total."""
+    modules = install_fake_main_modules(monkeypatch)
+    set_image_audio = _cascade_fakes(modules, pause_pressed=False)
+
+    # Every 3rd compressions() call trips a kneel failure, so each run of compressions lasts 3 ticks
+    compression_calls = {"count": 0}
+    def compressions():
+        compression_calls["count"] += 1
+        if compression_calls["count"] % 3 == 0:
+            return ErrorCode.ERROR_IMU_KNEEL_FAILURE
+        return ErrorCode.NORMAL_OPERATION
+    setattr(modules["actuation"], "compressions", compressions)
+
+    events = []
+    def draw_timer(elapsed_sec):
+        events.append(elapsed_sec)
+        return ErrorCode.NORMAL_OPERATION
+    setattr(modules["HMI"], "draw_timer", draw_timer)
+    def record_image(image, prompt):
+        if image in (modules["HMI"].Image.COMPRESSION, modules["HMI"].Image.KNEEL_FAILURE):
+            events.append(image)
+        return set_image_audio(image, prompt)
+    setattr(modules["HMI"], "set_image_audio", record_image)
+
+    import main
+    # Fake clock: each tick takes exactly 1 s. The tick a kneel failure is returned on skips the
+    # tick's sleep, so KNEEL_FAILURE's setup runs at the same time and banks 2 s per run
+    clock = {"t": 0.0}
+    monkeypatch.setattr(main.time, "monotonic", lambda: clock["t"])
+    ticks = {"count": 0}
+    def fake_sleep(seconds):
+        clock["t"] += 1.0
+        ticks["count"] += 1
+        if ticks["count"] >= 40:
+            raise _StopMainLoop()
+    monkeypatch.setattr(main.time, "sleep", fake_sleep)
+    try:
+        main.main()
+    except _StopMainLoop:
+        pass
+
+    run, kneel = main.HMI.Image.COMPRESSION, main.HMI.Image.KNEEL_FAILURE
+    # Time spent in KNEEL_FAILURE and back through alignment/zeroing never counts
+    assert events[:8] == [run, 0, 1, kneel, run, 2, 3, kneel]

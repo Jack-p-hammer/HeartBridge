@@ -59,7 +59,7 @@ def _no_main_log_files(monkeypatch):
 # Modules from src/ that need to be re-imported fresh once fake hardware/main
 # modules are (re)installed, so they pick up the fakes instead of any
 # previously cached real/fake versions.
-_APP_MODULES = ["sensing", "actuation", "moteus_thread", "HMI", "main"]
+_APP_MODULES = ["sensing", "actuation", "moteus_thread", "stepper", "HMI", "main"]
 
 # Shared keys used by both the fake moteus.Register namespace and the values
 # dict FakeMoteusController hands back, so `result.values[moteus.Register.X]`
@@ -97,6 +97,7 @@ def _fake_module(name: str, **attrs) -> types.ModuleType:
 # cycle outside its valid range of 0 to PWM_REALRANGE (1_000_000).
 PI_BAD_HPWM_DUTY = -97
 PWM_REALRANGE = 1_000_000
+PI_NO_TX_WAVE = 9998  # wave_tx_at() return value when no wave is playing
 
 
 class FakePi:
@@ -148,6 +149,32 @@ class FakePi:
         if not (0 <= duty_cycle <= PWM_REALRANGE):
             return PI_BAD_HPWM_DUTY
         return 0
+
+    # Waveforms (stepper.py). Every sent wave finishes instantly: wave_tx_at()
+    # reports nothing playing, so the next update() counts all queued steps.
+    def wave_clear(self):
+        self.pending_pulses = []
+
+    def wave_add_generic(self, pulses):
+        self.pending_pulses = getattr(self, "pending_pulses", []) + list(pulses)
+
+    def wave_create(self):
+        self.waves = getattr(self, "waves", {})
+        self.next_wave_id = getattr(self, "next_wave_id", 0)
+        wave_id = self.next_wave_id
+        self.waves[wave_id] = self.pending_pulses
+        self.pending_pulses = []
+        self.next_wave_id += 1
+        return wave_id
+
+    def wave_send_using_mode(self, wave_id, mode):
+        self.sent_waves = getattr(self, "sent_waves", []) + [wave_id]
+
+    def wave_tx_at(self):
+        return PI_NO_TX_WAVE
+
+    def wave_delete(self, wave_id):
+        getattr(self, "waves", {}).pop(wave_id, None)
 
 
 class FakeI2C:
@@ -269,8 +296,35 @@ class FakePygameSurface:
     def get_size(self):
         return self._size
 
-    def blit(self, source, dest):
+    def get_width(self):
+        return self._size[0]
+
+    def get_height(self):
+        return self._size[1]
+
+    def blit(self, source, dest, area=None):
         pass
+
+    def get_rect(self, **kwargs):
+        return FakePygameRect()
+
+
+class FakePygameRect:
+    """Stand-in for the pygame.Rect the CPR timer is drawn in."""
+
+    def union(self, other):
+        return self
+
+
+class FakePygameFont:
+    """Stand-in for pygame.font.Font. Records every string rendered in the harness's `rendered` list."""
+
+    def __init__(self, harness: "PygameHarness"):
+        self._harness = harness
+
+    def render(self, text, antialias, color):
+        self._harness.rendered.append(text)
+        return FakePygameSurface()
 
 
 class FakePygameSound:
@@ -323,6 +377,8 @@ class PygameHarness:
         self.ticks = 0
         self.sound_length_sec = 1.0
         self.sound_loads: list = []  # paths actually passed to mixer.Sound()
+        self.rendered: list = []  # strings rendered with pygame.font (the CPR timer)
+        self.display_updates: int = 0  # partial display.update() calls (the CPR timer)
 
         self.init_error: Optional[Exception] = None
         self.display_error: Optional[Exception] = None
@@ -363,6 +419,8 @@ def _make_pigpio_module(harness: HardwareHarness) -> types.ModuleType:
         OUTPUT=1,
         PUD_UP=2,
         PUD_DOWN=3,
+        WAVE_MODE_ONE_SHOT_SYNC=2,
+        pulse=lambda gpio_on, gpio_off, delay: (gpio_on, gpio_off, delay),
         pi=lambda: harness.pi,
     )
 
@@ -386,6 +444,7 @@ def _make_vl53l0x_module(harness: HardwareHarness) -> types.ModuleType:
             raise harness.tof_connect_error
         return harness.tof
 
+    # Only the real library's class name, so a misspelled constructor in sensing.py fails here too
     return _fake_module("adafruit_vl53l0x", VL53L0X=VL53L0X)
 
 
@@ -450,9 +509,14 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
     def display_flip():
         pass
 
+    def display_update(rects=None):
+        pg.display_updates += 1
+
     display_ns = types.SimpleNamespace(
         Info=display_info, set_mode=display_set_mode, set_caption=display_set_caption, flip=display_flip,
+        update=display_update,
     )
+    font_ns = types.SimpleNamespace(Font=lambda name, size: FakePygameFont(pg))
 
     def image_load(path):
         if pg.image_load_error is not None:
@@ -476,6 +540,7 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
         init=pg_init,
         mixer=mixer_ns,
         display=display_ns,
+        font=font_ns,
         image=image_ns,
         transform=transform_ns,
         event=event_ns,
@@ -540,6 +605,19 @@ def hardware():
     _clear_app_modules()
 
 
+def init_sensing(sensing, motor_controller, harness: HardwareHarness):
+    """Call sensing.init_sensors() the way main.py does, on the harness's fake hardware.
+
+    The ToF sensor is not pre-wired: init_sensors() must construct it and store it in
+    the `_vl53` global that read_ToF_sensor() reads, so these tests catch that wiring
+    breaking (see test_init_sensors_stores_tof_sensor_for_reads).
+
+    e.g.:
+        init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    """
+    return sensing.init_sensors(motor_controller, harness.pi)
+
+
 # -------------------- Whole-module fakes for main.py tests --------------------
 
 def install_fake_main_modules(monkeypatch) -> dict:
@@ -572,6 +650,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
     actuation_mod = _fake_module(
         "actuation",
         init_motor=lambda: ErrorCode.NORMAL_OPERATION,
+        init_steppers=lambda pi: ErrorCode.NORMAL_OPERATION,
         get_motor_controller=lambda: None,
         init_zeroing=lambda: ErrorCode.NORMAL_OPERATION,
         zeroing=lambda: ErrorCode.NORMAL_OPERATION,
@@ -579,6 +658,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
         compressions=lambda: ErrorCode.NORMAL_OPERATION,
         pause_compressions=lambda: ErrorCode.NORMAL_OPERATION,
         abort_compressions=lambda: ErrorCode.NORMAL_OPERATION,
+        retract_carriage=lambda: ErrorCode.NORMAL_OPERATION,
     )
     monkeypatch.setitem(sys.modules, "actuation", actuation_mod)
 
@@ -619,6 +699,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
         pump_events=lambda: ErrorCode.NORMAL_OPERATION,
         set_image_audio=lambda image, prompt: ErrorCode.NORMAL_OPERATION,
         set_image=lambda image: ErrorCode.NORMAL_OPERATION,
+        draw_timer=lambda elapsed_sec: ErrorCode.NORMAL_OPERATION,
         enable_next_button=lambda: ErrorCode.NORMAL_OPERATION,
         disable_next_button=lambda: ErrorCode.NORMAL_OPERATION,
         enable_pause_button=lambda: ErrorCode.NORMAL_OPERATION,

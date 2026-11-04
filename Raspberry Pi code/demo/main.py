@@ -1,66 +1,40 @@
-# main.py
+# main.py (demo)
 
-# UI-only demo of the CPR state machine. Shows the same images, plays the same
-# audio prompts, uses the same buttons and runs the alignment lasers as
-# src/main.py, but all sensing and actuation (motor, sensors, battery check)
-# has been removed. Button presses only advance to the next image and audio
-# prompt, plus turning the lasers on/off around the alignment step.
+# Runs the real state machine in src/main.py, with demo/sensing.py in place of src/sensing.py.
+# Every other module (actuation, stepper, moteus_thread, HMI, Enums) is imported from src/ unaltered,
+# so any bug found with the demo is a bug in the main machine.
 
 # External imports
-import time
 import sys
 import logging
-from datetime import datetime
+import importlib.util
 from pathlib import Path
+
+DEMO_DIR = Path(__file__).resolve().parent
+SRC_DIR = DEMO_DIR.parent / "src"
+
+# demo/ goes first so `import sensing` finds demo/sensing.py; everything else is only in src/
+sys.path[:0] = [str(DEMO_DIR), str(SRC_DIR)]
+
+# Load src/main.py under its own name, since this file is also called main.py
+spec = importlib.util.spec_from_file_location("heartbridge_main", SRC_DIR / "main.py")
+if spec is None or spec.loader is None:
+    sys.exit(f"Could not load {SRC_DIR / 'main.py'}")
+heartbridge_main = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(heartbridge_main)
+
+# Mark demo runs in the log file name. setattr since the loaded module's attributes aren't known to the type checker
+setattr(heartbridge_main, "LOG_FILE", heartbridge_main.LOG_DIR / f"heartBridge_demo_{heartbridge_main.RUN_TIMESTAMP}.log")
+
+# These are the same module objects src/main.py uses
 import pygame
-
-# Internal imports
 import HMI
+import actuation
+import stepper
 from Enums.error_codes import ErrorCode
-from Enums.states import CPRState
 
-LOOP_TICK_SEC = 0.05  # 50ms per tick, 20 Hz
-
-# Frames cycled during the unfold step, and how long each one stays up
-UNFOLD_FRAMES = [HMI.Image.UNFOLD_1, HMI.Image.UNFOLD_2, HMI.Image.UNFOLD_3, HMI.Image.UNFOLD_4]
-UNFOLD_FRAME_SEC = 0.5  # 2 frames per second
-
-# Initialize log directory and file
-# 2x parent to get to project root
-LOG_DIR = Path(__file__).resolve().parent.parent / "Logs"
-LOG_DIR.mkdir(parents=True, exist_ok=True)  # Ensure logs directory exists
-RUN_TIMESTAMP = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-LOG_FILE = LOG_DIR / f"heartBridge_demo_{RUN_TIMESTAMP}.log"
-
-# Maps error codes to the state they should force the machine into
-ERROR_STATE_MAP = {
-    ErrorCode.ERROR_INIT_FAILURE:           CPRState.ABORT,
-    ErrorCode.ERROR_PYGAME_FAILURE:         CPRState.ABORT,
-}
-
-FATAL_ERRORS = {
-    ErrorCode.EXIT_UNKNOWN,
-    ErrorCode.ERROR_PYGAME_INIT_FAILURE,
-    ErrorCode.ERROR_PI_DAEMON_FAILURE,
-    ErrorCode.ERROR_UNKNOWN_IMAGE,
-}
-
-
-def configure_logging():
-    """Configure console and file logging for the demo runtime."""
-    # Write to both console and log file simultaneously.
-    # Each line is prefixed with a timestamp and severity level, e.g.:
-    #   2026-05-10 12:00:00 - INFO - Sensors initialized
-    # Severity levels: DEBUG < WARNING < ERROR < CRITICAL
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="%(asctime)s - %(levelname)s - %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
-        handlers=[
-            logging.StreamHandler(),            # console
-            logging.FileHandler(LOG_FILE),      # log file
-        ]
-    )
+# Demo-only exit key. src/main.py calls HMI.pump_events() every tick, so the key check rides along with it
+_pump_events = HMI.pump_events
 
 
 def quit_requested() -> bool:
@@ -80,9 +54,15 @@ def quit_requested() -> bool:
     return False
 
 
-def shutdown_demo():
-    """Turn off lasers and button LEDs, close the window and exit cleanly."""
+def shutdown_demo() -> None:
+    """Stop the motor and steppers, turn off lasers and button LEDs, close the window and exit cleanly."""
     logging.info("Exit requested, shutting down demo")
+    # Same motor stop src/main.py does on a fatal error. Fails if Esc/Q is pressed before the motor is initialized
+    try:
+        actuation.abort_compressions()
+        stepper.halt()
+    except Exception as e:
+        logging.error(f"Motor stop on exit failed: {e}")
     HMI.disable_lasers()
     HMI.disable_next_button()
     HMI.disable_pause_button()
@@ -90,220 +70,16 @@ def shutdown_demo():
     sys.exit(0)
 
 
-def main():
-    """Run the UI-only state-machine loop."""
-    configure_logging()
+def pump_events_with_quit() -> ErrorCode:
+    """HMI.pump_events(), plus Esc or Q (or closing the window) exits back to the terminal from any state."""
+    error: ErrorCode = _pump_events()
+    if quit_requested():
+        shutdown_demo()
+    return error
 
-    # Start by defining initial state and error code. The state machine will update these as it runs.
-    state = CPRState.STARTUP
-    prev_state = None
-    error = ErrorCode.NORMAL_OPERATION
 
-    # Total time spent in COMPRESSION across all runs. Pausing freezes it and
-    # resuming carries on from the same total, so it reads total CPR time.
-    cpr_elapsed_sec = 0.0
-
-    while error not in FATAL_ERRORS:
-        # Record the start time of each loop iteration to maintain a consistent tick rate
-        loop_start = time.monotonic()
-
-        # If an error occurred, override the current state
-        # Whenever an error occurs, system must be forced back to this point via continue
-        if error in ERROR_STATE_MAP:
-            logging.warning(f"Error occurred: {error}, forcing state to {ERROR_STATE_MAP[error]}")
-            state = ERROR_STATE_MAP[error]
-            error = ErrorCode.NORMAL_OPERATION
-
-        # Must run every tick regardless of state (after HMI.init_HMI has run on
-        # the first tick), or the OS can mark the window as unresponsive
-        # Neither error code returned by pump_events will cause an actual error, so no check
-        error = HMI.pump_events()
-
-        # Esc or Q (or closing the window) exits back to the terminal from any state
-        if quit_requested():
-            shutdown_demo()
-
-        # --- State machine ---
-        # Each state checks (state != prev_state) to detect first entry, and runs
-        # one-time setup (screen, audio, button enables) only on that first tick.
-        # All other logic runs every tick until the exit condition is met.
-
-        # Capture current state to avoid issues with state changing mid-loop
-        current_state = state
-        match(current_state):
-            case(CPRState.STARTUP):
-                # Setup
-                if state != prev_state:
-                    # continue jumps back to the top of the while loop, so if any
-                    # init step fails its error code is caught on the next iteration
-                    error = HMI.init_Pi()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.init_HMI(HMI.get_pi())
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
-                    error = HMI.set_image_audio(HMI.Image.STARTUP, HMI.AudioPrompt.STARTUP)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.enable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
-                # Loop
-                error, next_pressed = HMI.next_button_pressed()
-                if error != ErrorCode.NORMAL_OPERATION: continue
-                if next_pressed:
-                    state = CPRState.UNFOLD_CUT_CLOTHES
-
-            case(CPRState.UNFOLD_CUT_CLOTHES):
-                # Setup
-                if state != prev_state:
-                    frame_idx = 0
-                    last_frame_time = time.monotonic()
-                    error = HMI.set_image_audio(UNFOLD_FRAMES[frame_idx], HMI.AudioPrompt.UNFOLD)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.enable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
-                # Loop
-                # Advance the animation. set_image only, so the audio prompt isn't restarted
-                if time.monotonic() - last_frame_time >= UNFOLD_FRAME_SEC:
-                    frame_idx = (frame_idx + 1) % len(UNFOLD_FRAMES)
-                    last_frame_time = time.monotonic()
-                    error = HMI.set_image(UNFOLD_FRAMES[frame_idx])
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
-                error, next_pressed = HMI.next_button_pressed()
-                if error != ErrorCode.NORMAL_OPERATION: continue
-                if next_pressed:
-                    state = CPRState.ALIGNMENT
-
-            case(CPRState.ALIGNMENT):
-                # Setup
-                if state != prev_state:
-                    error = HMI.enable_lasers()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.ALIGNMENT, HMI.AudioPrompt.ALIGNMENT)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.enable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
-                # Loop
-                error, next_pressed = HMI.next_button_pressed()
-                if error != ErrorCode.NORMAL_OPERATION: continue
-                if next_pressed:
-                    error = HMI.disable_lasers()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    state = CPRState.ZEROING_PREP
-
-            case(CPRState.ZEROING_PREP):
-                # Setup
-                if state != prev_state:
-                    error = HMI.set_image_audio(HMI.Image.ZEROING_PREP, HMI.AudioPrompt.ZEROING_PREP)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.enable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
-                # Loop
-                error, next_pressed = HMI.next_button_pressed()
-                if error != ErrorCode.NORMAL_OPERATION: continue
-                if next_pressed:
-                    state = CPRState.ZEROING
-
-            case(CPRState.ZEROING):
-                # Setup
-                if state != prev_state:
-                    error = HMI.disable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.ZEROING, HMI.AudioPrompt.ZEROING)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
-                # Loop
-                # No motor to zero; move on once the prompt has played through once
-                if HMI.audio_finished():
-                    state = CPRState.COMPRESSION_PREP
-
-            case(CPRState.COMPRESSION_PREP):
-                # Setup
-                if state != prev_state:
-                    error = HMI.disable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.disable_pause_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.COMPRESSION_PREP, HMI.AudioPrompt.COMPRESSION_PREP)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
-                # Loop
-                if HMI.audio_finished():
-                    state = CPRState.COMPRESSION
-
-            case(CPRState.COMPRESSION):
-                # Setup
-                if state != prev_state:
-                    error = HMI.enable_pause_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.COMPRESSION, HMI.AudioPrompt.COMPRESSION)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    # Start of this run of compressions; the timer is drawn on the first loop tick
-                    compression_start = time.monotonic()
-                    shown_sec = None
-
-                # Loop
-                # Only redraw when the displayed second changes, not every tick
-                run_sec = time.monotonic() - compression_start
-                total_sec = int(cpr_elapsed_sec + run_sec)
-                if total_sec != shown_sec:
-                    error = HMI.draw_timer(total_sec)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    shown_sec = total_sec
-
-                error, pause_pressed = HMI.pause_button_pressed()
-                if error != ErrorCode.NORMAL_OPERATION: continue
-                if pause_pressed:
-                    # Bank this run into the total so the timer resumes from here
-                    cpr_elapsed_sec += time.monotonic() - compression_start
-                    logging.info(f"CPR paused at {cpr_elapsed_sec:.1f} s total")
-                    state = CPRState.PAUSE
-
-            case(CPRState.PAUSE):
-                # Setup
-                if state != prev_state:
-                    error = HMI.disable_pause_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.enable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.PAUSE, HMI.AudioPrompt.PAUSE)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
-                    logging.debug("Device Paused")
-
-                # Loop
-                error, next_pressed = HMI.next_button_pressed()
-                if error != ErrorCode.NORMAL_OPERATION: continue
-                if next_pressed:
-                    state = CPRState.COMPRESSION_PREP
-
-            case(CPRState.ABORT):
-                # Setup
-                if state != prev_state:
-                    # We still care about error codes, in case of fatal error, but only functions that can return those
-                    error = HMI.disable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.disable_pause_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    logging.error(f"Abort state tripped: {error}")
-                # Halt — only a power cycle (or Esc/Q) exits this state
-
-            case(_):
-                error = ErrorCode.EXIT_UNKNOWN
-
-        # Record the previous state and sleep for the remainder of the tick duration
-        prev_state = current_state
-        elapsed = time.monotonic() - loop_start
-        time.sleep(max(0, LOOP_TICK_SEC - elapsed))
-
-    logging.critical(f"Fatal error: {error}")
-    sys.exit(1)
+HMI.pump_events = pump_events_with_quit
 
 
 if __name__ == "__main__":
-    main()
+    heartbridge_main.main()

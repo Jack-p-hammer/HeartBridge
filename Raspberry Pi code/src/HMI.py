@@ -85,6 +85,12 @@ _audio_length: float = 0.0    # length in seconds of the currently playing promp
 # Button lockout state
 _last_press_time: float = 0.0   # time.monotonic() of the last accepted button press
 
+# CPR timer overlay state
+_background: pygame.Surface | None = None   # scaled copy of the current image, used to erase old timer text
+_timer_font: pygame.font.Font
+_timer_rect: pygame.Rect | None = None      # screen area covered by the last drawn timer
+TIMER_COLOR: tuple[int, int, int] = (0, 0, 0)   # black, to match the text in the images
+
 def init_Pi() -> ErrorCode:
     """Initialize pigpio daemon and return the pi instance.
 
@@ -118,7 +124,9 @@ def _use_local_display() -> None:
     A terminal on the Pi's desktop already sets these, so they are only filled in when missing.
     XDG_RUNTIME_DIR also lets the audio mixer reach the desktop's sound server.
     """
-    if not sys.platform.startswith("linux"):
+    # sys.platform is exactly "linux" on every Linux since Python 3.3. Comparing with != lets Pylance skip the
+    # Linux-only os.getuid() below when checking on Windows
+    if sys.platform != "linux":
         return
     if os.environ.get("WAYLAND_DISPLAY") or os.environ.get("DISPLAY"):
         return
@@ -137,7 +145,7 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
     Returns:
         ErrorCode: Normal operation if successful, ERROR_INIT_FAILURE if failed
     """
-    global _screen, _pi, _audio_channel
+    global _screen, _pi, _audio_channel, _timer_font
     logging.debug("Initializing HMI...")
     
     # Initialize the global variable for the pigpio instance
@@ -162,6 +170,8 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
             pygame.FULLSCREEN
         )
         pygame.display.set_caption("CPR Machine")
+        # Timer text scales with the screen, roughly the size of the image text
+        _timer_font = pygame.font.Font(None, info.current_h // 8)
     except Exception as e:
         logging.error(f"Display initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
@@ -223,15 +233,57 @@ def set_image(image: Image) -> ErrorCode:
     Returns:
         ErrorCode: NORMAL_OPERATION if successful, ERROR_UNKNOWN_IMAGE if failed
     """
-    global _screen
+    global _screen, _background, _timer_rect
     try:
         surf = pygame.image.load(image.value)
         surf = pygame.transform.scale(surf, _screen.get_size())
         _screen.blit(surf, (0, 0))
+        # Keep the image so draw_timer can erase its old text; the new image already covers it
+        _background = surf
+        _timer_rect = None
         pygame.display.flip()
     except Exception as e:
         logging.error(f"Failed to set image {image.name}: {e}")
         return ErrorCode.ERROR_UNKNOWN_IMAGE
+    return ErrorCode.NORMAL_OPERATION
+
+
+def draw_timer(elapsed_sec: float) -> ErrorCode:
+    """Draw elapsed CPR time in the bottom right corner over the current image.
+    Only that corner of the screen is updated, so this is cheap enough to call every tick,
+    but callers should only redraw when the displayed second changes.
+
+    Args:
+        elapsed_sec (float): Total CPR time to display, in seconds
+
+    Returns:
+        ErrorCode: NORMAL_OPERATION if successful, ERROR_PYGAME_FAILURE if failed
+    """
+    global _screen, _background, _timer_rect, _timer_font
+
+    total = int(elapsed_sec)
+    hours, rem = divmod(total, 3600)
+    minutes, seconds = divmod(rem, 60)
+    text = f"{hours}:{minutes:02}:{seconds:02}" if hours else f"{minutes:02}:{seconds:02}"
+
+    try:
+        text_surf = _timer_font.render(text, True, TIMER_COLOR)
+        # Inset from the corner by a fraction of the screen height
+        margin = _screen.get_height() // 30
+        new_rect = text_surf.get_rect(bottomright=(_screen.get_width() - margin, _screen.get_height() - margin))
+
+        # Erase the previous text by restoring that patch of the image underneath it
+        dirty = new_rect
+        if _timer_rect is not None and _background is not None:
+            _screen.blit(_background, _timer_rect, _timer_rect)
+            dirty = new_rect.union(_timer_rect)
+
+        _screen.blit(text_surf, new_rect)
+        pygame.display.update(dirty)
+        _timer_rect = new_rect
+    except Exception as e:
+        logging.error(f"Failed to draw CPR timer: {e}")
+        return ErrorCode.ERROR_PYGAME_FAILURE
     return ErrorCode.NORMAL_OPERATION
 
 

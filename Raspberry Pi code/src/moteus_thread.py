@@ -23,15 +23,17 @@ RETRACT_VELOCITY_MPS: float = 0.08  # meters per second, velocity of the plunger
 
 # --- Ball screw constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
 BALL_SCREW_LEAD_M: float = 0.01  # meters of plunger travel per ball screw revolution
-BLDC_GEAR_RATIO: float = 1.0  # motor revolutions per ball screw revolution, 1:1 gear train
-BLDC_ROTATIONS_PER_M: float = BLDC_GEAR_RATIO / BALL_SCREW_LEAD_M  # motor rotations per meter of plunger travel
+# Signed: the 1:1 gear train reverses rotation, so negative (matches scripts/slow_jog.py). This sign is the only place
+# the BLDC's direction is set; flip it to reverse the motor. Plunger travel is always positive down
+BLDC_GEAR_RATIO: float = -1.0  # motor revolutions per ball screw revolution
+BLDC_ROTATIONS_PER_M: float = BLDC_GEAR_RATIO / BALL_SCREW_LEAD_M  # motor rotations per meter of plunger travel, signed like BLDC_GEAR_RATIO
 # Ball screw travel only covers compressions plus safety room at either end. Carriage travel is handled by the lead screw steppers (stepper.py)
 BALL_SCREW_TOP_CLEARANCE_M: float = 0.01  # meters, the plunger sits this far below the top of travel when zeroing, so pause/abort can lift off the chest
 BALL_SCREW_TRAVEL_M: float = 0.10  # meters, total usable ball screw travel down from the startup (absolute zero) position
 
 MAX_PLUNGER_FORCE_N: float = 500.0
 # Ideal (100% efficient) ball screw: F = 2*pi*T / lead. Real efficiency only lowers the force, so this limit is conservative
-TORQUE_LIMIT_NM: float = MAX_PLUNGER_FORCE_N * BALL_SCREW_LEAD_M / (2 * math.pi * BLDC_GEAR_RATIO)
+TORQUE_LIMIT_NM: float = MAX_PLUNGER_FORCE_N * BALL_SCREW_LEAD_M / (2 * math.pi * abs(BLDC_GEAR_RATIO))
 
 # --- data structures ---------------------------------------------------
 
@@ -186,9 +188,10 @@ class MoteusThread:
             Returns:
                 ErrorCode: ERROR_MOTOR_FAILURE if the control mode is invalid or the target is outside the ball screw travel, NORMAL_OPERATION otherwise
         """
-        retract_velocity_rps: float = RETRACT_VELOCITY_MPS * BLDC_ROTATIONS_PER_M
+        retract_velocity_rps: float = RETRACT_VELOCITY_MPS * abs(BLDC_ROTATIONS_PER_M)  # velocity_limit is a magnitude
         match control_mode:
-            # Positive rotation of motor is down on ball screw, so down is positive up is negative
+            # Setpoints are meters of plunger travel, positive down. Multiplying by BLDC_ROTATIONS_PER_M converts them to
+            # motor rotations, including the gear train's reversal
             case ControlMode.ZEROING:
                 # The steppers lower the whole carriage during zeroing, the plunger just holds just below the top of its travel
                 position: float = abs_zero_position + BALL_SCREW_TOP_CLEARANCE_M * BLDC_ROTATIONS_PER_M # rotations

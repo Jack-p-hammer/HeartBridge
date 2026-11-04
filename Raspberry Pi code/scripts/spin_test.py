@@ -1,8 +1,9 @@
 """
-Spin the motor TURNS rotations one way, then TURNS rotations back, then stop.
+Spin the ball screw TURNS revolutions one way, then TURNS revolutions back, then stop.
 
-Works directly in motor rotations (no inch conversion). Press Enter to start;
-press Enter again at any time to stop early.
+Works in ball screw revolutions (no inch conversion), positive = down first. The 1:1
+gear train reverses rotation (BLDC_GEAR_RATIO), so the motor itself spins the opposite
+way. Press Enter to start; press Enter again at any time to stop early.
 
 NOTE: the controller's servopos.position_min/max limits still apply -- the
 motor will stop at the limit if TURNS goes past it. To spin freely, disable
@@ -22,11 +23,14 @@ CONTROLLER_ID: int = 1  # same as moteus_thread.py
 MAX_TORQUE_NM: float = 0.4  # kept low for bench testing (main code allows TORQUE_LIMIT_NM, ~0.8 Nm for 500 N)
 COMMAND_PERIOD_S: float = 0.01  # 100 Hz, well under the moteus watchdog timeout
 
-TURNS: float = 10.0  # positive spins the "down" direction first
-SPEED_REV_S: float = 2.0  # rotations per second -> 5 s each way
+BLDC_GEAR_RATIO: float = -1.0  # same as moteus_thread.py, motor revolutions per ball screw revolution, 1:1 gear train that reverses rotation
+
+TURNS: float = 10.0  # ball screw revolutions, positive spins the "down" direction first
+SPEED_REV_S: float = 2.0  # motor rotations per second -> 5 s each way
 
 
-async def run(turns: float, speed_rev_s: float) -> None:
+async def run(screw_turns: float, speed_rev_s: float) -> None:
+    turns: float = screw_turns * BLDC_GEAR_RATIO  # motor rotations, signed by the gear train
     controller = moteus.Controller(id=CONTROLLER_ID)
     await controller.set_stop()  # clear any latched fault before commanding
 
@@ -75,7 +79,7 @@ async def run(turns: float, speed_rev_s: float) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--turns", type=float, default=TURNS, help="rotations each way")
+    parser.add_argument("--turns", type=float, default=TURNS, help="ball screw revolutions each way, positive = down first")
     parser.add_argument("--speed", type=float, default=SPEED_REV_S, help="rotations per second")
     args = parser.parse_args()
     asyncio.run(run(args.turns, abs(args.speed)))

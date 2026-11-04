@@ -22,14 +22,19 @@ STEPPER_STEP_PIN: int = 20
 STEPPER_DIR_PIN: int = 21
 STEPPER_ENABLE_PIN: int = 16
 STEPPER_ENABLE_ACTIVE_LOW: bool = True  # Most stepper drivers (A4988, DRV8825, TMC2209) enable on a LOW EN pin
-STEPPER_DIR_DOWN_LEVEL: int = 1  # DIR pin level that drives the carriage down. TODO: Verify against wiring
 
 # --- Mechanical constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
 LEAD_SCREW_PITCH_M: float = 0.008  # meters of carriage travel per lead screw revolution (the lead; equals pitch only for single-start screws)
-STEPPER_GEAR_RATIO: float = 1.0  # stepper revolutions per lead screw revolution, 1:1 gear train
+# Signed: the 1:1 gear train reverses rotation, so negative. This sign is the only place the steppers' direction is set;
+# flip it to reverse them. Carriage positions and step counts are always positive down
+STEPPER_GEAR_RATIO: float = -1.0  # stepper revolutions per lead screw revolution
 STEPPER_FULL_STEPS_PER_REV: int = 200  # 1.8 degree steppers
 STEPPER_MICROSTEPS: int = 8  # Microstepping set on the drivers
-STEPS_PER_M: float = STEPPER_FULL_STEPS_PER_REV * STEPPER_MICROSTEPS * STEPPER_GEAR_RATIO / LEAD_SCREW_PITCH_M
+STEPS_PER_M: float = STEPPER_FULL_STEPS_PER_REV * STEPPER_MICROSTEPS * abs(STEPPER_GEAR_RATIO) / LEAD_SCREW_PITCH_M  # magnitude, direction comes from the DIR pin
+
+# DIR pin level that drives the carriage down: high drives down through a non-reversing gear train, so the gear train's
+# reversal makes it low. TODO: Verify against wiring
+STEPPER_DIR_DOWN_LEVEL: int = 1 if STEPPER_GEAR_RATIO > 0 else 0
 
 LEAD_SCREW_TRAVEL_M: float = 0.0254 * 8  # meters, usable carriage travel from home (startup) position, 8" placeholder
 

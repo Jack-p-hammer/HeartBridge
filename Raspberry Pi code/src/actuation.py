@@ -302,7 +302,7 @@ def computeCompressionSetpoint() -> float:
     outputPos_cm: float = 0.0
     
     # Piecewise trapezoidal profile (periodic)
-    # Positive rotation of motor is down on ball screw, so down is positive up is negative
+    # Down (towards the chest) is positive. moteus_thread.py converts this to motor rotations, including the gear train's reversal
     if cycle_time < 0.12:
         outputPos_cm = 0.0
     elif cycle_time < 0.24:

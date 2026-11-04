@@ -270,6 +270,67 @@ def test_zeroing_succeeds_when_sensors_healthy(hardware):
     assert actuation.zeroing() == ErrorCode.NORMAL_OPERATION
 
 
+# -------------------- motor directions --------------------
+
+def test_gear_trains_reverse_both_motors(hardware):
+    """Both 1:1 gear trains reverse rotation (matching scripts/slow_jog.py), so both gear ratios are negative and
+    the steppers drive down with DIR low. Every other direction is derived from these signs; update this test
+    only if the gear trains change."""
+    import moteus_thread
+    import stepper
+
+    assert moteus_thread.BLDC_GEAR_RATIO == -1.0
+    assert moteus_thread.BLDC_ROTATIONS_PER_M < 0  # down on the ball screw is negative motor rotation
+    assert moteus_thread.TORQUE_LIMIT_NM > 0
+    assert stepper.STEPPER_GEAR_RATIO == -1.0
+    assert stepper.STEPPER_DIR_DOWN_LEVEL == 0
+    assert stepper.STEPS_PER_M > 0  # step counts stay positive down, DIR carries the direction
+
+
+def test_bldc_targets_follow_gear_ratio_sign(hardware):
+    """Plunger travel down converts to motor rotation in the direction BLDC_GEAR_RATIO sets, while velocity
+    limits stay positive magnitudes whichever way the gear train turns."""
+    import math
+    from Enums.control_modes import ControlMode
+    from moteus_thread import MoteusThread, BLDC_GEAR_RATIO, BLDC_ROTATIONS_PER_M, BALL_SCREW_TOP_CLEARANCE_M
+    thread = MoteusThread()  # never started, set_target() only stores the target
+    abs_zero = 3.0
+    zero = abs_zero + BALL_SCREW_TOP_CLEARANCE_M * BLDC_ROTATIONS_PER_M  # where zeroing leaves the plunger
+
+    assert thread.set_target(ControlMode.ZEROING, abs_zero, abs_zero) == ErrorCode.NORMAL_OPERATION
+    assert math.copysign(1.0, thread._target.position - abs_zero) == math.copysign(1.0, BLDC_GEAR_RATIO)
+    assert thread._target.velocity_limit > 0
+
+    assert thread.set_target(ControlMode.COMPRESSIONS, zero, abs_zero, 0.07) == ErrorCode.NORMAL_OPERATION
+    assert math.copysign(1.0, thread._target.position - zero) == math.copysign(1.0, BLDC_GEAR_RATIO)
+
+    for mode in (ControlMode.PAUSE_RETRACT, ControlMode.ABORT_RETRACT):
+        assert thread.set_target(mode, zero, abs_zero) == ErrorCode.NORMAL_OPERATION
+        assert thread._target.velocity_limit > 0
+
+    # Above the top of travel (the wrong way for the gear train) is still rejected
+    assert thread.set_target(ControlMode.COMPRESSIONS, abs_zero, abs_zero, -0.01) == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+def test_stepper_dir_pin_follows_gear_ratio_sign(hardware):
+    """Lowering the carriage writes STEPPER_DIR_DOWN_LEVEL to the DIR pin, and raising it writes the other level."""
+    import stepper
+    stepper.init_steppers(hardware.pi)
+
+    def last_dir_write() -> int:
+        return [value for pin, value in hardware.pi.writes if pin == stepper.STEPPER_DIR_PIN][-1]
+
+    stepper.set_target(0.05, stepper.ZEROING_VELOCITY_MPS)
+    assert stepper.update() == ErrorCode.NORMAL_OPERATION
+    assert last_dir_write() == stepper.STEPPER_DIR_DOWN_LEVEL
+
+    stepper.init_steppers(hardware.pi)
+    stepper.position_steps = round(0.05 * stepper.STEPS_PER_M)  # carriage lowered, so retracting moves up
+    stepper.set_target(0.0, stepper.RETRACT_VELOCITY_MPS)
+    assert stepper.update() == ErrorCode.NORMAL_OPERATION
+    assert last_dir_write() == 1 - stepper.STEPPER_DIR_DOWN_LEVEL
+
+
 # -------------------- computeCompressionSetpoint (pure) --------------------
 
 def test_compute_compression_setpoint_piecewise_profile(hardware, monkeypatch):

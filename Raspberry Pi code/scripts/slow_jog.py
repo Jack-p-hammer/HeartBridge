@@ -26,7 +26,7 @@ import moteus
 CONTROLLER_ID: int = 1  # same as moteus_thread.py
 PINION_RADIUS_M: float = 0.01  # same as moteus_thread.py
 MAX_TORQUE_NM: float = 2.0  # kept low for bench testing (main code allows 5.0)
-COMMAND_PERIOD_S: float = 0.001  # 100 Hz, well under the moteus watchdog timeout
+COMMAND_PERIOD_S: float = 0.01  # 100 Hz, well under the moteus watchdog timeout
 REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1 s watchdog
 LASER_PIN: int = 12  # BCM numbering, same as HMI.py. High -> Q5 on -> lasers on
 
@@ -37,7 +37,8 @@ SPEED_IN_PER_S: float = 0.1  # snail's pace
 
 def inches_to_rev(inches: float) -> float:
     """Convert linear rack travel to motor revolutions through the pinion."""
-    return inches * 0.0254 / (2.0 * math.pi * PINION_RADIUS_M)
+    # return inches * 0.0254 / (2.0 * math.pi * PINION_RADIUS_M)
+    return inches * 2
 
 
 def set_lasers(on: bool) -> None:
@@ -106,9 +107,9 @@ async def run(speed_in_per_s: float, lower_in: float, travel_in: float, lasers_o
                 # Triangle wave: base -> base + travel -> base, constant speed
                 phase: float = ((now - t_cycle) % period_s) / period_s
                 if phase < 0.5:
-                    frac, direction = 2.0 * phase, 1.0
+                    frac, direction = 2.0 * phase, -1.0
                 else:
-                    frac, direction = 2.0 - 2.0 * phase, -1.0
+                    frac, direction = 2.0 - 2.0 * phase, 1.0
                 target: float = base_rev + frac * travel_rev
                 velocity: float = direction * math.copysign(speed_rev_s, travel_rev)
             elif now - t0 < lower_s:

@@ -14,7 +14,7 @@ k = 10490; % Spring constant of chest
 %% Moteus PLL Filter
 
 zeta_pll = 1;
-f_pll = 200; % Hz, 3 dB cutoff (motor_position.sources.X.pll_filter_hz), calibration overwrites this, set to default
+f_pll = 400; % Hz, 3 dB cutoff (motor_position.sources.X.pll_filter_hz), calibration overwrites this, reset it after
 w_n_pll = 2*pi*f_pll/2.48; % rad/s, filter natural frequency (not an angle)
 
 %% System Setup
@@ -46,8 +46,8 @@ m = 2*.343; % Mass of rack and plunger
 % output, rotor_to_output_ratio = 1). The plant stays in SI (rad, m).
 
 % servo.pid_position
-pid_kp = 6;   % Nm/rev       (was 1.5 Nm/rad)
-pid_kd = 0.05; % Nm/(rev/s)   (was 0.0144 Nm/(rad/s))
+pid_kp = 4;   % Nm/rev       (was 1.5 Nm/rad)
+pid_kd = 0.02; % Nm/(rev/s)   (was 0.0144 Nm/(rad/s))
 pid_ki = 0;        % Nm/s per rev
 iRateLimit = -1;   % Nm/s, <0 = no limit (servo.pid_position.iratelimit)
 
@@ -65,5 +65,6 @@ tau_d = 1.5*Ts; % PWM Delay, s
 accel_limit = 16.5/L_ball;   % rev/s^2 (servo.default_accel_limit, firmware default 50)
 vel_limit = 0.6/L_ball; % rev/s (0.6 m/s at the nut) (servo.default_velocity_limit)
 inertia_ff = J_eff_ball; % kg*m^2 (servo.inertia_feedforward), default 0 = off
-tau_max_ball = min((F_max + m_ball*g)*p_ball/eta_ball, 1.7/1.5); % Nm, per-command maximum_torque (not a config)
+ff_torque = 0; % Nm, per-command feedforward_torque, holds the end effector's weight
+tau_max_ball = min((F_max + m_ball*g)*p_ball/eta_ball, 1.7/1.25); % Nm, per-command maximum_torque (not a config)
 iLimit = 1.2*tau_max_ball; % Nm (servo.pid_position.ilimit)

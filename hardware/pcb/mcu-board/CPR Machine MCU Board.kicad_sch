@@ -2998,6 +2998,18 @@
 		)
 	)
 	(rectangle
+		(start 13.97 13.97)
+		(end 186.69 50.8)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "056dd3cc-4e50-4eee-9413-92209ff183ec")
+	)
+	(rectangle
 		(start 13.97 52.07)
 		(end 143.51 195.58)
 		(stroke
@@ -3022,8 +3034,8 @@
 		(uuid "34de89e9-b9fa-4909-a4fa-c3360054d5f1")
 	)
 	(rectangle
-		(start 116.84 13.97)
-		(end 186.69 50.8)
+		(start 238.76 13.97)
+		(end 255.27 50.8)
 		(stroke
 			(width 0)
 			(type default)
@@ -3031,7 +3043,7 @@
 		(fill
 			(type none)
 		)
-		(uuid "605748a8-e042-49fd-8235-a056086e7cbc")
+		(uuid "4db20f6b-cb2c-4910-9757-95747ad519f0")
 	)
 	(rectangle
 		(start 187.96 13.97)
@@ -3044,18 +3056,6 @@
 			(type none)
 		)
 		(uuid "8a55d1aa-5f9c-48ad-b9b1-2af9220e2f61")
-	)
-	(rectangle
-		(start 13.97 13.97)
-		(end 115.57 50.8)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(uuid "b9084688-ec1d-4046-9c61-6dc0cd373cc6")
 	)
 	(rectangle
 		(start 144.78 166.37)
@@ -3089,17 +3089,7 @@
 		)
 		(uuid "79acf9eb-4785-457c-9596-6baead0e6251")
 	)
-	(text "Analog Filtering"
-		(exclude_from_sim no)
-		(at 124.968 16.51 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "88833a38-2ff6-4a75-bd97-673920ec1872")
-	)
-	(text "Decoupling Bus"
+	(text "Power Supply"
 		(exclude_from_sim no)
 		(at 22.098 16.256 0)
 		(effects
@@ -3108,6 +3098,16 @@
 			)
 		)
 		(uuid "e3e74ff1-e393-424d-af92-8429fb9753b4")
+	)
+	(text "NRST"
+		(exclude_from_sim no)
+		(at 241.808 16.51 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "ffe0414d-3bd3-4a15-a18f-a6efec28c620")
 	)
 	(text_box "Notes\n- VBAT attached to 3.3V (no direct battery connection).\n\nQuestions:\n- Will we need LSE, HSE, both?\n"
 		(exclude_from_sim no)
@@ -3414,6 +3414,16 @@
 			(type default)
 		)
 		(uuid "3adfb9e7-c123-458d-b6a1-e0f8b5e22eed")
+	)
+	(wire
+		(pts
+			(xy 245.11 36.83) (xy 245.11 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b4f3594-074d-4550-b105-85d4769a1ac4")
 	)
 	(wire
 		(pts
@@ -3877,6 +3887,16 @@
 	)
 	(wire
 		(pts
+			(xy 245.11 24.13) (xy 245.11 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df9b80c5-fbf3-457e-99a2-d0acdafa475d")
+	)
+	(wire
+		(pts
 			(xy 113.03 60.96) (xy 120.65 60.96)
 		)
 		(stroke
@@ -4135,6 +4155,16 @@
 		)
 		(uuid "ce5a3825-0496-461f-9452-eed202fd773d")
 	)
+	(label "NRST"
+		(at 245.11 24.13 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d362b8cb-340e-4079-a87a-03879509d74b")
+	)
 	(label "BOOT0"
 		(at 229.87 36.83 0)
 		(effects
@@ -4242,6 +4272,84 @@
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
 					(reference "C7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 245.11 43.18 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1ded0562-80c7-43f0-bd0e-3357ad407962")
+		(property "Reference" "#PWR09"
+			(at 245.11 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 245.11 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 245.11 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 245.11 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 245.11 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5af49e73-2016-468c-aaff-e6d7c371361b")
+		)
+		(instances
+			(project "CPR Machine MCU Board"
+				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -5070,7 +5178,7 @@
 				)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "10k"
 			(at 219.71 33.02 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5976,6 +6084,88 @@
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
 					(reference "#PWR03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 245.11 33.02 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e0295942-6a2f-4397-858b-02e2eeb54d62")
+		(property "Reference" "C?"
+			(at 248.92 31.7499 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 248.92 34.2899 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 246.0752 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 245.11 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 245.11 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "c6dcb8e6-2300-4095-91b4-d096b31f8342")
+		)
+		(pin "1"
+			(uuid "ac739175-3dc0-4f49-b6af-426c1d230efa")
+		)
+		(instances
+			(project "CPR Machine MCU Board"
+				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
+					(reference "C?")
 					(unit 1)
 				)
 			)

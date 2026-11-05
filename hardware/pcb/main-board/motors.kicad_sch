@@ -3119,18 +3119,6 @@
 		(uuid "93e9bceb-bdfe-42ee-b9ef-4afb792651b3")
 	)
 	(rectangle
-		(start 143.51 64.77)
-		(end 203.2 142.24)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(uuid "bc7e17cf-f426-48f2-8257-0ed15dae03fd")
-	)
-	(rectangle
 		(start 252.095 26.67)
 		(end 271.78 33.655)
 		(stroke
@@ -3161,16 +3149,6 @@
 			)
 		)
 		(uuid "60cebce0-68d4-4e57-b9b0-10e2448462ec")
-	)
-	(text "Stepper encoders: see the Encoder 1 and Encoder 2 sheets"
-		(exclude_from_sim no)
-		(at 152.4 66.802 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "e9e5f94d-ab1d-4046-b352-3668c76823dc")
 	)
 	(text "CAN-FD Transceiver"
 		(exclude_from_sim no)

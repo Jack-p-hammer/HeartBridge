@@ -901,7 +901,7 @@
         "uuid": "8991fc77-975f-4978-a089-6b2a5e33f59b"
       }
     ],
-    "used_designators": "#PWR9,#PWR11,#PWR19-20,#PWR34-38,#PWR62,#PWR77-84,#PWR87-177,C12-34,D1-15,J2,J12-19,R24-45,U2,U6-10,Y1",
+    "used_designators": "#PWR1,#PWR9,#PWR11,#PWR19-20,#PWR34-38,#PWR62,#PWR64-71,#PWR77-84,#PWR87-177,C12-34,D1-15,J2,J12-19,R24-45,U2,U6-10,Y1",
     "variants": []
   },
   "sheets": [
@@ -931,7 +931,7 @@
     ],
     [
       "7b515552-6db1-403d-b6a0-a1579d4772aa",
-      "Raspi"
+      "MCU Connector"
     ],
     [
       "4742a649-a015-487c-b382-01878b0e2dd4",

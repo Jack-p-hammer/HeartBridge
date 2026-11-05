@@ -22,7 +22,7 @@ COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
 RETRACT_VELOCITY_MPS: float = 0.08  # meters per second, velocity of the plunger along the ball screw during retract
 
 # --- Ball screw constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
-BALL_SCREW_LEAD_M: float = 0.01  # meters of plunger travel per ball screw revolution
+BALL_SCREW_LEAD_M: float = 0.0254*0.5  # meters of plunger travel per ball screw revolution
 # Signed: the 1:1 gear train reverses rotation, so negative (matches scripts/slow_jog.py). This sign is the only place
 # the BLDC's direction is set; flip it to reverse the motor. Plunger travel is always positive down
 BLDC_GEAR_RATIO: float = -1.0  # motor revolutions per ball screw revolution

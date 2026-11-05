@@ -61,6 +61,7 @@ class MotorState:
     position: float
     velocity: float
     voltage: float
+    q_current: float     # amps, torque-producing (q-axis) phase current. Not battery draw
     stale: bool          # True if we've never gotten a response yet
     timestamp: float      # time.monotonic() of last successful update
 
@@ -89,7 +90,7 @@ class MoteusThread:
         self._target: MotorTarget = MotorTarget(position=math.nan, velocity=0.0)
         self._state: MotorState = MotorState(
             mode=0, fault=0, position=0.0, velocity=0.0, voltage=0.0,
-            stale=True, timestamp=0.0,
+            q_current=0.0, stale=True, timestamp=0.0,
         )
 
         # Communication/setup-level error, as reported to the state
@@ -118,7 +119,10 @@ class MoteusThread:
             loop: asyncio.AbstractEventLoop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
             self._loop = loop
-            self._controller = moteus.Controller(id=self._controller_id)
+            # Q current is ignored by the default query, so request it explicitly
+            query_resolution = moteus.QueryResolution()
+            query_resolution.q_current = moteus.F32
+            self._controller = moteus.Controller(id=self._controller_id, query_resolution=query_resolution)
         except Exception:
             self._init_error = ErrorCode.ERROR_INIT_FAILURE
             self._ready.set()
@@ -161,6 +165,7 @@ class MoteusThread:
                     position=result.values[moteus.Register.POSITION],
                     velocity=result.values[moteus.Register.VELOCITY],
                     voltage=result.values[moteus.Register.VOLTAGE],
+                    q_current=result.values[moteus.Register.Q_CURRENT],
                     stale=False,
                     timestamp=time.monotonic(),
                 )
@@ -276,3 +281,7 @@ class MoteusThread:
     def get_rotary_position(self) -> float:
         """Returns the rotary position of the motor, in rotations, as reported by the moteus controller."""
         return self._state.position
+
+    def get_motor_current(self) -> float:
+        """Returns the q-axis (torque-producing) phase current of the motor, in amps, as reported by the moteus controller."""
+        return self._state.q_current

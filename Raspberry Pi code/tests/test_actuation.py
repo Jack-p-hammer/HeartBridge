@@ -29,6 +29,22 @@ def test_init_motor_failure_when_moteus_construction_fails(hardware):
     assert actuation.init_motor() == ErrorCode.ERROR_INIT_FAILURE
 
 
+@pytest.mark.parametrize("q_current", [-12.5, 0.0, 3.0, 40.0])
+def test_motor_state_reports_q_current(hardware, q_current):
+    """The q-axis current register is requested from the controller and passed through to MotorState."""
+    import time
+    import actuation
+
+    actuation.init_motor()
+    hardware.moteus_controller.q_current = q_current
+    time.sleep(0.05)
+
+    motor = actuation.get_motor_controller()
+    assert hardware.moteus_controller.query_resolution.q_current == "f32"
+    assert motor.get_state().q_current == pytest.approx(q_current)
+    assert motor.get_motor_current() == pytest.approx(q_current)
+
+
 def test_command_loop_without_controller_reports_init_failure(hardware, caplog):
     """The command loop's guard for a missing moteus controller reports an init failure and returns, rather than raising."""
     import asyncio

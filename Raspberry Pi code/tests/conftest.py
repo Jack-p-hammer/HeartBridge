@@ -66,6 +66,7 @@ _APP_MODULES = ["sensing", "actuation", "moteus_thread", "stepper", "HMI", "main
 # lookups succeed by identity.
 _MOTEUS_REGISTERS = types.SimpleNamespace(
     MODE="mode", FAULT="fault", POSITION="position", VELOCITY="velocity", VOLTAGE="voltage",
+    Q_CURRENT="q_current",
 )
 
 
@@ -258,7 +259,7 @@ class FakeMoteusResult:
 class FakeMoteusController:
     """Stand-in for moteus.Controller, the object MoteusThread talks to.
 
-    Configure `mode`/`fault`/`position`/`velocity`/`voltage` to control what
+    Configure `mode`/`fault`/`position`/`velocity`/`voltage`/`q_current` to control what
     the next query returns, or set `raise_on_set_position` to an exception
     instance to simulate a communication failure. Every call is recorded in
     `commands` for assertions.
@@ -272,6 +273,8 @@ class FakeMoteusController:
         self.position = 0.0
         self.velocity = 0.0
         self.voltage = 24.0
+        self.q_current = 0.0
+        self.query_resolution = None
         self.raise_on_set_position: Optional[Exception] = None
 
     async def set_position(self, **kwargs) -> FakeMoteusResult:
@@ -284,6 +287,7 @@ class FakeMoteusController:
             _MOTEUS_REGISTERS.POSITION: self.position,
             _MOTEUS_REGISTERS.VELOCITY: self.velocity,
             _MOTEUS_REGISTERS.VOLTAGE: self.voltage,
+            _MOTEUS_REGISTERS.Q_CURRENT: self.q_current,
         })
 
 
@@ -460,13 +464,17 @@ def _make_bno08x_modules(harness: HardwareHarness) -> tuple[types.ModuleType, ty
 
 
 def _make_moteus_module(harness: HardwareHarness) -> types.ModuleType:
-    def Controller(*, id=1, **_kwargs):
+    def Controller(*, id=1, query_resolution=None, **_kwargs):
         if harness.moteus_connect_error is not None:
             raise harness.moteus_connect_error
         harness.moteus_controller.controller_id = id
+        harness.moteus_controller.query_resolution = query_resolution
         return harness.moteus_controller
 
-    return _fake_module("moteus", Register=_MOTEUS_REGISTERS, Controller=Controller)
+    return _fake_module(
+        "moteus", Register=_MOTEUS_REGISTERS, Controller=Controller,
+        QueryResolution=types.SimpleNamespace, F32="f32",
+    )
 
 
 def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
@@ -537,6 +545,7 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
         "pygame",
         FULLSCREEN=0,
         Surface=FakePygameSurface,
+        Rect=FakePygameRect,
         init=pg_init,
         mixer=mixer_ns,
         display=display_ns,

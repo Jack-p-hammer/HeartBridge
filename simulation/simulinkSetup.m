@@ -8,8 +8,28 @@ J_m = 2.367e-6; % Motor Intertia
 K_v = 276.994; % Rpm / V
 K_torque = (3/2)*(1/sqrt(3))*(60/(2*pi))/K_v; % Nm/A
 
-b = 286.8; % Chest damping
-k = 10490; % Spring constant of chest
+%% Chest Model (adult, start of CPR)
+% Linear fit F = k*x + d*xdot to 615 out-of-hospital patients, with separate
+% compression / recoil damping (Ruiz de Gauna et al. 2023, Comput Methods
+% Programs Biomed 242:107847)
+k = 10490;   % N/m, chest stiffness
+b = 286.8;   % N*s/m, compression damping
+b_r = 488.9; % N*s/m, recoil damping
+
+% Nonlinear chest: stiffening spring with the shape of Tsitlik et al. 1983
+% (F = 54.9 N/cm*x + 10.8 N/cm^2*x^2) and damping that grows with depth,
+% d(x) = slope*(x_d0 + x) (Gruben et al. 1993/1999, Neurauter et al. 2009).
+% Each is scaled so its linear fit over the stroke equals k, b, b_r above.
+chest_nonlinear = true; % false = linear k with b in both phases (previous model)
+chest_stroke = 0.05;    % m, depth range the scaling is fitted over
+k1_tsitlik = 5490;      % N/m
+k2_tsitlik = 1.08e5;    % N/m^2
+x_d0 = 0.01;            % m, damping at zero depth as a depth offset (Gruben human: ~75 N*s/m at x = 0)
+k_lin_tsitlik = k1_tsitlik + 3/4*k2_tsitlik*chest_stroke; % least-squares linear fit over the stroke
+chest_p = struct( ...
+    'nonlinear', double(chest_nonlinear), 'k', k, 'b', b, ...
+    'k1', k1_tsitlik*k/k_lin_tsitlik, 'k2', k2_tsitlik*k/k_lin_tsitlik, 'x_d0', x_d0, ...
+    'dc_slope', b/(x_d0 + chest_stroke/2), 'dr_slope', b_r/(x_d0 + chest_stroke/2));
 
 %% Moteus PLL Filter
 
@@ -51,7 +71,7 @@ pid_kd = 0.02; % Nm/(rev/s)   (was 0.0144 Nm/(rad/s))
 pid_ki = 0;        % Nm/s per rev
 iRateLimit = -1;   % Nm/s, <0 = no limit (servo.pid_position.iratelimit)
 
-servo_max_current = 40; % A
+servo_max_current = 45.5; % A
 servo_pwm_rate_hz = 15000;
 Ts = 1/servo_pwm_rate_hz;
 

@@ -37,7 +37,7 @@
 
 // ---- Settings ----
 const int STEPS_PER_REV = 200;         // full steps per revolution (1.8 degree motor)
-const float RPM = 30.0;                // motor speed
+const float RPM = 40.0;                // motor speed
 const bool HALF_STEPS = false;         // false: full steps with both coils on (most torque)
                                        // true: half steps (smoother, twice the steps per rev)
 const bool HOLD_TO_RUN = false;        // false: press to start, switch direction, or stop

@@ -14,11 +14,11 @@ k = 10490; % Spring constant of chest
 %% Moteus PLL Filter
 
 zeta_pll = 1;
-f_pll = 400; % Hz (motor_position.sources.X.pll_filter_hz)
+f_pll = 200; % Hz, 3 dB cutoff (motor_position.sources.X.pll_filter_hz), calibration overwrites this, set to default
 w_n_pll = 2*pi*f_pll/2.48; % rad/s, filter natural frequency (not an angle)
 
 %% System Setup
-F_max = 600; % N
+F_max = 750; % N
 g = -9.81; % m/s^2, gravity along x (vertical axis, x < 0 is down into the chest)
 R_phase = 0.047; % Ohms, motor winding resistance
 V_batt = 22.2; % V, minimum for conservative estimate
@@ -55,11 +55,15 @@ servo_max_current = 40; % A
 servo_pwm_rate_hz = 15000;
 Ts = 1/servo_pwm_rate_hz;
 
-pid_dq_hz = 100;
+pid_dq_hz = 200; % Hz (servo.pid_dq_hz), calibration overwrites this, so set to default
 
 tau_d = 1.5*Ts; % PWM Delay, s
 
-accel_limit = 16.5/L_ball;   % rev/s^2, NaN = no limit (servo.default_accel_limit)
-vel_limit = 0.6/L_ball; % rev/s (0.6 m/s at the nut), NaN = no limit (servo.default_velocity_limit)
-tau_max_ball = (F_max + m_ball*g)*p_ball/eta_ball; % Nm
+% Trajectory limits are the config defaults, which apply because the Pi
+% sends velocity_limit/accel_limit = NaN. Config NaN = no limit; don't use
+% negative here (only a negative per-command limit disables it).
+accel_limit = 16.5/L_ball;   % rev/s^2 (servo.default_accel_limit, firmware default 50)
+vel_limit = 0.6/L_ball; % rev/s (0.6 m/s at the nut) (servo.default_velocity_limit)
+inertia_ff = J_eff_ball; % kg*m^2 (servo.inertia_feedforward), default 0 = off
+tau_max_ball = min((F_max + m_ball*g)*p_ball/eta_ball, 1.7/1.5); % Nm, per-command maximum_torque (not a config)
 iLimit = 1.2*tau_max_ball; % Nm (servo.pid_position.ilimit)

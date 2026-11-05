@@ -24,7 +24,7 @@ import time
 import moteus
 
 CONTROLLER_ID: int = 1  # same as moteus_thread.py
-BALL_SCREW_LEAD_M: float = 0.01  # PLACEHOLDER, same as moteus_thread.py, meters of plunger travel per ball screw revolution
+BALL_SCREW_LEAD_M: float = 0.0254*0.5  # PLACEHOLDER, same as moteus_thread.py, meters of plunger travel per ball screw revolution
 BLDC_GEAR_RATIO: float = -1.0  # motor revolutions per ball screw revolution, 1:1 gear train that reverses rotation
 BLDC_ROTATIONS_PER_IN: float = 0.0254 * BLDC_GEAR_RATIO / BALL_SCREW_LEAD_M  # motor rotations per inch of plunger travel
 MAX_TORQUE_NM: float = 0.4  # kept low for bench testing (main code allows TORQUE_LIMIT_NM, ~0.8 Nm for 500 N)

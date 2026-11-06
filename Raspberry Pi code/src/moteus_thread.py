@@ -153,7 +153,10 @@ class MoteusThread:
                 await asyncio.wait_for(self._controller.set_stop(query=True), timeout=REPLY_TIMEOUT_S) # pyright: ignore[reportAttributeAccessIssue]
                 break
             except Exception as e:
-                logging.error(f"Moteus startup stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
+                if attempt == STOP_ATTEMPTS:
+                    logging.error(f"Moteus startup stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
+                else:
+                    logging.warning(f"Moteus startup stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
 
         while not self._stop_requested:
             cycle_start: float = time.monotonic()

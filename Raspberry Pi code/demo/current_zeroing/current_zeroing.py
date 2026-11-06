@@ -42,7 +42,7 @@ from moteus_thread import (MoteusThread, MotorTarget, MotorState, CONTROLLER_ID,
                            BALL_SCREW_LEAD_M, BLDC_GEAR_RATIO, BALL_SCREW_TRAVEL_M)
 
 # --- Tunable constants (all TODO: tune on hardware) ---------------------------------------------------------
-DESCENT_VELOCITY_MPS: float = 0.005  # meters per second, plunger speed down the ball screw while searching
+DESCENT_VELOCITY_MPS: float = 0.01  # meters per second, plunger speed down the ball screw while searching
 # Force cap while descending. Kept well under moteus_thread.MAX_PLUNGER_FORCE_N, since contact is what we're looking for.
 # The q current saturates at the torque limit, so the spike threshold must stay below the current this cap allows
 DESCENT_MAX_FORCE_N: float = 50.0

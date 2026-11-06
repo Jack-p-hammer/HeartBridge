@@ -29,7 +29,7 @@ BLDC_GEAR_RATIO: float = -1.0  # motor revolutions per ball screw revolution
 BLDC_ROTATIONS_PER_M: float = BLDC_GEAR_RATIO / BALL_SCREW_LEAD_M  # motor rotations per meter of plunger travel, signed like BLDC_GEAR_RATIO
 # Ball screw travel only covers compressions plus safety room at either end. Carriage travel is handled by the lead screw steppers (stepper.py)
 BALL_SCREW_TOP_CLEARANCE_M: float = 0.01  # meters, the plunger sits this far below the top of travel when zeroing, so pause/abort can lift off the chest
-BALL_SCREW_TRAVEL_M: float = 0.10  # meters, total usable ball screw travel down from the startup (absolute zero) position
+BALL_SCREW_TRAVEL_M: float = 0.08  # meters, total usable ball screw travel down from the startup (absolute zero) position
 
 MAX_PLUNGER_FORCE_N: float = 500.0
 # Ideal (100% efficient) ball screw: F = 2*pi*T / lead. Real efficiency only lowers the force, so this limit is conservative

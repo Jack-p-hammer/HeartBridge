@@ -19,6 +19,7 @@ from Enums.control_modes import ControlMode
 
 CONTROLLER_ID: int = 1  # The ID of the moteus-x1 controller on the CAN bus
 COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
+REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1s watchdog, same as scripts/slow_jog.py
 RETRACT_VELOCITY_MPS: float = 0.08  # meters per second, velocity of the plunger along the ball screw during retract
 
 # --- Ball screw constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
@@ -149,7 +150,9 @@ class MoteusThread:
 
             # No controlMode decoding here, just pass values through to the controller
             try:
-                result: moteus.Result = await self._controller.set_position( # pyright: ignore[reportAttributeAccessIssue]
+                # Over the fdcanusb, the moteus library waits forever for a lost reply (the first one after connecting is
+                # often lost), which would freeze this loop for good. The timeout turns it into a normal failure below
+                result: moteus.Result = await asyncio.wait_for(self._controller.set_position( # pyright: ignore[reportAttributeAccessIssue]
                     position=target.position,
                     velocity=target.velocity,
                     kp_scale=target.kp_scale,
@@ -158,7 +161,7 @@ class MoteusThread:
                     velocity_limit=target.velocity_limit,
                     maximum_torque=target.maximum_torque,
                     query=True,
-                )
+                ), timeout=REPLY_TIMEOUT_S)
                 self._state = MotorState(
                     mode=result.values[moteus.Register.MODE],
                     fault=result.values[moteus.Register.FAULT],
@@ -170,6 +173,10 @@ class MoteusThread:
                     timestamp=time.monotonic(),
                 )
                 self._last_error = ErrorCode.NORMAL_OPERATION
+            except asyncio.TimeoutError:
+                # Lost reply. The next cycle sends the target again
+                logging.error(f"Moteus command loop failed: no reply within {REPLY_TIMEOUT_S} s")
+                self._last_error = ErrorCode.ERROR_MOTOR_FAILURE
             except Exception as e:
                 # Communication-level failure (timeout, transport, # error, etc).
                 logging.error(f"Moteus command loop failed: {e}")

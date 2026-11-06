@@ -19,7 +19,7 @@ import math
 import sensing
 from Enums.error_codes import ErrorCode
 from Enums.control_modes import ControlMode
-from moteus_thread import MoteusThread, CONTROLLER_ID
+from moteus_thread import MoteusThread, MotorState, CONTROLLER_ID, STARTUP_REPLY_TIMEOUT_S
 import stepper
 from stepper import LEAD_SCREW_TRAVEL_M, ZEROING_VELOCITY_MPS, RETRACT_VELOCITY_MPS
 
@@ -56,6 +56,19 @@ def init_motor() -> ErrorCode:
         logging.error(f"Motor controller initialization failed: {motor_error}")
         return ErrorCode.ERROR_INIT_FAILURE
 
+    # Until the moteus replies, its state holds placeholders (0 V, position 0). The battery check and the rotary zero in
+    # sensing.init_sensors() run right after this, so they would read those as a dead battery and a real position
+    motor_error = _motor_controller.wait_for_first_reply(STARTUP_REPLY_TIMEOUT_S)
+    if motor_error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"No reply from moteus within {STARTUP_REPLY_TIMEOUT_S} s: {_motor_controller.get_last_error()}")
+        # Stop commanding, so a target built from the placeholder positions is never sent. The moteus watchdog then
+        # stops the motor
+        _motor_controller.stop()
+        return ErrorCode.ERROR_INIT_FAILURE
+
+    state: MotorState = _motor_controller.get_state()
+    logging.info(f"Moteus connected: {state.voltage:.2f} V, position {state.position:.3f} rev, "
+                 f"mode {state.mode}, fault {state.fault}")
     return ErrorCode.NORMAL_OPERATION
 
 def init_steppers(pi) -> ErrorCode:
@@ -212,9 +225,11 @@ def compressions() -> ErrorCode:
 
 def pause_compressions() -> ErrorCode:
     """Pause compressions by returning to zeroed position. Non-blocking.
+    Also called on entry to KNEEL_FAILURE, so a kneel failure still commands the retract before it is reported.
 
     Returns:
-        ErrorCode: Normal operation if successful, ERROR_SENSOR_FAILURE if failed
+        ErrorCode: Normal operation if successful, ERROR_IMU_KNEEL_FAILURE on a kneel failure (after commanding the
+            retract), ERROR_SENSOR_FAILURE or ERROR_MOTOR_FAILURE if failed
     """
     global _motor_controller
     
@@ -222,6 +237,14 @@ def pause_compressions() -> ErrorCode:
     error = sensing.read_sensors(ControlMode.PAUSE_RETRACT)
     if error == ErrorCode.ERROR_IMU_KNEEL_FAILURE:
         logging.error(f"Compressions failed on IMU kneel: {error}")
+        # Lift off the chest anyway. Otherwise the plunger holds its last compression setpoint through KNEEL_FAILURE
+        # and ALIGNMENT, since neither commands the motor
+        retract_error: ErrorCode = _motor_controller.set_target(ControlMode.PAUSE_RETRACT,
+                                                                sensing.get_rotary_zero_position(),
+                                                                sensing.get_rotary_absolute_zero_position())
+        if retract_error != ErrorCode.NORMAL_OPERATION:
+            logging.error(f"Kneel failure retract failed on motor command: {retract_error}")
+            return ErrorCode.ERROR_MOTOR_FAILURE
         return ErrorCode.ERROR_IMU_KNEEL_FAILURE
     if error != ErrorCode.NORMAL_OPERATION:
         logging.error(f"Pause retract failed on sensors: {error}")

@@ -89,7 +89,15 @@ Running over SSH works: if no display is set, the screen and audio are sent to t
 
 ### Demo mode
 
-`python demo/main.py` runs the same state machine from `src/`, but with `demo/sensing.py` in place of `src/sensing.py`. The force sensor, ToF sensor and IMU aren't used, and zeroing stops when the carriage reaches `DEMO_ZERO_POSITION_M` (set in `demo/sensing.py`). The motor and steppers still move. Press Esc or Q to stop the motor and exit. Demo runs log to `Logs/heartBridge_demo_<timestamp>.log`.
+`python demo/main.py` runs the same state machine from `src/`, but with `demo/sensing.py` in place of `src/sensing.py`. The force sensor, ToF sensor and IMU aren't used, and zeroing stops when the carriage reaches `DEMO_ZERO_POSITION_M` (set in `demo/sensing.py`). The motor and steppers still move. Demo runs log to `Logs/heartBridge_demo_<timestamp>.log`.
+
+Keys work on a keyboard plugged into the Pi (the screen window gets them, not an SSH terminal):
+
+- **Esc** or **Q**: stop the motor and exit. Ctrl+C in the terminal does the same.
+- **K**: simulate a kneel failure, which goes to the kneel failure screen.
+- **A**: simulate a sensor failure, which goes to ABORT. Only a restart leaves ABORT.
+
+K and A take effect the next time the sensors are read: during zeroing, compressions, or on entering pause.
 
 ## Bench and bring-up scripts
 

@@ -527,3 +527,15 @@ def test_draw_timer_failure_reports_pygame_error(hardware, monkeypatch):
     monkeypatch.setattr(HMI.pygame.display, "update", broken_update)
 
     assert HMI.draw_timer(1) == ErrorCode.ERROR_PYGAME_FAILURE
+
+
+def test_every_image_and_audio_prompt_file_exists(hardware):
+    """A missing asset only fails once its state is entered on the machine, e.g. a missing paused.wav sent every
+    Pause press to ABORT. Catch it here instead."""
+    from pathlib import Path
+    import HMI
+
+    missing = [f"{member.__class__.__name__}.{member.name}: {member.value}"
+               for member in (*HMI.Image, *HMI.AudioPrompt)
+               if not Path(member.value).is_file()]
+    assert missing == []

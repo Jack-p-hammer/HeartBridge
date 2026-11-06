@@ -9,6 +9,9 @@ since actuation.py needs the rotary zero positions to command the BLDC.
 
 Zeroing finishes when the carriage reaches DEMO_ZERO_POSITION_M instead of when the force sensor detects the chest.
 
+The states the sensor suite would trigger are reached with simulate_fault(), which demo/main.py calls from the keyboard:
+ERROR_IMU_KNEEL_FAILURE goes to KNEEL_FAILURE and ERROR_SENSOR_FAILURE goes to ABORT, same as in src/main.py.
+
 BEFORE AND DURING ZEROING, THE zero_position VARIABLES MUST EQUAL THE absolute_zero_position VARIABLES
 """
 # External imports
@@ -38,6 +41,9 @@ rotary_absolute_zero_position: float = 0.0  # The absolute position of rotary en
 # Global variables for sensor zeroed positions
 rotary_zero_position: float = 0.0  # The zeroed position of the rotary encoder after zeroing
 
+# Fault for the next read_sensors() to report once, see simulate_fault(). None for no fault
+_simulated_fault: ErrorCode | None = None
+
 
 def init_sensors(motor_controller: MoteusThread, pi: pigpio.pi) -> ErrorCode:
     """Store the shared instances and record the rotary encoder's startup position. No sensor hardware is touched."""
@@ -62,18 +68,38 @@ def init_sensors(motor_controller: MoteusThread, pi: pigpio.pi) -> ErrorCode:
     return ErrorCode.NORMAL_OPERATION
 
 
+def simulate_fault(error: ErrorCode) -> None:
+    """Make the next read_sensors() report error once, as if a sensor had tripped. Sensors are only read while
+    zeroing, compressing and pausing, so the fault waits for the next of those.
+
+    Args:
+        error (ErrorCode): ERROR_IMU_KNEEL_FAILURE for KNEEL_FAILURE, ERROR_SENSOR_FAILURE for ABORT
+    """
+    global _simulated_fault
+    logging.warning(f"Demo: {error.name} queued for the next sensor read")
+    _simulated_fault = error
+
+
 def read_sensors(control_mode: ControlMode) -> ErrorCode:
     """No sensors are read. While zeroing, reports ZEROING_FINISHED once the carriage reaches DEMO_ZERO_POSITION_M
 
     Returns:
-        ErrorCode: ZEROING_FINISHED as above, NORMAL_OPERATION otherwise, ERROR_SENSOR_FAILURE on an invalid control mode
+        ErrorCode: A fault queued by simulate_fault(), else ZEROING_FINISHED as above, NORMAL_OPERATION otherwise,
+            ERROR_SENSOR_FAILURE on an invalid control mode
     """
+    global _simulated_fault
     match control_mode:
         case ControlMode.ZEROING | ControlMode.COMPRESSIONS | ControlMode.PAUSE_RETRACT:
             pass
         case _:
             logging.error(f"Invalid control mode for sensor reading: {control_mode}")
             return ErrorCode.ERROR_SENSOR_FAILURE
+
+    if _simulated_fault is not None:
+        error: ErrorCode = _simulated_fault
+        _simulated_fault = None
+        logging.warning(f"Demo: reporting simulated {error.name}")
+        return error
 
     carriage_position_m: float = stepper.get_position()
     if (control_mode == ControlMode.ZEROING and
@@ -140,7 +166,9 @@ def battery_check() -> ErrorCode:
         return ErrorCode.ERROR_MOTOR_FAILURE
 
     if battery_voltage < BATTERY_THRESHOLD_V:
+        logging.error(f"Low battery: {battery_voltage:.2f} V, threshold {BATTERY_THRESHOLD_V} V")
         return ErrorCode.ERROR_LOW_BATTERY
+    logging.debug(f"Battery voltage {battery_voltage:.2f} V")
     return ErrorCode.NORMAL_OPERATION
 
 

@@ -134,11 +134,12 @@ def test_zeroing_fails_on_timeout(hardware):
 def test_zeroing_fails_on_motor_error(hardware):
     import time
     import actuation
+    import moteus_thread
     actuation.init_motor()
     actuation.init_zeroing()
 
     hardware.moteus_controller.raise_on_set_position = RuntimeError("comm lost")
-    time.sleep(0.05)  # let the background command loop record the failure
+    time.sleep(moteus_thread.MAX_REPLY_AGE_S + 0.1)  # lost replies only count once they outlast the tolerance
 
     assert actuation.zeroing() == ErrorCode.ERROR_MOTOR_FAILURE
 
@@ -444,12 +445,13 @@ def test_compressions_propagates_imu_kneel_failure(hardware):
 def test_compressions_fails_on_motor_error(hardware):
     import time
     import actuation
+    import moteus_thread
     import sensing
     actuation.init_motor()
     init_sensing(sensing, actuation.get_motor_controller(), hardware)
 
     hardware.moteus_controller.raise_on_set_position = RuntimeError("comm lost")
-    time.sleep(0.05)
+    time.sleep(moteus_thread.MAX_REPLY_AGE_S + 0.1)  # lost replies only count once they outlast the tolerance
 
     assert actuation.compressions() == ErrorCode.ERROR_MOTOR_FAILURE
 
@@ -501,12 +503,13 @@ def test_pause_compressions_propagates_imu_kneel_failure(hardware):
 def test_pause_compressions_fails_on_motor_error(hardware):
     import time
     import actuation
+    import moteus_thread
     import sensing
     actuation.init_motor()
     init_sensing(sensing, actuation.get_motor_controller(), hardware)
 
     hardware.moteus_controller.raise_on_set_position = RuntimeError("comm lost")
-    time.sleep(0.05)
+    time.sleep(moteus_thread.MAX_REPLY_AGE_S + 0.1)  # lost replies only count once they outlast the tolerance
 
     assert actuation.pause_compressions() == ErrorCode.ERROR_MOTOR_FAILURE
 
@@ -520,3 +523,68 @@ def test_abort_compressions_does_not_require_sensing_init(hardware):
     # Deliberately skip init_sensing() -- abort must not depend on it.
 
     assert actuation.abort_compressions() == ErrorCode.NORMAL_OPERATION
+
+
+# -------------------- moteus startup and lost replies --------------------
+
+def test_init_motor_waits_for_first_reply(hardware):
+    """init_motor() only returns once the moteus has replied, so the battery check and the rotary zero that run right
+    after it read real values, not the placeholders MoteusThread starts with (0 V read as a dead battery)."""
+    import actuation
+    hardware.moteus_controller.voltage = 23.5
+    hardware.moteus_controller.position = 0.75
+
+    assert actuation.init_motor() == ErrorCode.NORMAL_OPERATION
+
+    state = actuation.get_motor_controller().get_state()  # no sleep
+    assert not state.stale
+    assert state.voltage == pytest.approx(23.5)
+    assert state.position == pytest.approx(0.75)
+
+
+def test_init_motor_fails_and_stops_commanding_without_a_reply(hardware, monkeypatch):
+    """No reply at startup is an init failure, and the thread stops so a target built from placeholder positions
+    is never sent."""
+    import actuation
+    monkeypatch.setattr(actuation, "STARTUP_REPLY_TIMEOUT_S", 0.1)
+    hardware.moteus_controller.raise_on_set_position = RuntimeError("no reply")
+
+    assert actuation.init_motor() == ErrorCode.ERROR_INIT_FAILURE
+    assert actuation.get_motor_controller()._stop_requested
+
+
+def test_lost_replies_tolerated_until_max_reply_age(hardware):
+    """A lost reply is retried on the next cycle, so it only becomes a motor failure once replies have been missing
+    for longer than MAX_REPLY_AGE_S, and clears as soon as replies come back."""
+    import time
+    import actuation
+    import moteus_thread
+    actuation.init_motor()
+    motor = actuation.get_motor_controller()
+
+    hardware.moteus_controller.raise_on_set_position = RuntimeError("lost reply")
+    time.sleep(0.03)  # a few lost cycles, well inside the tolerance
+    assert motor.get_last_error() == ErrorCode.NORMAL_OPERATION
+
+    time.sleep(moteus_thread.MAX_REPLY_AGE_S)
+    assert motor.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+    hardware.moteus_controller.raise_on_set_position = None
+    time.sleep(0.05)
+    assert motor.get_last_error() == ErrorCode.NORMAL_OPERATION
+
+
+def test_pause_compressions_retracts_on_imu_kneel_failure(hardware):
+    """KNEEL_FAILURE calls pause_compressions() while the IMU still reads a kneel failure. The plunger must still be
+    commanded back to the zeroed position, not left at its last compression setpoint."""
+    import actuation
+    import moteus_thread
+    import sensing
+    actuation.init_motor()
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    motor = actuation.get_motor_controller()
+    motor._target = moteus_thread.MotorTarget(position=12.3)  # stand-in for a compression setpoint
+    hardware.imu.acceleration = (0.0, 0.0, 20.0)  # exceeds the accel limit
+
+    assert actuation.pause_compressions() == ErrorCode.ERROR_IMU_KNEEL_FAILURE
+    assert motor._target.position == pytest.approx(sensing.get_rotary_zero_position())

@@ -56,6 +56,15 @@ Format: `case -> result`.
   repeat).
 - audio_finished(): elapsed < prompt length -> False. elapsed >= length ->
   True. audio-less state -> True. no prompt ever played -> True.
+- Assets: every Image and AudioPrompt file exists on disk.
+
+### Demo tests
+- demo/sensing.py read_sensors(): carriage below DEMO_ZERO_POSITION_M ->
+  NORMAL_OPERATION, at it -> ZEROING_FINISHED. simulate_fault() (K/A keys)
+  -> that fault reported once, in every sensor-reading mode, then
+  NORMAL_OPERATION.
+- demo/sensing.py init_sensors()/battery_check(): rotary zero and battery
+  voltage come from a real moteus reply.
 
 ### Sensing tests
 - init_sensors(): I2C/ToF (VL53L0X)/IMU unavailable -> ERROR_INIT_FAILURE.
@@ -82,7 +91,12 @@ Format: `case -> result`.
 - init_motor()/get_motor_controller(): healthy moteus construction ->
   NORMAL_OPERATION, same instance on later calls. failing construction ->
   ERROR_INIT_FAILURE. command loop with no controller -> ERROR_INIT_FAILURE,
-  returns without raising.
+  returns without raising. returns only after the first moteus reply, so the
+  state holds real voltage/position. no reply within STARTUP_REPLY_TIMEOUT_S
+  -> ERROR_INIT_FAILURE, command thread stopped.
+- MoteusThread.get_last_error(): lost replies for less than MAX_REPLY_AGE_S
+  -> NORMAL_OPERATION. longer -> ERROR_MOTOR_FAILURE. replies back ->
+  NORMAL_OPERATION again.
 - init_steppers(): any one pigpio setup call (pin mode, STEP/DIR/EN write,
   waveform clear) raises -> ERROR_INIT_FAILURE.
 - init_zeroing()/init_compressions(): records start time.
@@ -98,6 +112,8 @@ Format: `case -> result`.
 - compressions()/pause_compressions(): healthy / sensor failure / motor
   failure -> NORMAL_OPERATION / ERROR_SENSOR_FAILURE / ERROR_MOTOR_FAILURE.
   IMU kneel failure -> passed through unchanged, not ERROR_SENSOR_FAILURE.
+  pause_compressions() IMU kneel failure -> retract to the zeroed position
+  still commanded.
   pigpio failure in the stepper update -> ERROR_MOTOR_FAILURE.
 - abort_compressions(): no sensing init needed -> NORMAL_OPERATION.
 - stepper.set_target(): out of travel, NaN, non-positive velocity, or wrong

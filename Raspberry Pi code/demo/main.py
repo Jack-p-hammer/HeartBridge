@@ -31,27 +31,34 @@ import pygame
 import HMI
 import actuation
 import stepper
+import sensing  # demo/sensing.py, since demo/ is first on the path
 from Enums.error_codes import ErrorCode
 
-# Demo-only exit key. src/main.py calls HMI.pump_events() every tick, so the key check rides along with it
+# Demo-only keys. src/main.py calls HMI.pump_events() every tick, so the key check rides along with it
 _pump_events = HMI.pump_events
 
 
-def quit_requested() -> bool:
-    """Check whether the user pressed Esc or Q, or closed the window.
+def handle_demo_keys() -> bool:
+    """Handle the demo-only keys, and return whether the user pressed Esc or Q, or closed the window.
 
-    HMI.pump_events() keeps the window alive but never reads keys, so the
-    fullscreen window would otherwise have no way to exit back to the terminal.
+    HMI.pump_events() keeps the window alive but never reads keys, so the fullscreen window would otherwise have no
+    way to exit back to the terminal, and with the sensor suite gone nothing could reach the states it triggers:
+        K: simulated kneel failure -> KNEEL_FAILURE
+        A: simulated sensor failure -> ABORT
+    Both take effect the next time the sensors are read (zeroing, compressions or pause).
     """
     # The display doesn't exist until HMI.init_HMI() runs on the first tick
     if not pygame.display.get_init():
         return False
+    quit_pressed: bool = False
     for event in pygame.event.get((pygame.QUIT, pygame.KEYDOWN)):
-        if event.type == pygame.QUIT:
-            return True
-        if event.key in (pygame.K_ESCAPE, pygame.K_q):
-            return True
-    return False
+        if event.type == pygame.QUIT or event.key in (pygame.K_ESCAPE, pygame.K_q):
+            quit_pressed = True
+        elif event.key == pygame.K_k:
+            sensing.simulate_fault(ErrorCode.ERROR_IMU_KNEEL_FAILURE)
+        elif event.key == pygame.K_a:
+            sensing.simulate_fault(ErrorCode.ERROR_SENSOR_FAILURE)
+    return quit_pressed
 
 
 def shutdown_demo() -> None:
@@ -70,16 +77,20 @@ def shutdown_demo() -> None:
     sys.exit(0)
 
 
-def pump_events_with_quit() -> ErrorCode:
-    """HMI.pump_events(), plus Esc or Q (or closing the window) exits back to the terminal from any state."""
+def pump_events_with_demo_keys() -> ErrorCode:
+    """HMI.pump_events(), plus the demo keys. Esc or Q (or closing the window) exits back to the terminal from any state."""
     error: ErrorCode = _pump_events()
-    if quit_requested():
+    if handle_demo_keys():
         shutdown_demo()
     return error
 
 
-HMI.pump_events = pump_events_with_quit
+HMI.pump_events = pump_events_with_demo_keys
 
 
 if __name__ == "__main__":
-    heartbridge_main.main()
+    try:
+        heartbridge_main.main()
+    except KeyboardInterrupt:
+        # Ctrl+C in the terminal (e.g. over SSH) gets the same motor stop as Esc or Q
+        shutdown_demo()

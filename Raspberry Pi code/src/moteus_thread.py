@@ -21,6 +21,11 @@ CONTROLLER_ID: int = 1  # The ID of the moteus-x1 controller on the CAN bus
 COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
 REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1s watchdog, same as scripts/slow_jog.py
 STOP_ATTEMPTS: int = 5  # tries at the startup stop command before commanding anyway (the command loop then logs errors)
+# The first command also finds and opens the CAN adapter, which has taken ~5 s on the Pi, so this is generous
+STARTUP_REPLY_TIMEOUT_S: float = 10.0  # seconds to wait for the first reply, see wait_for_first_reply()
+# A lost reply is retried on the next cycle, so a failure is only reported once replies have been missing this long.
+# Same window as demo/current_zeroing/current_zeroing.py MAX_SAMPLE_AGE_S
+MAX_REPLY_AGE_S: float = 0.25
 RETRACT_VELOCITY_MPS: float = 0.08  # meters per second, velocity of the plunger along the ball screw during retract
 
 # --- Ball screw constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
@@ -87,6 +92,7 @@ class MoteusThread:
             target=self._run_loop, daemon=True
         )
         self._ready: threading.Event = threading.Event()
+        self._first_reply: threading.Event = threading.Event()  # set on the first successful reply, see wait_for_first_reply()
         self._stop_requested: bool = False
 
         self._target: MotorTarget = MotorTarget(position=math.nan, velocity=0.0)
@@ -112,6 +118,20 @@ class MoteusThread:
         if not self._ready.wait(timeout=timeout):
             return ErrorCode.ERROR_INIT_FAILURE
         return self._init_error
+
+    def wait_for_first_reply(self, timeout: float) -> ErrorCode:
+        """Block until the controller has replied at least once. Until then, get_state() holds the placeholders from
+        __init__ (0 V, position 0), which callers would otherwise read as real. Call once, after start().
+
+        Args:
+            timeout (float): Seconds to wait for the first reply
+
+        Returns:
+            ErrorCode: NORMAL_OPERATION once a reply has arrived, ERROR_INIT_FAILURE if none arrived within timeout
+        """
+        if self._first_reply.wait(timeout=timeout):
+            return ErrorCode.NORMAL_OPERATION
+        return ErrorCode.ERROR_INIT_FAILURE
 
     def stop(self) -> None:
         self._stop_requested = True
@@ -187,6 +207,7 @@ class MoteusThread:
                     timestamp=time.monotonic(),
                 )
                 self._last_error = ErrorCode.NORMAL_OPERATION
+                self._first_reply.set()
             except asyncio.TimeoutError:
                 # Lost reply. The next cycle sends the target again
                 logging.error(f"Moteus command loop failed: no reply within {REPLY_TIMEOUT_S} s")
@@ -292,8 +313,16 @@ class MoteusThread:
         return self._state
 
     def get_last_error(self) -> ErrorCode:
-        """Returns the ErrorCode describing the failure/lack thereof from the motor controller thread"""
-        return self._last_error
+        """Returns the ErrorCode describing the failure/lack thereof from the motor controller thread.
+        A lost reply is retried on the next cycle, so a failure only counts once no reply has arrived for
+        MAX_REPLY_AGE_S. Before the first reply there is nothing to tolerate, so the failure is reported as-is."""
+        error: ErrorCode = self._last_error
+        if error == ErrorCode.NORMAL_OPERATION:
+            return error
+        state: MotorState = self._state
+        if not state.stale and time.monotonic() - state.timestamp <= MAX_REPLY_AGE_S:
+            return ErrorCode.NORMAL_OPERATION
+        return error
     
     def get_battery_voltage(self) -> float:
         """Returns the battery voltage of the 6S Lipo battery pack, as reported by the moteus controller."""

@@ -276,6 +276,11 @@ class FakeMoteusController:
         self.q_current = 0.0
         self.query_resolution = None
         self.raise_on_set_position: Optional[Exception] = None
+        self.stop_count = 0
+
+    async def set_stop(self, **kwargs) -> None:
+        # Sent once when the command loop starts, to clear a latched watchdog timeout. Not recorded in `commands`
+        self.stop_count += 1
 
     async def set_position(self, **kwargs) -> FakeMoteusResult:
         if self.raise_on_set_position is not None:

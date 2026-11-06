@@ -20,6 +20,7 @@ from Enums.control_modes import ControlMode
 CONTROLLER_ID: int = 1  # The ID of the moteus-x1 controller on the CAN bus
 COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
 REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1s watchdog, same as scripts/slow_jog.py
+STOP_ATTEMPTS: int = 5  # tries at the startup stop command before commanding anyway (the command loop then logs errors)
 RETRACT_VELOCITY_MPS: float = 0.08  # meters per second, velocity of the plunger along the ball screw during retract
 
 # --- Ball screw constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
@@ -143,7 +144,17 @@ class MoteusThread:
             logging.error("Moteus controller not initialized - Command loop assert error")
             self._last_error = ErrorCode.ERROR_INIT_FAILURE
             return
-        
+
+        # When a previous run ends, commands stop and the moteus watchdog latches it in position timeout mode (11),
+        # which ignores position commands until a stop is received. Clear it first, like scripts/slow_jog.py.
+        # Queried so a lost frame (common right after connecting) is retried instead of silently skipped
+        for attempt in range(1, STOP_ATTEMPTS + 1):
+            try:
+                await asyncio.wait_for(self._controller.set_stop(query=True), timeout=REPLY_TIMEOUT_S) # pyright: ignore[reportAttributeAccessIssue]
+                break
+            except Exception as e:
+                logging.error(f"Moteus startup stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
+
         while not self._stop_requested:
             cycle_start: float = time.monotonic()
             target: MotorTarget = self._target

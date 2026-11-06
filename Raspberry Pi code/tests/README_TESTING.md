@@ -65,6 +65,9 @@ Format: `case -> result`.
   NORMAL_OPERATION.
 - demo/sensing.py init_sensors()/battery_check(): rotary zero and battery
   voltage come from a real moteus reply.
+- demo/main.py end to end: real src/main.py state machine on fake hardware,
+  operator only presses Next and Pause -> every state visited in order
+  (Pause tour: PAUSE, then KNEEL_FAILURE, then ABORT), Esc exits with code 0.
 
 ### Sensing tests
 - init_sensors(): I2C/ToF (VL53L0X)/IMU unavailable -> ERROR_INIT_FAILURE.

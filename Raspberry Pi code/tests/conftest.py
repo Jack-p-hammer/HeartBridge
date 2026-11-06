@@ -388,6 +388,8 @@ class PygameHarness:
         self.sound_loads: list = []  # paths actually passed to mixer.Sound()
         self.rendered: list = []  # strings rendered with pygame.font (the CPR timer)
         self.display_updates: int = 0  # partial display.update() calls (the CPR timer)
+        self.events: list = []  # queued events, handed out (and cleared) by the next pygame.event.get()
+        self.display_initialized: bool = False  # pygame.display.get_init(), True once pygame.init() has run
 
         self.init_error: Optional[Exception] = None
         self.display_error: Optional[Exception] = None
@@ -488,6 +490,7 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
     def pg_init():
         if pg.init_error is not None:
             raise pg.init_error
+        pg.display_initialized = True
 
     def mixer_init(frequency=44100, channels=1, buffer=2048):
         if pg.init_error is not None:
@@ -527,7 +530,7 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
 
     display_ns = types.SimpleNamespace(
         Info=display_info, set_mode=display_set_mode, set_caption=display_set_caption, flip=display_flip,
-        update=display_update,
+        update=display_update, get_init=lambda: pg.display_initialized,
     )
     font_ns = types.SimpleNamespace(Font=lambda name, size: FakePygameFont(pg))
 
@@ -543,12 +546,25 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
         if pg.event_pump_error is not None:
             raise pg.event_pump_error
 
-    event_ns = types.SimpleNamespace(pump=event_pump)
+    def event_get(eventtype=None):
+        # Every queued event is handed out regardless of eventtype; tests only queue the types the caller asks for
+        events, pg.events = pg.events, []
+        return events
+
+    event_ns = types.SimpleNamespace(pump=event_pump, get=event_get)
     time_ns = types.SimpleNamespace(get_ticks=lambda: pg.ticks)
 
     return _fake_module(
         "pygame",
         FULLSCREEN=0,
+        # Real pygame values, for demo/main.py's keyboard handling
+        QUIT=256,
+        KEYDOWN=768,
+        K_ESCAPE=27,
+        K_a=97,
+        K_k=107,
+        K_q=113,
+        quit=lambda: None,
         Surface=FakePygameSurface,
         Rect=FakePygameRect,
         init=pg_init,

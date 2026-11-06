@@ -91,7 +91,17 @@ Running over SSH works: if no display is set, the screen and audio are sent to t
 
 `python demo/main.py` runs the same state machine from `src/`, but with `demo/sensing.py` in place of `src/sensing.py`. The force sensor, ToF sensor and IMU aren't used, and zeroing stops when the carriage reaches `DEMO_ZERO_POSITION_M` (set in `demo/sensing.py`). The motor and steppers still move. Demo runs log to `Logs/heartBridge_demo_<timestamp>.log`.
 
-Keys work on a keyboard plugged into the Pi (the screen window gets them, not an SSH terminal):
+The demo only needs the Next and Pause buttons, the steppers and their drivers (STEP on GPIO 20, DIR on GPIO 21, EN on GPIO 16, see `src/stepper.py`), the moteus and its CAN adapter, the screen and the speaker. No sensors, lasers or keyboard.
+
+**Button-only tour.** With no IMU or other sensors, the Pause presses during compressions take the machine through the states the sensors would trigger, in order (`PAUSE_PRESS_TOUR` in `demo/main.py`):
+
+1. 1st Pause press: PAUSE as normal. Press Next to resume.
+2. 2nd Pause press: kneel failure. Press Next to go back to alignment, and on through zeroing to compressions.
+3. 3rd Pause press: ABORT. The tour ends here; only a restart leaves ABORT (Ctrl+C in the terminal stops the demo cleanly).
+
+After the tour, Pause presses are normal pauses. Set `PAUSE_PRESS_TOUR = []` to turn it off.
+
+Optional keys, on a keyboard plugged into the Pi (the screen window gets them, not an SSH terminal):
 
 - **Esc** or **Q**: stop the motor and exit. Ctrl+C in the terminal does the same.
 - **K**: simulate a kneel failure, which goes to the kneel failure screen.

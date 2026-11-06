@@ -3,6 +3,8 @@
 # Runs the real state machine in src/main.py, with demo/sensing.py in place of src/sensing.py.
 # Every other module (actuation, stepper, moteus_thread, HMI, Enums) is imported from src/ unaltered,
 # so any bug found with the demo is a bug in the main machine.
+# Hardware needed: the Next and Pause buttons, the steppers and their drivers, the moteus, the screen and the speaker.
+# No sensors, lasers or keyboard: PAUSE_PRESS_TOUR below reaches KNEEL_FAILURE and ABORT from the Pause button.
 
 # External imports
 import sys
@@ -86,6 +88,44 @@ def pump_events_with_demo_keys() -> ErrorCode:
 
 
 HMI.pump_events = pump_events_with_demo_keys
+
+
+# Button-only tour of the states the sensor suite would trigger, so the demo needs no keyboard. Each entry is what the
+# next Pause press during compressions does: None pauses as normal, an ErrorCode is reported by the next sensor read
+# instead (see sensing.simulate_fault()), sending the machine where that sensor fault would. Once the list runs out,
+# Pause presses pause as normal. ABORT ends the tour, since only a restart leaves it. Set to [] to turn the tour off
+PAUSE_PRESS_TOUR: list[ErrorCode | None] = [
+    None,                               # 1st press: PAUSE, then Next resumes compressions
+    ErrorCode.ERROR_IMU_KNEEL_FAILURE,  # 2nd press: KNEEL_FAILURE, then Next goes back to ALIGNMENT
+    ErrorCode.ERROR_SENSOR_FAILURE,     # 3rd press: ABORT
+]
+_pause_presses: int = 0  # Pause presses accepted so far
+_pause_button_pressed = HMI.pause_button_pressed
+
+
+def pause_button_pressed_with_tour() -> tuple[ErrorCode, bool]:
+    """HMI.pause_button_pressed(), with each accepted press following PAUSE_PRESS_TOUR.
+    src/main.py only reads the Pause button during compressions, so only those presses are counted."""
+    global _pause_presses
+    error, pressed = _pause_button_pressed()
+    if error != ErrorCode.NORMAL_OPERATION or not pressed:
+        return error, pressed
+
+    _pause_presses += 1
+    if _pause_presses > len(PAUSE_PRESS_TOUR):
+        return error, pressed
+
+    fault: ErrorCode | None = PAUSE_PRESS_TOUR[_pause_presses - 1]
+    if fault is None:
+        logging.info(f"Demo tour: Pause press {_pause_presses}/{len(PAUSE_PRESS_TOUR)} pauses as normal")
+        return error, pressed
+    logging.info(f"Demo tour: Pause press {_pause_presses}/{len(PAUSE_PRESS_TOUR)} simulates {fault.name}")
+    sensing.simulate_fault(fault)
+    # Not a pause: the fault, reported by the next sensor read, decides the next state
+    return error, False
+
+
+HMI.pause_button_pressed = pause_button_pressed_with_tour
 
 
 if __name__ == "__main__":

@@ -36,7 +36,7 @@ STEPS_PER_M: float = STEPPER_FULL_STEPS_PER_REV * STEPPER_MICROSTEPS * abs(STEPP
 # reversal makes it low. TODO: Verify against wiring
 STEPPER_DIR_DOWN_LEVEL: int = 1 if STEPPER_GEAR_RATIO > 0 else 0
 
-LEAD_SCREW_TRAVEL_M: float = 0.0254 * 8  # meters, usable carriage travel from home (startup) position, 8" placeholder
+LEAD_SCREW_TRAVEL_M: float = 0.12  # meters, usable carriage travel from home (startup) position, 8" placeholder
 
 # --- Motion constants ---
 CHUNK_DURATION_S: float = 0.04  # Duration of each queued chunk of steps

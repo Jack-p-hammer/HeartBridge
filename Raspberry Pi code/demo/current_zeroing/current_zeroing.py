@@ -61,6 +61,9 @@ RETRACT_TIMEOUT_S: float = 10.0  # seconds before giving up on the retract
 
 LOOP_PERIOD_S: float = 0.002  # main loop tick, faster than moteus_thread.COMMAND_RATE_HZ so no sample is missed
 STARTUP_TIMEOUT_S: float = 2.0  # seconds to wait for the first reply from the moteus
+# Longest gap between moteus replies before the descent stops. A few lost replies in a row (each ~moteus_thread
+# REPLY_TIMEOUT_S plus a command period) are tolerated, since the carriage only moves ~1 mm in this time
+MAX_SAMPLE_AGE_S: float = 0.25
 
 # Same log location and naming as src/main.py. The CSV shares the run timestamp so the two files pair up
 LOG_DIR: Path = REPO_DIR / "Logs"
@@ -171,7 +174,7 @@ def update_descent() -> ErrorCode:
 
     Returns:
         ErrorCode: NORMAL_OPERATION while descending, ZEROING_FINISHED on a current spike,
-                   ERROR_ZEROING_FAILURE at the extension limit or timeout, ERROR_MOTOR_FAILURE on a moteus error
+                   ERROR_ZEROING_FAILURE at the extension limit or timeout, ERROR_MOTOR_FAILURE if replies stop or the moteus faults
     """
     global _last_sample_time, _baseline_sum_a, _baseline_count, _spike_count
 
@@ -180,12 +183,15 @@ def update_descent() -> ErrorCode:
         logging.error(f"Timed out after {elapsed_s:.1f} s without a current spike")
         return ErrorCode.ERROR_ZEROING_FAILURE
 
-    if _motor.get_last_error() != ErrorCode.NORMAL_OPERATION:
-        logging.error(f"Moteus communication error: {_motor.get_last_error()}")
+    # A single lost reply is logged by the moteus thread and retried next cycle, so only stop once replies have been
+    # missing for longer than MAX_SAMPLE_AGE_S
+    state: MotorState = _motor.get_state()
+    sample_age_s: float = time.monotonic() - state.timestamp
+    if sample_age_s > MAX_SAMPLE_AGE_S:
+        logging.error(f"No moteus reply for {sample_age_s:.3f} s, last error {_motor.get_last_error()}")
         return ErrorCode.ERROR_MOTOR_FAILURE
 
     # The moteus thread only updates at COMMAND_RATE_HZ, skip ticks with no new sample
-    state: MotorState = _motor.get_state()
     if state.timestamp == _last_sample_time:
         return ErrorCode.NORMAL_OPERATION
     _last_sample_time = state.timestamp

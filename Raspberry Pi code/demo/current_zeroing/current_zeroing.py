@@ -45,7 +45,7 @@ from moteus_thread import (MoteusThread, MotorTarget, MotorState, CONTROLLER_ID,
 DESCENT_VELOCITY_MPS: float = 0.005  # meters per second, plunger speed down the ball screw while searching
 # Force cap while descending. Kept well under moteus_thread.MAX_PLUNGER_FORCE_N, since contact is what we're looking for.
 # The q current saturates at the torque limit, so the spike threshold must stay below the current this cap allows
-DESCENT_MAX_FORCE_N: float = 100.0
+DESCENT_MAX_FORCE_N: float = 50.0
 # Stop short of the end of travel, since the plunger coasts a little past the limit after the stop is commanded
 EXTENSION_LIMIT_M: float = BALL_SCREW_TRAVEL_M - 0.005  # meters below the startup position
 DESCENT_TIMEOUT_S: float = 1.5 * EXTENSION_LIMIT_M / DESCENT_VELOCITY_MPS  # 1.5x buffer for the accel ramp

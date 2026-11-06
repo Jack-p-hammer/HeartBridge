@@ -2392,7 +2392,7 @@
 	)
 	(rectangle
 		(start 54.61 12.7)
-		(end 85.09 44.45)
+		(end 132.08 44.45)
 		(stroke
 			(width 0)
 			(type default)
@@ -2428,7 +2428,7 @@
 	)
 	(rectangle
 		(start 12.7 45.72)
-		(end 59.69 121.92)
+		(end 120.65 121.92)
 		(stroke
 			(width 0)
 			(type default)
@@ -2511,6 +2511,46 @@
 		)
 		(uuid "6fdf379b-0bc3-4486-93a5-f4919a3f56d0")
 	)
+	(text_box "PIN Mapping\nI2C_SDA: PC9 (function: I2C3)\nI2C_SCL: PC8 (function: I2C3)\nForce_AIn: PA1 (function: ADC1_IN2)\nStepper Enable: PD10 (function: GPIO output)\nStepper Sleep: PD11 (function: GPIO output)\nStep: PA8 (function: TIM1_CH1)\nENC1_Z: PE0 (function: TIM4_ETR, encoder index)\nENC2_Z: PD2 (function: TIM3_ETR, encoder index)\nChest_Switch: PB15 (function: GPIO input, EXTI15)\nGo_Button: PD8 (function: GPIO input, EXTI8)\nGo_Enable: PB12 (function: GPIO output)\nTX_CAN: PD1 (function: FDCAN1_TX)\nRX_CAN: PD0 (function: FDCAN1_RX)\nStop_Button: PD9 (function: GPIO input, EXTI9)\nCAN Standby: PD3 (function: GPIO output)\nSTEPPER_nFAULT: PE15 (function: TIM1_BKIN)\nScreen_Data_Dir: PD4 (function: USART2_DE)\nSPARE1: PA2 (function: ADC1_IN3 / TIM2_CH3 / LPUART1_TX)\nSPARE2: PA3 (function: ADC1_IN4 / TIM2_CH4 / LPUART1_RX)\nENC1_B: PD13 (function: TIM4_CH2, encoder)\nENC2_B: PC7 (function: TIM3_CH2, encoder)\nLaser_PWM: PB14 (function: TIM15_CH1)\nUSART_TX: PD5 (function: USART2_TX)\nENC1_A: PD12 (function: TIM4_CH1, encoder)\nDir: PD14 (function: GPIO output)\nStop_Enable: PB13 (function: GPIO output)\nENC2_A: PC6 (function: TIM3_CH1, encoder)\nUSART_RX: PD6 (function: USART2_RX)"
+		(exclude_from_sim no)
+		(at 57.15 45.72 0)
+		(size 63.5 76.2)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "7063024a-aeb4-4d76-8003-7fc0027c5287")
+	)
+	(text_box "2x5 Header Mapping\nSPARE3: PA0 (function: ADC1_IN1 / TIM2_CH1)\nSPARE4: PC0 (function: ADC1_IN6)\nSPARE5: PC1 (function: ADC1_IN7)\nSPARE6: PA5 (function: DAC1_OUT2 / SPI1_SCK)\nSPARE7: PB10 (function: USART3_TX)\nSPARE8: PB11 (function: USART3_RX / ADC1_IN14)\nSPARE9: PA15 (function: I2C1_SCL)\nSPARE10: PB7 (function: I2C1_SDA)"
+		(exclude_from_sim no)
+		(at 82.55 12.7 0)
+		(size 49.53 31.75)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "9269a9a3-1618-4df6-9655-53a0988f2a30")
+	)
 	(junction
 		(at 31.75 30.48)
 		(diameter 0)
@@ -2530,12 +2570,20 @@
 		(uuid "ebbaa16a-d727-4fa5-acfd-cef89d48051e")
 	)
 	(no_connect
+		(at 63.5 34.29)
+		(uuid "3fc12219-bc08-4031-8e8f-93c48b4a2a5a")
+	)
+	(no_connect
 		(at 27.94 87.63)
 		(uuid "4efeffbf-9b8f-4d92-9d1f-32c4a772af2c")
 	)
 	(no_connect
 		(at 27.94 67.31)
 		(uuid "8ef13da0-9263-4b62-aa89-b958ad903f97")
+	)
+	(no_connect
+		(at 76.2 34.29)
+		(uuid "d1377c44-21f7-4143-9736-af5dc341629f")
 	)
 	(no_connect
 		(at 40.64 95.25)
@@ -2631,6 +2679,16 @@
 		)
 		(uuid "f0ebd165-2f9d-421a-9ee6-908973f602e3")
 	)
+	(label "PB11"
+		(at 76.2 29.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0906b655-43be-4156-8c4e-a1607417cff5")
+	)
 	(label "I2C_SCL"
 		(at 40.64 30.48 0)
 		(effects
@@ -2641,7 +2699,17 @@
 		)
 		(uuid "20e00bbe-64b4-4745-a6c0-d92469a00c60")
 	)
-	(label "PA2"
+	(label "PC1"
+		(at 63.5 26.67 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "43dca572-3312-454e-9f53-837c12d202c3")
+	)
+	(label "spare_PA2"
 		(at 27.94 100.33 180)
 		(effects
 			(font
@@ -2650,6 +2718,16 @@
 			(justify right bottom)
 		)
 		(uuid "4c17dafe-e0ac-4533-9871-c538443037a6")
+	)
+	(label "PA0"
+		(at 63.5 24.13 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "511d8c3a-5897-4a8c-bbcb-3c0195f06489")
 	)
 	(label "I2C_SCL"
 		(at 27.94 72.39 180)
@@ -2671,6 +2749,26 @@
 		)
 		(uuid "6c8d787f-8664-4074-934a-9bba52b5b068")
 	)
+	(label "PC0"
+		(at 76.2 24.13 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7bf8c7ba-0f92-4436-8e98-14077d97523f")
+	)
+	(label "PB10"
+		(at 63.5 29.21 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "833e3c06-6bb5-4275-a99f-866c541fb5c4")
+	)
 	(label "I2C_SDA"
 		(at 40.64 27.94 0)
 		(effects
@@ -2680,6 +2778,26 @@
 			(justify left bottom)
 		)
 		(uuid "a5ee57b0-89db-4866-ba8d-e1ac6371f676")
+	)
+	(label "PA5"
+		(at 76.2 26.67 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "acd5d9cb-5f26-4dc8-8590-098e77a8dcb6")
+	)
+	(label "PB7"
+		(at 76.2 31.75 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e57fce57-5b2f-4ce2-b73c-12c419eeb8ab")
 	)
 	(label "3.3V"
 		(at 27.94 67.31 180)
@@ -2691,7 +2809,17 @@
 		)
 		(uuid "e5958ced-ff35-4abb-9b21-96ec522677ad")
 	)
-	(label "PA3"
+	(label "PA15"
+		(at 63.5 31.75 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e91d23e4-6d54-4574-b1c2-2977c9cc289b")
+	)
+	(label "spare_PA3"
 		(at 40.64 100.33 0)
 		(effects
 			(font

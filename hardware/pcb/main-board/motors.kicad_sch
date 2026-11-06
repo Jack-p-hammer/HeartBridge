@@ -4232,7 +4232,7 @@
 		)
 		(uuid "fea312e8-e44e-4857-bbc5-4bebe30bd38b")
 	)
-	(label "Stepper 1 Coil 1 +"
+	(label "Stepper 2 Coil 1 +"
 		(at 44.45 95.25 0)
 		(effects
 			(font
@@ -4312,7 +4312,7 @@
 		)
 		(uuid "8bf139b7-3bc9-45a1-baec-9f4ec0558318")
 	)
-	(label "Stepper 1 Coil 1 -"
+	(label "Stepper 2 Coil 1 -"
 		(at 44.45 97.79 0)
 		(effects
 			(font
@@ -4352,7 +4352,7 @@
 		)
 		(uuid "c9400143-e830-4184-8542-aff5af5e4ae7")
 	)
-	(label "Stepper 1 Coil 2 -"
+	(label "Stepper 2 Coil 2 -"
 		(at 44.45 107.95 0)
 		(effects
 			(font
@@ -4362,7 +4362,7 @@
 		)
 		(uuid "cdca43e6-d28c-4542-9885-bd67d53f7a8a")
 	)
-	(label "Stepper 1 Coil 2 +"
+	(label "Stepper 2 Coil 2 +"
 		(at 44.45 105.41 0)
 		(effects
 			(font
@@ -5502,7 +5502,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 113.03 107.8796 90)
+		(at 113.03 107.95 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5513,7 +5513,7 @@
 		(fields_autoplaced yes)
 		(uuid "33ccad7b-3cb6-4bb0-819c-47012f6b46da")
 		(property "Reference" "#PWR0114"
-			(at 119.38 107.8796 0)
+			(at 119.38 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5524,7 +5524,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 116.84 107.8795 90)
+			(at 116.84 107.9499 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5535,7 +5535,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 113.03 107.8796 0)
+			(at 113.03 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5546,7 +5546,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 113.03 107.8796 0)
+			(at 113.03 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5557,7 +5557,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 113.03 107.8796 0)
+			(at 113.03 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10719,7 +10719,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 113.03 49.4596 90)
+		(at 113.03 49.53 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10730,7 +10730,7 @@
 		(fields_autoplaced yes)
 		(uuid "ffff7977-7bc2-4d54-80ee-2e792fcf0965")
 		(property "Reference" "#PWR098"
-			(at 119.38 49.4596 0)
+			(at 119.38 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10741,7 +10741,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 116.84 49.4595 90)
+			(at 116.84 49.5299 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10752,7 +10752,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 113.03 49.4596 0)
+			(at 113.03 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10763,7 +10763,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 113.03 49.4596 0)
+			(at 113.03 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10774,7 +10774,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 113.03 49.4596 0)
+			(at 113.03 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)

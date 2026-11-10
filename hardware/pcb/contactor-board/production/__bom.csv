@@ -1,0 +1,11 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+CONTACTOR1,AEV20EBP,1,AEV20E-BP,
+"D1, D2",D_SMC,2,SMCJ28A,
+D3,D_SMC,1,SMCJ28CA,
+F1,1206,1,20A,
+FLYBACK1,D_SMA,1,US1M,
+J_EXT1,AMASS_XT30U-M_1x02_P5.0mm_Vertical,1,Main Board,
+J_EXT2,AMASS_XT60-M_1x02_P7.20mm_Vertical,1,Battery,
+J_EXT3,AMASS_XT30U-M_1x02_P5.0mm_Vertical,1,Motor Driver,
+J_EXT4,AMASS_XT30U-M_1x02_P5.0mm_Vertical,1,Switch,
+U1,Converter_DCDC_TRACO_TSR-1_THT,1,12V Buck,

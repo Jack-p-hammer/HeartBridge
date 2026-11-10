@@ -4572,7 +4572,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e697f85a-7644-4a54-aa86-228db9504cee")
-		(property "Reference" "J?"
+		(property "Reference" "J17"
 			(at 69.85 17.78 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4658,7 +4658,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/7b515552-6db1-403d-b6a0-a1579d4772aa"
-					(reference "J?")
+					(reference "J17")
 					(unit 1)
 				)
 			)

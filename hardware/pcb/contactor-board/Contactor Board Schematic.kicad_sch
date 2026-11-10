@@ -1660,7 +1660,7 @@
 		)
 		(uuid "c8cfc367-2415-4ea6-9916-416bed7c9dfe")
 	)
-	(text "Screw terminal\nto EC5 Connector"
+	(text "XT60 plug\nto EC5 Connector"
 		(exclude_from_sim no)
 		(at 20.828 38.862 0)
 		(effects
@@ -2439,6 +2439,17 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 44.45 34.29 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5823934e-df41-4bbd-baf4-e5c3c44fcd8b")
 		)
@@ -2472,7 +2483,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0b011b49-efa8-47e5-9e5f-16138e5f9cca")
-		(property "Reference" "J_EXT4"
+		(property "Reference" "J_EXT3"
 			(at 68.58 48.895 0)
 			(hide yes)
 			(show_name no)
@@ -2592,6 +2603,28 @@
 				)
 			)
 		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ23GG1R?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1"
+			(at 60.96 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 60.96 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "4acf9a6e-ad69-4af3-82c9-f7978c20df94")
 		)
@@ -2601,7 +2634,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "J_EXT4")
+					(reference "J_EXT3")
 					(unit 1)
 				)
 			)
@@ -2694,6 +2727,28 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 44.45 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "4878-US1MCT-ND"
+			(at 44.45 54.61 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "5cd80255-1fa6-4984-8ad9-3c83ad96fba1")
 		)
@@ -2766,6 +2821,17 @@
 			)
 		)
 		(property "Description" "Mounting Hole with connection"
+			(at 106.68 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
 			(at 106.68 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -2856,6 +2922,17 @@
 		)
 		(property "digikey" "SMCJ28ALFCT-ND"
 			(at 24.13 21.59 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 30.48 21.59 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2969,7 +3046,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "51c1b1d3-74a7-4d6c-97b1-c6110097e313")
-		(property "Reference" "J_EXT2"
+		(property "Reference" "J_EXT4"
 			(at 49.53 17.145 0)
 			(hide yes)
 			(show_name no)
@@ -3089,6 +3166,39 @@
 				)
 			)
 		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ23GG1R?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1"
+			(at 41.91 16.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field12" ""
+			(at 41.91 16.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 41.91 16.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "48715605-5fab-4d9d-9e8e-90196279c57b")
 		)
@@ -3098,7 +3208,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "J_EXT2")
+					(reference "J_EXT4")
 					(unit 1)
 				)
 			)
@@ -3115,7 +3225,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5ff719ea-325e-45a8-919f-421bc72255c1")
-		(property "Reference" "D6"
+		(property "Reference" "D3"
 			(at 64.77 37.846 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3181,6 +3291,17 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 67.31 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "a2684a64-c79d-4d7e-9454-9be5d447f9ec")
 		)
@@ -3190,7 +3311,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "D6")
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -3208,7 +3329,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6bdc9dc7-b7f3-4775-b006-ca741e626901")
-		(property "Reference" "J_EXT3"
+		(property "Reference" "J_EXT1"
 			(at 81.915 24.13 0)
 			(hide yes)
 			(show_name no)
@@ -3328,6 +3449,28 @@
 				)
 			)
 		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ23GG1R?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1"
+			(at 82.55 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
+			(at 82.55 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0a5e9db5-44fe-4e5a-9b10-9b985ec2a221")
 		)
@@ -3337,7 +3480,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "J_EXT3")
+					(reference "J_EXT1")
 					(unit 1)
 				)
 			)
@@ -3400,6 +3543,17 @@
 			)
 		)
 		(property "Description" "Mounting Hole with connection"
+			(at 106.68 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Field11" ""
 			(at 106.68 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -3647,6 +3801,17 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 52.07 74.93 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "8fb072c4-0cf4-47c4-b18c-bfff01f1ede5")
 		)
@@ -3677,7 +3842,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c5faa5e8-17fc-491b-b523-8f17ef6aae56")
-		(property "Reference" "H1"
+		(property "Reference" "H2"
 			(at 109.22 17.7799 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3732,13 +3897,24 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 106.68 20.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "89fb65d1-2016-41e5-a6da-91426137d9b3")
 		)
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "H1")
+					(reference "H2")
 					(unit 1)
 				)
 			)
@@ -3833,7 +4009,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "dafa733b-2819-471c-aa5b-72b9cf0af1e0")
-		(property "Reference" "J_EXT1"
+		(property "Reference" "J_EXT2"
 			(at 17.145 24.13 0)
 			(hide yes)
 			(show_name no)
@@ -3887,7 +4063,7 @@
 				)
 			)
 		)
-		(property "digikey" "277-1667-ND"
+		(property "digikey" ""
 			(at 16.51 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -3953,6 +4129,17 @@
 				)
 			)
 		)
+		(property "amazon" "https://www.amazon.com/dp/B0DZ27PKHB?plpRedirect=mhFallback&ref=clp_hp_h_pc"
+			(at 16.51 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Field11" ""
 			(at 16.51 31.75 0)
 			(hide yes)
@@ -3973,7 +4160,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "J_EXT1")
+					(reference "J_EXT2")
 					(unit 1)
 				)
 			)
@@ -4147,7 +4334,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f143cbd3-8ea2-4804-b24a-7b698d738bd7")
-		(property "Reference" "H2"
+		(property "Reference" "H1"
 			(at 109.22 24.1299 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4202,13 +4389,24 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 106.68 26.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "11e732b4-1e0f-4245-a206-2240cef76083")
 		)
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "H2")
+					(reference "H1")
 					(unit 1)
 				)
 			)
@@ -4355,6 +4553,17 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 27.94 29.21 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "9372d1ec-2b44-4c57-b596-ee4eed517f6f")
 		)
@@ -4381,7 +4590,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "fc8dcabc-f4e6-4267-a4a5-af313b8643ad")
-		(property "Reference" "D4"
+		(property "Reference" "D1"
 			(at 63.5 18.034 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4447,6 +4656,17 @@
 				)
 			)
 		)
+		(property "Field11" ""
+			(at 58.42 19.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "3bea5a9b-8178-468d-8507-2bcf117b4905")
 		)
@@ -4456,7 +4676,7 @@
 		(instances
 			(project "Contactor Board Schematic"
 				(path "/070ed92a-1612-4f32-b689-998b796912af"
-					(reference "D4")
+					(reference "D1")
 					(unit 1)
 				)
 			)

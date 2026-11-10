@@ -534,6 +534,7 @@
       "pin_to_pin": "warning",
       "power_pin_not_driven": "warning",
       "same_local_global_label": "warning",
+      "same_local_global_power": "warning",
       "similar_label_and_power": "warning",
       "similar_labels": "warning",
       "similar_power": "warning",
@@ -600,8 +601,8 @@
     "meta": {
       "version": 5
     },
-    "net_colors": null,
-    "netclass_assignments": null,
+    "net_colors": {},
+    "netclass_assignments": {},
     "netclass_patterns": []
   },
   "pcbnew": {
@@ -900,7 +901,7 @@
         "uuid": "8991fc77-975f-4978-a089-6b2a5e33f59b"
       }
     ],
-    "used_designators": "D1-15,#PWR9,#PWR34-38,#PWR62,#PWR77-83,#PWR87-163,R24-45,J2,J12-15,J17-19,C12-34,U2,U6-10,Y1",
+    "used_designators": "#PWR9,#PWR11,#PWR19-20,#PWR34-38,#PWR62,#PWR77-84,#PWR87-177,C12-34,D1-15,J2,J12-19,R24-45,U2,U6-10,Y1",
     "variants": []
   },
   "sheets": [
@@ -911,6 +912,14 @@
     [
       "f135bbab-d1e4-4966-bdb4-9824ea49ef57",
       "Motors"
+    ],
+    [
+      "052d78b7-9761-42b3-bfaf-ad485eeda1d8",
+      "Encoder 1"
+    ],
+    [
+      "f4f0e739-486f-42d2-b645-1e2e157e6ded",
+      "Encoder 2"
     ],
     [
       "390cafbd-c317-4387-95c3-e11405a1139f",

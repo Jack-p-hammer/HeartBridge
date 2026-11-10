@@ -17,7 +17,7 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 76.2) (xy 176.53 76.2)
+			(xy 166.37 76.2) (xy 196.85 76.2)
 		)
 		(stroke
 			(width 0)
@@ -27,13 +27,23 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 86.36) (xy 176.53 86.36)
+			(xy 166.37 86.36) (xy 196.85 86.36)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "094b8247-1cc5-4e7b-b38c-5605f3c8fb6f")
+	)
+	(wire
+		(pts
+			(xy 194.31 152.4) (xy 196.85 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1206d0d2-69d6-4525-8dda-7384a333b09d")
 	)
 	(wire
 		(pts
@@ -47,6 +57,16 @@
 	)
 	(wire
 		(pts
+			(xy 166.37 93.98) (xy 168.91 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "19eef5e6-4a7e-434f-88da-8a77912cf717")
+	)
+	(wire
+		(pts
 			(xy 130.81 105.41) (xy 130.81 119.38)
 		)
 		(stroke
@@ -54,6 +74,16 @@
 			(type default)
 		)
 		(uuid "1ff12917-9e5c-4ba2-84fc-eba61106fd9e")
+	)
+	(wire
+		(pts
+			(xy 166.37 96.52) (xy 168.91 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26b63d73-8345-4c78-9253-21b34aba2c4e")
 	)
 	(wire
 		(pts
@@ -77,6 +107,36 @@
 	)
 	(wire
 		(pts
+			(xy 166.37 99.06) (xy 168.91 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b856e57-5892-4d97-9584-a9c34cf2fd69")
+	)
+	(wire
+		(pts
+			(xy 166.37 101.6) (xy 168.91 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3f152135-df7e-4674-b176-895e428c3df4")
+	)
+	(wire
+		(pts
+			(xy 166.37 91.44) (xy 168.91 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "690ad1fb-3bea-4bb8-9595-94f70b4368a2")
+	)
+	(wire
+		(pts
 			(xy 153.67 105.41) (xy 153.67 119.38)
 		)
 		(stroke
@@ -84,6 +144,36 @@
 			(type default)
 		)
 		(uuid "75530953-bb60-47bc-bce0-3fa2e53847de")
+	)
+	(wire
+		(pts
+			(xy 194.31 127) (xy 196.85 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "872a5276-619d-4ed0-9ae6-e111814b2bba")
+	)
+	(wire
+		(pts
+			(xy 166.37 88.9) (xy 168.91 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "882cd6b5-28a7-465a-a93d-deedf6e177d1")
+	)
+	(wire
+		(pts
+			(xy 194.31 124.46) (xy 196.85 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b66edb5-5cc2-4f8b-82c9-4204d9ca0adf")
 	)
 	(wire
 		(pts
@@ -107,7 +197,17 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 83.82) (xy 176.53 83.82)
+			(xy 194.31 149.86) (xy 196.85 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd108d30-695b-468e-943d-23dbe1b28e17")
+	)
+	(wire
+		(pts
+			(xy 166.37 83.82) (xy 196.85 83.82)
 		)
 		(stroke
 			(width 0)
@@ -117,13 +217,23 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 81.28) (xy 176.53 81.28)
+			(xy 166.37 81.28) (xy 196.85 81.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "c34f54c5-1c6c-4bb3-8bf6-b3f71f858bcf")
+	)
+	(wire
+		(pts
+			(xy 194.31 147.32) (xy 196.85 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d96d671b-828c-4b0c-acbd-99b860e16cd7")
 	)
 	(wire
 		(pts
@@ -137,7 +247,17 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 78.74) (xy 176.53 78.74)
+			(xy 194.31 121.92) (xy 196.85 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e320cd8e-8440-48db-9a3f-dc2ee6f026a0")
+	)
+	(wire
+		(pts
+			(xy 166.37 78.74) (xy 196.85 78.74)
 		)
 		(stroke
 			(width 0)
@@ -164,6 +284,202 @@
 			(type default)
 		)
 		(uuid "f87ce5c9-560b-4e95-a6a8-30ab4eb9565f")
+	)
+	(label "ENC1_A"
+		(at 168.91 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "17b3542d-b8cf-42b9-90d5-dfc52dd03fe1")
+	)
+	(label "ENC2_B"
+		(at 194.31 149.86 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1a1f0406-398a-4249-a1f5-2ffce3fa971d")
+	)
+	(label "ENC2_B"
+		(at 168.91 99.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3c57c74c-fb26-4000-9898-297de624d1a4")
+	)
+	(label "ENC1_Z"
+		(at 194.31 127 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "41f51a3a-c442-4167-992b-0a3e0ddb8608")
+	)
+	(label "ENC2_Z"
+		(at 194.31 152.4 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "427445eb-7f6e-43fe-b788-3ba96c15f517")
+	)
+	(label "ENC2_A"
+		(at 194.31 147.32 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7eb99dd3-ee67-42bb-b317-b7c6c7bc453f")
+	)
+	(label "ENC1_Z"
+		(at 168.91 93.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8b71406a-76d4-400c-a32c-84d571289a96")
+	)
+	(label "ENC1_B"
+		(at 194.31 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9e58272c-f1b2-4e4d-bcda-c9ea41fe3517")
+	)
+	(label "ENC2_Z"
+		(at 168.91 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a197a114-6b25-4bb3-8b76-60296d1f9900")
+	)
+	(label "ENC1_B"
+		(at 168.91 91.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b6366468-6fb8-4f3a-9322-1f76c463d4b0")
+	)
+	(label "ENC2_A"
+		(at 168.91 96.52 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ba8377cd-b5d3-4c98-bb78-be58d43842ce")
+	)
+	(label "ENC1_A"
+		(at 194.31 121.92 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "eb0f25b5-2f4f-4232-be3d-d465015bf170")
+	)
+	(sheet
+		(at 196.85 116.84)
+		(size 38.1 17.78)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "052d78b7-9761-42b3-bfaf-ad485eeda1d8")
+		(property "Sheetname" "Encoder 1"
+			(at 196.85 116.1284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "encoder.kicad_sch"
+			(at 196.85 135.2046 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "ENC_Z" output
+			(at 196.85 127 180)
+			(uuid "6cee4804-bd5c-4672-999c-d45ed1120f5b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENC_B" output
+			(at 196.85 124.46 180)
+			(uuid "84528b5a-291e-42c9-975a-8f46b8d2311b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENC_A" output
+			(at 196.85 121.92 180)
+			(uuid "059a15d7-133a-488e-933a-5d0bbefc5a15")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b"
+					(page "3")
+				)
+			)
+		)
 	)
 	(sheet
 		(at 57.15 67.945)
@@ -298,7 +614,7 @@
 		)
 	)
 	(sheet
-		(at 176.53 59.055)
+		(at 196.85 59.055)
 		(size 43.815 46.99)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -314,7 +630,7 @@
 		)
 		(uuid "4742a649-a015-487c-b382-01878b0e2dd4")
 		(property "Sheetname" "HMI"
-			(at 176.53 58.3434 0)
+			(at 196.85 58.3434 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -325,7 +641,7 @@
 			)
 		)
 		(property "Sheetfile" "HMI_Raspi.kicad_sch"
-			(at 176.53 106.6296 0)
+			(at 196.85 106.6296 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -336,7 +652,7 @@
 			)
 		)
 		(pin "Go_Button" input
-			(at 176.53 76.2 180)
+			(at 196.85 76.2 180)
 			(uuid "8ff8e260-c3ec-4722-b53c-b572079c60c9")
 			(effects
 				(font
@@ -346,7 +662,7 @@
 			)
 		)
 		(pin "Stop_Enable" input
-			(at 176.53 83.82 180)
+			(at 196.85 83.82 180)
 			(uuid "b496c741-6b88-4e14-93f9-a2a8df0ca25c")
 			(effects
 				(font
@@ -356,7 +672,7 @@
 			)
 		)
 		(pin "Stop_Button" input
-			(at 176.53 81.28 180)
+			(at 196.85 81.28 180)
 			(uuid "9588caa1-dd15-4710-8b05-2f3b53915cf8")
 			(effects
 				(font
@@ -366,7 +682,7 @@
 			)
 		)
 		(pin "Go_Enable" input
-			(at 176.53 78.74 180)
+			(at 196.85 78.74 180)
 			(uuid "952ff8a3-1b4d-4951-a5f5-f82c8adcb73b")
 			(effects
 				(font
@@ -376,7 +692,7 @@
 			)
 		)
 		(pin "Laser_PWM" input
-			(at 176.53 86.36 180)
+			(at 196.85 86.36 180)
 			(uuid "84a6684d-a874-422c-8665-5e483adba8e2")
 			(effects
 				(font
@@ -591,6 +907,66 @@
 				(justify left)
 			)
 		)
+		(pin "ENC2_Z" input
+			(at 166.37 101.6 0)
+			(uuid "3c4cd1e7-afdd-46ac-b1d5-a3b998798683")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENC1_B" input
+			(at 166.37 91.44 0)
+			(uuid "9e911881-72cc-47f6-a978-bb9116a985b5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENC2_B" input
+			(at 166.37 99.06 0)
+			(uuid "4a271536-8df1-4008-8cf2-1a4710591dce")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENC1_Z" input
+			(at 166.37 93.98 0)
+			(uuid "4543cdab-36f2-4ca5-b67e-793cfc1f879e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENC1_A" input
+			(at 166.37 88.9 0)
+			(uuid "075e253a-e908-4266-9456-91f230df9954")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENC2_A" input
+			(at 166.37 96.52 0)
+			(uuid "19665283-c0ad-4aef-b78b-4ba8eac679be")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b"
@@ -711,6 +1087,82 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b"
 					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 196.85 142.24)
+		(size 38.1 17.78)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "f4f0e739-486f-42d2-b645-1e2e157e6ded")
+		(property "Sheetname" "Encoder 2"
+			(at 196.85 141.5284 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "encoder.kicad_sch"
+			(at 196.85 160.6046 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "ENC_Z" output
+			(at 196.85 152.4 180)
+			(uuid "ad0675b7-4f41-494f-bfb3-96565eabf450")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENC_B" output
+			(at 196.85 149.86 180)
+			(uuid "a2425fad-be6e-4522-acd9-80b4894460c9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENC_A" output
+			(at 196.85 147.32 180)
+			(uuid "076a9092-6b6c-45cd-be8b-de4887b4265c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b"
+					(page "4")
 				)
 			)
 		)

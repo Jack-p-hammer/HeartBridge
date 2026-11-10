@@ -1867,8 +1867,44 @@
 		)
 	)
 	(rectangle
-		(start 78.74 13.97)
-		(end 93.98 52.07)
+		(start 153.67 93.98)
+		(end 205.74 163.83)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "006b430d-8eb2-46cb-bef4-79af917ba3c1")
+	)
+	(rectangle
+		(start 77.47 93.98)
+		(end 92.71 132.08)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "0e648b64-1d64-4653-9550-cecb872a3d00")
+	)
+	(rectangle
+		(start 13.97 93.98)
+		(end 76.2 132.08)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "1e62c858-9dde-41f1-b583-8cfcea6dba16")
+	)
+	(rectangle
+		(start 77.47 19.05)
+		(end 92.71 57.15)
 		(stroke
 			(width 0)
 			(type default)
@@ -1879,8 +1915,8 @@
 		(uuid "42c865cf-de8b-4e2c-952c-c4527cf9b4c2")
 	)
 	(rectangle
-		(start 154.94 13.97)
-		(end 207.01 83.82)
+		(start 153.67 19.05)
+		(end 205.74 88.9)
 		(stroke
 			(width 0)
 			(type default)
@@ -1891,8 +1927,8 @@
 		(uuid "4d324638-78b7-4af7-8acd-0ad61f7ade5e")
 	)
 	(rectangle
-		(start 95.25 13.97)
-		(end 153.67 83.82)
+		(start 93.98 19.05)
+		(end 152.4 88.9)
 		(stroke
 			(width 0)
 			(type default)
@@ -1915,8 +1951,32 @@
 		(uuid "5406e601-a2c2-4aeb-b60f-db8de45b8271")
 	)
 	(rectangle
-		(start 15.24 53.34)
-		(end 93.98 93.98)
+		(start 93.98 93.98)
+		(end 152.4 163.83)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "5d42c6c6-48e7-4fe5-9baa-dca89daedad7")
+	)
+	(rectangle
+		(start 13.97 133.35)
+		(end 92.71 163.83)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "d1f1828a-4aca-4537-9efb-903684a0f535")
+	)
+	(rectangle
+		(start 13.97 58.42)
+		(end 92.71 88.9)
 		(stroke
 			(width 0)
 			(type default)
@@ -1927,8 +1987,8 @@
 		(uuid "e0ae98d5-8532-4535-ab88-31110ce2a8af")
 	)
 	(rectangle
-		(start 15.24 13.97)
-		(end 77.47 52.07)
+		(start 13.97 19.05)
+		(end 76.2 57.15)
 		(stroke
 			(width 0)
 			(type default)
@@ -1938,9 +1998,29 @@
 		)
 		(uuid "e2ffa43f-ca5a-44e0-a2f1-d91390668235")
 	)
-	(text "Place D and F right next to J."
+	(text "Encoder 2"
 		(exclude_from_sim no)
-		(at 53.594 84.328 0)
+		(at 19.05 92.202 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "13f20035-98ff-4d6a-a207-f59cbfc89139")
+	)
+	(text "Encoder 1\n"
+		(exclude_from_sim no)
+		(at 19.05 16.764 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "1e055fcc-8fef-42a4-b27d-3a78d2a662c4")
+	)
+	(text "Place ESD and Fuse right next to JST 5-Pin"
+		(exclude_from_sim no)
+		(at 15.24 87.63 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1951,7 +2031,7 @@
 	)
 	(text "Unused inverter inputs tied to GND"
 		(exclude_from_sim no)
-		(at 155.702 83.058 0)
+		(at 154.432 88.138 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1960,9 +2040,20 @@
 		)
 		(uuid "42355e31-c551-4cb8-a5b8-783343f631fe")
 	)
+	(text "Input filters (A, B, Z)"
+		(exclude_from_sim no)
+		(at 96.012 98.044 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4c9ef1a1-fb6b-40b0-bf30-21c842654850")
+	)
 	(text "Encoder 5 V feed + ESD"
 		(exclude_from_sim no)
-		(at 16.256 57.15 0)
+		(at 14.986 62.23 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1970,6 +2061,50 @@
 			(justify left bottom)
 		)
 		(uuid "69e39f6d-fdf8-41ba-a0e8-d7694fb3d533")
+	)
+	(text "5 V -> 3.3 V (Schmitt inverter)"
+		(exclude_from_sim no)
+		(at 156.21 100.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7cc8b685-6b9c-48c4-a72d-d4dc6d6d1b51")
+	)
+	(text "Unused inverter inputs tied to GND"
+		(exclude_from_sim no)
+		(at 154.432 163.068 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "850ed7bc-32e0-4bde-b482-2f3006a52f9c")
+	)
+	(text "Place ESD and Fuse right next to JST 5-Pin"
+		(exclude_from_sim no)
+		(at 16.764 161.036 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "89259e83-dacb-4e7f-8399-fe3f39439db9")
+	)
+	(text "Encoder + cable + board connector"
+		(exclude_from_sim no)
+		(at 14.986 99.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8ae9095e-679b-4418-bb10-e578ea337ade")
 	)
 	(text "Notes\n- This sheet is used twice on the top sheet (Encoder 1, Encoder 2). KiCad numbers the parts 1xx and 2xx.\n- 5 V side: J, D, F, the 1k/100pF/100k filters. Everything after the SN74LVC14 runs on 3.3 V.\n- The Pi reads the LS7366R over SPI1 (mode 0, ~1 MHz). Each LS7366R has its own CS; MISO is shared (tri-state).\n- CS has a pull-up so the counter stays deselected while the Pi boots. LFLAG is open-drain, so it needs one too.\n- Check before ordering the PCB: LS7366R-S package width (footprint here is narrow SOIC-14),\n  and the AMT103 pin order / cable colors."
 		(exclude_from_sim no)
@@ -1982,9 +2117,20 @@
 		)
 		(uuid "9b84bebc-0c3f-49fa-8624-0b452878d475")
 	)
+	(text "Encoder 5 V feed + ESD"
+		(exclude_from_sim no)
+		(at 14.478 136.652 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c98d7c4e-3156-4725-a1c8-499bf74b6b2a")
+	)
 	(text "Encoder + cable + board connector"
 		(exclude_from_sim no)
-		(at 16.256 19.05 0)
+		(at 14.986 24.13 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1995,7 +2141,7 @@
 	)
 	(text "5 V -> 3.3 V (Schmitt inverter)"
 		(exclude_from_sim no)
-		(at 157.48 20.32 0)
+		(at 156.21 25.4 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2006,7 +2152,7 @@
 	)
 	(text "AMT103 on the motor -> CUI-435-1FT cable \n(bare wires) -> Connector on this board. \nPin order comes from the AMT10 datasheet.\n"
 		(exclude_from_sim no)
-		(at 18.034 43.688 0)
+		(at 16.764 48.768 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2015,9 +2161,20 @@
 		)
 		(uuid "e8df39e6-5e13-4500-a342-994ab3cdeb71")
 	)
+	(text "AMT103 on the motor -> CUI-435-1FT cable \n(bare wires) -> Connector on this board. \nPin order comes from the AMT10 datasheet.\n"
+		(exclude_from_sim no)
+		(at 16.764 123.698 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "edfdb11b-b020-4567-ae1b-d4b2c3065cf0")
+	)
 	(text "Input filters (A, B, Z)"
 		(exclude_from_sim no)
-		(at 99.314 18.034 0)
+		(at 95.504 22.606 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2027,100 +2184,172 @@
 		(uuid "f664f742-b16d-4b7c-9e86-3514f0003e66")
 	)
 	(junction
-		(at 133.35 24.13)
+		(at 134.62 29.21)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "06b3c03c-fc4a-43d5-aab0-42a9b7e71efb")
 	)
 	(junction
-		(at 133.35 64.77)
+		(at 134.62 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0cd465ae-e316-4642-9b52-6b3820bfd1fe")
 	)
 	(junction
-		(at 29.21 76.2)
+		(at 30.48 143.51)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "331311be-8080-4065-8804-a447ef1d5d83")
+		(uuid "0de8d5bf-2ac9-404b-8dbb-5f0c70388705")
 	)
 	(junction
-		(at 166.37 59.69)
+		(at 124.46 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1fdcef44-6df7-44cb-aa4a-7a915c385757")
+	)
+	(junction
+		(at 134.62 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "245630f4-5463-4840-b6ec-de7e86425c82")
+	)
+	(junction
+		(at 124.46 124.46)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2a6c73b4-aa43-409f-890c-ffe51535f34f")
+	)
+	(junction
+		(at 134.62 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2fe98428-cb89-482e-b2f8-d3ed37114c63")
+	)
+	(junction
+		(at 165.1 142.24)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "408f39e7-2ec6-40e4-ba4f-832bf0232423")
+	)
+	(junction
+		(at 30.48 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4145ac96-4264-4a0b-84d4-38b8d7935d6d")
+	)
+	(junction
+		(at 36.83 115.57)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "45dea064-b38b-4c09-956d-9348383400c8")
+	)
+	(junction
+		(at 134.62 124.46)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "555312fe-173c-4327-a57e-428c3022e0b7")
+	)
+	(junction
+		(at 165.1 139.7)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5784166e-1cf9-4682-80c8-c437a2fd153a")
+	)
+	(junction
+		(at 124.46 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "67b6a8e2-48c1-4a96-b17c-c4db0e48beef")
+	)
+	(junction
+		(at 165.1 64.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "72ee8473-a4c7-45ac-a4ca-07140aa5c26d")
 	)
 	(junction
-		(at 133.35 44.45)
+		(at 134.62 49.53)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7876c243-0f81-45e3-bf64-da5c24a98e96")
 	)
 	(junction
-		(at 123.19 44.45)
+		(at 124.46 49.53)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "80e39b89-57fc-46d6-9315-d13f30b388bd")
 	)
 	(junction
-		(at 38.1 35.56)
+		(at 36.83 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a2811a02-e202-40b6-a245-72aaa3dc9fd0")
 	)
 	(junction
-		(at 39.37 76.2)
+		(at 40.64 143.51)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b348f3db-964e-42bf-95a3-c173abefc32c")
+	)
+	(junction
+		(at 40.64 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cca990b0-1ad7-4b8c-b688-9587a03a6f46")
 	)
 	(junction
-		(at 166.37 62.23)
+		(at 165.1 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cd318bf9-d67c-438b-b7a9-d0659dfe1d9a")
 	)
 	(junction
-		(at 123.19 64.77)
+		(at 124.46 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "db788502-422f-413d-88fd-6383f126f123")
 	)
 	(junction
-		(at 123.19 24.13)
+		(at 124.46 29.21)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fa1ef1fb-a346-43aa-882d-ae3aa92ea47e")
 	)
 	(no_connect
-		(at 76.2 66.04)
+		(at 91.44 146.05)
+		(uuid "167f7c29-debc-4aff-a63f-95368aab8c97")
+	)
+	(no_connect
+		(at 187.96 139.7)
+		(uuid "21937945-bfe1-424a-a738-206269d5dc68")
+	)
+	(no_connect
+		(at 90.17 71.12)
 		(uuid "27c55cff-8d19-4e8f-b38c-0a391142094d")
 	)
 	(no_connect
-		(at 189.23 62.23)
+		(at 187.96 67.31)
 		(uuid "50b9f62c-e300-470e-b930-0c479632a631")
 	)
 	(no_connect
-		(at 189.23 57.15)
+		(at 187.96 142.24)
+		(uuid "932a2bb3-0afa-4b66-9006-b0d2f3680a08")
+	)
+	(no_connect
+		(at 187.96 62.23)
 		(uuid "945132df-f407-4052-a119-47cf309af0be")
 	)
 	(no_connect
-		(at 189.23 59.69)
+		(at 187.96 137.16)
+		(uuid "a3ce5e83-cbc2-4674-a1bf-5801f4c05324")
+	)
+	(no_connect
+		(at 187.96 64.77)
 		(uuid "a884d201-1623-4545-b343-f9aa77db2cfd")
 	)
 	(wire
 		(pts
-			(xy 19.05 76.2) (xy 29.21 76.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "015059d7-fc53-432e-8381-bc3b22e62e05")
-	)
-	(wire
-		(pts
-			(xy 60.96 60.96) (xy 58.42 60.96)
+			(xy 74.93 66.04) (xy 72.39 66.04)
 		)
 		(stroke
 			(width 0)
@@ -2130,7 +2359,37 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 31.75) (xy 133.35 34.29)
+			(xy 177.8 121.92) (xy 177.8 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07473f5c-d8bd-428a-929b-e54888648d82")
+	)
+	(wire
+		(pts
+			(xy 40.64 143.51) (xy 45.72 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "082c28c0-769a-43ff-b21a-82ce32b6fe03")
+	)
+	(wire
+		(pts
+			(xy 177.8 147.32) (xy 177.8 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0cb49344-76c4-409f-85a2-bd69552e2078")
+	)
+	(wire
+		(pts
+			(xy 134.62 36.83) (xy 134.62 39.37)
 		)
 		(stroke
 			(width 0)
@@ -2140,7 +2399,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 49.53) (xy 166.37 49.53)
+			(xy 167.64 54.61) (xy 165.1 54.61)
 		)
 		(stroke
 			(width 0)
@@ -2150,7 +2409,27 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 33.02) (xy 52.07 33.02)
+			(xy 134.62 144.78) (xy 140.97 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1446ad1c-cad0-4b36-8940-4601059769bb")
+	)
+	(wire
+		(pts
+			(xy 167.64 127) (xy 165.1 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "16290b32-b34c-4b26-b818-8f83c8b2dc6d")
+	)
+	(wire
+		(pts
+			(xy 30.48 38.1) (xy 50.8 38.1)
 		)
 		(stroke
 			(width 0)
@@ -2160,7 +2439,7 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 57.15) (xy 166.37 59.69)
+			(xy 165.1 62.23) (xy 165.1 64.77)
 		)
 		(stroke
 			(width 0)
@@ -2170,7 +2449,27 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 31.75) (xy 123.19 34.29)
+			(xy 167.64 132.08) (xy 165.1 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22cdff89-618c-4796-a194-78672dd7429b")
+	)
+	(wire
+		(pts
+			(xy 110.49 124.46) (xy 107.95 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25f84d2d-e4d9-47cf-a98a-2d8477613feb")
+	)
+	(wire
+		(pts
+			(xy 124.46 36.83) (xy 124.46 39.37)
 		)
 		(stroke
 			(width 0)
@@ -2180,7 +2479,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 68.58) (xy 58.42 68.58)
+			(xy 74.93 73.66) (xy 72.39 73.66)
 		)
 		(stroke
 			(width 0)
@@ -2190,7 +2489,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 83.82) (xy 39.37 86.36)
+			(xy 40.64 77.47) (xy 40.64 80.01)
 		)
 		(stroke
 			(width 0)
@@ -2200,7 +2499,37 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 63.5) (xy 58.42 63.5)
+			(xy 124.46 104.14) (xy 134.62 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ceb1f7f-7ddc-40de-abe1-f5faf05c5795")
+	)
+	(wire
+		(pts
+			(xy 76.2 146.05) (xy 73.66 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3126694d-221d-45b8-ade7-cac7cb51ca65")
+	)
+	(wire
+		(pts
+			(xy 118.11 104.14) (xy 124.46 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "31d03851-43d0-4541-b7c1-6cac15976fe8")
+	)
+	(wire
+		(pts
+			(xy 74.93 68.58) (xy 72.39 68.58)
 		)
 		(stroke
 			(width 0)
@@ -2210,7 +2539,17 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 59.69) (xy 166.37 62.23)
+			(xy 30.48 105.41) (xy 50.8 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32a81e8f-2a56-4b66-979f-9cfe02f03d0c")
+	)
+	(wire
+		(pts
+			(xy 165.1 64.77) (xy 165.1 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2220,7 +2559,37 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 83.82) (xy 29.21 86.36)
+			(xy 19.05 143.51) (xy 20.32 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3747463e-44bc-4e94-bf97-5bd5742fd379")
+	)
+	(wire
+		(pts
+			(xy 187.96 129.54) (xy 190.5 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37848927-528d-4ae8-b99b-936475130f90")
+	)
+	(wire
+		(pts
+			(xy 118.11 144.78) (xy 124.46 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39ca5a88-c113-4fb7-aa44-55073d01f35a")
+	)
+	(wire
+		(pts
+			(xy 30.48 77.47) (xy 30.48 80.01)
 		)
 		(stroke
 			(width 0)
@@ -2230,7 +2599,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 62.23) (xy 166.37 62.23)
+			(xy 167.64 67.31) (xy 165.1 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2240,7 +2609,17 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 27.94) (xy 52.07 27.94)
+			(xy 30.48 110.49) (xy 50.8 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3de310b9-cdaf-4e31-8a72-31eec57f7a32")
+	)
+	(wire
+		(pts
+			(xy 30.48 33.02) (xy 50.8 33.02)
 		)
 		(stroke
 			(width 0)
@@ -2250,7 +2629,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 29.21) (xy 85.09 26.67)
+			(xy 83.82 34.29) (xy 83.82 31.75)
 		)
 		(stroke
 			(width 0)
@@ -2260,7 +2639,47 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 25.4) (xy 52.07 25.4)
+			(xy 165.1 142.24) (xy 165.1 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "478a1684-d3ff-4692-8039-086f51b73a2e")
+	)
+	(wire
+		(pts
+			(xy 124.46 144.78) (xy 134.62 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48735472-dfe7-4770-af1c-90026da3e5a5")
+	)
+	(wire
+		(pts
+			(xy 30.48 115.57) (xy 36.83 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49c7fe94-d308-44ff-9ab8-280724824f76")
+	)
+	(wire
+		(pts
+			(xy 167.64 139.7) (xy 165.1 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4f0cda09-e2e7-4420-a956-4ee1572103ca")
+	)
+	(wire
+		(pts
+			(xy 30.48 30.48) (xy 50.8 30.48)
 		)
 		(stroke
 			(width 0)
@@ -2270,7 +2689,17 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 24.13) (xy 133.35 24.13)
+			(xy 160.02 116.84) (xy 160.02 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5a8e2058-446c-47fe-aa9a-2639e884b0a4")
+	)
+	(wire
+		(pts
+			(xy 124.46 29.21) (xy 134.62 29.21)
 		)
 		(stroke
 			(width 0)
@@ -2280,7 +2709,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 64.77) (xy 133.35 64.77)
+			(xy 124.46 69.85) (xy 134.62 69.85)
 		)
 		(stroke
 			(width 0)
@@ -2290,7 +2719,7 @@
 	)
 	(wire
 		(pts
-			(xy 179.07 41.91) (xy 179.07 39.37)
+			(xy 177.8 46.99) (xy 177.8 44.45)
 		)
 		(stroke
 			(width 0)
@@ -2300,7 +2729,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 52.07) (xy 191.77 52.07)
+			(xy 187.96 57.15) (xy 190.5 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2310,7 +2739,17 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 44.45) (xy 123.19 44.45)
+			(xy 27.94 143.51) (xy 30.48 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b99c17c-60d7-4378-ba31-6bfba2a5b296")
+	)
+	(wire
+		(pts
+			(xy 118.11 49.53) (xy 124.46 49.53)
 		)
 		(stroke
 			(width 0)
@@ -2320,7 +2759,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 57.15) (xy 166.37 57.15)
+			(xy 167.64 62.23) (xy 165.1 62.23)
 		)
 		(stroke
 			(width 0)
@@ -2330,7 +2769,7 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 76.2) (xy 39.37 76.2)
+			(xy 30.48 69.85) (xy 40.64 69.85)
 		)
 		(stroke
 			(width 0)
@@ -2340,7 +2779,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 30.48) (xy 52.07 30.48)
+			(xy 30.48 35.56) (xy 50.8 35.56)
 		)
 		(stroke
 			(width 0)
@@ -2350,7 +2789,57 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 73.66) (xy 68.58 76.2)
+			(xy 30.48 107.95) (xy 50.8 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "76905340-2a9b-4ea8-990b-64c0f7475c7c")
+	)
+	(wire
+		(pts
+			(xy 187.96 127) (xy 190.5 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7cd14647-362f-471a-9234-ef0f75e0b760")
+	)
+	(wire
+		(pts
+			(xy 83.82 153.67) (xy 83.82 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d7324c9-2159-4e4f-8bc8-4358f5b07f7c")
+	)
+	(wire
+		(pts
+			(xy 76.2 143.51) (xy 73.66 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80ad6272-cb1e-484c-af8b-8c67cee5b61b")
+	)
+	(wire
+		(pts
+			(xy 124.46 132.08) (xy 124.46 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "83d1c2e9-21be-41a4-b3f6-acb74e8b78a4")
+	)
+	(wire
+		(pts
+			(xy 82.55 78.74) (xy 82.55 81.28)
 		)
 		(stroke
 			(width 0)
@@ -2360,7 +2849,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 59.69) (xy 166.37 59.69)
+			(xy 167.64 64.77) (xy 165.1 64.77)
 		)
 		(stroke
 			(width 0)
@@ -2370,7 +2859,17 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 29.21) (xy 161.29 26.67)
+			(xy 110.49 144.78) (xy 107.95 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "85e4910f-1a2d-4611-83ac-4555d2e40a4d")
+	)
+	(wire
+		(pts
+			(xy 160.02 34.29) (xy 160.02 31.75)
 		)
 		(stroke
 			(width 0)
@@ -2380,7 +2879,7 @@
 	)
 	(wire
 		(pts
-			(xy 179.07 67.31) (xy 179.07 69.85)
+			(xy 177.8 72.39) (xy 177.8 74.93)
 		)
 		(stroke
 			(width 0)
@@ -2390,7 +2889,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 64.77) (xy 106.68 64.77)
+			(xy 110.49 69.85) (xy 107.95 69.85)
 		)
 		(stroke
 			(width 0)
@@ -2400,7 +2899,17 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 49.53) (xy 191.77 49.53)
+			(xy 124.46 111.76) (xy 124.46 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8c42dfb6-d653-4aa0-ba6b-b9bf928ef06d")
+	)
+	(wire
+		(pts
+			(xy 187.96 54.61) (xy 190.5 54.61)
 		)
 		(stroke
 			(width 0)
@@ -2410,7 +2919,27 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 64.77) (xy 123.19 64.77)
+			(xy 40.64 151.13) (xy 40.64 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "90b2368d-0836-4065-a07e-0d4ae1a7d58c")
+	)
+	(wire
+		(pts
+			(xy 160.02 109.22) (xy 160.02 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9252e057-6aba-4906-8982-f304e543922c")
+	)
+	(wire
+		(pts
+			(xy 118.11 69.85) (xy 124.46 69.85)
 		)
 		(stroke
 			(width 0)
@@ -2420,7 +2949,17 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 52.07) (xy 133.35 54.61)
+			(xy 76.2 148.59) (xy 73.66 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "941564e2-f8a1-448c-9167-4a6ed62d0281")
+	)
+	(wire
+		(pts
+			(xy 134.62 57.15) (xy 134.62 59.69)
 		)
 		(stroke
 			(width 0)
@@ -2430,7 +2969,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 24.13) (xy 139.7 24.13)
+			(xy 134.62 29.21) (xy 140.97 29.21)
 		)
 		(stroke
 			(width 0)
@@ -2440,7 +2979,17 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 46.99) (xy 166.37 46.99)
+			(xy 30.48 113.03) (xy 50.8 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c2e4968-fa00-45e9-96f4-38316956323a")
+	)
+	(wire
+		(pts
+			(xy 167.64 52.07) (xy 165.1 52.07)
 		)
 		(stroke
 			(width 0)
@@ -2450,7 +2999,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 44.45) (xy 106.68 44.45)
+			(xy 110.49 49.53) (xy 107.95 49.53)
 		)
 		(stroke
 			(width 0)
@@ -2460,17 +3009,17 @@
 	)
 	(wire
 		(pts
-			(xy 19.05 73.66) (xy 19.05 76.2)
+			(xy 187.96 132.08) (xy 190.5 132.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a1a39654-9000-43ee-9810-c45bcda62542")
+		(uuid "a1fc9aab-2a55-4d88-a656-f2c3f59d5dcd")
 	)
 	(wire
 		(pts
-			(xy 116.84 24.13) (xy 123.19 24.13)
+			(xy 118.11 29.21) (xy 124.46 29.21)
 		)
 		(stroke
 			(width 0)
@@ -2480,7 +3029,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 24.13) (xy 106.68 24.13)
+			(xy 110.49 29.21) (xy 107.95 29.21)
 		)
 		(stroke
 			(width 0)
@@ -2490,7 +3039,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 52.07) (xy 123.19 54.61)
+			(xy 124.46 57.15) (xy 124.46 59.69)
 		)
 		(stroke
 			(width 0)
@@ -2500,7 +3049,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 66.04) (xy 58.42 66.04)
+			(xy 74.93 71.12) (xy 72.39 71.12)
 		)
 		(stroke
 			(width 0)
@@ -2510,17 +3059,37 @@
 	)
 	(wire
 		(pts
-			(xy 19.05 66.04) (xy 19.05 63.5)
+			(xy 124.46 124.46) (xy 134.62 124.46)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b09a8ddd-174e-4442-a177-78dca18a05b0")
+		(uuid "a90cbdc2-6246-4fda-a5e3-f592507fda68")
 	)
 	(wire
 		(pts
-			(xy 161.29 36.83) (xy 161.29 39.37)
+			(xy 134.62 104.14) (xy 140.97 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa00311f-95a8-47b6-b699-31d36ef2321f")
+	)
+	(wire
+		(pts
+			(xy 134.62 132.08) (xy 134.62 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b24a0a8a-cf70-4daa-9cef-ec5261901cbe")
+	)
+	(wire
+		(pts
+			(xy 160.02 41.91) (xy 160.02 44.45)
 		)
 		(stroke
 			(width 0)
@@ -2530,7 +3099,17 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 62.23) (xy 166.37 64.77)
+			(xy 134.62 124.46) (xy 140.97 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc667401-13ff-4ed8-b768-3f68c6ea429f")
+	)
+	(wire
+		(pts
+			(xy 165.1 67.31) (xy 165.1 69.85)
 		)
 		(stroke
 			(width 0)
@@ -2540,7 +3119,17 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 64.77) (xy 139.7 64.77)
+			(xy 167.64 137.16) (xy 165.1 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be233c1e-a19b-437f-a2ce-0ea80954dc39")
+	)
+	(wire
+		(pts
+			(xy 134.62 69.85) (xy 140.97 69.85)
 		)
 		(stroke
 			(width 0)
@@ -2550,7 +3139,27 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 35.56) (xy 52.07 35.56)
+			(xy 19.05 69.85) (xy 20.32 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0b347f6-6edb-4aa2-9860-9d4d1e5c1d0a")
+	)
+	(wire
+		(pts
+			(xy 30.48 143.51) (xy 40.64 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c5259470-9c99-4fd3-b427-1f547718cf33")
+	)
+	(wire
+		(pts
+			(xy 36.83 40.64) (xy 50.8 40.64)
 		)
 		(stroke
 			(width 0)
@@ -2560,7 +3169,17 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 72.39) (xy 123.19 74.93)
+			(xy 134.62 111.76) (xy 134.62 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8842bfc-20d6-4d1e-8f9b-00e311e15135")
+	)
+	(wire
+		(pts
+			(xy 124.46 77.47) (xy 124.46 80.01)
 		)
 		(stroke
 			(width 0)
@@ -2570,7 +3189,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 46.99) (xy 191.77 46.99)
+			(xy 187.96 52.07) (xy 190.5 52.07)
 		)
 		(stroke
 			(width 0)
@@ -2580,7 +3199,17 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 76.2) (xy 44.45 76.2)
+			(xy 83.82 109.22) (xy 83.82 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc13327c-24b6-48c9-93a2-a35cc555d1c9")
+	)
+	(wire
+		(pts
+			(xy 40.64 69.85) (xy 45.72 69.85)
 		)
 		(stroke
 			(width 0)
@@ -2590,7 +3219,17 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 44.45) (xy 139.7 44.45)
+			(xy 27.94 69.85) (xy 30.48 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d07a47b4-c7c9-43c4-8a99-c9ff483434cb")
+	)
+	(wire
+		(pts
+			(xy 134.62 49.53) (xy 140.97 49.53)
 		)
 		(stroke
 			(width 0)
@@ -2600,7 +3239,57 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 44.45) (xy 133.35 44.45)
+			(xy 165.1 137.16) (xy 165.1 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d50a789a-0e6f-4054-892a-642aefbba4d7")
+	)
+	(wire
+		(pts
+			(xy 110.49 104.14) (xy 107.95 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d96dbd75-34f6-47dd-8646-92a9328505d6")
+	)
+	(wire
+		(pts
+			(xy 76.2 140.97) (xy 73.66 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "da46c0a1-d5a2-4d69-bd72-ceabccdf2ddd")
+	)
+	(wire
+		(pts
+			(xy 30.48 151.13) (xy 30.48 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de1c50a9-cca6-4ac1-94b6-ceb06294ce04")
+	)
+	(wire
+		(pts
+			(xy 124.46 152.4) (xy 124.46 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e02f1018-240d-48f9-bf4a-6e3834a74350")
+	)
+	(wire
+		(pts
+			(xy 124.46 49.53) (xy 134.62 49.53)
 		)
 		(stroke
 			(width 0)
@@ -2610,7 +3299,17 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 35.56) (xy 38.1 35.56)
+			(xy 167.64 142.24) (xy 165.1 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1921318-e8dc-41e6-ab74-5be7118d1652")
+	)
+	(wire
+		(pts
+			(xy 30.48 40.64) (xy 36.83 40.64)
 		)
 		(stroke
 			(width 0)
@@ -2620,7 +3319,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 36.83) (xy 85.09 39.37)
+			(xy 83.82 41.91) (xy 83.82 44.45)
 		)
 		(stroke
 			(width 0)
@@ -2630,7 +3329,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 52.07) (xy 166.37 52.07)
+			(xy 167.64 57.15) (xy 165.1 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2640,7 +3339,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 72.39) (xy 133.35 74.93)
+			(xy 134.62 77.47) (xy 134.62 80.01)
 		)
 		(stroke
 			(width 0)
@@ -2648,8 +3347,68 @@
 		)
 		(uuid "e88988a9-ce47-4f7c-ba78-ce51f6713cd2")
 	)
-	(label "ENC_5V_RAW"
-		(at 44.45 76.2 0)
+	(wire
+		(pts
+			(xy 167.64 129.54) (xy 165.1 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea5994a1-63a6-478f-8e0c-9c3ff79eff9c")
+	)
+	(wire
+		(pts
+			(xy 83.82 116.84) (xy 83.82 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef74c25a-429d-47d7-a357-233c3519d5e2")
+	)
+	(wire
+		(pts
+			(xy 134.62 152.4) (xy 134.62 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f762da69-dd9a-4e08-9223-6f3e00a364a3")
+	)
+	(wire
+		(pts
+			(xy 36.83 115.57) (xy 50.8 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb1fdbd9-81c9-443b-ae29-d86200eb7979")
+	)
+	(wire
+		(pts
+			(xy 165.1 139.7) (xy 165.1 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fbd18775-189a-4c12-9773-29b360108fd3")
+	)
+	(wire
+		(pts
+			(xy 118.11 124.46) (xy 124.46 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc833035-73c4-4e2f-bf62-edee21d7fb57")
+	)
+	(label "ENC1_5V_RAW"
+		(at 45.72 69.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2658,8 +3417,8 @@
 		)
 		(uuid "1896cba0-b515-4f7c-a56c-57f678f0d72d")
 	)
-	(label "ENC_B_RAW"
-		(at 106.68 44.45 180)
+	(label "ENC1_B_RAW"
+		(at 107.95 49.53 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2668,8 +3427,38 @@
 		)
 		(uuid "1af1509e-0e30-4e57-b3a1-37610d85e899")
 	)
-	(label "ENC_Z_RAW"
-		(at 106.68 64.77 180)
+	(label "ENC2_B_RAW"
+		(at 36.83 105.41 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1efb7302-3163-425e-9368-c241aa164b57")
+	)
+	(label "ENC2_Z_F"
+		(at 140.97 144.78 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "24b26e89-21df-4459-bf7d-febfa3c2d6e7")
+	)
+	(label "ENC2_5V_RAW"
+		(at 73.66 148.59 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2698c7b2-f414-489f-af41-e8d3d35630ba")
+	)
+	(label "ENC1_Z_RAW"
+		(at 107.95 69.85 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2678,8 +3467,28 @@
 		)
 		(uuid "291af3e8-9b7f-447f-98de-f0a1e1831365")
 	)
-	(label "ENC_B_RAW"
-		(at 58.42 63.5 180)
+	(label "ENC2_A_RAW"
+		(at 73.66 140.97 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "31633fef-d02a-474e-b423-50dbc529107b")
+	)
+	(label "ENC2_B_RAW"
+		(at 107.95 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3687ac36-ea8d-40e5-9e85-4afdd2d4fc24")
+	)
+	(label "ENC1_B_RAW"
+		(at 72.39 68.58 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2688,8 +3497,28 @@
 		)
 		(uuid "41bffb6d-56d3-4c92-b17c-5bf818ae897b")
 	)
-	(label "ENC_A_RAW"
-		(at 58.42 60.96 180)
+	(label "ENC2_B_RAW"
+		(at 73.66 143.51 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4496f35b-55e4-4510-b2fd-0bd39e1353f3")
+	)
+	(label "ENC2_A_RAW"
+		(at 36.83 110.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4a6f952a-3563-4d48-ad92-79b19ba45918")
+	)
+	(label "ENC1_A_RAW"
+		(at 72.39 66.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2698,8 +3527,18 @@
 		)
 		(uuid "52619690-e14a-432c-919a-a80a517f954d")
 	)
-	(label "ENC_A_F"
-		(at 166.37 46.99 180)
+	(label "ENC2_B_F"
+		(at 140.97 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5db20426-8105-4b53-8679-679fbe2e2f7a")
+	)
+	(label "ENC1_A_F"
+		(at 165.1 52.07 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2708,8 +3547,8 @@
 		)
 		(uuid "62add7a8-91cc-4fd5-9912-7448128a91db")
 	)
-	(label "ENC_B_F"
-		(at 139.7 44.45 0)
+	(label "ENC1_B_F"
+		(at 140.97 49.53 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2718,8 +3557,18 @@
 		)
 		(uuid "65931a3d-480e-4668-9f63-45945dd6c81b")
 	)
-	(label "ENC_5V_RAW"
-		(at 58.42 68.58 180)
+	(label "ENC2_A_RAW"
+		(at 107.95 104.14 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6ea783ce-e8bf-4e3f-ba52-66122db3123d")
+	)
+	(label "ENC1_5V_RAW"
+		(at 72.39 73.66 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2728,8 +3577,8 @@
 		)
 		(uuid "70b4801a-f679-4c62-8499-73bd5bca86fe")
 	)
-	(label "ENC_Z_F"
-		(at 166.37 52.07 180)
+	(label "ENC1_Z_F"
+		(at 165.1 57.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2738,8 +3587,28 @@
 		)
 		(uuid "7a573ba0-50e3-4613-8e0c-e344528510f7")
 	)
-	(label "ENC_B_RAW"
-		(at 38.1 25.4 0)
+	(label "ENC2_Z_RAW"
+		(at 73.66 146.05 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7aa9cbcd-8f3f-4f2f-9b5c-b293b04af45e")
+	)
+	(label "ENC2_5V_RAW"
+		(at 45.72 143.51 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7d0ed33b-8e6a-4d61-b572-b4d17f99a2c7")
+	)
+	(label "ENC1_B_RAW"
+		(at 36.83 30.48 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2748,8 +3617,18 @@
 		)
 		(uuid "7e6efa10-59fa-45c8-82f0-1ab7d0564b58")
 	)
-	(label "ENC_A_F"
-		(at 139.7 24.13 0)
+	(label "ENC2_A_F"
+		(at 140.97 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ad3e1f60-a5d8-46ae-9cbc-96de561f4bdf")
+	)
+	(label "ENC1_A_F"
+		(at 140.97 29.21 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2758,8 +3637,28 @@
 		)
 		(uuid "ad52ff7a-f87e-4471-9e7e-2173e4c7d0e1")
 	)
-	(label "ENC_Z_F"
-		(at 139.7 64.77 0)
+	(label "ENC2_Z_RAW"
+		(at 107.95 144.78 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "adf14516-c17e-4cf5-81e8-ec3467b6dfc8")
+	)
+	(label "ENC2_5V_RAW"
+		(at 36.83 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b2ad090a-604c-4c9e-a237-4fed0904bf72")
+	)
+	(label "ENC1_Z_F"
+		(at 140.97 69.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2768,8 +3667,18 @@
 		)
 		(uuid "bf3b8ba8-319d-4c6e-a49a-581e719ee7e3")
 	)
-	(label "ENC_B_F"
-		(at 166.37 49.53 180)
+	(label "ENC2_B_F"
+		(at 165.1 129.54 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c468c865-8601-4edf-a6da-970d0c629093")
+	)
+	(label "ENC1_B_F"
+		(at 165.1 54.61 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2778,8 +3687,8 @@
 		)
 		(uuid "c5b7c372-0246-4271-9218-6fac12dd1388")
 	)
-	(label "ENC_A_RAW"
-		(at 38.1 30.48 0)
+	(label "ENC1_A_RAW"
+		(at 36.83 35.56 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2788,8 +3697,8 @@
 		)
 		(uuid "c73e5770-edb5-4d2c-a9f4-7fb5c3e9e02a")
 	)
-	(label "ENC_5V_RAW"
-		(at 38.1 27.94 0)
+	(label "ENC1_5V_RAW"
+		(at 36.83 33.02 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2798,8 +3707,18 @@
 		)
 		(uuid "c766e390-ca07-4ff1-8516-e6f6fc9d2df2")
 	)
-	(label "ENC_Z_RAW"
-		(at 38.1 33.02 0)
+	(label "ENC2_Z_RAW"
+		(at 36.83 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ca4d95ae-cebe-4874-ba99-ec7e0ef902c9")
+	)
+	(label "ENC1_Z_RAW"
+		(at 36.83 38.1 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2808,8 +3727,8 @@
 		)
 		(uuid "e5130345-be37-45a6-a3e1-8ce96f1cf302")
 	)
-	(label "ENC_A_RAW"
-		(at 106.68 24.13 180)
+	(label "ENC1_A_RAW"
+		(at 107.95 29.21 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2818,8 +3737,8 @@
 		)
 		(uuid "f2c598cc-6311-4d6d-8a0b-d181cbdebf5d")
 	)
-	(label "ENC_Z_RAW"
-		(at 58.42 66.04 180)
+	(label "ENC1_Z_RAW"
+		(at 72.39 71.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2828,9 +3747,40 @@
 		)
 		(uuid "f405e38b-e13a-4f6f-ad46-cea0346c38d9")
 	)
-	(hierarchical_label "ENC_Z"
+	(label "ENC2_Z_F"
+		(at 165.1 132.08 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f754df02-fb8a-4d40-8f12-c71dc4d70ad9")
+	)
+	(label "ENC2_A_F"
+		(at 165.1 127 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f9bb519b-c27a-437c-bb63-eb4720b0bd91")
+	)
+	(hierarchical_label "ENC2_A"
 		(shape output)
-		(at 191.77 52.07 0)
+		(at 190.5 127 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "31b34d94-578a-4494-8afa-af6799ca8a5f")
+	)
+	(hierarchical_label "ENC1_Z"
+		(shape output)
+		(at 190.5 57.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2839,9 +3789,9 @@
 		)
 		(uuid "5bfd657b-8347-453a-b7b9-555c1af0d816")
 	)
-	(hierarchical_label "ENC_A"
+	(hierarchical_label "ENC1_A"
 		(shape output)
-		(at 191.77 46.99 0)
+		(at 190.5 52.07 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2850,9 +3800,31 @@
 		)
 		(uuid "774d3e36-ede2-415a-b24c-de18930ef976")
 	)
-	(hierarchical_label "ENC_B"
+	(hierarchical_label "ENC2_B"
 		(shape output)
-		(at 191.77 49.53 0)
+		(at 190.5 129.54 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9bd7651d-0ccd-4ac4-bb88-44884c3737c6")
+	)
+	(hierarchical_label "ENC2_Z"
+		(shape output)
+		(at 190.5 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e8e0cdf5-88eb-4ce3-9282-874a688894ac")
+	)
+	(hierarchical_label "ENC1_B"
+		(shape output)
+		(at 190.5 54.61 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2863,7 +3835,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 39.37 80.01 0)
+		(at 40.64 73.66 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2872,8 +3844,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "081cf230-8530-4d2e-8e78-7dc377a89ddc")
-		(property "Reference" "C102"
-			(at 41.91 78.74 0)
+		(property "Reference" "C35"
+			(at 43.18 72.39 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2884,7 +3856,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 41.91 81.28 0)
+			(at 43.18 74.93 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2895,7 +3867,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 39.37 80.01 0)
+			(at 40.64 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2906,7 +3878,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 39.37 80.01 0)
+			(at 40.64 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2917,7 +3889,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 39.37 80.01 0)
+			(at 40.64 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2936,19 +3908,15 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "C102")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "C9")
+					(reference "C35")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 123.19 48.26 0)
+		(lib_id "power:+3.3V")
+		(at 177.8 119.38 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2956,31 +3924,30 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "1c78ff00-2b74-4ab8-9fd0-6088f662e224")
-		(property "Reference" "C104"
-			(at 125.73 46.99 0)
+		(uuid "1414f34a-6b1a-40f3-b55b-98d1f6e33b77")
+		(property "Reference" "#PWR0190"
+			(at 177.8 119.38 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Value" "100pF"
-			(at 125.73 49.53 0)
+		(property "Value" "+3.3V"
+			(at 177.8 115.57 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 123.19 48.26 0)
+		(property "Footprint" ""
+			(at 177.8 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2991,7 +3958,243 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 48.26 0)
+			(at 177.8 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 177.8 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d985278f-0010-425c-810b-9e15509430d6")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0190")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 134.62 148.59 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "171a9627-ac1b-4191-bc6e-c3411424573c")
+		(property "Reference" "R57"
+			(at 137.16 147.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100k"
+			(at 137.16 149.86 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 134.62 148.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 134.62 148.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 134.62 148.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "de98c655-ff09-4ad8-bd7a-ba99ca4a22f6")
+		)
+		(pin "2"
+			(uuid "eed806e6-f793-4284-b151-70f35403f41e")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "R57")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 124.46 134.62 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "19985358-b355-491b-a18e-7cdc98ce8b4e")
+		(property "Reference" "#PWR0174"
+			(at 124.46 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 124.46 138.43 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 124.46 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 124.46 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5a588621-ccf8-4791-a92e-b988d7f49eb8")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0174")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 124.46 128.27 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1ab2f708-32ac-4d02-95f2-ddb6dcc116ce")
+		(property "Reference" "C43"
+			(at 127 127 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100pF"
+			(at 127 129.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 124.46 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 128.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3002,7 +4205,88 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 123.19 48.26 0)
+			(at 124.46 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "aae3573a-47c8-493b-b22e-cbc0567944a7")
+		)
+		(pin "2"
+			(uuid "e2981275-5e5f-4166-a0ff-839cca4c7600")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "C43")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 124.46 53.34 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1c78ff00-2b74-4ab8-9fd0-6088f662e224")
+		(property "Reference" "C40"
+			(at 127 52.07 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100pF"
+			(at 127 54.61 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 124.46 53.34 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 53.34 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 124.46 53.34 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3021,19 +4305,15 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "C104")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "C37")
+					(reference "C40")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
-		(at 19.05 63.5 0)
+		(lib_id "Device:R_US")
+		(at 134.62 128.27 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3041,30 +4321,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "1fe6feb2-8771-4ee8-9736-8832984840c2")
-		(property "Reference" "#PWR0502"
-			(at 19.05 63.5 0)
-			(hide yes)
+		(uuid "1ee2e737-5c85-4a8d-a49e-c1240602a445")
+		(property "Reference" "R56"
+			(at 137.16 127 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Value" "+5V"
-			(at 19.05 59.69 0)
+		(property "Value" "100k"
+			(at 137.16 129.54 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 19.05 63.5 0)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 134.62 128.27 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3075,7 +4356,226 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 19.05 63.5 0)
+			(at 134.62 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 134.62 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "01b0043b-8f25-4fbe-b03e-cd6db6058d29")
+		)
+		(pin "2"
+			(uuid "0f83d7f0-6c98-4290-aff8-6d4f7d62cbcf")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "R56")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Custom_Parts:SN74LVC14A")
+		(at 177.8 134.62 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1f2f2317-65bd-424d-a2ed-53f1fe02c502")
+		(property "Reference" "U11"
+			(at 180.34 123.19 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SN74LVC14ADR"
+			(at 180.34 146.05 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
+			(at 177.8 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/sn74lvc14a.pdf"
+			(at 177.8 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "TI SN74LVC14A hex Schmitt-trigger inverter, 1.65-3.6 V supply, 5.5 V tolerant inputs, SOIC-14"
+			(at 177.8 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "SN74LVC14ADR"
+			(at 177.8 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey" "https://www.digikey.com/en/products/detail/texas-instruments/SN74LVC14ADR/377434"
+			(at 177.8 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d5a233e1-1ef3-47f8-8692-ae2440100ee6")
+		)
+		(pin "3"
+			(uuid "118bd4ed-2077-4466-9dde-04d6d9646cb5")
+		)
+		(pin "5"
+			(uuid "a4fc61f9-f0da-4f45-a025-7438fe3f5636")
+		)
+		(pin "9"
+			(uuid "907e5492-7d94-4869-97f4-9ec35aa60317")
+		)
+		(pin "11"
+			(uuid "1cd057eb-b36a-4817-a1b6-f22b05a1d018")
+		)
+		(pin "13"
+			(uuid "c79d115e-079d-4bbd-bcdc-f98b56487918")
+		)
+		(pin "2"
+			(uuid "5d08523f-5d25-46d9-b8d9-a64dfb814561")
+		)
+		(pin "4"
+			(uuid "68791b29-6288-4c22-83dc-4284fd2ecc45")
+		)
+		(pin "6"
+			(uuid "c7397c3d-61f0-4bb6-b28f-51a0a7eda059")
+		)
+		(pin "8"
+			(uuid "f0d2048b-7cef-498d-ab78-cf121e1e5581")
+		)
+		(pin "10"
+			(uuid "b290cad1-c45a-4770-866c-4ec58a871290")
+		)
+		(pin "12"
+			(uuid "05a5c483-b404-48a6-ac3f-c3045b9ba191")
+		)
+		(pin "14"
+			(uuid "83e6edde-bf94-4683-9c98-25bc4a42135e")
+		)
+		(pin "7"
+			(uuid "ee884ab4-a051-41fc-a6f4-ff9734fa2a11")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "U11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 19.05 69.85 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1fe6feb2-8771-4ee8-9736-8832984840c2")
+		(property "Reference" "#PWR011"
+			(at 19.05 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 15.24 69.85 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 19.05 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 19.05 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3086,7 +4586,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 19.05 63.5 0)
+			(at 19.05 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3102,10 +4602,6 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0502")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
 					(reference "#PWR011")
 					(unit 1)
 				)
@@ -3114,7 +4610,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 113.03 64.77 90)
+		(at 114.3 69.85 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3123,8 +4619,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "239bef54-81ac-423d-a95a-8769a0b02a51")
-		(property "Reference" "R103"
-			(at 113.03 62.23 0)
+		(property "Reference" "R48"
+			(at 114.3 67.31 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3134,7 +4630,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 113.03 67.31 0)
+			(at 114.3 72.39 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3144,7 +4640,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 113.03 64.77 0)
+			(at 114.3 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3155,7 +4651,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 113.03 64.77 0)
+			(at 114.3 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3166,7 +4662,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 113.03 64.77 0)
+			(at 114.3 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3185,10 +4681,6 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "R103")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
 					(reference "R48")
 					(unit 1)
 				)
@@ -3197,7 +4689,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 29.21 86.36 0)
+		(at 134.62 134.62 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3205,9 +4697,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "3429e696-8ab2-40c7-a81d-508c4d81496c")
-		(property "Reference" "#PWR0503"
-			(at 29.21 86.36 0)
+		(uuid "23d6eea1-6253-4574-a350-ec7ec685902f")
+		(property "Reference" "#PWR0180"
+			(at 134.62 134.62 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3218,7 +4710,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 29.21 90.17 0)
+			(at 134.62 138.43 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3228,7 +4720,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 29.21 86.36 0)
+			(at 134.62 134.62 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3239,7 +4731,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 29.21 86.36 0)
+			(at 134.62 134.62 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3250,7 +4742,244 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 29.21 86.36 0)
+			(at 134.62 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9aa9bff9-5d7a-4ed4-9f6a-76474034bb0a")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0180")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 160.02 113.03 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "2587bc2a-874b-4175-9283-5a91ace53757")
+		(property "Reference" "C46"
+			(at 162.56 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 162.56 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 160.02 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 160.02 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 160.02 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6daeb867-54c1-4324-8eb9-f43b18ed9a2e")
+		)
+		(pin "2"
+			(uuid "3f6d71c4-8c31-4059-ae97-d06ab95c57ec")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "C46")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 114.3 124.46 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "259e6d21-0e3c-4346-b990-eaf2ae599317")
+		(property "Reference" "R50"
+			(at 114.3 121.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 114.3 127 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 114.3 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 114.3 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2d1ce249-0edd-41cc-b38d-ba270b729fc2")
+		)
+		(pin "2"
+			(uuid "64c40185-6011-4ed7-90e1-d418ff498658")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "R50")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 30.48 80.01 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "3429e696-8ab2-40c7-a81d-508c4d81496c")
+		(property "Reference" "#PWR020"
+			(at 30.48 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 30.48 83.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 30.48 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 30.48 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 30.48 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3266,11 +4995,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0503")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR019")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -3278,7 +5003,7 @@
 	)
 	(symbol
 		(lib_id "Device:Fuse")
-		(at 19.05 69.85 0)
+		(at 24.13 69.85 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3287,30 +5012,30 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3906ea01-7224-4f32-8325-12983d96e4e5")
-		(property "Reference" "F101"
-			(at 21.59 68.58 0)
+		(property "Reference" "F3"
+			(at 21.59 65.024 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "PTC 120mA"
-			(at 21.59 71.12 0)
+			(at 21.59 67.564 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "Fuse:Fuse_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
-			(at 19.05 69.85 0)
+			(at 24.13 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3321,7 +5046,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 19.05 69.85 0)
+			(at 24.13 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3332,7 +5057,7 @@
 			)
 		)
 		(property "Description" "Fuse"
-			(at 19.05 69.85 0)
+			(at 24.13 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3343,7 +5068,7 @@
 			)
 		)
 		(property "MPN" "MF-NSMF012-2"
-			(at 19.05 69.85 0)
+			(at 24.13 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3354,7 +5079,7 @@
 			)
 		)
 		(property "DigiKey" "https://www.digikey.com/en/products/detail/bourns-inc/MF-NSMF012-2/662807"
-			(at 19.05 69.85 0)
+			(at 24.13 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3373,10 +5098,6 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "F101")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
 					(reference "F3")
 					(unit 1)
 				)
@@ -3385,7 +5106,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 68.58 76.2 0)
+		(at 82.55 81.28 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3394,8 +5115,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3d671408-5696-4587-9c88-14b2a6e9037c")
-		(property "Reference" "#PWR0505"
-			(at 68.58 76.2 0)
+		(property "Reference" "#PWR0164"
+			(at 82.55 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3406,7 +5127,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 68.58 80.01 0)
+			(at 82.55 85.09 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3416,7 +5137,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 68.58 76.2 0)
+			(at 82.55 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3427,7 +5148,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 68.58 76.2 0)
+			(at 82.55 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3438,7 +5159,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 68.58 76.2 0)
+			(at 82.55 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3454,11 +5175,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0505")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR073")
+					(reference "#PWR0164")
 					(unit 1)
 				)
 			)
@@ -3466,7 +5183,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 133.35 27.94 0)
+		(at 134.62 33.02 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3475,8 +5192,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3fa2829a-2a6e-4c71-8e99-87800e525ca2")
-		(property "Reference" "R104"
-			(at 135.89 26.67 0)
+		(property "Reference" "R52"
+			(at 137.16 31.75 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3487,7 +5204,7 @@
 			)
 		)
 		(property "Value" "100k"
-			(at 135.89 29.21 0)
+			(at 137.16 34.29 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3498,7 +5215,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 133.35 27.94 0)
+			(at 134.62 33.02 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3509,7 +5226,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 27.94 0)
+			(at 134.62 33.02 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3520,7 +5237,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 133.35 27.94 0)
+			(at 134.62 33.02 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3539,11 +5256,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "R104")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "R49")
+					(reference "R52")
 					(unit 1)
 				)
 			)
@@ -3551,7 +5264,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 133.35 34.29 0)
+		(at 134.62 39.37 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3560,8 +5273,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3fcaef0f-7a01-4c98-bcd6-2d8d39c08dca")
-		(property "Reference" "#PWR0507"
-			(at 133.35 34.29 0)
+		(property "Reference" "#PWR0176"
+			(at 134.62 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3572,7 +5285,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 133.35 38.1 0)
+			(at 134.62 43.18 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3582,7 +5295,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 133.35 34.29 0)
+			(at 134.62 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3593,7 +5306,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 34.29 0)
+			(at 134.62 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3604,7 +5317,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 133.35 34.29 0)
+			(at 134.62 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3620,11 +5333,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0507")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0166")
+					(reference "#PWR0176")
 					(unit 1)
 				)
 			)
@@ -3632,7 +5341,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 161.29 33.02 0)
+		(at 160.02 38.1 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3641,8 +5350,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "40e369c4-97e5-4b62-84f6-2a7a089cda0a")
-		(property "Reference" "C106"
-			(at 163.83 31.75 0)
+		(property "Reference" "C45"
+			(at 162.56 36.83 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3653,7 +5362,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 163.83 34.29 0)
+			(at 162.56 39.37 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3664,7 +5373,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 161.29 33.02 0)
+			(at 160.02 38.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3675,7 +5384,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 161.29 33.02 0)
+			(at 160.02 38.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3686,7 +5395,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 161.29 33.02 0)
+			(at 160.02 38.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3705,11 +5414,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "C106")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "C39")
+					(reference "C45")
 					(unit 1)
 				)
 			)
@@ -3717,7 +5422,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 29.21 80.01 0)
+		(at 30.48 73.66 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3726,8 +5431,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "40f0798c-9407-486c-9e00-e0f58ea5bcf2")
-		(property "Reference" "C101"
-			(at 31.75 78.74 0)
+		(property "Reference" "C8"
+			(at 33.02 72.39 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3738,7 +5443,7 @@
 			)
 		)
 		(property "Value" "1uF"
-			(at 31.75 81.28 0)
+			(at 33.02 74.93 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3749,7 +5454,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 29.21 80.01 0)
+			(at 30.48 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3760,7 +5465,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 29.21 80.01 0)
+			(at 30.48 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3771,7 +5476,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 29.21 80.01 0)
+			(at 30.48 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3790,10 +5495,6 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "C101")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
 					(reference "C8")
 					(unit 1)
 				)
@@ -3802,7 +5503,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 123.19 74.93 0)
+		(at 124.46 114.3 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3810,9 +5511,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "43d20d4c-a1c5-48e3-8859-d69d405fb7f9")
-		(property "Reference" "#PWR0510"
-			(at 123.19 74.93 0)
+		(uuid "43b5f176-d5b5-4bf3-bb30-d6863edac821")
+		(property "Reference" "#PWR0173"
+			(at 124.46 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3823,7 +5524,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 123.19 78.74 0)
+			(at 124.46 118.11 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3833,7 +5534,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 123.19 74.93 0)
+			(at 124.46 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3844,7 +5545,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 74.93 0)
+			(at 124.46 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3855,7 +5556,84 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 123.19 74.93 0)
+			(at 124.46 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5445b5a4-4a2d-46c9-9ed7-52413f8c22c4")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0173")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 124.46 80.01 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "43d20d4c-a1c5-48e3-8859-d69d405fb7f9")
+		(property "Reference" "#PWR0172"
+			(at 124.46 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 124.46 83.82 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 124.46 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 124.46 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3871,11 +5649,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0510")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0165")
+					(reference "#PWR0172")
 					(unit 1)
 				)
 			)
@@ -3883,7 +5657,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 161.29 26.67 0)
+		(at 160.02 31.75 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3892,8 +5666,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "44380580-e7be-4c77-90a3-4382d02fabb9")
-		(property "Reference" "#PWR0515"
-			(at 161.29 26.67 0)
+		(property "Reference" "#PWR0182"
+			(at 160.02 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3904,7 +5678,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 161.29 22.86 0)
+			(at 160.02 27.94 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3914,7 +5688,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 161.29 26.67 0)
+			(at 160.02 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3925,7 +5699,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 161.29 26.67 0)
+			(at 160.02 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3936,7 +5710,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 161.29 26.67 0)
+			(at 160.02 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3952,11 +5726,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0515")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0169")
+					(reference "#PWR0182")
 					(unit 1)
 				)
 			)
@@ -3964,7 +5734,7 @@
 	)
 	(symbol
 		(lib_id "Custom_Parts:TPD4E1U06DBV")
-		(at 68.58 66.04 0)
+		(at 82.55 71.12 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3973,8 +5743,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "461dd3cf-e2e6-422a-a5a7-ef4472d37957")
-		(property "Reference" "D101"
-			(at 63.5 57.15 0)
+		(property "Reference" "D6"
+			(at 77.47 62.23 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3985,7 +5755,7 @@
 			)
 		)
 		(property "Value" "TPD4E1U06DBVR"
-			(at 69.85 72.39 0)
+			(at 63.754 78.486 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3996,7 +5766,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6_Handsoldering"
-			(at 68.58 66.04 0)
+			(at 82.55 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4007,7 +5777,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd4e1u06.pdf"
-			(at 68.58 66.04 0)
+			(at 82.55 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4018,7 +5788,7 @@
 			)
 		)
 		(property "Description" "TI TPD4E1U06 4-channel ESD protection, 5.5 V working voltage, SOT-23-6 (DBV)"
-			(at 68.58 66.04 0)
+			(at 82.55 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4029,7 +5799,7 @@
 			)
 		)
 		(property "MPN" "TPD4E1U06DBVR"
-			(at 68.58 66.04 0)
+			(at 82.55 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4040,7 +5810,7 @@
 			)
 		)
 		(property "DigiKey" "https://www.digikey.com/en/products/detail/texas-instruments/TPD4E1U06DBVR/3929533"
-			(at 68.58 66.04 0)
+			(at 82.55 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4071,10 +5841,6 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "D101")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
 					(reference "D6")
 					(unit 1)
 				)
@@ -4083,7 +5849,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 85.09 26.67 0)
+		(at 83.82 31.75 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4092,8 +5858,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "49ce86b0-4256-4f60-861c-b7795cb3f73d")
-		(property "Reference" "#PWR0525"
-			(at 85.09 26.67 0)
+		(property "Reference" "#PWR0165"
+			(at 83.82 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4104,7 +5870,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 85.09 22.86 0)
+			(at 83.82 27.94 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4114,7 +5880,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 85.09 26.67 0)
+			(at 83.82 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4125,7 +5891,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 85.09 26.67 0)
+			(at 83.82 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4136,7 +5902,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 85.09 26.67 0)
+			(at 83.82 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4152,11 +5918,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0525")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR074")
+					(reference "#PWR0165")
 					(unit 1)
 				)
 			)
@@ -4164,7 +5926,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 39.37 86.36 0)
+		(at 40.64 80.01 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4173,8 +5935,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "4a49dd68-ebde-49d7-a502-70c11e87f56b")
-		(property "Reference" "#PWR0504"
-			(at 39.37 86.36 0)
+		(property "Reference" "#PWR084"
+			(at 40.64 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4185,7 +5947,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 39.37 90.17 0)
+			(at 40.64 83.82 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4195,7 +5957,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 39.37 86.36 0)
+			(at 40.64 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4206,7 +5968,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 39.37 86.36 0)
+			(at 40.64 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4217,7 +5979,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 39.37 86.36 0)
+			(at 40.64 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4233,19 +5995,15 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0504")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR072")
+					(reference "#PWR084")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 123.19 27.94 0)
+		(lib_id "power:GND")
+		(at 83.82 119.38 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4253,31 +6011,30 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "58832f95-02a8-4434-b042-7513cce54c4f")
-		(property "Reference" "C103"
-			(at 125.73 26.67 0)
+		(uuid "555b69e2-d6b4-4a02-a6a6-04363cf7c603")
+		(property "Reference" "#PWR0168"
+			(at 83.82 119.38 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Value" "100pF"
-			(at 125.73 29.21 0)
+		(property "Value" "GND"
+			(at 83.82 123.19 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 123.19 27.94 0)
+		(property "Footprint" ""
+			(at 83.82 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4288,7 +6045,164 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 27.94 0)
+			(at 83.82 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 83.82 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "56312ddf-e7e3-4851-839f-699f93637249")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0168")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 114.3 144.78 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "565344b6-4da8-4a4e-8776-f844c0eab9b8")
+		(property "Reference" "R51"
+			(at 114.3 142.24 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 114.3 147.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 114.3 144.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 144.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 114.3 144.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4bafd740-89f2-4ee3-9b02-d5949fa1fbf9")
+		)
+		(pin "2"
+			(uuid "f27986d6-64ff-4236-af7e-d5212c7dbcff")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "R51")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 40.64 147.32 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "56762c59-eab1-4a7d-8c71-72e1aa096b01")
+		(property "Reference" "C36"
+			(at 43.18 146.05 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 43.18 148.59 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 40.64 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 40.64 147.32 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4299,7 +6213,88 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 123.19 27.94 0)
+			(at 40.64 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "453d354a-92cc-4336-80a1-d29c6948442f")
+		)
+		(pin "2"
+			(uuid "c269f749-5b4f-4629-9118-f99204f21404")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "C36")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 124.46 33.02 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "58832f95-02a8-4434-b042-7513cce54c4f")
+		(property "Reference" "C39"
+			(at 127 31.75 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100pF"
+			(at 127 34.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 124.46 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 124.46 33.02 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4318,11 +6313,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "C103")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "C36")
+					(reference "C39")
 					(unit 1)
 				)
 			)
@@ -4330,7 +6321,7 @@
 	)
 	(symbol
 		(lib_id "Custom_Parts:SN74LVC14A")
-		(at 179.07 54.61 0)
+		(at 177.8 59.69 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4339,8 +6330,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5ba4d6a8-d695-4e14-afb9-26d6b9a705b8")
-		(property "Reference" "U101"
-			(at 181.61 43.18 0)
+		(property "Reference" "U5"
+			(at 180.34 48.26 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4351,7 +6342,7 @@
 			)
 		)
 		(property "Value" "SN74LVC14ADR"
-			(at 181.61 66.04 0)
+			(at 180.34 71.12 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4362,7 +6353,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
-			(at 179.07 54.61 0)
+			(at 177.8 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4373,7 +6364,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/sn74lvc14a.pdf"
-			(at 179.07 54.61 0)
+			(at 177.8 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4384,7 +6375,7 @@
 			)
 		)
 		(property "Description" "TI SN74LVC14A hex Schmitt-trigger inverter, 1.65-3.6 V supply, 5.5 V tolerant inputs, SOIC-14"
-			(at 179.07 54.61 0)
+			(at 177.8 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4395,7 +6386,7 @@
 			)
 		)
 		(property "MPN" "SN74LVC14ADR"
-			(at 179.07 54.61 0)
+			(at 177.8 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4406,7 +6397,7 @@
 			)
 		)
 		(property "DigiKey" "https://www.digikey.com/en/products/detail/texas-instruments/SN74LVC14ADR/377434"
-			(at 179.07 54.61 0)
+			(at 177.8 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4461,10 +6452,6 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "U101")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
 					(reference "U5")
 					(unit 1)
 				)
@@ -4473,7 +6460,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 38.1 35.56 0)
+		(at 36.83 40.64 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4482,8 +6469,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5f0fca36-eaa1-4831-9ce5-20d24202325e")
-		(property "Reference" "#PWR0501"
-			(at 38.1 35.56 0)
+		(property "Reference" "#PWR073"
+			(at 36.83 40.64 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4494,7 +6481,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 38.1 39.37 0)
+			(at 36.83 44.45 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4504,7 +6491,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 38.1 35.56 0)
+			(at 36.83 40.64 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4515,7 +6502,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 38.1 35.56 0)
+			(at 36.83 40.64 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4526,7 +6513,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 38.1 35.56 0)
+			(at 36.83 40.64 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4542,11 +6529,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0501")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR020")
+					(reference "#PWR073")
 					(unit 1)
 				)
 			)
@@ -4554,7 +6537,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 123.19 68.58 0)
+		(at 124.46 73.66 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4563,8 +6546,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6147bd1d-9be8-43af-845a-1d9a917ae9f2")
-		(property "Reference" "C105"
-			(at 125.73 67.31 0)
+		(property "Reference" "C41"
+			(at 127 72.39 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4575,7 +6558,7 @@
 			)
 		)
 		(property "Value" "100pF"
-			(at 125.73 69.85 0)
+			(at 127 74.93 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4586,7 +6569,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 123.19 68.58 0)
+			(at 124.46 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4597,7 +6580,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 68.58 0)
+			(at 124.46 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4608,7 +6591,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 123.19 68.58 0)
+			(at 124.46 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4627,19 +6610,15 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "C105")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "C38")
+					(reference "C41")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
-		(at 133.35 48.26 0)
+		(lib_id "Device:Fuse")
+		(at 24.13 143.51 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4647,31 +6626,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "753e314b-5917-494d-b11f-b595f4bdd4a0")
-		(property "Reference" "R105"
-			(at 135.89 46.99 0)
+		(uuid "6f15db17-56d8-4eb4-a01e-0ee6afb254da")
+		(property "Reference" "F4"
+			(at 21.082 138.938 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Value" "100k"
-			(at 135.89 49.53 0)
+		(property "Value" "PTC 120mA"
+			(at 21.082 141.478 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 133.35 48.26 0)
+		(property "Footprint" "Fuse:Fuse_1206_3216Metric_Pad1.42x1.75mm_HandSolder"
+			(at 24.13 143.51 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4682,7 +6661,187 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 48.26 0)
+			(at 24.13 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Fuse"
+			(at 24.13 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "MF-NSMF012-2"
+			(at 24.13 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey" "https://www.digikey.com/en/products/detail/bourns-inc/MF-NSMF012-2/662807"
+			(at 24.13 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e418ecee-11b3-4734-b5b5-deb0007518f2")
+		)
+		(pin "2"
+			(uuid "1d74807e-e877-45be-9034-4862bad29f7d")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "F4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 83.82 156.21 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7352e7ea-e1ed-47fd-be46-32e5f31dff3a")
+		(property "Reference" "#PWR0169"
+			(at 83.82 156.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 83.82 160.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 83.82 156.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 156.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 83.82 156.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a9af2a11-5986-456e-b5ac-1bc41e9d8f64")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0169")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 134.62 53.34 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "753e314b-5917-494d-b11f-b595f4bdd4a0")
+		(property "Reference" "R53"
+			(at 137.16 52.07 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100k"
+			(at 137.16 54.61 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 134.62 53.34 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 134.62 53.34 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4693,7 +6852,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 133.35 48.26 0)
+			(at 134.62 53.34 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4712,11 +6871,122 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "R105")
+					(reference "R53")
 					(unit 1)
 				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "R50")
+			)
+		)
+	)
+	(symbol
+		(lib_id "Custom_Parts:TPD4E1U06DBV")
+		(at 83.82 146.05 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "76030cc9-77ba-44f2-b9b2-ee57e65ca2b1")
+		(property "Reference" "D7"
+			(at 78.74 137.16 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TPD4E1U06DBVR"
+			(at 65.024 153.416 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6_Handsoldering"
+			(at 83.82 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tpd4e1u06.pdf"
+			(at 83.82 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "TI TPD4E1U06 4-channel ESD protection, 5.5 V working voltage, SOT-23-6 (DBV)"
+			(at 83.82 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "TPD4E1U06DBVR"
+			(at 83.82 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey" "https://www.digikey.com/en/products/detail/texas-instruments/TPD4E1U06DBVR/3929533"
+			(at 83.82 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b0d52d71-7361-4bea-a36b-7b91b14ee8f2")
+		)
+		(pin "6"
+			(uuid "c4c4d19a-01da-4d02-a870-81084b9b82e0")
+		)
+		(pin "3"
+			(uuid "5c672339-d22d-46bc-a104-80199ef7df23")
+		)
+		(pin "4"
+			(uuid "afe534eb-4b35-4d46-bc72-563132a41d13")
+		)
+		(pin "2"
+			(uuid "66faefa4-21eb-43c3-a7ca-bddc92f96bdd")
+		)
+		(pin "5"
+			(uuid "ddf65eb6-df68-4df7-abf9-ca32653e9996")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "D7")
 					(unit 1)
 				)
 			)
@@ -4724,7 +6994,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 113.03 44.45 90)
+		(at 114.3 49.53 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4733,8 +7003,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "78834520-c12f-4e74-a5dd-e39b7070b96e")
-		(property "Reference" "R102"
-			(at 113.03 41.91 0)
+		(property "Reference" "R47"
+			(at 114.3 46.99 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4744,7 +7014,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 113.03 46.99 0)
+			(at 114.3 52.07 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4754,7 +7024,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 113.03 44.45 0)
+			(at 114.3 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4765,7 +7035,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 113.03 44.45 0)
+			(at 114.3 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4776,7 +7046,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 113.03 44.45 0)
+			(at 114.3 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4795,10 +7065,6 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "R102")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
 					(reference "R47")
 					(unit 1)
 				)
@@ -4807,7 +7073,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 123.19 34.29 0)
+		(at 124.46 154.94 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4815,9 +7081,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "932c97e1-5f5a-4092-8b98-7857cd115d80")
-		(property "Reference" "#PWR0506"
-			(at 123.19 34.29 0)
+		(uuid "79725f41-5993-4044-8d70-4cd02bdb35c1")
+		(property "Reference" "#PWR0175"
+			(at 124.46 154.94 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4828,7 +7094,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 123.19 38.1 0)
+			(at 124.46 158.75 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4838,7 +7104,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 123.19 34.29 0)
+			(at 124.46 154.94 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4849,7 +7115,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 34.29 0)
+			(at 124.46 154.94 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4860,7 +7126,288 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 123.19 34.29 0)
+			(at 124.46 154.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "dce1162f-1098-4a78-aa55-3d118e928bbf")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0175")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Custom_Parts:AMT103-V")
+		(at 22.86 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board no)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7be48bef-1f76-40ee-a005-2f6ef5876f72")
+		(property "Reference" "ENC2"
+			(at 17.78 101.6 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "AMT103-V"
+			(at 17.78 119.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 22.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.sameskydevices.com/product/resource/amt10.pdf"
+			(at 22.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Same Sky AMT103-V capacitive incremental encoder, axial connector. Mounts on the stepper motor rear shaft (not on this PCB). Pinout from the AMT10 datasheet; check with a meter."
+			(at 22.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "AMT103-V"
+			(at 22.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey" "https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/AMT103-V/827016"
+			(at 22.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Cable" "CUI-435-1FT (https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/CUI-435-1FT/968159)"
+			(at 22.86 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f8008bd0-fdee-4a43-a4a0-b28a487ac406")
+		)
+		(pin "2"
+			(uuid "222748ce-e366-4d4d-9178-83bb0db8bd8a")
+		)
+		(pin "3"
+			(uuid "ca8521f1-6f2b-47fd-bffc-68be51cda9ca")
+		)
+		(pin "4"
+			(uuid "e55f7c0f-8356-4eb2-902e-5f5dc43020d7")
+		)
+		(pin "5"
+			(uuid "320beeb4-7d87-4191-86c7-ba742c207ff3")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "ENC2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 124.46 107.95 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "912177eb-5cfb-4690-a4fb-bd58915df0de")
+		(property "Reference" "C42"
+			(at 127 106.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100pF"
+			(at 127 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 124.46 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 124.46 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "23f9e0c6-1a75-4046-b8dd-d06a6738d205")
+		)
+		(pin "2"
+			(uuid "3983c252-dba2-4029-a9a3-34fc59fd7c31")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "C42")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 124.46 39.37 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "932c97e1-5f5a-4092-8b98-7857cd115d80")
+		(property "Reference" "#PWR0170"
+			(at 124.46 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 124.46 43.18 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 124.46 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 124.46 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4876,19 +7423,15 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0506")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0161")
+					(reference "#PWR0170")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "power:+3.3V")
-		(at 179.07 39.37 0)
+		(lib_id "Connector_Generic:Conn_01x05")
+		(at 55.88 110.49 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4896,30 +7439,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "a39955fb-b4dd-4e3e-8627-ecea099cadc0")
-		(property "Reference" "#PWR0512"
-			(at 179.07 39.37 0)
-			(hide yes)
+		(uuid "9cf5e718-4cb8-4575-91cc-7a4fb1360730")
+		(property "Reference" "J16"
+			(at 58.42 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Value" "+3.3V"
-			(at 179.07 35.56 0)
+		(property "Value" "Encoder (JST XH 5-pin)"
+			(at 58.42 111.76 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 179.07 39.37 0)
+		(property "Footprint" "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical"
+			(at 55.88 110.49 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4930,7 +7474,195 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 179.07 39.37 0)
+			(at 55.88 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 55.88 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "B5B-XH-A(LF)(SN)"
+			(at 55.88 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Mating" "XHP-5 housing + SXH-001T-P0.6 crimps"
+			(at 55.88 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "49ce5dfd-884c-444e-84f9-88e43ce48d8e")
+		)
+		(pin "2"
+			(uuid "1c860432-c2ea-4a72-941b-ee6520f7920d")
+		)
+		(pin "3"
+			(uuid "fe5ea012-b1dc-480f-90a0-5f0f0194677f")
+		)
+		(pin "4"
+			(uuid "351e379b-cc4f-4e21-8cec-ba0c12ab14bf")
+		)
+		(pin "5"
+			(uuid "7d688348-02ad-443d-9345-4f077b3e58ca")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "J16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 40.64 153.67 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "9e98d897-1d57-4a29-a569-d7efced961a4")
+		(property "Reference" "#PWR0161"
+			(at 40.64 153.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 40.64 157.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 40.64 153.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 40.64 153.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 40.64 153.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "081f1f56-4167-455c-b2a0-88bdc2b64e7c")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0161")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 177.8 44.45 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a39955fb-b4dd-4e3e-8627-ecea099cadc0")
+		(property "Reference" "#PWR0188"
+			(at 177.8 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 177.8 40.64 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 177.8 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 177.8 44.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4941,7 +7673,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 179.07 39.37 0)
+			(at 177.8 44.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4957,19 +7689,15 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0512")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0172")
+					(reference "#PWR0188")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 85.09 33.02 0)
+		(lib_id "power:GND")
+		(at 177.8 149.86 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4977,31 +7705,30 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "a7b25965-ed1f-4601-a40c-90dbbda72c55")
-		(property "Reference" "C108"
-			(at 87.63 31.75 0)
+		(uuid "a740eb92-2bd4-4c50-a7e2-6b1e2097b587")
+		(property "Reference" "#PWR0191"
+			(at 177.8 149.86 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Value" "10nF"
-			(at 87.63 34.29 0)
+		(property "Value" "GND"
+			(at 177.8 153.67 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 85.09 33.02 0)
+		(property "Footprint" ""
+			(at 177.8 149.86 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5012,7 +7739,85 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 85.09 33.02 0)
+			(at 177.8 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 177.8 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "fb1223d3-46b5-4174-8d2a-8183a91d361b")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0191")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 83.82 38.1 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a7b25965-ed1f-4601-a40c-90dbbda72c55")
+		(property "Reference" "C37"
+			(at 86.36 36.83 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10nF"
+			(at 86.36 39.37 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 83.82 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 38.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5023,7 +7828,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 85.09 33.02 0)
+			(at 83.82 38.1 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5042,11 +7847,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "C108")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "C35")
+					(reference "C37")
 					(unit 1)
 				)
 			)
@@ -5054,7 +7855,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 179.07 69.85 0)
+		(at 160.02 119.38 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5062,9 +7863,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "ac8fd019-ad10-4d9c-9bbc-ee67a4713054")
-		(property "Reference" "#PWR0513"
-			(at 179.07 69.85 0)
+		(uuid "a9221aaf-3be0-48a0-89ed-bb269e80f84b")
+		(property "Reference" "#PWR0185"
+			(at 160.02 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5075,7 +7876,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 179.07 73.66 0)
+			(at 160.02 123.19 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5085,7 +7886,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 179.07 69.85 0)
+			(at 160.02 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5096,7 +7897,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 179.07 69.85 0)
+			(at 160.02 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5107,7 +7908,84 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 179.07 69.85 0)
+			(at 160.02 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a461a0c4-b1fa-4a11-9a4d-b93fb7304457")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0185")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 177.8 74.93 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ac8fd019-ad10-4d9c-9bbc-ee67a4713054")
+		(property "Reference" "#PWR0189"
+			(at 177.8 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 177.8 78.74 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 177.8 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 177.8 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 177.8 74.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5123,19 +8001,15 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0513")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0173")
+					(reference "#PWR0189")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 166.37 64.77 0)
+		(lib_id "Device:R_US")
+		(at 114.3 104.14 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5143,10 +8017,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "ca815a2a-d620-4340-9fbf-bb4c06405530")
-		(property "Reference" "#PWR0514"
-			(at 166.37 64.77 0)
-			(hide yes)
+		(uuid "b46b9cbb-1a73-4f9c-9a10-715a50b864c2")
+		(property "Reference" "R49"
+			(at 114.3 101.6 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5155,8 +8028,8 @@
 				)
 			)
 		)
-		(property "Value" "GND"
-			(at 166.37 68.58 0)
+		(property "Value" "1k"
+			(at 114.3 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5165,8 +8038,8 @@
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 166.37 64.77 0)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 114.3 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5177,7 +8050,249 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 166.37 64.77 0)
+			(at 114.3 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 114.3 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1270777f-5d58-4020-b3b1-869723054329")
+		)
+		(pin "2"
+			(uuid "e68acd60-5bff-4f2e-a570-da21ba2961b8")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "R49")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 124.46 148.59 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b73c5cbd-0a8c-43ad-a0e4-90f735df2ae0")
+		(property "Reference" "C44"
+			(at 127 147.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100pF"
+			(at 127 149.86 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 124.46 148.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 148.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 124.46 148.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1ef4bf21-53c4-4d4b-9d17-cb2fc074e22b")
+		)
+		(pin "2"
+			(uuid "d076c0e2-36dc-4125-87e8-6e77406a996a")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "C44")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 30.48 147.32 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "be13999b-9b45-4a68-81ca-8c31b0c68e57")
+		(property "Reference" "C9"
+			(at 33.02 146.05 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1uF"
+			(at 33.02 148.59 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 30.48 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 30.48 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 30.48 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "29ea6cef-3d25-43d1-a54b-f0f299e8a2aa")
+		)
+		(pin "2"
+			(uuid "1636397b-9814-42d9-b942-2127d5f18e79")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "C9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 134.62 114.3 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c0efd197-fd8c-43ea-be27-822f77a79dbc")
+		(property "Reference" "#PWR0179"
+			(at 134.62 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 134.62 118.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 134.62 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 134.62 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5188,7 +8303,161 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 166.37 64.77 0)
+			(at 134.62 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "99867376-ff94-4002-a1f4-6c6e6dd78e0f")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0179")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 19.05 143.51 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ca05398d-fbfb-44de-a0b3-a7b8d893b2d7")
+		(property "Reference" "#PWR019"
+			(at 19.05 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 15.24 143.51 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 19.05 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 19.05 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 19.05 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9ffdce46-b93e-4aee-910d-acb7c4b46f99")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR019")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 165.1 69.85 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ca815a2a-d620-4340-9fbf-bb4c06405530")
+		(property "Reference" "#PWR0186"
+			(at 165.1 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 165.1 73.66 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 165.1 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 165.1 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 165.1 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5204,11 +8473,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0514")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0171")
+					(reference "#PWR0186")
 					(unit 1)
 				)
 			)
@@ -5216,7 +8481,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 123.19 54.61 0)
+		(at 124.46 59.69 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5225,8 +8490,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ca86d92c-185c-477f-adf4-6302beda7f9c")
-		(property "Reference" "#PWR0508"
-			(at 123.19 54.61 0)
+		(property "Reference" "#PWR0171"
+			(at 124.46 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5237,7 +8502,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 123.19 58.42 0)
+			(at 124.46 63.5 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5247,7 +8512,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 123.19 54.61 0)
+			(at 124.46 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5258,7 +8523,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 54.61 0)
+			(at 124.46 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5269,7 +8534,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 123.19 54.61 0)
+			(at 124.46 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5285,11 +8550,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0508")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0164")
+					(reference "#PWR0171")
 					(unit 1)
 				)
 			)
@@ -5297,7 +8558,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 133.35 54.61 0)
+		(at 134.62 154.94 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5305,9 +8566,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "cda238d4-f7e2-4cc3-8032-8c4f427940c6")
-		(property "Reference" "#PWR0509"
-			(at 133.35 54.61 0)
+		(uuid "caac2ea0-74b6-4ecc-b1d3-c010f62c17f3")
+		(property "Reference" "#PWR0181"
+			(at 134.62 154.94 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5318,7 +8579,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 133.35 58.42 0)
+			(at 134.62 158.75 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5328,7 +8589,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 133.35 54.61 0)
+			(at 134.62 154.94 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5339,7 +8600,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 54.61 0)
+			(at 134.62 154.94 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5350,7 +8611,84 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 133.35 54.61 0)
+			(at 134.62 154.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4a83e488-0601-4c17-8c0c-519d1721218f")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0181")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 134.62 59.69 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "cda238d4-f7e2-4cc3-8032-8c4f427940c6")
+		(property "Reference" "#PWR0177"
+			(at 134.62 59.69 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 134.62 63.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 134.62 59.69 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 134.62 59.69 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 134.62 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5366,11 +8704,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0509")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0167")
+					(reference "#PWR0177")
 					(unit 1)
 				)
 			)
@@ -5378,7 +8712,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x05")
-		(at 57.15 30.48 0)
+		(at 55.88 35.56 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5387,8 +8721,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d24fe2b1-7f7a-4769-bcf5-088580f8f738")
-		(property "Reference" "J101"
-			(at 59.69 29.21 0)
+		(property "Reference" "J5"
+			(at 58.42 34.29 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5399,7 +8733,7 @@
 			)
 		)
 		(property "Value" "Encoder (JST XH 5-pin)"
-			(at 59.69 31.75 0)
+			(at 58.42 36.83 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5410,7 +8744,7 @@
 			)
 		)
 		(property "Footprint" "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical"
-			(at 57.15 30.48 0)
+			(at 55.88 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5421,7 +8755,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 57.15 30.48 0)
+			(at 55.88 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5432,7 +8766,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 57.15 30.48 0)
+			(at 55.88 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5443,7 +8777,7 @@
 			)
 		)
 		(property "MPN" "B5B-XH-A(LF)(SN)"
-			(at 57.15 30.48 0)
+			(at 55.88 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5454,7 +8788,7 @@
 			)
 		)
 		(property "Mating" "XHP-5 housing + SXH-001T-P0.6 crimps"
-			(at 57.15 30.48 0)
+			(at 55.88 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5482,10 +8816,6 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "J101")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
 					(reference "J5")
 					(unit 1)
 				)
@@ -5494,7 +8824,7 @@
 	)
 	(symbol
 		(lib_id "Custom_Parts:AMT103-V")
-		(at 24.13 30.48 0)
+		(at 22.86 35.56 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5503,8 +8833,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "dcb61247-2905-4a97-aee4-a7edffc78672")
-		(property "Reference" "ENC101"
-			(at 19.05 21.59 0)
+		(property "Reference" "ENC1"
+			(at 17.78 26.67 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5515,7 +8845,7 @@
 			)
 		)
 		(property "Value" "AMT103-V"
-			(at 19.05 39.37 0)
+			(at 17.78 44.45 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5526,7 +8856,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 24.13 30.48 0)
+			(at 22.86 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5537,7 +8867,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.sameskydevices.com/product/resource/amt10.pdf"
-			(at 24.13 30.48 0)
+			(at 22.86 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5548,7 +8878,7 @@
 			)
 		)
 		(property "Description" "Same Sky AMT103-V capacitive incremental encoder, axial connector. Mounts on the stepper motor rear shaft (not on this PCB). Pinout from the AMT10 datasheet; check with a meter."
-			(at 24.13 30.48 0)
+			(at 22.86 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5559,7 +8889,7 @@
 			)
 		)
 		(property "MPN" "AMT103-V"
-			(at 24.13 30.48 0)
+			(at 22.86 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5570,7 +8900,7 @@
 			)
 		)
 		(property "DigiKey" "https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/AMT103-V/827016"
-			(at 24.13 30.48 0)
+			(at 22.86 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5581,7 +8911,7 @@
 			)
 		)
 		(property "Cable" "CUI-435-1FT (https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/CUI-435-1FT/968159)"
-			(at 24.13 30.48 0)
+			(at 22.86 35.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5609,10 +8939,6 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "ENC101")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
 					(reference "ENC1")
 					(unit 1)
 				)
@@ -5621,7 +8947,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 133.35 74.93 0)
+		(at 134.62 80.01 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5630,8 +8956,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ddc704f4-f60e-485c-9369-9f308382f24f")
-		(property "Reference" "#PWR0511"
-			(at 133.35 74.93 0)
+		(property "Reference" "#PWR0178"
+			(at 134.62 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5642,7 +8968,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 133.35 78.74 0)
+			(at 134.62 83.82 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5652,7 +8978,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 133.35 74.93 0)
+			(at 134.62 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5663,7 +8989,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 74.93 0)
+			(at 134.62 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5674,7 +9000,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 133.35 74.93 0)
+			(at 134.62 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5690,11 +9016,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0511")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0168")
+					(reference "#PWR0178")
 					(unit 1)
 				)
 			)
@@ -5702,7 +9024,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 133.35 68.58 0)
+		(at 134.62 107.95 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5710,9 +9032,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "efdd8c83-0172-4e40-91dc-01c136baef9a")
-		(property "Reference" "R106"
-			(at 135.89 67.31 0)
+		(uuid "e48de29a-95f6-4601-ba55-bd35d6ebb51d")
+		(property "Reference" "R55"
+			(at 137.16 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5723,7 +9045,7 @@
 			)
 		)
 		(property "Value" "100k"
-			(at 135.89 69.85 0)
+			(at 137.16 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5734,7 +9056,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 133.35 68.58 0)
+			(at 134.62 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5745,7 +9067,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 68.58 0)
+			(at 134.62 107.95 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5756,7 +9078,242 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 133.35 68.58 0)
+			(at 134.62 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a62cdd47-23e7-47a7-98c6-1d2b7dcadcd9")
+		)
+		(pin "2"
+			(uuid "3475c7e6-4a77-4a55-8406-068f6d37ce79")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "R55")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 83.82 106.68 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ea3fce5a-19bd-4357-9695-e162dce9a1a3")
+		(property "Reference" "#PWR0167"
+			(at 83.82 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 83.82 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 83.82 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 83.82 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "22b0ca11-6d3b-4107-be34-159aa2cad0d0")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0167")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 160.02 106.68 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "efae860f-28ca-43df-88cf-ce355eb5c073")
+		(property "Reference" "#PWR0184"
+			(at 160.02 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 160.02 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.02 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 160.02 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 160.02 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "237cf05d-db8a-4170-ac59-ea0015ba0bbe")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0184")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 134.62 73.66 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "efdd8c83-0172-4e40-91dc-01c136baef9a")
+		(property "Reference" "R54"
+			(at 137.16 72.39 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100k"
+			(at 137.16 74.93 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 134.62 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 134.62 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 134.62 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5775,11 +9332,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "R106")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "R51")
+					(reference "R54")
 					(unit 1)
 				)
 			)
@@ -5787,7 +9340,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 85.09 39.37 0)
+		(at 36.83 115.57 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5795,9 +9348,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "f31cb3e7-cf6a-4c52-8b30-dee396898883")
-		(property "Reference" "#PWR0526"
-			(at 85.09 39.37 0)
+		(uuid "f0fdbbd1-3c22-4b64-8229-5aa4c53a68ae")
+		(property "Reference" "#PWR074"
+			(at 36.83 115.57 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5808,7 +9361,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 85.09 43.18 0)
+			(at 36.83 119.38 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5818,7 +9371,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 85.09 39.37 0)
+			(at 36.83 115.57 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5829,7 +9382,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 85.09 39.37 0)
+			(at 36.83 115.57 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5840,7 +9393,84 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 85.09 39.37 0)
+			(at 36.83 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7d4240f7-d878-4103-8a4d-d10bded0449f")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR074")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 83.82 44.45 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "f31cb3e7-cf6a-4c52-8b30-dee396898883")
+		(property "Reference" "#PWR0166"
+			(at 83.82 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 83.82 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 83.82 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 83.82 44.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5856,19 +9486,15 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0526")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR084")
+					(reference "#PWR0166")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
-		(at 113.03 24.13 90)
+		(lib_id "power:GND")
+		(at 165.1 144.78 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5876,9 +9502,10 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "f8921c26-7f5a-4edd-8f49-9e67a80de533")
-		(property "Reference" "R101"
-			(at 113.03 21.59 0)
+		(uuid "f53a58d3-4bc0-48c6-9ee5-58dc053f9ee1")
+		(property "Reference" "#PWR0187"
+			(at 165.1 144.78 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5887,8 +9514,8 @@
 				)
 			)
 		)
-		(property "Value" "1k"
-			(at 113.03 26.67 0)
+		(property "Value" "GND"
+			(at 165.1 148.59 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5897,8 +9524,8 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 113.03 24.13 0)
+		(property "Footprint" ""
+			(at 165.1 144.78 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5909,7 +9536,83 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 113.03 24.13 0)
+			(at 165.1 144.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 165.1 144.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2c2aa6c6-1f43-4908-bb86-5f1d444788f4")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR0187")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 114.3 29.21 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "f8921c26-7f5a-4edd-8f49-9e67a80de533")
+		(property "Reference" "R46"
+			(at 114.3 26.67 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 114.3 31.75 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 114.3 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 29.21 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5920,7 +9623,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 113.03 24.13 0)
+			(at 114.3 29.21 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5939,10 +9642,6 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "R101")
-					(unit 1)
-				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
 					(reference "R46")
 					(unit 1)
 				)
@@ -5951,7 +9650,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 161.29 39.37 0)
+		(at 30.48 153.67 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5959,9 +9658,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "fc668b32-e604-4305-8f89-3ce94c90e201")
-		(property "Reference" "#PWR0516"
-			(at 161.29 39.37 0)
+		(uuid "fab1c179-536c-4a44-9da2-a62482dbbb0e")
+		(property "Reference" "#PWR072"
+			(at 30.48 153.67 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5972,7 +9671,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 161.29 43.18 0)
+			(at 30.48 157.48 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5982,7 +9681,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 161.29 39.37 0)
+			(at 30.48 153.67 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5993,7 +9692,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 161.29 39.37 0)
+			(at 30.48 153.67 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6004,7 +9703,84 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 161.29 39.37 0)
+			(at 30.48 153.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "efe4f8d4-05a7-4a0e-aed0-5062fdd04def")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "#PWR072")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 160.02 44.45 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "fc668b32-e604-4305-8f89-3ce94c90e201")
+		(property "Reference" "#PWR0183"
+			(at 160.02 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 160.02 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.02 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 160.02 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 160.02 44.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6020,11 +9796,88 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "#PWR0516")
+					(reference "#PWR0183")
 					(unit 1)
 				)
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/f4f0e739-486f-42d2-b645-1e2e157e6ded"
-					(reference "#PWR0170")
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 83.82 113.03 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ff991b31-75da-40fe-a9f9-5c3e146f4de7")
+		(property "Reference" "C38"
+			(at 86.36 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10nF"
+			(at 86.36 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 83.82 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 83.82 113.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6fd32b91-f3ed-4230-901a-0833ec160c52")
+		)
+		(pin "2"
+			(uuid "14747455-5b31-4516-909b-b2eeaeade85f")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "C38")
 					(unit 1)
 				)
 			)

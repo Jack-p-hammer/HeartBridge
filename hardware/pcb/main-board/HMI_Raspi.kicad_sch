@@ -2138,6 +2138,12 @@
 		(uuid "e24923a1-eeb1-4fae-9296-dccafb9d20d8")
 	)
 	(junction
+		(at 175.26 31.75)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "02e214c3-b071-4a78-b96e-377038d8eadb")
+	)
+	(junction
 		(at 186.69 44.45)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2168,6 +2174,12 @@
 		(uuid "3a32a47a-924b-4973-bf5d-83a457fb6cdb")
 	)
 	(junction
+		(at 115.57 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3f171dcd-89b7-4264-9951-c4c608369522")
+	)
+	(junction
 		(at 20.32 39.37)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2180,18 +2192,6 @@
 		(uuid "6a3bbcdd-c08f-42d3-bbcf-eaaca18e18f7")
 	)
 	(junction
-		(at 115.57 34.29)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8b01a23c-99da-4424-b3c6-20e398c2eec7")
-	)
-	(junction
-		(at 115.57 36.83)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a0d25e02-af4c-40d5-afd8-2edddb282351")
-	)
-	(junction
 		(at 83.82 20.32)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2202,12 +2202,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c975407b-7377-46f0-aa4e-74c4b9dff5a6")
-	)
-	(junction
-		(at 175.26 31.75)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ca547d4f-a891-4b67-b3c9-8a3e357f85db")
 	)
 	(junction
 		(at 130.81 31.75)
@@ -2353,16 +2347,6 @@
 	)
 	(wire
 		(pts
-			(xy 115.57 36.83) (xy 132.08 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3b2d69c1-fe50-4cef-a214-905b4fce7281")
-	)
-	(wire
-		(pts
 			(xy 20.32 40.64) (xy 20.32 39.37)
 		)
 		(stroke
@@ -2403,16 +2387,6 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 36.83) (xy 115.57 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "51cc658e-a72c-4c7d-a4be-f5170e52de06")
-	)
-	(wire
-		(pts
 			(xy 77.47 16.51) (xy 83.82 16.51)
 		)
 		(stroke
@@ -2423,13 +2397,13 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 34.29) (xy 111.76 36.83)
+			(xy 175.26 31.75) (xy 177.8 31.75)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5f7ec37d-2847-46f4-b240-2e22ac4415ca")
+		(uuid "5f9ff7e1-5395-47be-b9d4-6d28158ea0cb")
 	)
 	(wire
 		(pts
@@ -2513,16 +2487,6 @@
 	)
 	(wire
 		(pts
-			(xy 115.57 39.37) (xy 115.57 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8ffdb117-67e4-493b-8e08-5941f36638e8")
-	)
-	(wire
-		(pts
 			(xy 194.31 34.29) (xy 186.69 34.29)
 		)
 		(stroke
@@ -2530,6 +2494,16 @@
 			(type default)
 		)
 		(uuid "99d75032-78fc-49ab-b939-bb513bd4fbbc")
+	)
+	(wire
+		(pts
+			(xy 115.57 36.83) (xy 115.57 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c8ba4be-c329-4c0b-87a1-bb47df1c64f4")
 	)
 	(wire
 		(pts
@@ -2543,23 +2517,13 @@
 	)
 	(wire
 		(pts
-			(xy 115.57 30.48) (xy 115.57 34.29)
+			(xy 115.57 30.48) (xy 115.57 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "a9aac366-bff1-478b-b3b7-d12c403d3663")
-	)
-	(wire
-		(pts
-			(xy 175.26 31.75) (xy 177.8 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "abe72117-32ea-4399-aa6e-dc2058032e14")
 	)
 	(wire
 		(pts
@@ -2580,6 +2544,16 @@
 			(type default)
 		)
 		(uuid "b0b430d0-431a-4de4-b64b-0a7ef194bd1a")
+	)
+	(wire
+		(pts
+			(xy 111.76 36.83) (xy 115.57 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b115a1b3-f3aa-44ed-9112-f712a66fe842")
 	)
 	(wire
 		(pts
@@ -2703,7 +2677,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 34.29) (xy 172.72 34.29)
+			(xy 172.72 34.29) (xy 186.69 34.29)
 		)
 		(stroke
 			(width 0)
@@ -2733,23 +2707,13 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 34.29) (xy 132.08 34.29)
+			(xy 172.72 31.75) (xy 175.26 31.75)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e59272b1-088b-4063-8e50-c2e47f18ac3a")
-	)
-	(wire
-		(pts
-			(xy 175.26 31.75) (xy 172.72 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e9346aed-24ff-437d-993e-ba4da001bfa7")
+		(uuid "e73d5d0b-d2c4-460e-8270-d77b3e7f55db")
 	)
 	(wire
 		(pts
@@ -2790,6 +2754,16 @@
 			(type default)
 		)
 		(uuid "f5ff2859-74c0-4b42-8048-e6f12c8bf77f")
+	)
+	(wire
+		(pts
+			(xy 115.57 36.83) (xy 132.08 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8fa1b97-6982-491e-b410-49025df87e33")
 	)
 	(wire
 		(pts
@@ -2918,7 +2892,7 @@
 	)
 	(hierarchical_label "Screen_Data_Dir"
 		(shape input)
-		(at 111.76 35.56 0)
+		(at 111.76 36.83 0)
 		(effects
 			(font
 				(size 1.27 1.27)

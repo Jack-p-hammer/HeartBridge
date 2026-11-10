@@ -224,6 +224,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -235,6 +236,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -246,6 +248,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -901,7 +904,7 @@
         "uuid": "8991fc77-975f-4978-a089-6b2a5e33f59b"
       }
     ],
-    "used_designators": "#PWR1,#PWR9,#PWR11,#PWR19-20,#PWR34-38,#PWR62,#PWR64-74,#PWR77-84,#PWR87-177,C8-9,C12-39,D1-15,ENC1,F3,J2,J5,J12-19,R24-51,U2,U5-10,Y1",
+    "used_designators": "#PWR1,#PWR9,#PWR11,#PWR19-20,#PWR34-38,#PWR62,#PWR64-74,#PWR77-84,#PWR87-209,C8-9,C12-46,D1-15,ENC1-2,F3-4,J2,J5,J12-19,R24-57,U2,U5-11,Y1",
     "variants": []
   },
   "sheets": [
@@ -916,10 +919,6 @@
     [
       "052d78b7-9761-42b3-bfaf-ad485eeda1d8",
       "Encoder 1"
-    ],
-    [
-      "f4f0e739-486f-42d2-b645-1e2e157e6ded",
-      "Encoder 2"
     ],
     [
       "390cafbd-c317-4387-95c3-e11405a1139f",

@@ -11543,114 +11543,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:Crystal_GND24")
-		(at 105.41 52.07 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "378d7123-3d2f-4012-b855-8257069dafd4")
-		(property "Reference" "Y?"
-			(at 105.41 43.18 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Crystal_GND24"
-			(at 105.41 45.72 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 105.41 52.07 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 105.41 52.07 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Four pin crystal, GND on pins 2 and 4"
-			(at 105.41 52.07 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property private "KLC_S3.3" "The rectangle is not a symbol body but a graphical element"
-			(at 105.41 64.77 0)
-			(hide yes)
-			(show_name yes)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property private "KLC_S4.1" "Some pins are on 50mil grid to make the symbol small"
-			(at 105.41 67.31 0)
-			(hide yes)
-			(show_name yes)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "c48cb23d-5c20-48f6-ad00-bf0521985b23")
-		)
-		(pin "1"
-			(uuid "061acea4-bff1-47ab-8b0d-cde32d0e2de6")
-		)
-		(pin "4"
-			(uuid "684971cb-638d-47d6-a4f1-4fc364ca02e4")
-		)
-		(pin "3"
-			(uuid "ed0d226f-4872-4acc-9802-b37b7f2ea018")
-		)
-		(instances
-			(project "CPR Machine MCU Board"
-				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "Y?")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 368.3 62.23 0)
 		(mirror y)
@@ -15782,7 +15674,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fab3e071-5540-4086-a531-50d581c9325d")
-		(property "Reference" "Y?"
+		(property "Reference" "Y1"
 			(at 105.41 63.5 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15872,7 +15764,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "Y?")
+					(reference "Y1")
 					(unit 1)
 				)
 			)

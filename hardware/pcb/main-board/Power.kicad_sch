@@ -5705,7 +5705,7 @@
 	(text_box "Total Power Budget:\n\nBLDC Motor: 62 W @ Batt\nStepper Motor: 16 W @ Batt\nLasers: 20 mW @ 3V3\nIMU: 4.6 mW @ 3V3\nForce Amp: 1.3 mW @ 3V3\nMC: 270 mW @ 3V3\nScreens: 8 W @ 5V\nContactor Coil: 3 W @ 12 V\n12V Buck: 0.93 W @ Batt\n3V3 Buck: 0.93 W @ 5 V\n5V Buck: 0.3 W @ Batt\nRS485 Comms: 79 mW @ 3V3\n\nTotal: 91.53 W\n\nZeee: 88.8 Wh => 58 min uptime\nRealistic Zeee: 88.8 Wh*0.48 => 27.7 min\nRRC: 98.28 Wh => 64.4 min uptime"
 		(exclude_from_sim no)
 		(at 58.42 124.46 0)
-		(size 44.704 42.7962)
+		(size 44.704 50.8)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
 			(width 0)

@@ -1,18 +1,22 @@
 // stepper_buttons.ino
 //
-// Two buttons drive both DRV8434 stepper drivers on an Arduino Nano. Both
+// Two buttons drive both DRV8434 stepper drivers from an Arduino Pro Micro
+// (ATmega32U4, either the 5 V / 16 MHz or the 3.3 V / 8 MHz version). Both
 // motors always turn together, in the same direction.
 //   Forward button: the motors start turning forward and keep going.
 //   Reverse button: the motors turn backward instead.
 //   Press the button for the direction they're already going to stop them.
 // Set HOLD_TO_RUN to true if you'd rather the motors only turn while a button
 // is held down. The drivers go to sleep whenever the motors stop, so nothing
-// sits there heating up. The Serial Monitor (115200 baud) shows forward/reverse/stopped.
+// sits there heating up. The Serial Monitor shows forward/reverse/stopped (the
+// Pro Micro's serial port is its own USB connection, so the baud rate doesn't matter).
 //
-// Wiring, Nano pin -> Pololu DRV8434 carrier (#3762) pin:
+// Wiring, Pro Micro pin -> Pololu DRV8434 carrier (#3762) pin. The Pro Micro
+// prints just the number next to each pin (D9 is "9"), and 10 is on the
+// opposite side of the board from the others.
 //   Driver 1 (motor 1): D9 -> STEP, D10 -> DIR
 //   Driver 2 (motor 2): D5 -> STEP, D6  -> DIR
-//   Both drivers:       D7 -> SLEEP (one Nano pin wakes/sleeps both boards;
+//   Both drivers:       D7 -> SLEEP (one Pro Micro pin wakes/sleeps both boards;
 //                       the carrier pulls SLEEP low, so it stays asleep until D7 goes high)
 //   On both carriers:
 //     EN     -> leave unconnected (floating = enabled; sleep is what turns the coils off)
@@ -21,11 +25,12 @@
 //               match; Pololu's product page has the full M0/M1 table.
 //     DECAY0, DECAY1, TOFF -> leave unconnected (default smart tune decay)
 //     FAULT  -> leave unconnected
-//     GND    -> Nano GND and motor supply ground
+//     GND    -> Pro Micro GND and motor supply ground
 //     VIN    -> separate motor supply, 6-48 V (below 6 V the max current drops), with
 //               a 47 uF+ capacitor across VIN/GND close to the board
 //     One stepper coil on the A outputs, the other on the B outputs
-//     No logic supply pin: the carrier makes its own from VIN.
+//     No logic supply pin: the carrier makes its own from VIN, and its inputs
+//     take 1.8-5 V logic, so the 3.3 V and 5 V Pro Micros both work.
 //   Unlike the TB6612, the DRV8434 limits coil current itself. Set the limit
 //   with the board's trimpot BEFORE connecting a motor: current limit = VREF / 1.32,
 //   so 1.32 V = 1 A. Measure VREF at the small hole circled on the bottom
@@ -33,7 +38,7 @@
 //   under ~1.2 A (VREF 1.58 V) without a heatsink. Never connect or disconnect a
 //   motor while VIN is powered: that can destroy the driver.
 //
-// Buttons (no resistors needed: the sketch turns on the Nano's internal pull-ups):
+// Buttons (no resistors needed: the sketch turns on the Pro Micro's internal pull-ups):
 //   Forward button: one leg -> D2, the diagonally opposite leg -> GND
 //   Reverse button: one leg -> D3, the diagonally opposite leg -> GND
 //   A 4-leg tactile button has its legs joined in pairs. The diagonal pair is
@@ -43,9 +48,20 @@
 // wrong way, swap the two wires of one coil (or flip that motor's entry in
 // DIR_INVERT).
 //
-// Upload: open this file in the Arduino IDE, choose Tools -> Board -> Arduino
-// Nano, pick the port under Tools -> Port, then Upload. If the upload fails
-// with "not in sync", set Tools -> Processor to "ATmega328P (Old Bootloader)".
+// Upload from the Arduino IDE:
+//   1. Once: in File -> Preferences -> "Additional boards manager URLs", add
+//        https://raw.githubusercontent.com/sparkfun/Arduino_Boards/main/IDE_Board_Manager/package_sparkfun_index.json
+//      then install "SparkFun AVR Boards" from Tools -> Board -> Boards Manager.
+//   2. Tools -> Board -> SparkFun AVR Boards -> SparkFun Pro Micro, then under
+//      Tools -> Processor pick your board's version: ATmega32U4 (5V, 16 MHz) or
+//      ATmega32U4 (3.3V, 8 MHz). Picking the wrong one still uploads, but the
+//      board then drops off USB (fix below). Most Pro Micro clones are 5 V / 16 MHz.
+//      A 5 V / 16 MHz board also works as Tools -> Board -> Arduino Leonardo,
+//      with nothing to install.
+//   3. Pick the port under Tools -> Port (on a Mac, /dev/cu.usbmodem...), then Upload.
+// If the port vanishes or the upload can't find the board: click Upload, and as
+// soon as the IDE says "Uploading", connect RST to GND twice quickly. That keeps
+// the bootloader running for 8 seconds so the upload can get through.
 
 // ---- Settings ----
 const int STEPS_PER_REV = 200;         // full steps per revolution (1.8 degree motor)
@@ -56,6 +72,7 @@ const float RPM = 40.0;                // motor speed
 const bool HOLD_TO_RUN = false;        // false: press to start, switch direction, or stop
                                        // true: motors turn only while a button is held
 const unsigned long DEBOUNCE_MS = 20;  // a button has to read steady this long to count
+const unsigned long SERIAL_WAIT_MS = 2000;  // how long setup() waits for the Serial Monitor
 
 // ---- Pins ----
 const uint8_t FORWARD_BUTTON_PIN = 2;
@@ -152,6 +169,11 @@ void setup() {
     digitalWrite(STEP_PINS[m], LOW);
   }
   writeDirection(1);
+  // The Pro Micro's USB serial port only comes up a moment after reset. Give the
+  // Serial Monitor up to SERIAL_WAIT_MS to connect so the first line isn't lost,
+  // without hanging when nothing is listening (e.g. running on a power bank).
+  while (!Serial && millis() < SERIAL_WAIT_MS) {
+  }
   Serial.println(F("DRV8434 stepper buttons: D2 = forward, D3 = reverse"));
 }
 

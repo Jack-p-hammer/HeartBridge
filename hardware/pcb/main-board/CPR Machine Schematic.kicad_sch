@@ -1037,7 +1037,7 @@
 				(justify right)
 			)
 		)
-		(pin "Stepper_Fault" input
+		(pin "Stepper_nFault" input
 			(at 143.51 105.41 270)
 			(uuid "9662d8a4-10cd-4b52-87e0-995824d26e98")
 			(effects
@@ -1163,7 +1163,7 @@
 				(justify right)
 			)
 		)
-		(pin "Stepper_Fault" output
+		(pin "Stepper_nFault" output
 			(at 143.51 119.38 90)
 			(uuid "3b1295bf-12fd-4e33-9b55-dd0c737111de")
 			(effects

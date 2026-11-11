@@ -5320,7 +5320,7 @@
 		)
 		(uuid "8072de24-b12c-4629-8c9f-2be95867e027")
 	)
-	(hierarchical_label "Stepper_Fault"
+	(hierarchical_label "Stepper_nFault"
 		(shape output)
 		(at 125.73 118.11 0)
 		(effects

@@ -2589,10 +2589,6 @@
 		(at 76.2 34.29)
 		(uuid "d1377c44-21f7-4143-9736-af5dc341629f")
 	)
-	(no_connect
-		(at 40.64 95.25)
-		(uuid "e4504620-e3ea-4d05-a316-50343fea6376")
-	)
 	(wire
 		(pts
 			(xy 49.53 67.31) (xy 49.53 69.85)
@@ -2965,9 +2961,9 @@
 		)
 		(uuid "63e50245-72c5-41e1-b1bc-06b4ed8217cc")
 	)
-	(hierarchical_label "Stepper_Fault"
+	(hierarchical_label "Stepper_nFault"
 		(shape input)
-		(at 40.64 129.54 0)
+		(at 40.64 95.25 0)
 		(effects
 			(font
 				(size 1.27 1.27)

@@ -52,6 +52,9 @@ class MotorTarget:
     feedforward_torque: float = 0.0
     velocity_limit: float = 0.0
     maximum_torque: float = TORQUE_LIMIT_NM # Torque command should never exceed MAX_PLUNGER_FORCE_N out of the ball screw
+    # Rotations per second squared for the moteus trajectory planner. NaN leaves it out of the command entirely, so the
+    # controller uses its configured default (servo.default_accel_limit), exactly as before this field existed
+    accel_limit: float = math.nan
 
 
 @dataclasses.dataclass(frozen=True)
@@ -174,6 +177,8 @@ class MoteusThread:
                     feedforward_torque=target.feedforward_torque,
                     velocity_limit=target.velocity_limit,
                     maximum_torque=target.maximum_torque,
+                    # None omits the register, so commands without an accel limit are unchanged on the bus
+                    accel_limit=None if math.isnan(target.accel_limit) else target.accel_limit,
                     query=True,
                 ), timeout=REPLY_TIMEOUT_S)
                 self._state = MotorState(

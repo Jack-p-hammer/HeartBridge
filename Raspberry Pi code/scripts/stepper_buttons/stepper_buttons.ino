@@ -52,7 +52,7 @@ const int STEPS_PER_REV = 200;         // full steps per revolution (1.8 degree 
 const int MICROSTEPS = 1;              // must match the M0/M1 wiring: 1 = full steps
                                        // (M0 and M1 to GND); 128 if both are left
                                        // unconnected (the carrier's default)
-const float RPM = 40.0;                // motor speed
+const float RPM = 320.0;                // motor speed
 const bool HOLD_TO_RUN = false;        // false: press to start, switch direction, or stop
                                        // true: motors turn only while a button is held
 const unsigned long DEBOUNCE_MS = 20;  // a button has to read steady this long to count

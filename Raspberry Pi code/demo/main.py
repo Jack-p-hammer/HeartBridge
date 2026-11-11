@@ -42,6 +42,9 @@ LOOP_TICK_SEC = 0.05  # 50ms per tick, 20 Hz
 UNFOLD_FRAMES = [HMI.Image.UNFOLD_1, HMI.Image.UNFOLD_2, HMI.Image.UNFOLD_3, HMI.Image.UNFOLD_4]
 UNFOLD_FRAME_SEC = 0.5  # 2 frames per second
 
+# The battery voltage comes from the moteus, so it reads 0 V until the first reply. Wait this long for one at startup
+MOTOR_FIRST_REPLY_TIMEOUT_SEC = 5.0
+
 # Initialize log directory and file
 # 2x parent to get to project root
 LOG_DIR = Path(__file__).resolve().parent.parent / "Logs"
@@ -158,6 +161,7 @@ def main():
     compression_start: float | None = None  # time.monotonic() when the current run of compressions started, None while not compressing
     shown_sec: int | None = None  # Whole seconds currently drawn on the timer, None to force a redraw
     abort_carriage_home: bool = False  # True once ABORT has finished retracting the carriage, so it stops re-retracting
+    init_done_time: float = 0.0  # time.monotonic() when INIT_STARTUP's setup finished, to time out waiting for the moteus
 
     # Unfold animation position, reset when UNFOLD_CUT_CLOTHES is entered
     frame_idx: int = 0
@@ -207,10 +211,20 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = sensing.init_sensors(actuation.get_motor_controller(), HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    init_done_time = time.monotonic()
+
+                # Loop
+                # Until the moteus first replies its state is stale and the battery reads 0 V, so only check the
+                # battery once a reply has arrived. No reply within the timeout is a motor failure
+                if actuation.get_motor_controller().get_state().stale:
+                    if time.monotonic() - init_done_time > MOTOR_FIRST_REPLY_TIMEOUT_SEC:
+                        logging.error(f"No reply from the moteus within {MOTOR_FIRST_REPLY_TIMEOUT_SEC} s of startup")
+                        error = ErrorCode.ERROR_MOTOR_FAILURE
+                else:
                     error = sensing.battery_check()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    
-                    # Immediately go to the WAIT state, which is only used in the demo
+
+                    # Go to the WAIT state, which is only used in the demo
                     state = CPRState.WAIT
                     
             case(CPRState.WAIT):

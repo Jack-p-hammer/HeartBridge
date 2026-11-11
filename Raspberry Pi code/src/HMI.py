@@ -33,6 +33,9 @@ LASER_PWM_DUTY_CYCLE: float = 0.5  # 50% duty cycle for now
 # After a press is accepted, ignore both buttons for a time
 BUTTON_TIMEOUT_SEC: float = 1.0
 
+# Default audio repeat delay for prompts that don't have a specific one
+DEFAULT_AUDIO_REPEAT_DELAY: float = 1.0
+
 # Declare paths for images and audio files relative to this script's directory
 IMAGES = Path(__file__).resolve().parent / "Images"
 AUDIO = Path(__file__).resolve().parent / "Audio"
@@ -211,7 +214,7 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
 def pump_events() -> ErrorCode:
     """Service the pygame event queue. Must be called exactly once per main
     loop tick, unconditionally, regardless of state
-    
+
     Returns:
         ErrorCode: NORMAL_OPERATION if successful, WARNING_PYGAME_PUMP_FAILURE if failed
     """
@@ -287,13 +290,14 @@ def draw_timer(elapsed_sec: float) -> ErrorCode:
     return ErrorCode.NORMAL_OPERATION
 
 
-def set_audio(prompt: AudioPrompt) -> ErrorCode:
+def set_audio(prompt: AudioPrompt, repeat_delay: float) -> ErrorCode:
     """Play audio prompt on loop. Call once on state entry; restarts playback
     from the beginning even if called again with the same prompt.
 
     Args:
         prompt (AudioPrompt): Audio prompt enum for current state
-        
+        repeat_delay (float): Delay in seconds before repeating the audio
+
     Returns:
         ErrorCode: NORMAL_OPERATION if successful, ERROR_PYGAME_FAILURE if failed
     """
@@ -314,25 +318,49 @@ def set_audio(prompt: AudioPrompt) -> ErrorCode:
             return ErrorCode.ERROR_PYGAME_FAILURE
     prompt_audio = _audio_cache[prompt]
 
+    # pygame can only loop a sound back to back, so the delay is added as silence on the end of a copy of the
+    # prompt, and that copy is looped instead. The cached prompt itself is never changed
+    looped_audio: pygame.mixer.Sound = prompt_audio
+    if repeat_delay > 0.0:  # Written so NaN counts as no delay
+        try:
+            mixer_init = pygame.mixer.get_init()
+            if mixer_init is None:
+                raise RuntimeError("mixer not initialized")
+            frequency, sample_format, channels = mixer_init
+            # sample_format is the sample size in bits, negative for signed. Signed and float silence is all zero
+            # bytes; unsigned silence is the midpoint, e.g. 0x80 for 8 bit
+            sample_bytes = abs(sample_format) // 8
+            if sample_format > 0 and sample_format != 32:
+                silent_sample = (1 << (sample_format - 1)).to_bytes(sample_bytes, "little")
+            else:
+                silent_sample = bytes(sample_bytes)
+            silence = silent_sample * (channels * round(repeat_delay * frequency))
+            looped_audio = pygame.mixer.Sound(buffer=prompt_audio.get_raw() + silence)
+        except Exception as e:
+            logging.error(f"Failed to add {repeat_delay} s repeat delay to audio prompt {prompt.name}: {e}")
+            return ErrorCode.ERROR_PYGAME_FAILURE
+
     # Channel.play() always restarts from the beginning, so this swaps
     # cleanly to a new prompt and restarts on a repeated one
     try:
-        _audio_channel.play(prompt_audio, loops=-1)
+        _audio_channel.play(looped_audio, loops=-1)
         _audio_start_time = time.monotonic()
         _audio_length = prompt_audio.get_length()
     except Exception as e:
         logging.error(f"Failed to play audio prompt {prompt.name}: {e}")
         return ErrorCode.ERROR_PYGAME_FAILURE
-    
+
     return ErrorCode.NORMAL_OPERATION
 
 
-def set_image_audio(image: Image, prompt: AudioPrompt) -> ErrorCode:
+def set_image_audio(image: Image, prompt: AudioPrompt, repeat_delay: float = DEFAULT_AUDIO_REPEAT_DELAY) -> ErrorCode:
     """Set both image and audio prompt for current state. Call once on state entry.
 
     Args:
         image (Image): Image enum for current state
         prompt (AudioPrompt): Audio prompt enum for current state
+        repeat_delay (float): Delay in seconds before repeating the audio
+
     
     Returns:
         ErrorCode: NORMAL_OPERATION if successful, ERROR_UNKNOWN_IMAGE or ERROR_PYGAME_FAILURE if failed
@@ -340,7 +368,7 @@ def set_image_audio(image: Image, prompt: AudioPrompt) -> ErrorCode:
     error = set_image(image)
     if error != ErrorCode.NORMAL_OPERATION:
         return error
-    return set_audio(prompt)
+    return set_audio(prompt, repeat_delay)
     
 
 

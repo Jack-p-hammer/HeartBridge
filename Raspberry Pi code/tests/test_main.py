@@ -322,13 +322,8 @@ def test_main_advances_from_startup_when_next_pressed(monkeypatch):
 # -------------------- flow: remaining happy-path edges --------------------
 # STARTUP -> UNFOLD_CUT_CLOTHES -> ALIGNMENT is covered above; these cover the
 # rest of the chain: ALIGNMENT -> KNEELING -> ZEROING -> COMPRESSION
-# -> PAUSE -> COMPRESSION_PREP -> COMPRESSION (loop), and KNEEL_FAILURE -> ALIGNMENT.
-# COMPRESSION_PREP is deprecated, but PAUSE still resumes through it.
-
-def _first_entry(calls: list[tuple], entry: tuple) -> int:
-    """Index of a state's first set_image_audio() entry, or len(calls) if it was never entered"""
-    return calls.index(entry) if entry in calls else len(calls)
-
+# -> PAUSE -> COMPRESSION (loop), and KNEEL_FAILURE -> ALIGNMENT.
+# COMPRESSION_PREP is deprecated and no longer reached.
 
 def test_main_flow_alignment_to_kneeling(monkeypatch):
     modules = install_fake_main_modules(monkeypatch)
@@ -362,8 +357,7 @@ def test_main_flow_zeroing_to_compression_when_finished(monkeypatch):
     compression = (main.HMI.Image.COMPRESSION, main.HMI.AudioPrompt.COMPRESSION)
     compression_prep = (main.HMI.Image.COMPRESSION_PREP, main.HMI.AudioPrompt.COMPRESSION_PREP)
     assert compression in calls
-    # Pause is held, so COMPRESSION_PREP shows up later on resume, but never before the first COMPRESSION
-    assert _first_entry(calls, compression) < _first_entry(calls, compression_prep)
+    assert compression_prep not in calls
 
 
 def test_main_flow_zeroing_stays_while_not_finished(monkeypatch):
@@ -391,41 +385,6 @@ def test_main_flow_zero_position_failure_after_zeroing_finished_routes_to_abort(
 
     assert (main.HMI.Image.ABORT, main.HMI.AudioPrompt.ABORT) in set_image_audio.calls
     assert (main.HMI.Image.COMPRESSION, main.HMI.AudioPrompt.COMPRESSION) not in set_image_audio.calls
-
-
-def test_main_flow_compression_prep_to_compression_when_audio_finished(monkeypatch):
-    """Resuming from PAUSE goes through COMPRESSION_PREP, which returns to COMPRESSION once its audio finishes."""
-    modules = install_fake_main_modules(monkeypatch)
-    set_image_audio = _cascade_fakes(modules)
-    setattr(modules["HMI"], "audio_finished", lambda: True)
-
-    import main
-    _run_main_for_ticks(monkeypatch, main, max_ticks=15)
-
-    calls = set_image_audio.calls
-    compression = (main.HMI.Image.COMPRESSION, main.HMI.AudioPrompt.COMPRESSION)
-    compression_prep = (main.HMI.Image.COMPRESSION_PREP, main.HMI.AudioPrompt.COMPRESSION_PREP)
-    assert compression_prep in calls
-    # Compressions restarted after COMPRESSION_PREP
-    assert compression in calls[calls.index(compression_prep):]
-
-
-def test_main_flow_compression_prep_stays_while_audio_not_finished(monkeypatch):
-    """COMPRESSION_PREP waits for its audio. Audio only stays unfinished once COMPRESSION_PREP is entered, since
-    STARTUP also waits for its audio before advancing."""
-    modules = install_fake_main_modules(monkeypatch)
-    set_image_audio = _cascade_fakes(modules)
-    setattr(modules["HMI"], "audio_finished",
-            lambda: modules["HMI"].Image.COMPRESSION_PREP not in [image for image, _ in set_image_audio.calls])
-
-    import main
-    _run_main_for_ticks(monkeypatch, main, max_ticks=15)
-
-    calls = set_image_audio.calls
-    compression = (main.HMI.Image.COMPRESSION, main.HMI.AudioPrompt.COMPRESSION)
-    compression_prep = (main.HMI.Image.COMPRESSION_PREP, main.HMI.AudioPrompt.COMPRESSION_PREP)
-    assert compression_prep in calls
-    assert compression not in calls[calls.index(compression_prep):]
 
 
 def test_main_flow_compression_to_pause_on_pause_button(monkeypatch):
@@ -458,20 +417,39 @@ def test_main_flow_compression_does_not_pause_on_next_button_alone(monkeypatch):
     assert (main.HMI.Image.PAUSE, main.HMI.AudioPrompt.PAUSE) not in set_image_audio.calls
 
 
-def test_main_flow_pause_to_compression_prep_on_next(monkeypatch):
-    """Pause resumes back into COMPRESSION_PREP (not straight to COMPRESSION) on Next."""
+def test_main_flow_pause_to_compression_on_next(monkeypatch):
+    """Pause resumes straight back into COMPRESSION on Next, without COMPRESSION_PREP."""
     modules = install_fake_main_modules(monkeypatch)
     set_image_audio = _cascade_fakes(modules)
 
     import main
     _run_main_for_ticks(monkeypatch, main, max_ticks=15)
 
-    # ZEROING goes straight to COMPRESSION, so COMPRESSION_PREP is only entered by resuming from PAUSE
     calls = set_image_audio.calls
     pause = (main.HMI.Image.PAUSE, main.HMI.AudioPrompt.PAUSE)
+    compression = (main.HMI.Image.COMPRESSION, main.HMI.AudioPrompt.COMPRESSION)
     compression_prep = (main.HMI.Image.COMPRESSION_PREP, main.HMI.AudioPrompt.COMPRESSION_PREP)
-    assert compression_prep in calls
-    assert _first_entry(calls, pause) < _first_entry(calls, compression_prep)
+    assert pause in calls
+    assert compression in calls[calls.index(pause):]  # compressions restarted after the pause
+    assert compression_prep not in calls
+
+
+def test_main_flow_pause_resume_does_not_wait_for_audio(monkeypatch):
+    """Resuming from PAUSE doesn't wait for any audio to finish, unlike the old COMPRESSION_PREP.
+    Audio only stays unfinished once PAUSE is entered, since STARTUP also waits for its audio before advancing."""
+    modules = install_fake_main_modules(monkeypatch)
+    set_image_audio = _cascade_fakes(modules)
+    setattr(modules["HMI"], "audio_finished",
+            lambda: modules["HMI"].Image.PAUSE not in [image for image, _ in set_image_audio.calls])
+
+    import main
+    _run_main_for_ticks(monkeypatch, main, max_ticks=15)
+
+    calls = set_image_audio.calls
+    pause = (main.HMI.Image.PAUSE, main.HMI.AudioPrompt.PAUSE)
+    compression = (main.HMI.Image.COMPRESSION, main.HMI.AudioPrompt.COMPRESSION)
+    assert pause in calls
+    assert compression in calls[calls.index(pause):]
 
 
 def test_main_flow_pause_loop_abort_failure_routes_to_abort(monkeypatch):
@@ -722,7 +700,7 @@ def test_main_cpr_timer_holds_while_paused_and_resumes_from_total(monkeypatch):
     except _StopMainLoop:
         pass
 
-    # Paused time (PAUSE and COMPRESSION_PREP ticks) never counts
+    # Paused time (PAUSE ticks) never counts
     assert events[:9] == ["run", 0, 1, 2, "run", 2, 3, 4, "run"]
 
 

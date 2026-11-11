@@ -9,11 +9,11 @@
 // is held down. The drivers go to sleep whenever the motors stop, so nothing
 // sits there heating up. The Serial Monitor (115200 baud) shows forward/reverse/stopped.
 //
-// Wiring, Nano pin -> Pololu DRV8434 carrier (#3762) pin:
-//   Driver 1 (motor 1): D9 -> STEP, D10 -> DIR
-//   Driver 2 (motor 2): D5 -> STEP, D6  -> DIR
-//   Both drivers:       D7 -> SLEEP (one Nano pin wakes/sleeps both boards;
-//                       the carrier pulls SLEEP low, so it stays asleep until D7 goes high)
+// Wiring, Nano pin -> Pololu DRV8434 carrier (#3762) pin. Each Nano pin goes to
+// the same pin on BOTH carriers, so the two drivers always get identical signals:
+//   D9  -> STEP
+//   D10 -> DIR
+//   D7  -> SLEEP (the carrier pulls SLEEP low, so it stays asleep until D7 goes high)
 //   On both carriers:
 //     EN     -> leave unconnected (floating = enabled; sleep is what turns the coils off)
 //     M0, M1 -> both to GND = full steps. Left unconnected the carrier defaults to
@@ -39,9 +39,9 @@
 //   A 4-leg tactile button has its legs joined in pairs. The diagonal pair is
 //   always the switched one, whichever way the button sits in the breadboard.
 //
-// If a motor buzzes instead of turning, a coil pair is wrong. If it turns the
-// wrong way, swap the two wires of one coil (or flip that motor's entry in
-// DIR_INVERT).
+// If a motor buzzes instead of turning, a coil pair is wrong. If one motor turns
+// the wrong way, swap the two wires of one of its coils (both motors share DIR,
+// so this can't be fixed in code). If both turn the wrong way, swap the buttons.
 //
 // Upload: open this file in the Arduino IDE, choose Tools -> Board -> Arduino
 // Nano, pick the port under Tools -> Port, then Upload. If the upload fails
@@ -60,10 +60,10 @@ const unsigned long DEBOUNCE_MS = 20;  // a button has to read steady this long 
 // ---- Pins ----
 const uint8_t FORWARD_BUTTON_PIN = 2;
 const uint8_t REVERSE_BUTTON_PIN = 3;
-const uint8_t SLEEP_PIN = 7;                  // nSLEEP on both drivers: low = asleep, coils off
-const uint8_t STEP_PINS[2] = {9, 5};          // driver 1, driver 2
-const uint8_t DIR_PINS[2] = {10, 6};          // driver 1, driver 2
-const bool DIR_INVERT[2] = {false, false};    // true flips that motor's direction
+// Each of these goes to the same pin on both drivers.
+const uint8_t SLEEP_PIN = 7;  // low = asleep, coils off
+const uint8_t STEP_PIN = 9;
+const uint8_t DIR_PIN = 10;
 
 const unsigned long STEP_INTERVAL_US = (unsigned long)(60.0e6 / (RPM * STEPS_PER_REV * MICROSTEPS));
 const unsigned long WAKE_US = 2000;  // DRV8434 needs ~1.2 ms after nSLEEP goes high before it takes steps
@@ -82,23 +82,11 @@ struct Button {
 Button forwardButton = {FORWARD_BUTTON_PIN, false, false, 0};
 Button reverseButton = {REVERSE_BUTTON_PIN, false, false, 0};
 
-// Point both motors' DIR pins forward (+1) or backward (-1).
-void writeDirection(int8_t dir) {
-  for (int m = 0; m < 2; m++) {
-    bool high = (dir > 0) != DIR_INVERT[m];
-    digitalWrite(DIR_PINS[m], high ? HIGH : LOW);
-  }
-}
-
-// Send one step pulse to both drivers. The driver steps on STEP's rising edge.
+// Send one step pulse to both drivers. They step on STEP's rising edge.
 void pulseStep() {
-  for (int m = 0; m < 2; m++) {
-    digitalWrite(STEP_PINS[m], HIGH);
-  }
+  digitalWrite(STEP_PIN, HIGH);
   delayMicroseconds(STEP_PULSE_US);
-  for (int m = 0; m < 2; m++) {
-    digitalWrite(STEP_PINS[m], LOW);
-  }
+  digitalWrite(STEP_PIN, LOW);
 }
 
 // Update a button's debounced state. Returns true once for each new press.
@@ -127,7 +115,7 @@ void setDirection(int8_t newDirection) {
     digitalWrite(SLEEP_PIN, LOW);  // sleep: coils off, shaft turns freely, no current draw
     Serial.println(F("stopped"));
   } else {
-    writeDirection(newDirection);
+    digitalWrite(DIR_PIN, newDirection > 0 ? HIGH : LOW);
     if (direction == 0) {
       // Waking up: the first step goes out once the driver has had WAKE_US to start.
       digitalWrite(SLEEP_PIN, HIGH);
@@ -146,12 +134,10 @@ void setup() {
   pinMode(REVERSE_BUTTON_PIN, INPUT_PULLUP);
   pinMode(SLEEP_PIN, OUTPUT);
   digitalWrite(SLEEP_PIN, LOW);  // start asleep
-  for (int m = 0; m < 2; m++) {
-    pinMode(STEP_PINS[m], OUTPUT);
-    pinMode(DIR_PINS[m], OUTPUT);
-    digitalWrite(STEP_PINS[m], LOW);
-  }
-  writeDirection(1);
+  pinMode(STEP_PIN, OUTPUT);
+  digitalWrite(STEP_PIN, LOW);
+  pinMode(DIR_PIN, OUTPUT);
+  digitalWrite(DIR_PIN, HIGH);
   Serial.println(F("DRV8434 stepper buttons: D2 = forward, D3 = reverse"));
 }
 

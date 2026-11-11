@@ -21,6 +21,8 @@ CONTROLLER_ID: int = 1  # The ID of the moteus-x1 controller on the CAN bus
 COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
 REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1s watchdog, same as scripts/slow_jog.py
 STOP_ATTEMPTS: int = 5  # tries at the startup stop command before commanding anyway (the command loop then logs errors)
+# Same as demo/current_zeroing/current_zeroing.py DESCENT_VELOCITY_MPS, since the current spike thresholds in sensing.py depend on it
+ZEROING_VELOCITY_MPS: float = 0.02  # meters per second, velocity of the plunger down the ball screw while seeking the chest
 RETRACT_VELOCITY_MPS: float = 0.08  # meters per second, velocity of the plunger along the ball screw during retract
 
 # --- Ball screw constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
@@ -29,13 +31,20 @@ BALL_SCREW_LEAD_M: float = 0.0254*0.5  # meters of plunger travel per ball screw
 # the BLDC's direction is set; flip it to reverse the motor. Plunger travel is always positive down
 BLDC_GEAR_RATIO: float = -1.0  # motor revolutions per ball screw revolution
 BLDC_ROTATIONS_PER_M: float = BLDC_GEAR_RATIO / BALL_SCREW_LEAD_M  # motor rotations per meter of plunger travel, signed like BLDC_GEAR_RATIO
-# Ball screw travel only covers compressions plus safety room at either end. Carriage travel is handled by the lead screw steppers (stepper.py)
-BALL_SCREW_TOP_CLEARANCE_M: float = 0.01  # meters, the plunger sits this far below the top of travel when zeroing, so pause/abort can lift off the chest
-BALL_SCREW_TRAVEL_M: float = 0.12  # meters, total usable ball screw travel down from the startup (absolute zero) position
+# A single ball screw covers the whole stroke: zeroing (bringing the plunger down to the chest), compressions, and retracting
+# TODO: Set for the long ball screw
+BALL_SCREW_TRAVEL_M: float = 0.0254*8.5  # meters, total usable ball screw travel down from the startup (absolute zero) position. 
 
 MAX_PLUNGER_FORCE_N: float = 500.0
 # Ideal (100% efficient) ball screw: F = 2*pi*T / lead. Real efficiency only lowers the force, so this limit is conservative
 TORQUE_LIMIT_NM: float = MAX_PLUNGER_FORCE_N * BALL_SCREW_LEAD_M / (2 * math.pi * abs(BLDC_GEAR_RATIO))
+# Force cap while zeroing, same as demo/current_zeroing/current_zeroing.py DESCENT_MAX_FORCE_N. Kept well under
+# MAX_PLUNGER_FORCE_N, since contact is what zeroing is looking for. The q current saturates at this torque, so
+# sensing.ZEROING_SPIKE_THRESHOLD_A must stay below the current this cap allows. TODO: Tune
+ZEROING_MAX_FORCE_N: float = 50.0
+ZEROING_TORQUE_LIMIT_NM: float = ZEROING_MAX_FORCE_N * BALL_SCREW_LEAD_M / (2 * math.pi * abs(BLDC_GEAR_RATIO))
+
+MOTEUS_FAULT_MODE: int = 1  # MotorState.mode when the controller has latched a fault
 
 # --- data structures ---------------------------------------------------
 
@@ -219,14 +228,16 @@ class MoteusThread:
             # Setpoints are meters of plunger travel, positive down. Multiplying by BLDC_ROTATIONS_PER_M converts them to
             # motor rotations, including the gear train's reversal
             case ControlMode.ZEROING:
-                # The steppers lower the whole carriage during zeroing, the plunger just holds just below the top of its travel
-                position: float = abs_zero_position + BALL_SCREW_TOP_CLEARANCE_M * BLDC_ROTATIONS_PER_M # rotations
-                velocity: float = 0.0
+                # Constant velocity down the ball screw until the chest is found. Position NaN puts the moteus in pure
+                # velocity control, so there is no position target to check against the travel. actuation.zeroing()
+                # checks the extension limit instead
+                position: float = math.nan
+                velocity: float = ZEROING_VELOCITY_MPS * BLDC_ROTATIONS_PER_M # rotations per second, signed by the gear train
                 kp_scale: float = 1.0
                 kd_scale: float = 1.0
                 feedforward_torque: float = 0.0
-                velocity_limit: float = retract_velocity_rps # rotations per second
-                maximum_torque: float = TORQUE_LIMIT_NM
+                velocity_limit: float = math.nan
+                maximum_torque: float = ZEROING_TORQUE_LIMIT_NM # Reduced cap, see ZEROING_MAX_FORCE_N
             case ControlMode.COMPRESSIONS:
                 position: float = zero_position + compressionSetpoint * BLDC_ROTATIONS_PER_M # rotations, relative to zeroed position
                 velocity: float = math.nan

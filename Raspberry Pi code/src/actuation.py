@@ -1,13 +1,12 @@
 # actuation.py
 """Functions that dictate actuation of the plunger, including zeroing and compressions. These functions are non-blocking.
 
-The plunger is a nested two-stage actuator:
-- Two lead screws, driven by steppers sharing one STEP/DIR input (stepper.py), move the whole carriage. Used for zeroing (bringing the plunger down to the chest) and fully retracting on abort.
-- The moteus-driven BLDC moves the plunger along a ball screw within the carriage (moteus_thread.py). Used for compressions, with only enough travel for compressions plus safety room.
+The plunger is driven along a single ball screw by the moteus-driven BLDC (moteus_thread.py), which covers the whole
+stroke: zeroing (bringing the plunger down to the chest), compressions, and retracting on pause/abort.
 
-The system is assumed to start fully retracted on both stages.
+The plunger is assumed to start fully retracted, at the top of the ball screw.
 
-NOTE: ALL SETPOINTS ARE IN METERS, AND COMPRESSION SETPOINTS ARE RELATIVE TO ZEROED POSITION. DO NOT CONVERT TO ROTATIONS OR STEPS, THAT IS ALL DONE WITHIN moteus_thread.py AND stepper.py
+NOTE: ALL SETPOINTS ARE IN METERS, AND COMPRESSION SETPOINTS ARE RELATIVE TO ZEROED POSITION. DO NOT CONVERT TO ROTATIONS, THAT IS ALL DONE WITHIN moteus_thread.py
 """
 
 # External imports
@@ -19,23 +18,22 @@ import math
 import sensing
 from Enums.error_codes import ErrorCode
 from Enums.control_modes import ControlMode
-from moteus_thread import MoteusThread, CONTROLLER_ID
-import stepper
-from stepper import LEAD_SCREW_TRAVEL_M, ZEROING_VELOCITY_MPS, RETRACT_VELOCITY_MPS
+from moteus_thread import (MoteusThread, MotorState, CONTROLLER_ID, BLDC_ROTATIONS_PER_M, BALL_SCREW_TRAVEL_M,
+                           ZEROING_VELOCITY_MPS, MOTEUS_FAULT_MODE)
 
 
 COMPRESSION_DEPTH_CM: float = 7.0 # depth of compressions in cm, because compression setpoint math is in cm
-EXTENSION_STROKE_LIMIT_M: float = LEAD_SCREW_TRAVEL_M # maximum carriage extension in meters, zeroing fails if the chest isn't found by here
+EXTENSION_STROKE_LIMIT_M: float = BALL_SCREW_TRAVEL_M - COMPRESSION_DEPTH_CM / 100.0 # maximum plunger extension in meters, zeroing fails if the chest isn't found by here
+PLUNGER_HOME_TOLERANCE_M: float = 0.001 # meters from the startup position that counts as fully retracted, see retract_plunger()
 
 # 1.5x buffer on top of the time to reach max extension, for accel ramps. TODO: Tune
 ZEROING_TIMEOUT_SEC: float = 1.5 * EXTENSION_STROKE_LIMIT_M / ZEROING_VELOCITY_MPS # maximum time to spend zeroing, in seconds
 
-# See moteus_thread.py for BLDC/ball screw constants, stepper.py for stepper/lead screw constants
-# See sensing.py for force threshold constants
+# See moteus_thread.py for BLDC/ball screw and velocity constants
+# See sensing.py for the zeroing current spike and force threshold constants
 
 zeroing_start_time: float = 0.0 # time.monotonic() of when zeroing started
 compression_start_time: float = 0.0 # time.monotonic() of when compressions started, used to compute trapezoidal waveform
-retract_target_m: float | None = None # Carriage position the current retraction ends at, set on its first tick, None while not retracting
 
 _motor_controller: MoteusThread  # The shared moteus controller instance
 
@@ -59,25 +57,6 @@ def init_motor() -> ErrorCode:
 
     return ErrorCode.NORMAL_OPERATION
 
-def init_steppers(pi) -> ErrorCode:
-    """Initialize the lead screw steppers on the shared pigpio instance.
-
-    Args:
-        pi (pigpio.pi): The shared pigpio instance from HMI.init_Pi()
-
-    Returns:
-        ErrorCode: Normal operation if successful, ERROR_INIT_FAILURE if failed
-    """
-    global retract_target_m
-    retract_target_m = None  # stepper.init_steppers() zeroes the extending step count, so no retraction is in progress
-
-    error: ErrorCode = stepper.init_steppers(pi)
-    if error != ErrorCode.NORMAL_OPERATION:
-        logging.error(f"Stepper initialization failed: {error}")
-        return ErrorCode.ERROR_INIT_FAILURE
-
-    return ErrorCode.NORMAL_OPERATION
-
 def get_motor_controller() -> MoteusThread:
     """Get the shared moteus controller instance.
 
@@ -94,20 +73,26 @@ def init_zeroing() -> ErrorCode:
         ErrorCode: Normal operation if successful, ERROR_ZEROING_FAILURE if failed
     """
     global zeroing_start_time
-    
+
     zeroing_start_time = time.monotonic()
+
+    # Start a fresh current spike detection run
+    error: ErrorCode = sensing.init_zeroing()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Zeroing initialization failed: {error}")
+        return ErrorCode.ERROR_ZEROING_FAILURE
+
     logging.debug("Zeroing initialized")
-    
     return ErrorCode.NORMAL_OPERATION
 
 
 def zeroing() -> ErrorCode:
     """Perform the zeroing procedure. Non-blocking.
     The procedure is as follows:
-    1. Hold the plunger just below the top of its ball screw travel
-    2. Command the steppers towards max carriage extension at zeroing velocity
-    3. Repeatedly poll the force sensor (via read_sensors) until the force exceeds the threshold
-    4. Halt the steppers. The carriage holds there for the rest of compressions
+    1. Move the plunger down the ball screw at a constant velocity, with a reduced torque cap
+    2. Repeatedly check the motor's q current (via read_sensors) until it spikes above its free-running baseline,
+       same as demo/current_zeroing/current_zeroing.py
+    3. Stop the plunger there. sensing.zero_position() then records it as the zeroed position
 
     Returns:
         ErrorCode: Normal while zeroing, ZEROING_FINISHED when finished, ERROR_ZEROING_FAILURE if failed (timeout, max extension reached)
@@ -125,8 +110,20 @@ def zeroing() -> ErrorCode:
     if error != ErrorCode.NORMAL_OPERATION:
         logging.error(f"Zeroing failed: motor error {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE
-        
-    # Hold the plunger in place on the ball screw, can be done repeatedly since it is non-blocking
+
+    # Check for a latched controller fault, the q current is meaningless once the motor stops driving
+    fault_state: MotorState = _motor_controller.get_state()
+    if fault_state.mode == MOTEUS_FAULT_MODE:
+        logging.error(f"Zeroing failed: moteus fault {fault_state.fault}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+
+    # Check for max extension, in meters of plunger travel down from the startup (top of ball screw) position
+    travel_m: float = (_motor_controller.get_rotary_position() - sensing.get_rotary_absolute_zero_position()) / BLDC_ROTATIONS_PER_M
+    if travel_m >= EXTENSION_STROKE_LIMIT_M:
+        logging.error(f"Zeroing failed: max extension reached at {travel_m} m")
+        return ErrorCode.ERROR_ZEROING_FAILURE
+
+    # Move the plunger down at zeroing velocity, can be done repeatedly since it is non-blocking
     error = _motor_controller.set_target(ControlMode.ZEROING,
                                          sensing.get_rotary_zero_position(),
                                          sensing.get_rotary_absolute_zero_position())
@@ -134,29 +131,20 @@ def zeroing() -> ErrorCode:
         logging.error(f"Zeroing failed on motor command: {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE
 
-    # Check for max extension
-    if stepper.get_position() >= EXTENSION_STROKE_LIMIT_M:
-        logging.error("Zeroing failed: max extension reached")
-        return ErrorCode.ERROR_ZEROING_FAILURE
-
-    # Lower the carriage towards max extension, can be done repeatedly since it is non-blocking
-    error = stepper.set_target(EXTENSION_STROKE_LIMIT_M, ZEROING_VELOCITY_MPS)
-    if error == ErrorCode.NORMAL_OPERATION:
-        error = stepper.update()
-    if error != ErrorCode.NORMAL_OPERATION:
-        logging.error(f"Zeroing failed on stepper: {error}")
-        stepper.halt()
-        return ErrorCode.ERROR_MOTOR_FAILURE
-
-    # Read sensors to determine if chest reached
+    # Read sensors (including the motor current spike check) to determine if chest reached
     # ZEROING_FINISHED exists to transmit zeroing success to state machine, just pass along results of sensor read
     # All sensor reading logic is in sensing.py
     result: ErrorCode = sensing.read_sensors(ControlMode.ZEROING)
     if result != ErrorCode.NORMAL_OPERATION:
-        # Chest found (or a sensor failure), stop the carriage either way
-        stepper.halt()
+        # Chest found (or a sensor failure), stop the plunger either way
+        error = _motor_controller.set_target(ControlMode.HOLD_POSITION,
+                                             sensing.get_rotary_zero_position(),
+                                             sensing.get_rotary_absolute_zero_position())
+        if error != ErrorCode.NORMAL_OPERATION:
+            logging.error(f"Zeroing failed to stop the plunger: {error}")
+            return ErrorCode.ERROR_MOTOR_FAILURE
         if result == ErrorCode.ZEROING_FINISHED:
-            logging.info(f"Carriage zeroed at {stepper.get_position()} m")
+            logging.info(f"Plunger zeroed at {travel_m} m")
     return result
 
 
@@ -196,12 +184,6 @@ def compressions() -> ErrorCode:
         logging.error(f"Compressions failed on motor: {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE
 
-    # Carriage holds at its zeroed position, finish playing out any steps still queued from zeroing
-    error = stepper.update()
-    if error != ErrorCode.NORMAL_OPERATION:
-        logging.error(f"Compressions failed on stepper: {error}")
-        return ErrorCode.ERROR_MOTOR_FAILURE
-
     # Update compression setpoint
     error = _motor_controller.set_target(ControlMode.COMPRESSIONS, 
                                          sensing.get_rotary_zero_position(), 
@@ -237,12 +219,6 @@ def pause_compressions() -> ErrorCode:
         logging.error(f"Pause retract failed on motor: {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE
 
-    # Carriage stays at its zeroed position so compressions can resume without re-zeroing
-    error = stepper.update()
-    if error != ErrorCode.NORMAL_OPERATION:
-        logging.error(f"Pause retract failed on stepper: {error}")
-        return ErrorCode.ERROR_MOTOR_FAILURE
-
     # Update motor command to pause retract
     # This works because motor setpoints are retained between calls
     error = _motor_controller.set_target(ControlMode.PAUSE_RETRACT, 
@@ -255,8 +231,7 @@ def pause_compressions() -> ErrorCode:
 
 
 def abort_compressions() -> ErrorCode:
-    """Return plunger to the top of its ball screw travel for compressions abort. Non-blocking.
-    NOTE: This does not move the carriage, since PAUSE also calls this every tick. Use retract_carriage() to fully retract.
+    """Return plunger to the top of its ball screw travel (the startup position) for compressions abort. Non-blocking.
 
     Returns:
         ErrorCode: Normal operation if successful, ERROR_ZEROING_FAILURE if failed
@@ -303,35 +278,31 @@ def computeCompressionSetpoint() -> float:
     # Convert to meters and return
     return outputPos_cm / 100.0
 
-def retract_carriage() -> tuple[ErrorCode, bool]:
-    """Retract the carriage to its home (startup) position with the steppers, by retracting exactly as many steps as
-    have been commanded in the extending direction (stepper.get_extended_distance()). Non-blocking, must be called
-    every tick until the carriage is home. Like abort_compressions(), does not read sensors.
-    Once home, the extending step count is reset so the next retraction only undoes extension commanded after this one.
+def retract_plunger() -> tuple[ErrorCode, bool]:
+    """Retract the plunger to the top of its ball screw travel (the startup position), and report once it is there.
+    Same motor command as abort_compressions(), without the log message, so it can be called every tick until the
+    plunger is home. Like abort_compressions(), does not read sensors.
 
     Returns:
         ErrorCode: Normal operation if successful, ERROR_MOTOR_FAILURE if failed
-        bool: True if the carriage is home, False otherwise
+        bool: True if the plunger is within PLUNGER_HOME_TOLERANCE_M of the startup position, False otherwise
     """
-    global retract_target_m
+    global _motor_controller
 
-    # First tick of this retraction: stop where the already-commanded steps end, then set the target exactly the
-    # commanded extension above it. Kept fixed until home, since the extending step count doesn't change while retracting
-    if retract_target_m is None:
-        stepper.halt()
-        retract_target_m = stepper.get_setpoint() - stepper.get_extended_distance()
-        logging.info(f"Retracting carriage {stepper.get_extended_distance()} m, from {stepper.get_setpoint()} m to {retract_target_m} m")
-
-    error = stepper.set_target(retract_target_m, RETRACT_VELOCITY_MPS)
-    if error == ErrorCode.NORMAL_OPERATION:
-        error = stepper.update()
+    error = _motor_controller.set_target(ControlMode.ABORT_RETRACT,
+                                         sensing.get_rotary_zero_position(),
+                                         sensing.get_rotary_absolute_zero_position())
     if error != ErrorCode.NORMAL_OPERATION:
-        logging.error(f"Carriage retract failed on stepper: {error}")
+        logging.error(f"Plunger retract failed on motor command: {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE, False
 
-    if stepper.at_target():
-        logging.info(f"Carriage retracted to {stepper.get_position()} m")
-        stepper.reset_extended_steps()
-        retract_target_m = None
+    error = _motor_controller.get_last_error()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Plunger retract failed on motor: {error}")
+        return ErrorCode.ERROR_MOTOR_FAILURE, False
+
+    travel_m: float = (_motor_controller.get_rotary_position() - sensing.get_rotary_absolute_zero_position()) / BLDC_ROTATIONS_PER_M
+    if abs(travel_m) <= PLUNGER_HOME_TOLERANCE_M:
+        logging.info(f"Plunger retracted to {travel_m} m")
         return ErrorCode.NORMAL_OPERATION, True
     return ErrorCode.NORMAL_OPERATION, False

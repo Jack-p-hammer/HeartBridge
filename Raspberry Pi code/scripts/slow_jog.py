@@ -38,8 +38,7 @@ SPEED_IN_PER_S: float = 0.1  # snail's pace
 
 
 def inches_to_rev(inches: float) -> float:
-    """Convert linear rack travel to motor revolutions through the pinion."""
-    # return inches * 0.0254 / (2.0 * math.pi * PINION_RADIUS_M)
+    """Convert linear ball screw travel to motor revolutions."""
     return inches * 2
 
 

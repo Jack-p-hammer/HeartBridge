@@ -4,7 +4,7 @@ Current-spike zeroing test. Drives the plunger down the ball screw at a constant
 the q-axis (torque-producing) current spikes above its free-running baseline, or when the extension limit is reached.
 
 Uses src/moteus_thread.py unaltered for all moteus communication and its ball screw constants for unit conversion.
-The lead screw steppers and the sensor suite are not touched, so this runs without pigpio, I2C, or the force sensor.
+The sensor suite is not touched, so this runs without pigpio, I2C, or the force sensor.
 
 Sequence:
     1. Record the startup motor position as the top of ball screw travel (same as sensing.py)
@@ -62,7 +62,7 @@ RETRACT_TIMEOUT_S: float = 10.0  # seconds before giving up on the retract
 LOOP_PERIOD_S: float = 0.002  # main loop tick, faster than moteus_thread.COMMAND_RATE_HZ so no sample is missed
 STARTUP_TIMEOUT_S: float = 2.0  # seconds to wait for the first reply from the moteus
 # Longest gap between moteus replies before the descent stops. A few lost replies in a row (each ~moteus_thread
-# REPLY_TIMEOUT_S plus a command period) are tolerated, since the carriage only moves ~1 mm in this time
+# REPLY_TIMEOUT_S plus a command period) are tolerated, since the plunger only moves ~1 mm in this time
 MAX_SAMPLE_AGE_S: float = 0.25
 
 # Same log location and naming as src/main.py. The CSV shares the run timestamp so the two files pair up
@@ -156,8 +156,10 @@ def init_descent() -> None:
     _descent_start_time = time.monotonic()
     _last_sample_time = _motor.get_state().timestamp
 
-    # MoteusThread.set_target() has no constant velocity mode, and src/ must stay unaltered, so the target is written
-    # directly. Position NaN puts the moteus in pure velocity control. The thread sends this every tick until replaced
+    # MoteusThread.set_target()'s ControlMode.ZEROING uses moteus_thread.ZEROING_VELOCITY_MPS and ZEROING_TORQUE_LIMIT_NM.
+    # This test writes its target directly, so DESCENT_VELOCITY_MPS and DESCENT_MAX_FORCE_N can be tuned here with src/
+    # unaltered. Keep src/ in step once tuned. Position NaN puts the moteus in pure velocity control. The thread sends
+    # this every tick until replaced
     setattr(_motor, "_target", MotorTarget(
         position=math.nan,
         velocity=DESCENT_VELOCITY_MPS * BLDC_ROTATIONS_PER_M,  # rotations per second, signed by the gear train

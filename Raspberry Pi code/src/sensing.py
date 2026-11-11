@@ -4,10 +4,14 @@ Library of functions for reading and validating sensor readings, including the f
 
 All functions that read sensors return a value assuming a successful read. All reading validation functions return an error code indicating whether the readings are valid or not. Therefore, try/except blocks are used when calling the read functions, all of which is done through the read_sensors() function, which is called by the main loop.
 
+Zeroing detects the chest from a spike in the BLDC's q-axis (torque-producing) current, the same process as
+demo/current_zeroing/current_zeroing.py, not from the force sensor. The force sensor is still validated against its limits.
+
 BEFORE AND DURING ZEROING, THE zero_position VARIABLES MUST EQUAL THE absolute_zero_position VARIABLES
 """
 # External imports
 import dataclasses
+import time
 import pigpio
 import board
 import busio
@@ -18,7 +22,7 @@ from adafruit_bno08x.i2c import BNO08X_I2C
 
 # Internal imports
 from Enums.error_codes import ErrorCode
-from moteus_thread import MoteusThread, BLDC_ROTATIONS_PER_M
+from moteus_thread import MoteusThread, MotorState, BLDC_ROTATIONS_PER_M, ZEROING_MAX_FORCE_N
 from Enums.control_modes import ControlMode
 
 # Global variables for shared sensor instances
@@ -41,14 +45,17 @@ ADC_BITS: int = 10
 # Battery voltage threshold for low battery detection. TODO: Calibrate this value based on actual battery performance.
 BATTERY_THRESHOLD_V: float = 21.6  # 6S LiPo battery, 3.6V per cell minimum, 4.2V per cell maximum. 6S = 21.6V minimum, 25.2V maximum.
 
-ZEROING_FORCE_THRESHOLD_N: float = 35.0  # Newtons, threshold for detecting contact with the patient during zeroing
 COMPRESSION_FORCE_THRESHOLD_N: float = 500.0  # Newtons
 
-POSITION_DISAGREE_THRESHOLD_MM: int = 2 # Millimeters
+# Current spike zeroing, same values as demo/current_zeroing/current_zeroing.py. TODO: Tune on hardware
+# Samples are taken once per main loop tick (main.LOOP_TICK_SEC), not every moteus reply like the demo, so the
+# baseline averages fewer samples and the consecutive samples span more time
+ZEROING_SETTLE_TIME_S: float = 0.5  # seconds after zeroing starts before the current is trusted (acceleration transient)
+ZEROING_BASELINE_TIME_S: float = 0.5  # seconds of free-running current averaged into the baseline, after ZEROING_SETTLE_TIME_S
+ZEROING_SPIKE_THRESHOLD_A: float = 1.0  # amps above the baseline |q_current| that counts as chest contact
+ZEROING_SPIKE_CONSECUTIVE_SAMPLES: int = 3  # samples in a row above threshold before zeroing finishes, rejects single-sample noise
 
-# Lead screw encoder tolerances, see check_lead_screw_position()
-STEPPER_POSITION_TOLERANCE_M: float = 0.001  # meters, max allowed disagreement between commanded and encoder position. TODO: Tune
-LEAD_SCREW_SYNC_TOLERANCE_M: float = 0.0005  # meters, max allowed disagreement between the two lead screws. TODO: Tune
+POSITION_DISAGREE_THRESHOLD_MM: int = 2 # Millimeters
 
 # Global variables for sensor starting positions
 rotary_absolute_zero_position: float = 0.0  # The absolute position of rotary encoder on startup
@@ -59,6 +66,14 @@ rotary_zero_position: float = 0.0  # The zeroed position of the rotary encoder a
 ToF_zero_position: int = 0  # The zeroed position of the ToF sensor after zeroing
 force_zero_value: float = 0.0 # Newtons, force sensor reading under no load
 
+# Global variables for current spike zeroing, reset by init_zeroing()
+zeroing_start_time: float = 0.0  # time.monotonic() when zeroing started
+zeroing_last_sample_time: float = 0.0  # MotorState.timestamp of the last motor sample used, so each sample is only counted once
+zeroing_baseline_sum_a: float = 0.0  # sum of the free-running |q_current| samples, in amps
+zeroing_baseline_count: int = 0  # number of samples in zeroing_baseline_sum_a
+zeroing_spike_count: int = 0  # consecutive samples above the spike threshold
+zeroing_contact_found: bool = False  # True once the current spike has been found, checked by zero_position()
+
 # Define setpoint struct
 # Not including position setpoints because those are validated against e/o
 @dataclasses.dataclass()
@@ -68,8 +83,8 @@ class SensorLimits:
 
 # Define setpoints for zeroing and compressions
 zeroing_limits = SensorLimits(
-    force = ZEROING_FORCE_THRESHOLD_N * 1.5, # Higher because we want to detect contact with the patient, but not trigger a sensor failure until the force is well above that threshold. 
-    # TODO: Refine Multiplier
+    # The zeroing torque cap limits the plunger to ZEROING_MAX_FORCE_N, so a reading well above that is a sensor failure
+    force = ZEROING_MAX_FORCE_N * 1.5, # TODO: Refine Multiplier
     accel = (0.0, 0.0, 9.81)  # TODO: Determine method to set this based on IMU orientation. Assuming the IMU is oriented such that gravity is along the z-axis
 )
 
@@ -207,15 +222,30 @@ def read_sensors(control_mode: ControlMode) -> ErrorCode:
         # Pass through IMU kneel failure error code
         validation_error = ErrorCode.ERROR_IMU_KNEEL_FAILURE
         
-    # Zeroing Case: Check for successful zeroing (force threshold exceeded)
-    # At this point, we know that force is below error threshold, so only check for zeroing threshold
-    if (control_mode == ControlMode.ZEROING and 
-        current_force > ZEROING_FORCE_THRESHOLD_N
+    # Zeroing Case: Check the motor current for chest contact, only once the other readings are known to be valid
+    if (control_mode == ControlMode.ZEROING and
+        validation_error == ErrorCode.NORMAL_OPERATION
     ):
-        logging.info(f"Zeroing complete: Force {current_force} N exceeded threshold {ZEROING_FORCE_THRESHOLD_N} N")
-        return ErrorCode.ZEROING_FINISHED
-        
+        return check_zeroing_current()
+
     return validation_error
+
+def init_zeroing() -> ErrorCode:
+    """Reset the current spike detection for a new zeroing run. Non-blocking, call when zeroing starts.
+
+    Returns:
+        ErrorCode: Normal operation
+    """
+    global zeroing_start_time, zeroing_last_sample_time, zeroing_baseline_sum_a, zeroing_baseline_count
+    global zeroing_spike_count, zeroing_contact_found
+
+    zeroing_start_time = time.monotonic()
+    zeroing_last_sample_time = 0.0  # Samples from before zeroing_start_time fall in the settle time and are ignored
+    zeroing_baseline_sum_a = 0.0
+    zeroing_baseline_count = 0
+    zeroing_spike_count = 0
+    zeroing_contact_found = False
+    return ErrorCode.NORMAL_OPERATION
 
 def zero_position() -> ErrorCode:
     """Set zeroed positions for the rotary encoder and ToF sensor. This should be called after zeroing is complete, and the plunger is at the zeroed position.
@@ -223,12 +253,11 @@ def zero_position() -> ErrorCode:
     Returns:
         ErrorCode: Error code describing the success or failure of the operation. Normal if successful, ERROR_SENSOR_FAILURE if failed.
     """
-    global rotary_zero_position, ToF_zero_position
-    
-    # TODO: Determine if this read_sensors() is necessary
-    error = read_sensors(ControlMode.ZEROING)
-    if error != ErrorCode.ZEROING_FINISHED:
-        logging.error(f"Zeroing not finished, cannot set zeroed positions: {error}")
+    global rotary_zero_position, ToF_zero_position, zeroing_contact_found
+
+    # The spike that finished zeroing has already been counted, so check the result instead of reading the current again
+    if not zeroing_contact_found:
+        logging.error("Zeroing not finished, cannot set zeroed positions")
         return ErrorCode.ERROR_SENSOR_FAILURE
     
     if(zero_rotary_encoder() != ErrorCode.NORMAL_OPERATION or 
@@ -279,44 +308,64 @@ def battery_check() -> ErrorCode:
         return ErrorCode.ERROR_LOW_BATTERY
     return ErrorCode.NORMAL_OPERATION
 
+# -------- PRIVATE FUNCTIONS --------
 
-def check_lead_screw_position(position_m: float, setpoint_m: float, encoder_positions_m: tuple[float, ...]) -> ErrorCode:
-    """Validate the lead screw encoders against the stepper position, and against each other.
-    Catches missed steps/stalls (encoders lagging behind the position) and the two lead screws drifting out of sync (racking).
-
-    While steps are playing out, the carriage may be anywhere between its position and its setpoint, so encoders
-    are accepted anywhere in that range (plus tolerance).
-
-    Args:
-        position_m (float): Current carriage position from stepper.get_position(), in meters from home
-        setpoint_m (float): Carriage setpoint from stepper.get_setpoint(), in meters from home
-        encoder_positions_m (tuple[float, ...]): Position of each lead screw from its encoder, in meters from home
+def check_zeroing_current() -> ErrorCode:
+    """Check the newest motor sample for a q current spike above the free-running baseline, meaning the plunger has
+    reached the chest. Same process as demo/current_zeroing/current_zeroing.py update_descent():
+    1. Ignore the current for ZEROING_SETTLE_TIME_S while the motor accelerates
+    2. Average the current for ZEROING_BASELINE_TIME_S to get the free-running baseline
+    3. Report contact once |q_current| exceeds the baseline by ZEROING_SPIKE_THRESHOLD_A for
+       ZEROING_SPIKE_CONSECUTIVE_SAMPLES samples in a row
 
     Returns:
-        ErrorCode: Normal if valid, ERROR_MOTOR_FAILURE if the steppers disagree with the encoders, ERROR_SENSOR_FAILURE if the encoder readings are unusable
+        ErrorCode: ZEROING_FINISHED on a current spike, NORMAL_OPERATION otherwise, ERROR_SENSOR_FAILURE if the motor
+                   state can't be read, ERROR_ZEROING_FAILURE if no baseline samples were collected
     """
-    lower_m: float = min(position_m, setpoint_m) - STEPPER_POSITION_TOLERANCE_M
-    upper_m: float = max(position_m, setpoint_m) + STEPPER_POSITION_TOLERANCE_M
-
-    for index, encoder_m in enumerate(encoder_positions_m):
-        if not (lower_m <= encoder_m <= upper_m):
-            logging.error(f"Lead screw {index} position error: Position {position_m} m, Setpoint {setpoint_m} m, Encoder {encoder_m} m")
-            return ErrorCode.ERROR_MOTOR_FAILURE
+    global _motor_controller, zeroing_start_time, zeroing_last_sample_time, zeroing_baseline_sum_a
+    global zeroing_baseline_count, zeroing_spike_count, zeroing_contact_found
 
     try:
-        encoder_spread_m: float = max(encoder_positions_m) - min(encoder_positions_m)
+        state: MotorState = _motor_controller.get_state()
     except Exception as e:
-        # e.g. no encoder readings at all
-        logging.error(f"Lead screw encoder spread could not be computed: {e}")
+        logging.error(f"Motor state read failed: {e}")
         return ErrorCode.ERROR_SENSOR_FAILURE
 
-    if encoder_spread_m > LEAD_SCREW_SYNC_TOLERANCE_M:
-        logging.error(f"Lead screws out of sync: Encoders {encoder_positions_m} m")
-        return ErrorCode.ERROR_MOTOR_FAILURE
+    # The moteus thread only updates at COMMAND_RATE_HZ, skip samples that were already counted (or no reply yet)
+    if state.stale or state.timestamp == zeroing_last_sample_time:
+        return ErrorCode.NORMAL_OPERATION
+    zeroing_last_sample_time = state.timestamp
+
+    sample_time_s: float = state.timestamp - zeroing_start_time
+    current_a: float = abs(state.q_current)  # sign depends on motor direction, only the magnitude matters
+
+    # Acceleration transient, current isn't meaningful yet
+    if sample_time_s < ZEROING_SETTLE_TIME_S:
+        return ErrorCode.NORMAL_OPERATION
+
+    # Average the free-running current into the baseline
+    if sample_time_s < ZEROING_SETTLE_TIME_S + ZEROING_BASELINE_TIME_S:
+        zeroing_baseline_sum_a += current_a
+        zeroing_baseline_count += 1
+        return ErrorCode.NORMAL_OPERATION
+
+    if zeroing_baseline_count == 0:
+        logging.error("No samples collected for the zeroing current baseline")
+        return ErrorCode.ERROR_ZEROING_FAILURE
+
+    baseline_a: float = zeroing_baseline_sum_a / zeroing_baseline_count
+    if current_a - baseline_a > ZEROING_SPIKE_THRESHOLD_A:
+        zeroing_spike_count += 1
+    else:
+        zeroing_spike_count = 0
+
+    if zeroing_spike_count >= ZEROING_SPIKE_CONSECUTIVE_SAMPLES:
+        logging.info(f"Zeroing complete: Current {current_a} A exceeded baseline {baseline_a} A by more than {ZEROING_SPIKE_THRESHOLD_A} A")
+        zeroing_contact_found = True
+        return ErrorCode.ZEROING_FINISHED
 
     return ErrorCode.NORMAL_OPERATION
-    
-# -------- PRIVATE FUNCTIONS --------
+
 
 def check_sensor_error(sensor_limits: SensorLimits, sensor_readings: tuple) -> ErrorCode:
     """Determines if any sensor readings are out of intended range. 

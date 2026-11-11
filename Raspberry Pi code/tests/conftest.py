@@ -59,7 +59,7 @@ def _no_main_log_files(monkeypatch):
 # Modules from src/ that need to be re-imported fresh once fake hardware/main
 # modules are (re)installed, so they pick up the fakes instead of any
 # previously cached real/fake versions.
-_APP_MODULES = ["sensing", "actuation", "moteus_thread", "stepper", "HMI", "main"]
+_APP_MODULES = ["sensing", "actuation", "moteus_thread", "HMI", "main"]
 
 # Shared keys used by both the fake moteus.Register namespace and the values
 # dict FakeMoteusController hands back, so `result.values[moteus.Register.X]`
@@ -98,7 +98,6 @@ def _fake_module(name: str, **attrs) -> types.ModuleType:
 # cycle outside its valid range of 0 to PWM_REALRANGE (1_000_000).
 PI_BAD_HPWM_DUTY = -97
 PWM_REALRANGE = 1_000_000
-PI_NO_TX_WAVE = 9998  # wave_tx_at() return value when no wave is playing
 
 
 class FakePi:
@@ -150,32 +149,6 @@ class FakePi:
         if not (0 <= duty_cycle <= PWM_REALRANGE):
             return PI_BAD_HPWM_DUTY
         return 0
-
-    # Waveforms (stepper.py). Every sent wave finishes instantly: wave_tx_at()
-    # reports nothing playing, so the next update() counts all queued steps.
-    def wave_clear(self):
-        self.pending_pulses = []
-
-    def wave_add_generic(self, pulses):
-        self.pending_pulses = getattr(self, "pending_pulses", []) + list(pulses)
-
-    def wave_create(self):
-        self.waves = getattr(self, "waves", {})
-        self.next_wave_id = getattr(self, "next_wave_id", 0)
-        wave_id = self.next_wave_id
-        self.waves[wave_id] = self.pending_pulses
-        self.pending_pulses = []
-        self.next_wave_id += 1
-        return wave_id
-
-    def wave_send_using_mode(self, wave_id, mode):
-        self.sent_waves = getattr(self, "sent_waves", []) + [wave_id]
-
-    def wave_tx_at(self):
-        return PI_NO_TX_WAVE
-
-    def wave_delete(self, wave_id):
-        getattr(self, "waves", {}).pop(wave_id, None)
 
 
 class FakeI2C:
@@ -686,7 +659,6 @@ def install_fake_main_modules(monkeypatch) -> dict:
     actuation_mod = _fake_module(
         "actuation",
         init_motor=lambda: ErrorCode.NORMAL_OPERATION,
-        init_steppers=lambda pi: ErrorCode.NORMAL_OPERATION,
         get_motor_controller=lambda: None,
         init_zeroing=lambda: ErrorCode.NORMAL_OPERATION,
         zeroing=lambda: ErrorCode.NORMAL_OPERATION,
@@ -694,7 +666,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
         compressions=lambda: ErrorCode.NORMAL_OPERATION,
         pause_compressions=lambda: ErrorCode.NORMAL_OPERATION,
         abort_compressions=lambda: ErrorCode.NORMAL_OPERATION,
-        retract_carriage=lambda: (ErrorCode.NORMAL_OPERATION, False),
+        retract_plunger=lambda: (ErrorCode.NORMAL_OPERATION, False),
     )
     monkeypatch.setitem(sys.modules, "actuation", actuation_mod)
 

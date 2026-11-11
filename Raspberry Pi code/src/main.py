@@ -10,7 +10,6 @@ from pathlib import Path
 # Internal imports
 import sensing
 import actuation
-import stepper
 import HMI
 from Enums.error_codes import ErrorCode
 from Enums.states import CPRState
@@ -117,8 +116,6 @@ def main():
                     error = HMI.init_Pi()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = actuation.init_motor()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = actuation.init_steppers(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.init_HMI(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
@@ -335,10 +332,7 @@ def main():
                     logging.error(f"Abort state tripped: {error}")
 
                 # Loop
-                # The steppers only move while being updated, so keep retracting the carriage every tick
-                # No continue on failure: the error is still routed back to ABORT next tick, but prev_state is
-                # recorded first so ABORT's setup doesn't re-run, and the tick still sleeps
-                error, _ = actuation.retract_carriage()
+                # The moteus keeps retracting the plunger to the target set above, nothing to update
                 # Halt — only a power cycle exits this state
 
             case(_):

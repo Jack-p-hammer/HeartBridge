@@ -10,6 +10,7 @@ catch up) entirely. Exactly one test (test_init_sensors_integrates_with_real_
 motor_controller) exercises the real actuation.init_motor() -> MoteusThread
 path end to end, to prove the wiring genuinely works.
 """
+import types
 from typing import TYPE_CHECKING, cast
 
 import pytest
@@ -35,6 +36,14 @@ class _FakeMotorController:
         self.voltage = voltage
         self.raise_on_battery = raise_on_battery
         self.raise_on_position = raise_on_position
+        # Latest motor sample for zeroing's current spike check, see get_state()
+        self.q_current = 0.0
+        self.timestamp = 0.0
+        self.stale = False
+
+    def get_state(self):
+        """Only the MotorState fields sensing.py reads"""
+        return types.SimpleNamespace(q_current=self.q_current, timestamp=self.timestamp, stale=self.stale)
 
     def get_rotary_position(self):
         if self.raise_on_position is not None:
@@ -203,14 +212,93 @@ def test_read_sensors_normal_operation_within_limits(hardware):
     assert sensing.read_sensors(ControlMode.COMPRESSIONS) == ErrorCode.NORMAL_OPERATION
 
 
-def test_read_sensors_detects_zeroing_finished(hardware):
-    """Force past the zeroing threshold (but under the zeroing sensor limit) should
-    report ZEROING_FINISHED during a zeroing read."""
-    hardware.i2c.adc_bytes = _raw_adc_bytes_for_force(40.0)  # > 35N threshold, < 52.5N limit
+def _start_zeroing(hardware) -> tuple:
+    """Init sensing on a _FakeMotorController and start a zeroing run. Returns (sensing, controller)"""
     import sensing
-    init_sensing(sensing, _fake_controller(), hardware)
+    controller = _FakeMotorController()
+    init_sensing(sensing, cast("MoteusThread", controller), hardware)
+    sensing.init_zeroing()
+    return sensing, controller
 
-    assert sensing.read_sensors(ControlMode.ZEROING) == ErrorCode.ZEROING_FINISHED
+
+def _zeroing_read(sensing, controller, time_s: float, q_current: float) -> ErrorCode:
+    """Feed one motor sample, time_s after zeroing started, through a zeroing sensor read"""
+    controller.timestamp = sensing.zeroing_start_time + time_s
+    controller.q_current = q_current
+    return sensing.read_sensors(ControlMode.ZEROING)
+
+
+def _feed_baseline(sensing, controller, baseline_a: float) -> None:
+    """Samples through the settle and baseline windows at a steady free-running current"""
+    start_s = sensing.ZEROING_SETTLE_TIME_S
+    for i in range(5):
+        time_s = start_s + sensing.ZEROING_BASELINE_TIME_S * i / 5
+        assert _zeroing_read(sensing, controller, time_s, baseline_a) == ErrorCode.NORMAL_OPERATION
+
+
+def test_read_sensors_detects_zeroing_current_spike(hardware):
+    """A q current spike above the free-running baseline for ZEROING_SPIKE_CONSECUTIVE_SAMPLES samples in a row
+    finishes zeroing, on the last of those samples. The current's sign doesn't matter."""
+    sensing, controller = _start_zeroing(hardware)
+    _feed_baseline(sensing, controller, -2.0)
+    after_baseline_s = sensing.ZEROING_SETTLE_TIME_S + sensing.ZEROING_BASELINE_TIME_S
+    spike_a = -(2.0 + sensing.ZEROING_SPIKE_THRESHOLD_A + 0.5)
+
+    for i in range(sensing.ZEROING_SPIKE_CONSECUTIVE_SAMPLES - 1):
+        assert _zeroing_read(sensing, controller, after_baseline_s + 0.05 * i, spike_a) == ErrorCode.NORMAL_OPERATION
+    assert _zeroing_read(sensing, controller, after_baseline_s + 1.0, spike_a) == ErrorCode.ZEROING_FINISHED
+    assert sensing.zeroing_contact_found
+
+
+def test_read_sensors_ignores_short_current_spike(hardware):
+    """A spike shorter than ZEROING_SPIKE_CONSECUTIVE_SAMPLES resets once the current drops, rejecting noise."""
+    sensing, controller = _start_zeroing(hardware)
+    _feed_baseline(sensing, controller, 2.0)
+    time_s = sensing.ZEROING_SETTLE_TIME_S + sensing.ZEROING_BASELINE_TIME_S
+    spike_a = 2.0 + sensing.ZEROING_SPIKE_THRESHOLD_A + 0.5
+
+    for q_current in [spike_a] * (sensing.ZEROING_SPIKE_CONSECUTIVE_SAMPLES - 1) + [2.0] + [spike_a]:
+        time_s += 0.05
+        assert _zeroing_read(sensing, controller, time_s, q_current) == ErrorCode.NORMAL_OPERATION
+    assert not sensing.zeroing_contact_found
+
+
+def test_read_sensors_ignores_current_during_settle_time(hardware):
+    """The acceleration transient right after zeroing starts isn't counted as contact or into the baseline."""
+    sensing, controller = _start_zeroing(hardware)
+
+    for i in range(sensing.ZEROING_SPIKE_CONSECUTIVE_SAMPLES + 2):
+        time_s = sensing.ZEROING_SETTLE_TIME_S * i / (sensing.ZEROING_SPIKE_CONSECUTIVE_SAMPLES + 3)
+        assert _zeroing_read(sensing, controller, time_s, 50.0) == ErrorCode.NORMAL_OPERATION
+    assert sensing.zeroing_baseline_count == 0
+
+
+def test_read_sensors_counts_each_motor_sample_once(hardware):
+    """Reads between moteus replies see the same sample again, which is not counted twice."""
+    sensing, controller = _start_zeroing(hardware)
+    _feed_baseline(sensing, controller, 2.0)
+    time_s = sensing.ZEROING_SETTLE_TIME_S + sensing.ZEROING_BASELINE_TIME_S + 0.05
+
+    for _ in range(sensing.ZEROING_SPIKE_CONSECUTIVE_SAMPLES + 2):
+        assert _zeroing_read(sensing, controller, time_s, 10.0) == ErrorCode.NORMAL_OPERATION
+    assert sensing.zeroing_spike_count == 1
+
+
+def test_read_sensors_reports_missing_current_baseline(hardware, caplog):
+    """No samples landing in the baseline window (e.g. replies stalled) is a zeroing failure, not a divide by zero."""
+    sensing, controller = _start_zeroing(hardware)
+    after_baseline_s = sensing.ZEROING_SETTLE_TIME_S + sensing.ZEROING_BASELINE_TIME_S
+
+    assert _zeroing_read(sensing, controller, after_baseline_s + 0.1, 2.0) == ErrorCode.ERROR_ZEROING_FAILURE
+    assert "No samples collected for the zeroing current baseline" in caplog.text
+
+
+def test_read_sensors_zeroing_ignores_force_for_contact(hardware):
+    """Force alone (under the zeroing force limit) no longer finishes zeroing, only the current spike does."""
+    hardware.i2c.adc_bytes = _raw_adc_bytes_for_force(40.0)
+    sensing, controller = _start_zeroing(hardware)
+
+    assert _zeroing_read(sensing, controller, 0.1, 0.0) == ErrorCode.NORMAL_OPERATION
 
 
 def test_read_sensors_accel_within_tolerance_is_normal_operation(hardware):
@@ -295,10 +383,11 @@ def test_read_sensors_detects_imu_disconnect_mid_operation(hardware):
 # -------------------- zero_position --------------------
 
 def test_zero_position_captures_current_position_once_zeroing_finishes(hardware):
-    hardware.i2c.adc_bytes = _raw_adc_bytes_for_force(40.0)  # past the zeroing threshold
     import sensing
     init_sensing(sensing, _fake_controller(position=1.0), hardware)
-    hardware.tof.range = 10  # 1.0 rotation is 10mm of ball screw travel
+    hardware.tof.range = 10
+    sensing.init_zeroing()
+    sensing.zeroing_contact_found = True  # the current spike was found
 
     assert sensing.zero_position() == ErrorCode.NORMAL_OPERATION
     assert sensing.rotary_zero_position == pytest.approx(1.0)
@@ -307,9 +396,11 @@ def test_zero_position_captures_current_position_once_zeroing_finishes(hardware)
 
 
 def test_zero_position_fails_when_zeroing_not_finished(hardware):
-    """With force still under the zeroing threshold, zeroing hasn't finished yet."""
+    """With no current spike found yet, zeroing hasn't finished, even with force on the plunger."""
+    hardware.i2c.adc_bytes = _raw_adc_bytes_for_force(40.0)
     import sensing
     init_sensing(sensing, _fake_controller(), hardware)
+    sensing.init_zeroing()
 
     assert sensing.zero_position() == ErrorCode.ERROR_SENSOR_FAILURE
 
@@ -356,43 +447,3 @@ def test_battery_check_reports_motor_failure_when_read_fails(hardware):
     init_sensing(sensing, _fake_controller(raise_on_battery=RuntimeError("comm lost")), hardware)
 
     assert sensing.battery_check() == ErrorCode.ERROR_MOTOR_FAILURE
-
-
-# -------------------- check_lead_screw_position --------------------
-
-def test_check_lead_screw_position_within_tolerance(hardware):
-    import sensing
-
-    assert sensing.check_lead_screw_position(0.010, 0.010, (0.0105, 0.0102)) == ErrorCode.NORMAL_OPERATION
-
-
-def test_check_lead_screw_position_accepts_anywhere_between_position_and_setpoint(hardware):
-    """While steps are playing out, the encoders can be anywhere between the position and setpoint, in either direction."""
-    import sensing
-
-    assert sensing.check_lead_screw_position(0.010, 0.020, (0.015, 0.015)) == ErrorCode.NORMAL_OPERATION
-    assert sensing.check_lead_screw_position(0.020, 0.010, (0.015, 0.015)) == ErrorCode.NORMAL_OPERATION
-
-
-def test_check_lead_screw_position_detects_missed_steps(hardware):
-    """Both encoders lagging the position (stall/missed steps) is a failure, at rest or moving."""
-    import sensing
-
-    assert sensing.check_lead_screw_position(0.010, 0.010, (0.0, 0.0)) == ErrorCode.ERROR_MOTOR_FAILURE
-    assert sensing.check_lead_screw_position(0.010, 0.050, (0.005, 0.005)) == ErrorCode.ERROR_MOTOR_FAILURE
-
-
-def test_check_lead_screw_position_detects_screws_out_of_sync(hardware):
-    """Each screw within tolerance of the command, but too far from each other (racking), is a failure."""
-    import sensing
-    offset = sensing.STEPPER_POSITION_TOLERANCE_M * 0.9
-
-    assert sensing.check_lead_screw_position(0.010, 0.010, (0.010 - offset, 0.010 + offset)) == ErrorCode.ERROR_MOTOR_FAILURE
-
-
-def test_check_lead_screw_position_reports_unusable_readings(hardware, caplog):
-    """No encoder readings at all is a sensor failure, not an exception."""
-    import sensing
-
-    assert sensing.check_lead_screw_position(0.010, 0.010, ()) == ErrorCode.ERROR_SENSOR_FAILURE
-    assert "Lead screw encoder spread could not be computed" in caplog.text

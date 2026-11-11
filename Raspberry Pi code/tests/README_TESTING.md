@@ -63,46 +63,46 @@ Format: `case -> result`.
   healthy hardware -> NORMAL_OPERATION, absolute-zero positions captured.
 - read_force_sensor()/read_ToF_sensor()/read_IMU(): raw ADC bytes/ToF
   range/IMU accel -> matching converted value.
-- read_sensors(): within limits -> NORMAL_OPERATION. force past zeroing
-  threshold -> ZEROING_FINISHED. IMU beyond tolerance, rotary/ToF
-  disagreement, or invalid mode -> ERROR_SENSOR_FAILURE. I2C/rotary/ToF/IMU
-  raises mid-operation -> ERROR_SENSOR_FAILURE.
-- zero_position(): zeroing finished -> position captured, NORMAL_OPERATION.
-  zeroing in progress -> ERROR_SENSOR_FAILURE.
+- read_sensors(): within limits -> NORMAL_OPERATION. IMU beyond tolerance,
+  rotary/ToF disagreement, or invalid mode -> ERROR_SENSOR_FAILURE.
+  I2C/rotary/ToF/IMU raises mid-operation -> ERROR_SENSOR_FAILURE.
+- read_sensors() zeroing current spike: |q_current| past the baseline by
+  ZEROING_SPIKE_THRESHOLD_A for ZEROING_SPIKE_CONSECUTIVE_SAMPLES samples in a
+  row -> ZEROING_FINISHED on the last one, either current sign. shorter spike
+  -> count resets, NORMAL_OPERATION. samples in the settle time -> ignored,
+  not in the baseline. same motor sample read again -> counted once. no
+  baseline samples -> ERROR_ZEROING_FAILURE. force alone -> not contact.
+- zero_position(): current spike found -> position captured,
+  NORMAL_OPERATION. no spike yet (even with force on the plunger) ->
+  ERROR_SENSOR_FAILURE.
 - zero_rotary_encoder()/zero_ToF_sensor(): read raises ->
   ERROR_SENSOR_FAILURE, never raises.
 - battery_check(): healthy/low/unreadable voltage -> NORMAL_OPERATION /
   ERROR_LOW_BATTERY / ERROR_MOTOR_FAILURE.
-- check_lead_screw_position(): encoders within tolerance of the command, or
-  anywhere between the position and setpoint -> NORMAL_OPERATION. encoders
-  lagging the position (missed steps) or screws too far apart from each other
-  (racking) -> ERROR_MOTOR_FAILURE. no encoder readings -> ERROR_SENSOR_FAILURE.
 
 ### Actuation tests
 - init_motor()/get_motor_controller(): healthy moteus construction ->
   NORMAL_OPERATION, same instance on later calls. failing construction ->
   ERROR_INIT_FAILURE. command loop with no controller -> ERROR_INIT_FAILURE,
   returns without raising.
-- init_steppers(): any one pigpio setup call (pin mode, STEP/DIR/EN write,
-  waveform clear) raises -> ERROR_INIT_FAILURE.
 - init_zeroing()/init_compressions(): records start time.
-- zeroing(): timeout / motor error / max extension -> matching error.
-  pigpio failure while lowering the carriage -> ERROR_MOTOR_FAILURE, steppers
-  halted. healthy sensors -> NORMAL_OPERATION.
-- stepper.update(): pigpio rejects a waveform, or any one pigpio call (read
-  playing wave, delete wave, DIR write, add pulses, create wave, send wave)
-  raises -> ERROR_MOTOR_FAILURE.
+- zeroing(): timeout / motor error / moteus fault / plunger at the end of
+  the ball screw -> matching error. healthy sensors -> NORMAL_OPERATION,
+  plunger commanded down at ZEROING_VELOCITY_MPS (velocity control, sign set
+  by the gear train) with the reduced ZEROING_TORQUE_LIMIT_NM. current spike
+  -> ZEROING_FINISHED, plunger stopped, zero_position() succeeds.
 - computeCompressionSetpoint(): time in 0.56s cycle -> flat, ramp, plateau,
   ramp, repeat. exact segment-boundary instants -> correct value, not off by
   one segment.
 - compressions()/pause_compressions(): healthy / sensor failure / motor
   failure -> NORMAL_OPERATION / ERROR_SENSOR_FAILURE / ERROR_MOTOR_FAILURE.
   IMU kneel failure -> passed through unchanged, not ERROR_SENSOR_FAILURE.
-  pigpio failure in the stepper update -> ERROR_MOTOR_FAILURE.
 - abort_compressions(): no sensing init needed -> NORMAL_OPERATION.
-- stepper.set_target(): out of travel, NaN, non-positive velocity, or wrong
-  type -> ERROR_MOTOR_FAILURE, previous setpoint kept, never raises.
-- retract_carriage(): pigpio failure -> ERROR_MOTOR_FAILURE, never raises.
+- retract_plunger(): plunger below the startup position -> commanded back to
+  it, not home yet. at the startup position -> home. motor communication
+  failure -> ERROR_MOTOR_FAILURE, never raises.
+- motor direction: BLDC gear ratio is -1 (reversing gear train), and zeroing
+  velocity, compression and retract targets all follow its sign.
 
 ### Main-state tests
 - ERROR_STATE_MAP: each recoverable error -> ABORT, except IMU kneel ->
@@ -130,5 +130,4 @@ Format: `case -> result`.
 - pump_events() called once per main loop tick, in every state. a
   WARNING_PYGAME_PUMP_FAILURE from it doesn't disrupt state routing.
 - ABORT is terminal: once entered, stays entered exactly once even as the
-  loop keeps ticking. retract_carriage() failing in ABORT's loop -> setup
-  still runs only once, retract keeps being retried every tick.
+  loop keeps ticking.

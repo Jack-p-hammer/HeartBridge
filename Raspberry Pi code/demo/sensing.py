@@ -7,7 +7,7 @@ Same public functions as src/sensing.py, but none of the sensor suite is used: n
 I2C bus, or sensor validation. Readings that come from the moteus itself (rotary position, battery voltage) are kept,
 since actuation.py needs the rotary zero positions to command the BLDC.
 
-Zeroing finishes when the carriage reaches DEMO_ZERO_POSITION_M instead of when the force sensor detects the chest.
+Zeroing finishes when the plunger reaches DEMO_ZERO_POSITION_M down the ball screw instead of when src/sensing.py detects the chest from a motor current spike.
 
 BEFORE AND DURING ZEROING, THE zero_position VARIABLES MUST EQUAL THE absolute_zero_position VARIABLES
 """
@@ -17,16 +17,15 @@ import logging
 
 # Internal imports (from src/)
 from Enums.error_codes import ErrorCode
-from moteus_thread import MoteusThread
+from moteus_thread import MoteusThread, BLDC_ROTATIONS_PER_M
 from Enums.control_modes import ControlMode
-import stepper
 
 # Global variables for shared instances
 _pi: pigpio.pi
 _motor_controller: MoteusThread
 
-# Carriage position that counts as reaching the chest, in meters from home. Must be below stepper.LEAD_SCREW_TRAVEL_M
-# The carriage stops up to CHUNK_DURATION_S * CHUNK_QUEUE_DEPTH of zeroing travel past this (see stepper.halt())
+# Plunger travel that counts as reaching the chest, in meters down from the startup position (top of the ball screw).
+# Must be below actuation.EXTENSION_STROKE_LIMIT_M. The plunger stops a little past this, since zeroing only checks once per main loop tick
 DEMO_ZERO_POSITION_M: float = 0.05  # TODO: Placeholder
 
 # Battery voltage threshold for low battery detection. TODO: Calibrate this value based on actual battery performance.
@@ -63,7 +62,7 @@ def init_sensors(motor_controller: MoteusThread, pi: pigpio.pi) -> ErrorCode:
 
 
 def read_sensors(control_mode: ControlMode) -> ErrorCode:
-    """No sensors are read. While zeroing, reports ZEROING_FINISHED once the carriage reaches DEMO_ZERO_POSITION_M
+    """No sensors are read. While zeroing, reports ZEROING_FINISHED once the plunger reaches DEMO_ZERO_POSITION_M
 
     Returns:
         ErrorCode: ZEROING_FINISHED as above, NORMAL_OPERATION otherwise, ERROR_SENSOR_FAILURE on an invalid control mode
@@ -75,13 +74,26 @@ def read_sensors(control_mode: ControlMode) -> ErrorCode:
             logging.error(f"Invalid control mode for sensor reading: {control_mode}")
             return ErrorCode.ERROR_SENSOR_FAILURE
 
-    carriage_position_m: float = stepper.get_position()
+    try:
+        plunger_position_m: float = (read_rotary_encoder() - rotary_absolute_zero_position) / BLDC_ROTATIONS_PER_M
+    except Exception as e:
+        logging.error(f"Rotary encoder read failed: {e}")
+        return ErrorCode.ERROR_SENSOR_FAILURE
+
     if (control_mode == ControlMode.ZEROING and
-        carriage_position_m >= DEMO_ZERO_POSITION_M
+        plunger_position_m >= DEMO_ZERO_POSITION_M
     ):
-        logging.info(f"Zeroing complete: Carriage {carriage_position_m} m reached demo zero position {DEMO_ZERO_POSITION_M} m")
+        logging.info(f"Zeroing complete: Plunger {plunger_position_m} m reached demo zero position {DEMO_ZERO_POSITION_M} m")
         return ErrorCode.ZEROING_FINISHED
 
+    return ErrorCode.NORMAL_OPERATION
+
+def init_zeroing() -> ErrorCode:
+    """No current spike detection to reset in the demo, zeroing stops at DEMO_ZERO_POSITION_M instead.
+
+    Returns:
+        ErrorCode: Always NORMAL_OPERATION
+    """
     return ErrorCode.NORMAL_OPERATION
 
 def zero_position() -> ErrorCode:
@@ -143,14 +155,6 @@ def battery_check() -> ErrorCode:
         return ErrorCode.ERROR_LOW_BATTERY
     return ErrorCode.NORMAL_OPERATION
 
-
-def check_lead_screw_position(position_m: float, setpoint_m: float, encoder_positions_m: tuple[float, ...]) -> ErrorCode:
-    """No lead screw encoders are checked in the demo.
-
-    Returns:
-        ErrorCode: Always NORMAL_OPERATION
-    """
-    return ErrorCode.NORMAL_OPERATION
 
 # -------- PRIVATE FUNCTIONS --------
 

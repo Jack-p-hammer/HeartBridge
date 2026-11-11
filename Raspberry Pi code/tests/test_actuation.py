@@ -58,36 +58,6 @@ def test_command_loop_without_controller_reports_init_failure(hardware, caplog):
     assert "Moteus controller not initialized" in caplog.text
 
 
-def _daemon_gone(*args, **kwargs):
-    """Stand-in for a pigpio call that raises, e.g. the daemon or its socket going away."""
-    raise RuntimeError("daemon gone")
-
-
-@pytest.mark.parametrize("pigpio_method, pin_name", [
-    ("set_mode", None),
-    ("write", "STEPPER_STEP_PIN"),
-    ("write", "STEPPER_DIR_PIN"),
-    ("write", "STEPPER_ENABLE_PIN"),
-    ("wave_clear", None),
-])
-def test_init_steppers_reports_pigpio_failure(hardware, monkeypatch, caplog, pigpio_method, pin_name):
-    """Each pigpio call while setting up the steppers that raises is an init failure, not an exception.
-    pin_name picks out which of the write() calls fails."""
-    import actuation
-    import stepper
-
-    if pin_name is None:
-        monkeypatch.setattr(hardware.pi, pigpio_method, _daemon_gone)
-    else:
-        failing_pin = getattr(stepper, pin_name)
-        real_write = hardware.pi.write
-        monkeypatch.setattr(hardware.pi, "write",
-                            lambda pin, value: _daemon_gone() if pin == failing_pin else real_write(pin, value))
-
-    assert actuation.init_steppers(hardware.pi) == ErrorCode.ERROR_INIT_FAILURE
-    assert "Stepper GPIO initialization failed" in caplog.text
-
-
 def test_get_motor_controller_returns_same_instance_after_init(hardware):
     import actuation
     actuation.init_motor()
@@ -144,181 +114,60 @@ def test_zeroing_fails_on_motor_error(hardware):
 
 
 def test_zeroing_fails_on_max_extension(hardware):
+    """The plunger reaching the end of the ball screw without finding the chest is a zeroing failure."""
     import time
     import actuation
-    import stepper
+    import sensing
+    from moteus_thread import BLDC_ROTATIONS_PER_M
     actuation.init_motor()
-    actuation.init_steppers(hardware.pi)
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)  # startup position 0.0 rev
     actuation.init_zeroing()
 
-    # Carriage reached the end of the lead screws without finding the chest
-    stepper.position_steps = round(actuation.EXTENSION_STROKE_LIMIT_M * stepper.STEPS_PER_M)
-    time.sleep(0.05)
+    hardware.moteus_controller.position = actuation.EXTENSION_STROKE_LIMIT_M * BLDC_ROTATIONS_PER_M
+    time.sleep(0.05)  # let the background command loop pick up the new position
 
     assert actuation.zeroing() == ErrorCode.ERROR_ZEROING_FAILURE
 
 
-def test_zeroing_lowers_carriage_with_steppers(hardware):
-    import time
-    import actuation
-    actuation.init_motor()
-    actuation.init_steppers(hardware.pi)
-    actuation.init_zeroing()
-    time.sleep(0.05)
-
-    for _ in range(5):
-        actuation.zeroing()
-
-    assert actuation.stepper.get_position() > 0.0
-
-
-@pytest.mark.parametrize("position_m, velocity_mps, log_text", [
-    (-0.01, 0.04, "Invalid stepper target"),                        # above home
-    (1e6, 0.04, "Invalid stepper target"),                          # past the end of the lead screws
-    (float("nan"), 0.04, "Invalid stepper target"),
-    (0.05, 0.0, "Invalid stepper target"),
-    (0.05, float("nan"), "Invalid stepper target"),
-    ("0.05", 0.04, "Stepper target could not be checked"),          # wrong type raises in the range check
-])
-def test_stepper_set_target_rejects_invalid_targets(hardware, caplog, position_m, velocity_mps, log_text):
-    """Invalid stepper targets report a motor failure instead of raising or being accepted."""
-    import stepper
-    stepper.init_steppers(hardware.pi)
-
-    assert stepper.set_target(position_m, velocity_mps) == ErrorCode.ERROR_MOTOR_FAILURE
-    assert log_text in caplog.text
-    assert stepper.get_setpoint() == 0.0  # previous setpoint kept
-
-
-def test_zeroing_reports_stepper_failure_and_halts(hardware, caplog):
-    """A pigpio failure while lowering the carriage is a motor failure, and the steppers stop."""
-    import time
-    import actuation
-    import stepper
-    actuation.init_motor()
-    actuation.init_steppers(hardware.pi)
-    actuation.init_zeroing()
-    time.sleep(0.05)
-    hardware.pi.raise_on_write = RuntimeError("daemon gone")
-
-    assert actuation.zeroing() == ErrorCode.ERROR_MOTOR_FAILURE
-    assert stepper.get_setpoint() == stepper.get_position()
-    assert "Failed to build stepper waveform" in caplog.text
-
-
-def test_stepper_update_reports_rejected_waveform(hardware, monkeypatch, caplog):
-    """pigpio rejecting a waveform (negative wave_create status) is a motor failure, not an exception."""
-    import stepper
-    stepper.init_steppers(hardware.pi)
-    stepper.set_target(0.05, stepper.ZEROING_VELOCITY_MPS)
-    monkeypatch.setattr(hardware.pi, "wave_create", lambda: -1)
-
-    assert stepper.update() == ErrorCode.ERROR_MOTOR_FAILURE
-    assert "wave_create failed" in caplog.text
-
-
-@pytest.mark.parametrize("pigpio_method, log_text", [
-    ("wave_tx_at", "Failed to read the playing stepper waveform"),
-    ("wave_delete", "Failed to delete stepper waveform"),
-    ("write", "Failed to build stepper waveform"),
-    ("wave_add_generic", "Failed to build stepper waveform"),
-    ("wave_create", "Failed to build stepper waveform"),
-    ("wave_send_using_mode", "Failed to send stepper waveform"),
-])
-def test_stepper_update_reports_pigpio_failure(hardware, monkeypatch, caplog, pigpio_method, log_text):
-    """Each pigpio call in update() that raises is a motor failure, not an exception."""
-    import stepper
-    stepper.init_steppers(hardware.pi)
-    stepper.chunk_queue = [(0, 1)]  # a finished chunk to retire (fake daemon reports nothing playing)
-    stepper.set_target(0.05, stepper.ZEROING_VELOCITY_MPS)  # and more steps to queue
-    monkeypatch.setattr(hardware.pi, pigpio_method, _daemon_gone)
-
-    assert stepper.update() == ErrorCode.ERROR_MOTOR_FAILURE
-    assert log_text in caplog.text
-
-
-@pytest.mark.parametrize("actuation_fn_name", ["compressions", "pause_compressions"])
-def test_compressions_and_pause_report_stepper_failure(hardware, monkeypatch, actuation_fn_name, caplog):
-    """A pigpio failure while the steppers finish their last queued chunk is a motor failure in compressions/pause."""
+def test_zeroing_drives_plunger_down_at_zeroing_velocity(hardware):
+    """Zeroing commands a constant velocity down the ball screw (pure velocity control, no position target)."""
+    import math
     import time
     import actuation
     import sensing
-    import stepper
+    from moteus_thread import (ZEROING_VELOCITY_MPS, BLDC_ROTATIONS_PER_M, BLDC_GEAR_RATIO, ZEROING_TORQUE_LIMIT_NM,
+                               TORQUE_LIMIT_NM)
     actuation.init_motor()
-    actuation.init_steppers(hardware.pi)
     init_sensing(sensing, actuation.get_motor_controller(), hardware)
-    stepper.chunk_queue = [(0, 1)]  # a chunk still playing out from zeroing
+    actuation.init_zeroing()
+    time.sleep(0.05)
 
-    def daemon_gone():
-        raise RuntimeError("daemon gone")
+    assert actuation.zeroing() == ErrorCode.NORMAL_OPERATION
 
-    monkeypatch.setattr(hardware.pi, "wave_tx_at", daemon_gone)
-    time.sleep(0.05)  # let the background command loop report a healthy motor first
+    target = actuation.get_motor_controller()._target
+    assert math.isnan(target.position)
+    assert target.velocity == pytest.approx(ZEROING_VELOCITY_MPS * BLDC_ROTATIONS_PER_M)
+    assert math.copysign(1.0, target.velocity) == math.copysign(1.0, BLDC_GEAR_RATIO)  # down, through the gear train
+    # Reduced torque cap, so the q current spike stays below where the current saturates
+    assert target.maximum_torque == pytest.approx(ZEROING_TORQUE_LIMIT_NM)
+    assert 0 < ZEROING_TORQUE_LIMIT_NM < TORQUE_LIMIT_NM
 
-    assert getattr(actuation, actuation_fn_name)() == ErrorCode.ERROR_MOTOR_FAILURE
-    assert "Failed to read the playing stepper waveform" in caplog.text
 
-
-def test_retract_carriage_reports_pigpio_failure(hardware):
-    """A pigpio failure while retracting surfaces as a motor failure rather than raising."""
+def test_zeroing_fails_on_moteus_fault(hardware, caplog):
+    """A latched controller fault stops zeroing with a motor failure, since the current no longer means anything."""
+    import time
     import actuation
-    import stepper
-    actuation.init_steppers(hardware.pi)
-    stepper.position_steps = round(0.05 * stepper.STEPS_PER_M)  # carriage lowered, so retracting needs new steps
-    stepper.extended_steps = stepper.position_steps  # as if those steps were commanded down
-    hardware.pi.raise_on_write = RuntimeError("daemon gone")
+    import sensing
+    from moteus_thread import MOTEUS_FAULT_MODE
+    actuation.init_motor()
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    actuation.init_zeroing()
+    hardware.moteus_controller.mode = MOTEUS_FAULT_MODE
+    hardware.moteus_controller.fault = 39
+    time.sleep(0.05)
 
-    assert actuation.retract_carriage() == (ErrorCode.ERROR_MOTOR_FAILURE, False)
-
-
-def _run_steppers_to(stepper, position_m: float, velocity_mps: float) -> None:
-    """Drive the steppers to a position on the fake pigpio, whose waves finish instantly"""
-    assert stepper.set_target(position_m, velocity_mps) == ErrorCode.NORMAL_OPERATION
-    for _ in range(10_000):
-        assert stepper.update() == ErrorCode.NORMAL_OPERATION
-        if stepper.at_target():
-            return
-    raise AssertionError("Steppers never reached the target")
-
-
-def test_stepper_counts_only_extending_steps(hardware):
-    """Every step commanded down adds to the extending count, and steps commanded up don't reduce it."""
-    import stepper
-    stepper.init_steppers(hardware.pi)
-
-    _run_steppers_to(stepper, 0.05, stepper.ZEROING_VELOCITY_MPS)
-    assert stepper.extended_steps == round(0.05 * stepper.STEPS_PER_M)
-
-    _run_steppers_to(stepper, 0.03, stepper.RETRACT_VELOCITY_MPS)
-    assert stepper.extended_steps == round(0.05 * stepper.STEPS_PER_M)
-    assert stepper.get_extended_distance() == pytest.approx(0.05)
-
-    stepper.reset_extended_steps()
-    assert stepper.extended_steps == 0
-
-
-def test_retract_carriage_retracts_exactly_the_extended_steps(hardware):
-    """retract_carriage() moves the carriage up by exactly the commanded extending steps, reports home once there,
-    and resets the count so a second extend and retract cycle only undoes the second extension."""
-    import actuation
-    import stepper
-    actuation.init_steppers(hardware.pi)
-
-    for depth_m in (0.05, 0.02):
-        _run_steppers_to(stepper, depth_m, stepper.ZEROING_VELOCITY_MPS)
-        assert stepper.extended_steps == round(depth_m * stepper.STEPS_PER_M)
-
-        for _ in range(10_000):
-            error, home = actuation.retract_carriage()
-            assert error == ErrorCode.NORMAL_OPERATION
-            if home:
-                break
-        else:
-            raise AssertionError("Carriage never reported home")
-
-        assert stepper.position_steps == 0
-        assert stepper.extended_steps == 0
-        assert actuation.retract_target_m is None
+    assert actuation.zeroing() == ErrorCode.ERROR_MOTOR_FAILURE
+    assert "moteus fault 39" in caplog.text
 
 
 def test_zeroing_succeeds_when_sensors_healthy(hardware):
@@ -326,7 +175,6 @@ def test_zeroing_succeeds_when_sensors_healthy(hardware):
     import actuation
     import sensing
     actuation.init_motor()
-    actuation.init_steppers(hardware.pi)
     init_sensing(sensing, actuation.get_motor_controller(), hardware)
     actuation.init_zeroing()
 
@@ -337,21 +185,74 @@ def test_zeroing_succeeds_when_sensors_healthy(hardware):
     assert actuation.zeroing() == ErrorCode.NORMAL_OPERATION
 
 
-# -------------------- motor directions --------------------
+def test_zeroing_stops_plunger_when_chest_found(hardware):
+    """A q current spike finishes zeroing, stops the plunger where it is, and lets zero_position() record it."""
+    import math
+    import time
+    import actuation
+    import sensing
+    actuation.init_motor()
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    actuation.init_zeroing()
 
-def test_gear_trains_reverse_both_motors(hardware):
-    """Both 1:1 gear trains reverse rotation (matching scripts/slow_jog.py), so both gear ratios are negative and
-    the steppers drive down with DIR low. Every other direction is derived from these signs; update this test
-    only if the gear trains change."""
+    # Past the settle and baseline windows with a 0 A baseline, one spike sample short of finishing
+    sensing.zeroing_start_time -= sensing.ZEROING_SETTLE_TIME_S + sensing.ZEROING_BASELINE_TIME_S
+    sensing.zeroing_baseline_count = 1
+    sensing.zeroing_spike_count = sensing.ZEROING_SPIKE_CONSECUTIVE_SAMPLES - 1
+    hardware.moteus_controller.q_current = sensing.ZEROING_SPIKE_THRESHOLD_A + 0.5
+    time.sleep(0.05)  # let the background command loop pick up the new current
+
+    assert actuation.zeroing() == ErrorCode.ZEROING_FINISHED
+    assert sensing.zero_position() == ErrorCode.NORMAL_OPERATION
+
+    target = actuation.get_motor_controller()._target
+    assert math.isnan(target.position)
+    assert target.velocity == 0.0
+
+
+def test_retract_plunger_reports_home_once_at_startup_position(hardware):
+    """retract_plunger() commands the plunger back to the startup position, and only reports home once it is there."""
+    import time
+    import actuation
+    import sensing
+    from moteus_thread import BLDC_ROTATIONS_PER_M
+    actuation.init_motor()
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)  # startup position 0.0 rev
+
+    hardware.moteus_controller.position = 0.05 * BLDC_ROTATIONS_PER_M  # 5 cm down the ball screw
+    time.sleep(0.05)
+    assert actuation.retract_plunger() == (ErrorCode.NORMAL_OPERATION, False)
+    assert actuation.get_motor_controller()._target.position == pytest.approx(0.0)
+
+    hardware.moteus_controller.position = 0.0
+    time.sleep(0.05)
+    assert actuation.retract_plunger() == (ErrorCode.NORMAL_OPERATION, True)
+
+
+def test_retract_plunger_reports_motor_failure(hardware):
+    """A motor communication failure while retracting surfaces as a motor failure rather than raising."""
+    import time
+    import actuation
+    import sensing
+    actuation.init_motor()
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
+
+    hardware.moteus_controller.raise_on_set_position = RuntimeError("comm lost")
+    time.sleep(0.05)
+
+    assert actuation.retract_plunger() == (ErrorCode.ERROR_MOTOR_FAILURE, False)
+
+
+# -------------------- motor direction --------------------
+
+def test_gear_train_reverses_bldc(hardware):
+    """The 1:1 gear train reverses rotation (matching scripts/slow_jog.py), so the gear ratio is negative. Every other
+    direction is derived from this sign; update this test only if the gear train changes."""
     import moteus_thread
-    import stepper
 
     assert moteus_thread.BLDC_GEAR_RATIO == -1.0
     assert moteus_thread.BLDC_ROTATIONS_PER_M < 0  # down on the ball screw is negative motor rotation
     assert moteus_thread.TORQUE_LIMIT_NM > 0
-    assert stepper.STEPPER_GEAR_RATIO == -1.0
-    assert stepper.STEPPER_DIR_DOWN_LEVEL == 0
-    assert stepper.STEPS_PER_M > 0  # step counts stay positive down, DIR carries the direction
 
 
 def test_bldc_targets_follow_gear_ratio_sign(hardware):
@@ -359,14 +260,13 @@ def test_bldc_targets_follow_gear_ratio_sign(hardware):
     limits stay positive magnitudes whichever way the gear train turns."""
     import math
     from Enums.control_modes import ControlMode
-    from moteus_thread import MoteusThread, BLDC_GEAR_RATIO, BLDC_ROTATIONS_PER_M, BALL_SCREW_TOP_CLEARANCE_M
+    from moteus_thread import MoteusThread, BLDC_GEAR_RATIO, BLDC_ROTATIONS_PER_M
     thread = MoteusThread()  # never started, set_target() only stores the target
     abs_zero = 3.0
-    zero = abs_zero + BALL_SCREW_TOP_CLEARANCE_M * BLDC_ROTATIONS_PER_M  # where zeroing leaves the plunger
+    zero = abs_zero + 0.04 * BLDC_ROTATIONS_PER_M  # chest found 4 cm down the ball screw
 
     assert thread.set_target(ControlMode.ZEROING, abs_zero, abs_zero) == ErrorCode.NORMAL_OPERATION
-    assert math.copysign(1.0, thread._target.position - abs_zero) == math.copysign(1.0, BLDC_GEAR_RATIO)
-    assert thread._target.velocity_limit > 0
+    assert math.copysign(1.0, thread._target.velocity) == math.copysign(1.0, BLDC_GEAR_RATIO)
 
     assert thread.set_target(ControlMode.COMPRESSIONS, zero, abs_zero, 0.07) == ErrorCode.NORMAL_OPERATION
     assert math.copysign(1.0, thread._target.position - zero) == math.copysign(1.0, BLDC_GEAR_RATIO)
@@ -377,25 +277,6 @@ def test_bldc_targets_follow_gear_ratio_sign(hardware):
 
     # Above the top of travel (the wrong way for the gear train) is still rejected
     assert thread.set_target(ControlMode.COMPRESSIONS, abs_zero, abs_zero, -0.01) == ErrorCode.ERROR_MOTOR_FAILURE
-
-
-def test_stepper_dir_pin_follows_gear_ratio_sign(hardware):
-    """Lowering the carriage writes STEPPER_DIR_DOWN_LEVEL to the DIR pin, and raising it writes the other level."""
-    import stepper
-    stepper.init_steppers(hardware.pi)
-
-    def last_dir_write() -> int:
-        return [value for pin, value in hardware.pi.writes if pin == stepper.STEPPER_DIR_PIN][-1]
-
-    stepper.set_target(0.05, stepper.ZEROING_VELOCITY_MPS)
-    assert stepper.update() == ErrorCode.NORMAL_OPERATION
-    assert last_dir_write() == stepper.STEPPER_DIR_DOWN_LEVEL
-
-    stepper.init_steppers(hardware.pi)
-    stepper.position_steps = round(0.05 * stepper.STEPS_PER_M)  # carriage lowered, so retracting moves up
-    stepper.set_target(0.0, stepper.RETRACT_VELOCITY_MPS)
-    assert stepper.update() == ErrorCode.NORMAL_OPERATION
-    assert last_dir_write() == 1 - stepper.STEPPER_DIR_DOWN_LEVEL
 
 
 # -------------------- computeCompressionSetpoint (pure) --------------------

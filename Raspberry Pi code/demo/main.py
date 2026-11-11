@@ -4,8 +4,8 @@
 #   - demo/sensing.py is used in place of src/sensing.py
 #   - demo/Enums/states.py is used in place of src/Enums/states.py
 #   - Log files are named heartBridge_demo_<timestamp>.log
-#   - Esc or Q (or closing the window) stops the motor and steppers and exits back to the terminal from any state
-# Every other module (actuation, stepper, moteus_thread, HMI, Enums.error_codes, Enums.control_modes)
+#   - Esc or Q (or closing the window) stops the motor and exits back to the terminal from any state
+# Every other module (actuation, moteus_thread, HMI, Enums.error_codes, Enums.control_modes)
 # is imported from src/ unaltered.
 
 # External imports
@@ -30,7 +30,6 @@ import pygame
 # Internal imports
 import sensing
 import actuation
-import stepper
 import HMI
 from Enums.error_codes import ErrorCode
 from Enums.states import CPRState  # demo/Enums/states.py
@@ -115,10 +114,10 @@ def read_keys() -> tuple[ErrorCode, list[int]]:
 
 
 def shutdown_demo() -> None:
-    """Stop the motor and steppers, turn off lasers and button LEDs, close the window and exit cleanly.
+    """Stop the motor, turn off lasers and button LEDs, close the window and exit cleanly.
 
     Only called once a key press or window close has been read, which needs HMI.init_HMI() to have run.
-    INIT_STARTUP only gets there after init_motor() and init_steppers() succeed, so both are initialized here.
+    INIT_STARTUP only gets there after init_motor() succeeds, so the motor is initialized here.
     Failures are logged and the shutdown carries on, since the demo is exiting either way.
     """
     logging.info("Exit requested, shutting down demo")
@@ -127,7 +126,6 @@ def shutdown_demo() -> None:
     error = actuation.abort_compressions()
     if error != ErrorCode.NORMAL_OPERATION:
         logging.error(f"Motor abort on exit failed: {error}")
-    stepper.halt()
 
     error = HMI.disable_lasers()
     if error != ErrorCode.NORMAL_OPERATION:
@@ -198,8 +196,6 @@ def main():
                     error = HMI.init_Pi()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = actuation.init_motor()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = actuation.init_steppers(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.init_HMI(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
@@ -439,8 +435,8 @@ def main():
                     # Reset CPR timer
                     cpr_elapsed_sec = 0.0
 
-                # Return carriage position to home
-                error, retreat_success = actuation.retract_carriage()
+                # Return the plunger to the top of the ball screw
+                error, retreat_success = actuation.retract_plunger()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 
                 if retreat_success:
@@ -461,10 +457,7 @@ def main():
                     logging.error(f"Abort state tripped: {error}")
 
                 # Loop
-                # The steppers only move while being updated, so keep retracting the carriage every tick
-                # No continue on failure: the error is still routed back to ABORT next tick, but prev_state is
-                # recorded first so ABORT's setup doesn't re-run, and the tick still sleeps
-                error, _ = actuation.retract_carriage()
+                # The moteus keeps retracting the plunger to the target set above, nothing to update
                 # Halt — only a power cycle exits this state
 
             case(_):

@@ -2039,7 +2039,7 @@
 	)
 	(rectangle
 		(start 93.98 93.98)
-		(end 152.4 163.83)
+		(end 156.21 163.83)
 		(stroke
 			(width 0)
 			(type default)
@@ -3961,7 +3961,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "171a9627-ac1b-4191-bc6e-c3411424573c")
-		(property "Reference" "R57"
+		(property "Reference" "R_ZFILTER_TUNE_1"
 			(at 137.16 147.32 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4025,7 +4025,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "R57")
+					(reference "R_ZFILTER_TUNE_1")
 					(unit 1)
 				)
 			)
@@ -4414,7 +4414,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "1ee2e737-5c85-4a8d-a49e-c1240602a445")
-		(property "Reference" "R56"
+		(property "Reference" "R_BFILTER_TUNE_1"
 			(at 137.16 127 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4478,7 +4478,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "R56")
+					(reference "R_BFILTER_TUNE_1")
 					(unit 1)
 				)
 			)
@@ -9339,7 +9339,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e48de29a-95f6-4601-ba55-bd35d6ebb51d")
-		(property "Reference" "R55"
+		(property "Reference" "R_AFILTER_TUNE_1"
 			(at 137.16 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9403,7 +9403,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
-					(reference "R55")
+					(reference "R_AFILTER_TUNE_1")
 					(unit 1)
 				)
 			)

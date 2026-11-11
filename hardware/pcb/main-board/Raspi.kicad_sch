@@ -2574,14 +2574,6 @@
 		(uuid "3fc12219-bc08-4031-8e8f-93c48b4a2a5a")
 	)
 	(no_connect
-		(at 27.94 87.63)
-		(uuid "4efeffbf-9b8f-4d92-9d1f-32c4a772af2c")
-	)
-	(no_connect
-		(at 27.94 67.31)
-		(uuid "8ef13da0-9263-4b62-aa89-b958ad903f97")
-	)
-	(no_connect
 		(at 76.2 25.4)
 		(uuid "cdbcb659-326d-4cad-b159-47884af12264")
 	)
@@ -2788,6 +2780,16 @@
 			(justify left bottom)
 		)
 		(uuid "acd5d9cb-5f26-4dc8-8590-098e77a8dcb6")
+	)
+	(label "PC10"
+		(at 27.94 87.63 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b74c76f4-3b92-4a54-8f41-1ac937f30599")
 	)
 	(label "PB7"
 		(at 76.2 31.75 0)

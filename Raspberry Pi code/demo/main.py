@@ -38,6 +38,7 @@ import sensing
 import actuation
 import stepper
 import HMI
+import jog_compressions  # demo/jog_compressions.py, used in place of actuation.compressions()
 from Enums.error_codes import ErrorCode
 from Enums.states import CPRState  # demo/Enums/states.py
 
@@ -285,18 +286,19 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.init_HMI(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = sensing.init_sensors(actuation.get_motor_controller(), HMI.get_pi())
-                    if error != ErrorCode.NORMAL_OPERATION: continue
                     init_done_time = time.monotonic()
 
                 # Loop
-                # Until the moteus first replies its state is stale and the battery reads 0 V, so only check the
-                # battery once a reply has arrived. No reply within the timeout is a motor failure
+                # Until the moteus first replies its state is stale: position and battery both read 0. So the sensors
+                # (which record the startup position that pause, abort, and the travel limits are measured from) and
+                # the battery check wait for a reply. No reply within the timeout is a motor failure
                 if actuation.get_motor_controller().get_state().stale:
                     if time.monotonic() - init_done_time > MOTOR_FIRST_REPLY_TIMEOUT_SEC:
                         logging.error(f"No reply from the moteus within {MOTOR_FIRST_REPLY_TIMEOUT_SEC} s of startup")
                         error = ErrorCode.ERROR_MOTOR_FAILURE
                 else:
+                    error = sensing.init_sensors(actuation.get_motor_controller(), HMI.get_pi())
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     error = sensing.battery_check()
                     if error != ErrorCode.NORMAL_OPERATION: continue
 
@@ -432,12 +434,15 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.set_image_audio(HMI.Image.COMPRESSION, HMI.AudioPrompt.COMPRESSION)
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    # Bench test: cycle a fixed stroke down and up from wherever the plunger is now
+                    error = jog_compressions.init_jog_compressions(actuation.get_motor_controller())
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     # Start of this run of compressions; the timer is drawn on the first loop tick
                     compression_start = time.monotonic()
                     shown_sec = None
 
                 # Loop
-                error = actuation.compressions()
+                error = jog_compressions.jog_compressions(actuation.get_motor_controller())
                 if error != ErrorCode.NORMAL_OPERATION: continue
 
                 # Setup always sets this before the loop runs; this only narrows the type for the timer math below

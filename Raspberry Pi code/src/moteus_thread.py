@@ -283,6 +283,16 @@ class MoteusThread:
         
         return ErrorCode.NORMAL_OPERATION
 
+    def set_raw_target(self, target: MotorTarget) -> None:
+        """Send a target in raw motor units (rotations, rotations per second), bypassing set_target()'s ControlMode
+        conversion and ball screw travel check. The caller must keep the target inside the ball screw travel.
+        Used by demo/jog_compressions.py for its fixed-stroke bench test
+
+        Args:
+            target (MotorTarget): Every value the moteus is sent on its next command loop tick
+        """
+        self._target = target
+
     def get_state(self) -> MotorState:
         """Get motor state
 

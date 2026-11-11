@@ -176,12 +176,12 @@ def main():
                 if next_pressed:
                     error = HMI.disable_lasers()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    state = CPRState.ZEROING_PREP
+                    state = CPRState.KNEELING
 
-            case(CPRState.ZEROING_PREP):
+            case(CPRState.KNEELING):
                 # Setup
                 if state != prev_state:
-                    error = HMI.set_image_audio(HMI.Image.ZEROING_PREP, HMI.AudioPrompt.ZEROING_PREP)
+                    error = HMI.set_image_audio(HMI.Image.KNEELING, HMI.AudioPrompt.KNEELING)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
@@ -211,11 +211,13 @@ def main():
                 if error == ErrorCode.ZEROING_FINISHED:
                     error = sensing.zero_position()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    state = CPRState.COMPRESSION_PREP
+                    state = CPRState.COMPRESSION
 
             case(CPRState.COMPRESSION_PREP):
+                # !!!!!!!!!! DEPRICATED !!!!!!!!!!!!!!!!
                 # Setup
                 if state != prev_state:
+                    logging.warning("COMPRESSION_PREP state is deprecated and should not be used. why are we here?")
                     error = HMI.disable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.disable_pause_button()

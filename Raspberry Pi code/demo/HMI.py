@@ -55,6 +55,7 @@ class Image(Enum):
     COMPRESSION_PREP = IMAGES / "zeroing.jpg"
     COMPRESSION = IMAGES / "compressions.jpg"
     PAUSE = IMAGES / "paused.jpg"
+    KNEEL_FAILURE = IMAGES / "kneelFailure.jpg"
     ABORT = IMAGES / "abort.jpg"
 
 
@@ -68,7 +69,8 @@ class AudioPrompt(Enum):
     ZEROING = AUDIO / "zeroing.wav"
     COMPRESSION_PREP = AUDIO / "compressionsPrep.wav"
     COMPRESSION = AUDIO / "compressions.wav"
-    PAUSE = AUDIO / "paused.wav"  
+    PAUSE = AUDIO / "paused.wav"
+    KNEEL_FAILURE = AUDIO / "kneelFailure.wav"
     ABORT = AUDIO / "abort.wav"
 
 

@@ -373,7 +373,7 @@ def main():
             case(CPRState.KNEELING):
                 # Setup
                 if state != prev_state:
-                    error = HMI.set_image_audio(HMI.Image.KNEELING, HMI.AudioPrompt.KNEELING)
+                    error = HMI.set_image_audio(HMI.Image.ZEROING_PREP, HMI.AudioPrompt.ZEROING_PREP)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue

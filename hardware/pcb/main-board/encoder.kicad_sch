@@ -5,6 +5,129 @@
 	(uuid "52ae3f06-3584-4ea8-a1be-f5d3bd9dd94c")
 	(paper "A4")
 	(lib_symbols
+		(symbol "Connector:TestPoint"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.762)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Generic:Conn_01x05"
 			(pin_names
 				(offset 1.016)
@@ -2097,7 +2220,7 @@
 	)
 	(text "Encoder + cable + board connector"
 		(exclude_from_sim no)
-		(at 14.986 99.06 0)
+		(at 14.224 96.52 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2130,7 +2253,7 @@
 	)
 	(text "Encoder + cable + board connector"
 		(exclude_from_sim no)
-		(at 14.986 24.13 0)
+		(at 14.732 21.844 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2152,7 +2275,7 @@
 	)
 	(text "AMT103 on the motor -> CUI-435-1FT cable \n(bare wires) -> Connector on this board. \nPin order comes from the AMT10 datasheet.\n"
 		(exclude_from_sim no)
-		(at 16.764 48.768 0)
+		(at 15.24 50.8 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2163,7 +2286,7 @@
 	)
 	(text "AMT103 on the motor -> CUI-435-1FT cable \n(bare wires) -> Connector on this board. \nPin order comes from the AMT10 datasheet.\n"
 		(exclude_from_sim no)
-		(at 16.764 123.698 0)
+		(at 14.732 125.984 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2238,7 +2361,7 @@
 		(uuid "4145ac96-4264-4a0b-84d4-38b8d7935d6d")
 	)
 	(junction
-		(at 36.83 115.57)
+		(at 29.21 111.76)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "45dea064-b38b-4c09-956d-9348383400c8")
@@ -2250,10 +2373,40 @@
 		(uuid "555312fe-173c-4327-a57e-428c3022e0b7")
 	)
 	(junction
+		(at 39.37 106.68)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "55c33aac-6930-4d06-8d55-359b5fa0a8ae")
+	)
+	(junction
 		(at 165.1 139.7)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5784166e-1cf9-4682-80c8-c437a2fd153a")
+	)
+	(junction
+		(at 31.75 109.22)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "58d63a7b-d9ae-4398-b071-67256065cc8f")
+	)
+	(junction
+		(at 41.91 31.75)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "64e28447-59aa-44e2-a0fe-b6303d6f237e")
+	)
+	(junction
+		(at 54.61 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "66a6cd93-c2d1-487c-b915-fe43ade46854")
+	)
+	(junction
+		(at 49.53 29.21)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "66c53e41-964f-4300-8762-ac26fedfead5")
 	)
 	(junction
 		(at 124.46 104.14)
@@ -2280,10 +2433,22 @@
 		(uuid "80e39b89-57fc-46d6-9315-d13f30b388bd")
 	)
 	(junction
-		(at 36.83 40.64)
+		(at 57.15 26.67)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8131d5fb-8959-4967-8821-6d4bde146aa3")
+	)
+	(junction
+		(at 31.75 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a2811a02-e202-40b6-a245-72aaa3dc9fd0")
+	)
+	(junction
+		(at 34.29 34.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b019537b-0f07-41a6-b12c-070569bbe87b")
 	)
 	(junction
 		(at 40.64 143.51)
@@ -2308,6 +2473,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "db788502-422f-413d-88fd-6383f126f123")
+	)
+	(junction
+		(at 46.99 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e7baa033-a84a-4362-8ce8-d283d6a46fa2")
 	)
 	(junction
 		(at 124.46 29.21)
@@ -2359,6 +2530,16 @@
 	)
 	(wire
 		(pts
+			(xy 54.61 101.6) (xy 54.61 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "073bdd95-4275-4474-83e3-0b680b31a665")
+	)
+	(wire
+		(pts
 			(xy 177.8 121.92) (xy 177.8 119.38)
 		)
 		(stroke
@@ -2386,6 +2567,16 @@
 			(type default)
 		)
 		(uuid "0cb49344-76c4-409f-85a2-bd69552e2078")
+	)
+	(wire
+		(pts
+			(xy 46.99 104.14) (xy 58.42 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "11bc5fc0-1527-49bc-9fe8-78853cbbe414")
 	)
 	(wire
 		(pts
@@ -2429,7 +2620,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 38.1) (xy 50.8 38.1)
+			(xy 30.48 34.29) (xy 58.42 34.29)
 		)
 		(stroke
 			(width 0)
@@ -2539,7 +2730,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 105.41) (xy 50.8 105.41)
+			(xy 27.94 101.6) (xy 54.61 101.6)
 		)
 		(stroke
 			(width 0)
@@ -2609,7 +2800,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 110.49) (xy 50.8 110.49)
+			(xy 27.94 106.68) (xy 39.37 106.68)
 		)
 		(stroke
 			(width 0)
@@ -2619,7 +2810,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 33.02) (xy 50.8 33.02)
+			(xy 30.48 29.21) (xy 58.42 29.21)
 		)
 		(stroke
 			(width 0)
@@ -2649,6 +2840,16 @@
 	)
 	(wire
 		(pts
+			(xy 49.53 29.21) (xy 49.53 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "480fe7ce-d721-485b-9494-8f4baadab221")
+	)
+	(wire
+		(pts
 			(xy 124.46 144.78) (xy 134.62 144.78)
 		)
 		(stroke
@@ -2659,7 +2860,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 115.57) (xy 36.83 115.57)
+			(xy 27.94 111.76) (xy 58.42 111.76)
 		)
 		(stroke
 			(width 0)
@@ -2679,7 +2880,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 30.48) (xy 50.8 30.48)
+			(xy 30.48 26.67) (xy 57.15 26.67)
 		)
 		(stroke
 			(width 0)
@@ -2779,7 +2980,17 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 35.56) (xy 50.8 35.56)
+			(xy 54.61 101.6) (xy 58.42 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73633081-ff5e-44c2-a852-8564983647f7")
+	)
+	(wire
+		(pts
+			(xy 30.48 31.75) (xy 58.42 31.75)
 		)
 		(stroke
 			(width 0)
@@ -2789,13 +3000,23 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 107.95) (xy 50.8 107.95)
+			(xy 27.94 104.14) (xy 46.99 104.14)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "76905340-2a9b-4ea8-990b-64c0f7475c7c")
+	)
+	(wire
+		(pts
+			(xy 34.29 39.37) (xy 34.29 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "76c6494f-18d1-40c8-b64f-e03f9a4f6675")
 	)
 	(wire
 		(pts
@@ -2909,6 +3130,16 @@
 	)
 	(wire
 		(pts
+			(xy 46.99 104.14) (xy 46.99 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d4bf1a6-1f54-49ac-8ff4-2d1cdd947f4a")
+	)
+	(wire
+		(pts
 			(xy 187.96 54.61) (xy 190.5 54.61)
 		)
 		(stroke
@@ -2926,6 +3157,16 @@
 			(type default)
 		)
 		(uuid "90b2368d-0836-4065-a07e-0d4ae1a7d58c")
+	)
+	(wire
+		(pts
+			(xy 41.91 31.75) (xy 41.91 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91f598c2-c9e3-4b84-a3e3-376dfc15444c")
 	)
 	(wire
 		(pts
@@ -2979,7 +3220,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 113.03) (xy 50.8 113.03)
+			(xy 27.94 109.22) (xy 31.75 109.22)
 		)
 		(stroke
 			(width 0)
@@ -3099,6 +3340,26 @@
 	)
 	(wire
 		(pts
+			(xy 31.75 109.22) (xy 58.42 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b50e9e13-a39f-42f2-a001-2d9d54ed82ee")
+	)
+	(wire
+		(pts
+			(xy 57.15 26.67) (xy 57.15 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b7c4beef-b5a4-44ae-bf45-ea7b839aa6e7")
+	)
+	(wire
+		(pts
 			(xy 134.62 124.46) (xy 140.97 124.46)
 		)
 		(stroke
@@ -3139,6 +3400,16 @@
 	)
 	(wire
 		(pts
+			(xy 39.37 106.68) (xy 58.42 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0aa5405-534e-4d40-af15-a9e4f77f3275")
+	)
+	(wire
+		(pts
 			(xy 19.05 69.85) (xy 20.32 69.85)
 		)
 		(stroke
@@ -3156,16 +3427,6 @@
 			(type default)
 		)
 		(uuid "c5259470-9c99-4fd3-b427-1f547718cf33")
-	)
-	(wire
-		(pts
-			(xy 36.83 40.64) (xy 50.8 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c6ac146c-fd61-4a60-995b-8e090140e3e7")
 	)
 	(wire
 		(pts
@@ -3209,6 +3470,16 @@
 	)
 	(wire
 		(pts
+			(xy 39.37 106.68) (xy 39.37 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d03382f6-005a-419b-9727-ae4203d7fe14")
+	)
+	(wire
+		(pts
 			(xy 40.64 69.85) (xy 45.72 69.85)
 		)
 		(stroke
@@ -3246,6 +3517,16 @@
 			(type default)
 		)
 		(uuid "d50a789a-0e6f-4054-892a-642aefbba4d7")
+	)
+	(wire
+		(pts
+			(xy 31.75 109.22) (xy 31.75 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6d738c6-23c9-45f7-bf0d-6bd26182ee75")
 	)
 	(wire
 		(pts
@@ -3309,7 +3590,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 40.64) (xy 36.83 40.64)
+			(xy 30.48 36.83) (xy 58.42 36.83)
 		)
 		(stroke
 			(width 0)
@@ -3369,6 +3650,16 @@
 	)
 	(wire
 		(pts
+			(xy 57.15 26.67) (xy 58.42 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f57954e6-10d3-4ec3-a020-9323308fb4bb")
+	)
+	(wire
+		(pts
 			(xy 134.62 152.4) (xy 134.62 154.94)
 		)
 		(stroke
@@ -3376,16 +3667,6 @@
 			(type default)
 		)
 		(uuid "f762da69-dd9a-4e08-9223-6f3e00a364a3")
-	)
-	(wire
-		(pts
-			(xy 36.83 115.57) (xy 50.8 115.57)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fb1fdbd9-81c9-443b-ae29-d86200eb7979")
 	)
 	(wire
 		(pts
@@ -3428,7 +3709,7 @@
 		(uuid "1af1509e-0e30-4e57-b3a1-37610d85e899")
 	)
 	(label "ENC2_B_RAW"
-		(at 36.83 105.41 0)
+		(at 34.29 101.6 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3508,7 +3789,7 @@
 		(uuid "4496f35b-55e4-4510-b2fd-0bd39e1353f3")
 	)
 	(label "ENC2_A_RAW"
-		(at 36.83 110.49 0)
+		(at 34.29 106.68 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3608,7 +3889,7 @@
 		(uuid "7d0ed33b-8e6a-4d61-b572-b4d17f99a2c7")
 	)
 	(label "ENC1_B_RAW"
-		(at 36.83 30.48 0)
+		(at 36.83 26.67 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3648,7 +3929,7 @@
 		(uuid "adf14516-c17e-4cf5-81e8-ec3467b6dfc8")
 	)
 	(label "ENC2_5V_RAW"
-		(at 36.83 107.95 0)
+		(at 34.29 104.14 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3688,7 +3969,7 @@
 		(uuid "c5b7c372-0246-4271-9218-6fac12dd1388")
 	)
 	(label "ENC1_A_RAW"
-		(at 36.83 35.56 0)
+		(at 36.83 31.75 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3698,7 +3979,7 @@
 		(uuid "c73e5770-edb5-4d2c-a9f4-7fb5c3e9e02a")
 	)
 	(label "ENC1_5V_RAW"
-		(at 36.83 33.02 0)
+		(at 36.83 29.21 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3708,7 +3989,7 @@
 		(uuid "c766e390-ca07-4ff1-8516-e6f6fc9d2df2")
 	)
 	(label "ENC2_Z_RAW"
-		(at 36.83 113.03 0)
+		(at 34.29 109.22 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3718,7 +3999,7 @@
 		(uuid "ca4d95ae-cebe-4874-ba99-ec7e0ef902c9")
 	)
 	(label "ENC1_Z_RAW"
-		(at 36.83 38.1 0)
+		(at 36.83 34.29 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4144,6 +4425,139 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
 					(reference "#PWR0174")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 39.37 114.3 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1a4ec992-4854-43f9-94fc-6c92e7f42701")
+		(property "Reference" "TP18"
+			(at 37.846 119.888 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ENC2_A"
+			(at 35.306 121.666 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 34.29 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 34.29 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 39.37 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 39.37 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 39.37 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 39.37 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 39.37 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 39.37 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a869ba43-1e6d-4de8-92dd-76584cd64a04")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "TP18")
 					(unit 1)
 				)
 			)
@@ -4682,6 +5096,139 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
 					(reference "R48")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 57.15 39.37 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "23b23eb5-8b49-46e1-b056-0459445ec6f4")
+		(property "Reference" "TP16"
+			(at 55.626 44.958 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ENC1_B"
+			(at 53.086 46.736 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 52.07 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 52.07 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 57.15 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 57.15 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 57.15 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 57.15 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 57.15 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 57.15 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9d0a043e-6f42-4985-8168-865f318351c0")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "TP16")
 					(unit 1)
 				)
 			)
@@ -5848,6 +6395,139 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 31.75 114.3 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "46d9836a-4d29-4778-8661-477465e6cc06")
+		(property "Reference" "TP17"
+			(at 30.226 119.888 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ENC2_Z"
+			(at 27.686 121.666 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 26.67 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 26.67 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 31.75 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 31.75 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 31.75 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 31.75 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 31.75 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 31.75 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "243cded4-b71a-456b-a46c-a1562469a461")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "TP17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 83.82 31.75 0)
 		(unit 1)
@@ -6320,6 +7000,139 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 41.91 39.37 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "58ce5d33-3a26-495d-a32c-17586cd090e5")
+		(property "Reference" "TP14"
+			(at 40.386 44.958 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ENC1_A"
+			(at 37.846 46.736 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 36.83 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 36.83 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 41.91 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 41.91 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 41.91 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 41.91 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 41.91 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 41.91 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e0ca1df4-c81e-4ab3-88ce-afbd78908c30")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "TP14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Custom_Parts:SN74LVC14A")
 		(at 177.8 59.69 0)
 		(unit 1)
@@ -6460,7 +7273,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 36.83 40.64 0)
+		(at 31.75 36.83 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6470,7 +7283,7 @@
 		(dnp no)
 		(uuid "5f0fca36-eaa1-4831-9ce5-20d24202325e")
 		(property "Reference" "#PWR073"
-			(at 36.83 40.64 0)
+			(at 31.75 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6481,7 +7294,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 36.83 44.45 0)
+			(at 31.75 40.64 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6491,7 +7304,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 36.83 40.64 0)
+			(at 31.75 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6502,7 +7315,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 36.83 40.64 0)
+			(at 31.75 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6513,7 +7326,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 36.83 40.64 0)
+			(at 31.75 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7150,7 +7963,7 @@
 	)
 	(symbol
 		(lib_id "Custom_Parts:AMT103-V")
-		(at 22.86 110.49 0)
+		(at 20.32 106.68 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7160,7 +7973,7 @@
 		(dnp no)
 		(uuid "7be48bef-1f76-40ee-a005-2f6ef5876f72")
 		(property "Reference" "ENC2"
-			(at 17.78 101.6 0)
+			(at 15.24 97.79 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7171,7 +7984,7 @@
 			)
 		)
 		(property "Value" "AMT103-V"
-			(at 17.78 119.38 0)
+			(at 15.24 115.57 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7182,7 +7995,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 22.86 110.49 0)
+			(at 20.32 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7193,7 +8006,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.sameskydevices.com/product/resource/amt10.pdf"
-			(at 22.86 110.49 0)
+			(at 20.32 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7204,7 +8017,7 @@
 			)
 		)
 		(property "Description" "Same Sky AMT103-V capacitive incremental encoder, axial connector. Mounts on the stepper motor rear shaft (not on this PCB). Pinout from the AMT10 datasheet; check with a meter."
-			(at 22.86 110.49 0)
+			(at 20.32 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7215,7 +8028,7 @@
 			)
 		)
 		(property "MPN" "AMT103-V"
-			(at 22.86 110.49 0)
+			(at 20.32 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7226,7 +8039,7 @@
 			)
 		)
 		(property "DigiKey" "https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/AMT103-V/827016"
-			(at 22.86 110.49 0)
+			(at 20.32 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7237,7 +8050,7 @@
 			)
 		)
 		(property "Cable" "CUI-435-1FT (https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/CUI-435-1FT/968159)"
-			(at 22.86 110.49 0)
+			(at 20.32 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7431,7 +8244,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x05")
-		(at 55.88 110.49 0)
+		(at 63.5 106.68 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7441,7 +8254,7 @@
 		(dnp no)
 		(uuid "9cf5e718-4cb8-4575-91cc-7a4fb1360730")
 		(property "Reference" "J16"
-			(at 58.42 109.22 0)
+			(at 66.04 105.41 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7451,8 +8264,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Encoder (JST XH 5-pin)"
-			(at 58.42 111.76 0)
+		(property "Value" "JST XH 5-pin"
+			(at 61.976 114.808 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7463,7 +8276,7 @@
 			)
 		)
 		(property "Footprint" "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical"
-			(at 55.88 110.49 0)
+			(at 63.5 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7474,7 +8287,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 55.88 110.49 0)
+			(at 63.5 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7485,7 +8298,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 55.88 110.49 0)
+			(at 63.5 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7496,7 +8309,7 @@
 			)
 		)
 		(property "MPN" "B5B-XH-A(LF)(SN)"
-			(at 55.88 110.49 0)
+			(at 63.5 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7507,7 +8320,7 @@
 			)
 		)
 		(property "Mating" "XHP-5 housing + SXH-001T-P0.6 crimps"
-			(at 55.88 110.49 0)
+			(at 63.5 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7925,6 +8738,139 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
 					(reference "#PWR0185")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 54.61 114.3 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "aa72ffe5-d28a-43d8-905d-9693fe24488a")
+		(property "Reference" "TP20"
+			(at 53.086 119.888 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ENC2_B"
+			(at 50.546 121.666 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 49.53 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 49.53 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 54.61 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 54.61 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 54.61 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 54.61 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 54.61 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 54.61 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "664077bf-be3b-46cd-be0a-37286890e3b0")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "TP20")
 					(unit 1)
 				)
 			)
@@ -8712,7 +9658,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x05")
-		(at 55.88 35.56 0)
+		(at 63.5 31.75 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8722,7 +9668,7 @@
 		(dnp no)
 		(uuid "d24fe2b1-7f7a-4769-bcf5-088580f8f738")
 		(property "Reference" "J5"
-			(at 58.42 34.29 0)
+			(at 62.738 24.13 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8732,8 +9678,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Encoder (JST XH 5-pin)"
-			(at 58.42 36.83 0)
+		(property "Value" "JST XH 5-pin"
+			(at 62.484 39.624 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8744,7 +9690,7 @@
 			)
 		)
 		(property "Footprint" "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical"
-			(at 55.88 35.56 0)
+			(at 63.5 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8755,7 +9701,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 55.88 35.56 0)
+			(at 63.5 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8766,7 +9712,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 55.88 35.56 0)
+			(at 63.5 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8777,7 +9723,7 @@
 			)
 		)
 		(property "MPN" "B5B-XH-A(LF)(SN)"
-			(at 55.88 35.56 0)
+			(at 63.5 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8788,7 +9734,7 @@
 			)
 		)
 		(property "Mating" "XHP-5 housing + SXH-001T-P0.6 crimps"
-			(at 55.88 35.56 0)
+			(at 63.5 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8823,8 +9769,141 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 34.29 39.37 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d7e0a7a7-dda7-479e-bbad-1123218fcf3e")
+		(property "Reference" "TP13"
+			(at 32.766 44.958 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ENC1_Z"
+			(at 30.226 46.736 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 29.21 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 29.21 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 34.29 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 34.29 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 34.29 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 34.29 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 34.29 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 34.29 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "44f75a2c-d273-4f8e-9b07-e01955c8a885")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "TP13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Custom_Parts:AMT103-V")
-		(at 22.86 35.56 0)
+		(at 22.86 31.75 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8834,7 +9913,7 @@
 		(dnp no)
 		(uuid "dcb61247-2905-4a97-aee4-a7edffc78672")
 		(property "Reference" "ENC1"
-			(at 17.78 26.67 0)
+			(at 17.78 22.86 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8845,7 +9924,7 @@
 			)
 		)
 		(property "Value" "AMT103-V"
-			(at 17.78 44.45 0)
+			(at 17.78 40.64 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8856,7 +9935,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 22.86 35.56 0)
+			(at 22.86 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8867,7 +9946,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.sameskydevices.com/product/resource/amt10.pdf"
-			(at 22.86 35.56 0)
+			(at 22.86 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8878,7 +9957,7 @@
 			)
 		)
 		(property "Description" "Same Sky AMT103-V capacitive incremental encoder, axial connector. Mounts on the stepper motor rear shaft (not on this PCB). Pinout from the AMT10 datasheet; check with a meter."
-			(at 22.86 35.56 0)
+			(at 22.86 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8889,7 +9968,7 @@
 			)
 		)
 		(property "MPN" "AMT103-V"
-			(at 22.86 35.56 0)
+			(at 22.86 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8900,7 +9979,7 @@
 			)
 		)
 		(property "DigiKey" "https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/AMT103-V/827016"
-			(at 22.86 35.56 0)
+			(at 22.86 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8911,7 +9990,7 @@
 			)
 		)
 		(property "Cable" "CUI-435-1FT (https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/CUI-435-1FT/968159)"
-			(at 22.86 35.56 0)
+			(at 22.86 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9098,6 +10177,139 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
 					(reference "R55")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 49.53 39.37 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e59b0bfb-af5e-429c-ba40-91880488a4e2")
+		(property "Reference" "TP15"
+			(at 48.006 44.958 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ENC1_5"
+			(at 45.466 46.736 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 44.45 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 44.45 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 49.53 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 49.53 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 49.53 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 49.53 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 49.53 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 49.53 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "132d6a77-6a56-4f0d-850c-ffc707e18849")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "TP15")
 					(unit 1)
 				)
 			)
@@ -9340,7 +10552,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 36.83 115.57 0)
+		(at 29.21 111.76 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9350,7 +10562,7 @@
 		(dnp no)
 		(uuid "f0fdbbd1-3c22-4b64-8229-5aa4c53a68ae")
 		(property "Reference" "#PWR074"
-			(at 36.83 115.57 0)
+			(at 29.21 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9361,7 +10573,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 36.83 119.38 0)
+			(at 29.21 115.57 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9371,7 +10583,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 36.83 115.57 0)
+			(at 29.21 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9382,7 +10594,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 36.83 115.57 0)
+			(at 29.21 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9393,7 +10605,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 36.83 115.57 0)
+			(at 29.21 111.76 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9797,6 +11009,139 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
 					(reference "#PWR0183")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 46.99 114.3 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ff2bcb2c-7976-4ecd-9c0e-218b99ed057e")
+		(property "Reference" "TP19"
+			(at 45.466 119.888 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ENC2_5"
+			(at 42.926 121.666 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 41.91 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 41.91 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 46.99 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" ""
+			(at 46.99 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_FARNELL" ""
+			(at 46.99 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "OC_NEWARK" ""
+			(at 46.99 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 46.99 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SUPPLIER" ""
+			(at 46.99 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4aa691c2-b910-4cd9-a2b4-b78dcedfbe74")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/052d78b7-9761-42b3-bfaf-ad485eeda1d8"
+					(reference "TP19")
 					(unit 1)
 				)
 			)

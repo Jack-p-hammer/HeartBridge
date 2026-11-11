@@ -157,6 +157,7 @@ def main():
     cpr_elapsed_sec: float = 0.0
     compression_start: float | None = None  # time.monotonic() when the current run of compressions started, None while not compressing
     shown_sec: int | None = None  # Whole seconds currently drawn on the timer, None to force a redraw
+    abort_carriage_home: bool = False  # True once ABORT has finished retracting the carriage, so it stops re-retracting
 
     # Unfold animation position, reset when UNFOLD_CUT_CLOTHES is entered
     frame_idx: int = 0
@@ -199,6 +200,7 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = actuation.init_motor()
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    time.sleep(0.5)  # Wait for the motor controller to be ready
                     error = actuation.init_steppers(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.init_HMI(HMI.get_pi())
@@ -459,12 +461,16 @@ def main():
                     error = HMI.set_image_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     logging.error(f"Abort state tripped: {error}")
+                    abort_carriage_home = False
 
                 # Loop
-                # The steppers only move while being updated, so keep retracting the carriage every tick
+                # The steppers only move while being updated, so keep retracting the carriage every tick until home.
+                # Once home, stop calling retract_carriage(): it resets its target when done, so each further call
+                # would start (and log) a fresh zero-length retraction
                 # No continue on failure: the error is still routed back to ABORT next tick, but prev_state is
                 # recorded first so ABORT's setup doesn't re-run, and the tick still sleeps
-                error, _ = actuation.retract_carriage()
+                if not abort_carriage_home:
+                    error, abort_carriage_home = actuation.retract_carriage()
                 # Halt — only a power cycle exits this state
 
             case(_):

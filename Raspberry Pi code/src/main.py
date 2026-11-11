@@ -117,6 +117,7 @@ def main():
                     error = HMI.init_Pi()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = actuation.init_motor()
+                    time.sleep(0.5)  # Wait for the motor controller to be ready
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = actuation.init_steppers(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue

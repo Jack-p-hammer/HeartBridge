@@ -230,12 +230,13 @@ def main():
             case(CPRState.WAIT):
                 # Wait for a keyboard input to start the demo. This state is only used in the demo, not in src/main.py.
                 if state != prev_state:
+                    # B starts the demo
+                    logging.debug(f"Press B to start the demo, Esc or Q to exit")
                     # No images yet, TODO: Add a black screen or sm
                     pass
 
                 # Loop
-                # B starts the demo
-                logging.debug(f"Press B to start the demo, Esc or Q to exit")
+
                 if pygame.K_b in keys_pressed:
                     logging.info("B pressed, starting demo")
                     state = CPRState.STARTUP

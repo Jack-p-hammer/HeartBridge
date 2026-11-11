@@ -3556,7 +3556,7 @@
 	)
 	(text "Shared\nPullup"
 		(exclude_from_sim no)
-		(at 135.89 111.76 0)
+		(at 133.604 112.014 0)
 		(effects
 			(font
 				(size 1.27 1.27)

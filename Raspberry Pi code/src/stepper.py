@@ -20,21 +20,21 @@ from Enums.error_codes import ErrorCode
 # TODO: Set actual GPIO pin numbers to match the hardware hat
 STEPPER_STEP_PIN: int = 20
 STEPPER_DIR_PIN: int = 21
-STEPPER_ENABLE_PIN: int = 16
-STEPPER_ENABLE_ACTIVE_LOW: bool = True  # Most stepper drivers (A4988, DRV8825, TMC2209) enable on a LOW EN pin
+STEPPER_SLEEP_PIN: int = 16
+STEPPER_SLEEP_ACTIVE_LOW: bool = False  # Most stepper drivers (A4988, DRV8825, TMC2209) enable on a LOW EN pin
 
 # --- Mechanical constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
-LEAD_SCREW_PITCH_M: float = 0.008  # meters of carriage travel per lead screw revolution (the lead; equals pitch only for single-start screws)
+LEAD_SCREW_PITCH_M: float = 0.0254*0.1  # meters of carriage travel per lead screw revolution (the lead; equals pitch only for single-start screws)
 # Signed: the 1:1 gear train reverses rotation, so negative. This sign is the only place the steppers' direction is set;
 # flip it to reverse them. Carriage positions and step counts are always positive down
 STEPPER_GEAR_RATIO: float = -1.0  # stepper revolutions per lead screw revolution
 STEPPER_FULL_STEPS_PER_REV: int = 200  # 1.8 degree steppers
-STEPPER_MICROSTEPS: int = 8  # Microstepping set on the drivers
+STEPPER_MICROSTEPS: int = 1  # Microstepping set on the drivers
 STEPS_PER_M: float = STEPPER_FULL_STEPS_PER_REV * STEPPER_MICROSTEPS * abs(STEPPER_GEAR_RATIO) / LEAD_SCREW_PITCH_M  # magnitude, direction comes from the DIR pin
 
 # DIR pin level that drives the carriage down: high drives down through a non-reversing gear train, so the gear train's
 # reversal makes it low. TODO: Verify against wiring
-STEPPER_DIR_DOWN_LEVEL: int = 1 if STEPPER_GEAR_RATIO > 0 else 0
+STEPPER_DIR_DOWN_LEVEL: int = 1
 
 LEAD_SCREW_TRAVEL_M: float = 0.12  # meters, usable carriage travel from home (startup) position, 8" placeholder
 
@@ -87,11 +87,11 @@ def init_steppers(pi: pigpio.pi) -> ErrorCode:
         # STEP/DIR/EN as outputs, STEP low, DIR down
         _pi.set_mode(STEPPER_STEP_PIN, pigpio.OUTPUT)
         _pi.set_mode(STEPPER_DIR_PIN, pigpio.OUTPUT)
-        _pi.set_mode(STEPPER_ENABLE_PIN, pigpio.OUTPUT)
+        _pi.set_mode(STEPPER_SLEEP_PIN, pigpio.OUTPUT)
         _pi.write(STEPPER_STEP_PIN, 0)
         _pi.write(STEPPER_DIR_PIN, STEPPER_DIR_DOWN_LEVEL)
         # Drivers stay enabled for the whole run: holding torque keeps the carriage from back-driving under compression load
-        _pi.write(STEPPER_ENABLE_PIN, 0 if STEPPER_ENABLE_ACTIVE_LOW else 1)
+        _pi.write(STEPPER_SLEEP_PIN, 0 if STEPPER_SLEEP_ACTIVE_LOW else 1)
         _pi.wave_clear()
     except Exception as e:
         logging.error(f"Stepper GPIO initialization failed: {e}")

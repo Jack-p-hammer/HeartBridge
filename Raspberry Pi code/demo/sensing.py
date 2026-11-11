@@ -140,6 +140,7 @@ def battery_check() -> ErrorCode:
         return ErrorCode.ERROR_MOTOR_FAILURE
 
     if battery_voltage < BATTERY_THRESHOLD_V:
+        logging.warning(f"Battery voltage low: {battery_voltage:.2f} V (threshold: {BATTERY_THRESHOLD_V:.2f} V)")
         return ErrorCode.ERROR_LOW_BATTERY
     return ErrorCode.NORMAL_OPERATION
 

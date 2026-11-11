@@ -2965,6 +2965,17 @@
 		)
 		(uuid "63e50245-72c5-41e1-b1bc-06b4ed8217cc")
 	)
+	(hierarchical_label "Stepper_Fault"
+		(shape input)
+		(at 40.64 129.54 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "727f5e80-f0cc-49de-8962-55e749b30090")
+	)
 	(hierarchical_label "ENC2_A"
 		(shape input)
 		(at 40.64 113.03 0)

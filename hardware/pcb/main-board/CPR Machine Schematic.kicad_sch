@@ -77,6 +77,16 @@
 	)
 	(wire
 		(pts
+			(xy 143.51 105.41) (xy 143.51 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "21402899-f008-48b6-be3e-ad46976cdbaa")
+	)
+	(wire
+		(pts
 			(xy 151.13 105.41) (xy 151.13 119.38)
 		)
 		(stroke
@@ -1027,6 +1037,16 @@
 				(justify right)
 			)
 		)
+		(pin "Stepper_Fault" input
+			(at 143.51 105.41 270)
+			(uuid "9662d8a4-10cd-4b52-87e0-995824d26e98")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b"
@@ -1136,6 +1156,16 @@
 		(pin "TX_CAN" output
 			(at 153.67 119.38 90)
 			(uuid "c2a43e9f-d79d-4f6a-a150-95943d9f1e3a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "Stepper_Fault" output
+			(at 143.51 119.38 90)
+			(uuid "3b1295bf-12fd-4e33-9b55-dd0c737111de")
 			(effects
 				(font
 					(size 1.27 1.27)

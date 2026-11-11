@@ -265,9 +265,60 @@ def test_retract_carriage_reports_pigpio_failure(hardware):
     import stepper
     actuation.init_steppers(hardware.pi)
     stepper.position_steps = round(0.05 * stepper.STEPS_PER_M)  # carriage lowered, so retracting needs new steps
+    stepper.extended_steps = stepper.position_steps  # as if those steps were commanded down
     hardware.pi.raise_on_write = RuntimeError("daemon gone")
 
-    assert actuation.retract_carriage() == ErrorCode.ERROR_MOTOR_FAILURE
+    assert actuation.retract_carriage() == (ErrorCode.ERROR_MOTOR_FAILURE, False)
+
+
+def _run_steppers_to(stepper, position_m: float, velocity_mps: float) -> None:
+    """Drive the steppers to a position on the fake pigpio, whose waves finish instantly"""
+    assert stepper.set_target(position_m, velocity_mps) == ErrorCode.NORMAL_OPERATION
+    for _ in range(10_000):
+        assert stepper.update() == ErrorCode.NORMAL_OPERATION
+        if stepper.at_target():
+            return
+    raise AssertionError("Steppers never reached the target")
+
+
+def test_stepper_counts_only_extending_steps(hardware):
+    """Every step commanded down adds to the extending count, and steps commanded up don't reduce it."""
+    import stepper
+    stepper.init_steppers(hardware.pi)
+
+    _run_steppers_to(stepper, 0.05, stepper.ZEROING_VELOCITY_MPS)
+    assert stepper.extended_steps == round(0.05 * stepper.STEPS_PER_M)
+
+    _run_steppers_to(stepper, 0.03, stepper.RETRACT_VELOCITY_MPS)
+    assert stepper.extended_steps == round(0.05 * stepper.STEPS_PER_M)
+    assert stepper.get_extended_distance() == pytest.approx(0.05)
+
+    stepper.reset_extended_steps()
+    assert stepper.extended_steps == 0
+
+
+def test_retract_carriage_retracts_exactly_the_extended_steps(hardware):
+    """retract_carriage() moves the carriage up by exactly the commanded extending steps, reports home once there,
+    and resets the count so a second extend and retract cycle only undoes the second extension."""
+    import actuation
+    import stepper
+    actuation.init_steppers(hardware.pi)
+
+    for depth_m in (0.05, 0.02):
+        _run_steppers_to(stepper, depth_m, stepper.ZEROING_VELOCITY_MPS)
+        assert stepper.extended_steps == round(depth_m * stepper.STEPS_PER_M)
+
+        for _ in range(10_000):
+            error, home = actuation.retract_carriage()
+            assert error == ErrorCode.NORMAL_OPERATION
+            if home:
+                break
+        else:
+            raise AssertionError("Carriage never reported home")
+
+        assert stepper.position_steps == 0
+        assert stepper.extended_steps == 0
+        assert actuation.retract_target_m is None
 
 
 def test_zeroing_succeeds_when_sensors_healthy(hardware):

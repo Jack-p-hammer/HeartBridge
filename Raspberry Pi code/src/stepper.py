@@ -58,6 +58,10 @@ target_steps: int = 0
 velocity_limit_steps_per_s: float = 0.0
 rate_steps_per_s: float = 0.0  # Signed step rate of the last chunk, used for the accel ramp
 chunk_queue: list[tuple[int, int]] = []  # Chunks queued on the pigpio daemon in play order as (wave_id, signed steps)
+# Total steps commanded in the extending (down) direction since init or the last reset_extended_steps().
+# Counted when each chunk is queued, and never decreased by retracting steps. actuation.retract_carriage()
+# retracts exactly this many steps, then resets it
+extended_steps: int = 0
 
 
 def init_steppers(pi: pigpio.pi) -> ErrorCode:
@@ -69,7 +73,7 @@ def init_steppers(pi: pigpio.pi) -> ErrorCode:
     Returns:
         ErrorCode: NORMAL_OPERATION if successful, ERROR_INIT_FAILURE if failed
     """
-    global _pi, position_steps, target_steps, rate_steps_per_s, chunk_queue
+    global _pi, position_steps, target_steps, rate_steps_per_s, chunk_queue, extended_steps
     logging.debug("Initializing steppers...")
 
     _pi = pi
@@ -77,6 +81,7 @@ def init_steppers(pi: pigpio.pi) -> ErrorCode:
     target_steps = 0
     rate_steps_per_s = 0.0
     chunk_queue = []
+    extended_steps = 0
 
     try:
         # STEP/DIR/EN as outputs, STEP low, DIR down
@@ -174,6 +179,19 @@ def at_target() -> bool:
     return not chunk_queue and position_steps == target_steps
 
 
+def get_extended_distance() -> float:
+    """Returns the total carriage travel commanded in the extending (down) direction since init or the last
+    reset_extended_steps(), in meters. Counts extending steps only, so retracting steps don't reduce it"""
+    global extended_steps
+    return extended_steps / STEPS_PER_M
+
+
+def reset_extended_steps() -> None:
+    """Zero the extending step count, once the carriage has been retracted by that many steps"""
+    global extended_steps
+    extended_steps = 0
+
+
 # -------- PRIVATE FUNCTIONS --------
 
 def queued_end_steps() -> int:
@@ -224,7 +242,7 @@ def queue_next_chunk() -> ErrorCode:
     Returns:
         ErrorCode: NORMAL_OPERATION if successful, ERROR_MOTOR_FAILURE on a pigpio failure
     """
-    global _pi, target_steps, velocity_limit_steps_per_s, rate_steps_per_s, chunk_queue
+    global _pi, target_steps, velocity_limit_steps_per_s, rate_steps_per_s, chunk_queue, extended_steps
     remaining_steps: int = target_steps - queued_end_steps()
     direction: int = 1 if remaining_steps > 0 else -1
 
@@ -268,4 +286,7 @@ def queue_next_chunk() -> ErrorCode:
 
     chunk_queue.append((wave_id, direction * num_steps))
     rate_steps_per_s = direction * rate
+    # Queued chunks always play out (nothing cancels a sent waveform), so these steps are commanded
+    if direction > 0:
+        extended_steps += num_steps
     return ErrorCode.NORMAL_OPERATION

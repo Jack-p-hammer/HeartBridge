@@ -35,6 +35,7 @@ ZEROING_TIMEOUT_SEC: float = 1.5 * EXTENSION_STROKE_LIMIT_M / ZEROING_VELOCITY_M
 
 zeroing_start_time: float = 0.0 # time.monotonic() of when zeroing started
 compression_start_time: float = 0.0 # time.monotonic() of when compressions started, used to compute trapezoidal waveform
+retract_target_m: float | None = None # Carriage position the current retraction ends at, set on its first tick, None while not retracting
 
 _motor_controller: MoteusThread  # The shared moteus controller instance
 
@@ -67,6 +68,9 @@ def init_steppers(pi) -> ErrorCode:
     Returns:
         ErrorCode: Normal operation if successful, ERROR_INIT_FAILURE if failed
     """
+    global retract_target_m
+    retract_target_m = None  # stepper.init_steppers() zeroes the extending step count, so no retraction is in progress
+
     error: ErrorCode = stepper.init_steppers(pi)
     if error != ErrorCode.NORMAL_OPERATION:
         logging.error(f"Stepper initialization failed: {error}")
@@ -274,22 +278,6 @@ def abort_compressions() -> ErrorCode:
     return ErrorCode.NORMAL_OPERATION
 
 
-def retract_carriage() -> ErrorCode:
-    """Retract the carriage to its home (startup) position with the steppers. Non-blocking, must be called every tick
-    until the carriage is home. Like abort_compressions(), does not read sensors.
-
-    Returns:
-        ErrorCode: Normal operation if successful, ERROR_MOTOR_FAILURE if failed
-    """
-    error = stepper.set_target(0.0, RETRACT_VELOCITY_MPS)
-    if error == ErrorCode.NORMAL_OPERATION:
-        error = stepper.update()
-    if error != ErrorCode.NORMAL_OPERATION:
-        logging.error(f"Carriage retract failed on stepper: {error}")
-        return ErrorCode.ERROR_MOTOR_FAILURE
-    return ErrorCode.NORMAL_OPERATION
-
-
 def computeCompressionSetpoint() -> float:
     """Computes the current compression setpoint from the trapezoidal waveform, returns position relative to zeroed position
 
@@ -314,3 +302,36 @@ def computeCompressionSetpoint() -> float:
     
     # Convert to meters and return
     return outputPos_cm / 100.0
+
+def retract_carriage() -> tuple[ErrorCode, bool]:
+    """Retract the carriage to its home (startup) position with the steppers, by retracting exactly as many steps as
+    have been commanded in the extending direction (stepper.get_extended_distance()). Non-blocking, must be called
+    every tick until the carriage is home. Like abort_compressions(), does not read sensors.
+    Once home, the extending step count is reset so the next retraction only undoes extension commanded after this one.
+
+    Returns:
+        ErrorCode: Normal operation if successful, ERROR_MOTOR_FAILURE if failed
+        bool: True if the carriage is home, False otherwise
+    """
+    global retract_target_m
+
+    # First tick of this retraction: stop where the already-commanded steps end, then set the target exactly the
+    # commanded extension above it. Kept fixed until home, since the extending step count doesn't change while retracting
+    if retract_target_m is None:
+        stepper.halt()
+        retract_target_m = stepper.get_setpoint() - stepper.get_extended_distance()
+        logging.info(f"Retracting carriage {stepper.get_extended_distance()} m, from {stepper.get_setpoint()} m to {retract_target_m} m")
+
+    error = stepper.set_target(retract_target_m, RETRACT_VELOCITY_MPS)
+    if error == ErrorCode.NORMAL_OPERATION:
+        error = stepper.update()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Carriage retract failed on stepper: {error}")
+        return ErrorCode.ERROR_MOTOR_FAILURE, False
+
+    if stepper.at_target():
+        logging.info(f"Carriage retracted to {stepper.get_position()} m")
+        stepper.reset_extended_steps()
+        retract_target_m = None
+        return ErrorCode.NORMAL_OPERATION, True
+    return ErrorCode.NORMAL_OPERATION, False

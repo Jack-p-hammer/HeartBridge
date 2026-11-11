@@ -10,6 +10,7 @@ from pathlib import Path
 # Internal imports
 import sensing
 import actuation
+import stepper
 import HMI
 from Enums.error_codes import ErrorCode
 from Enums.states import CPRState
@@ -290,7 +291,7 @@ def main():
                 error, next_pressed = HMI.next_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 if next_pressed:
-                    state = CPRState.COMPRESSION_PREP
+                    state = CPRState.COMPRESSION
 
             case(CPRState.KNEEL_FAILURE):
                 # Setup
@@ -337,7 +338,7 @@ def main():
                 # The steppers only move while being updated, so keep retracting the carriage every tick
                 # No continue on failure: the error is still routed back to ABORT next tick, but prev_state is
                 # recorded first so ABORT's setup doesn't re-run, and the tick still sleeps
-                error = actuation.retract_carriage()
+                error, _ = actuation.retract_carriage()
                 # Halt — only a power cycle exits this state
 
             case(_):

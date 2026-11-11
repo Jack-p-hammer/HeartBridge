@@ -672,7 +672,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
         compressions=lambda: ErrorCode.NORMAL_OPERATION,
         pause_compressions=lambda: ErrorCode.NORMAL_OPERATION,
         abort_compressions=lambda: ErrorCode.NORMAL_OPERATION,
-        retract_carriage=lambda: ErrorCode.NORMAL_OPERATION,
+        retract_carriage=lambda: (ErrorCode.NORMAL_OPERATION, False),
     )
     monkeypatch.setitem(sys.modules, "actuation", actuation_mod)
 
@@ -683,7 +683,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
         UNFOLD_3="unfold_3",
         UNFOLD_4="unfold_4",
         ALIGNMENT="alignment",
-        ZEROING_PREP="zeroing_prep",
+        KNEELING="kneeling",
         ZEROING="zeroing",
         COMPRESSION_PREP="compression_prep",
         COMPRESSION="compression",
@@ -695,7 +695,7 @@ def install_fake_main_modules(monkeypatch) -> dict:
         STARTUP="startup_prompt",
         UNFOLD="unfold_prompt",
         ALIGNMENT="alignment_prompt",
-        ZEROING_PREP="zeroing_prep_prompt",
+        KNEELING="kneeling_prompt",
         ZEROING="zeroing_prompt",
         COMPRESSION_PREP="compression_prep_prompt",
         COMPRESSION="compression_prompt",

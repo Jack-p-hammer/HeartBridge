@@ -21,7 +21,7 @@ from moteus_thread import MoteusThread, MotorTarget, BLDC_ROTATIONS_PER_M, BALL_
 
 STROKE_IN: float = 2.0  # inches down from the starting position, then back up. AHA adult depth is 2 to 2.4 in
 COMPRESSIONS_PER_MIN: float = 110.0  # AHA rate is 100 to 120 per minute. Lower this to slow everything down
-MAX_TORQUE_NM: float = 0.4  # bench limit, same as slow_jog.py (the full build allows TORQUE_LIMIT_NM)
+MAX_TORQUE_NM: float = 1.0  # bench limit, same as slow_jog.py (the full build allows TORQUE_LIMIT_NM)
 START_TOLERANCE_M: float = 0.005  # how far above the startup (absolute zero) position the start may read, for encoder noise
 
 M_PER_IN: float = 0.0254

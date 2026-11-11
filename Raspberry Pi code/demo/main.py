@@ -289,7 +289,7 @@ def main():
                 error, next_pressed = HMI.next_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 if next_pressed:
-                    state = CPRState.ZEROING
+                    state = CPRState.COMPRESSION
 
             case(CPRState.ZEROING):
                 # Setup

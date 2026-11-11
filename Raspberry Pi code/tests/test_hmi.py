@@ -362,12 +362,12 @@ def test_set_audio_plays_prompt_and_reports_failures(hardware):
     import HMI
     HMI.init_HMI(hardware.pi)
 
-    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD) == ErrorCode.NORMAL_OPERATION
+    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY) == ErrorCode.NORMAL_OPERATION
     assert hardware.pygame.channel.sound is not None
     assert hardware.pygame.channel.loops == -1
 
     hardware.pygame.audio_load_error = RuntimeError("missing asset")
-    assert HMI.set_audio(HMI.AudioPrompt.ALIGNMENT) == ErrorCode.ERROR_PYGAME_FAILURE
+    assert HMI.set_audio(HMI.AudioPrompt.ALIGNMENT, HMI.DEFAULT_AUDIO_REPEAT_DELAY) == ErrorCode.ERROR_PYGAME_FAILURE
 
 
 def test_set_audio_restarts_playback_on_repeated_same_prompt(hardware):
@@ -377,8 +377,8 @@ def test_set_audio_restarts_playback_on_repeated_same_prompt(hardware):
     import HMI
     HMI.init_HMI(hardware.pi)
 
-    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD) == ErrorCode.NORMAL_OPERATION
-    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD) == ErrorCode.NORMAL_OPERATION
+    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY) == ErrorCode.NORMAL_OPERATION
+    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY) == ErrorCode.NORMAL_OPERATION
 
     assert len(hardware.pygame.channel.play_calls) == 2
 
@@ -390,11 +390,11 @@ def test_set_audio_caches_sound_and_does_not_reload_on_repeat(hardware):
     import HMI
     HMI.init_HMI(hardware.pi)
 
-    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD) == ErrorCode.NORMAL_OPERATION
+    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY) == ErrorCode.NORMAL_OPERATION
     assert len(hardware.pygame.sound_loads) == 1
 
     hardware.pygame.audio_load_error = RuntimeError("missing asset")
-    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD) == ErrorCode.NORMAL_OPERATION
+    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY) == ErrorCode.NORMAL_OPERATION
     assert len(hardware.pygame.sound_loads) == 1  # still just the one load
 
 
@@ -405,7 +405,66 @@ def test_set_audio_reports_failure_when_playback_fails(hardware):
     HMI.init_HMI(hardware.pi)
     hardware.pygame.channel.raise_on_play = RuntimeError("mixer channel busy")
 
-    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD) == ErrorCode.ERROR_PYGAME_FAILURE
+    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY) == ErrorCode.ERROR_PYGAME_FAILURE
+
+
+def test_set_audio_repeat_delay_loops_prompt_with_silence_appended(hardware):
+    """A repeat delay loops a copy of the prompt with that many seconds of silence on the end, while the
+    cached prompt stays unchanged and audio_finished() still times the prompt alone."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    hardware.pygame.sound_length_sec = 2.0
+
+    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD, 3.0) == ErrorCode.NORMAL_OPERATION
+
+    prompt = HMI._audio_cache[HMI.AudioPrompt.UNFOLD]
+    looped, loops = hardware.pygame.channel.play_calls[-1]
+    assert loops == -1
+    assert looped is not prompt
+    assert looped.get_length() == pytest.approx(5.0)
+    assert looped.get_raw().startswith(prompt.get_raw())
+    assert set(looped.get_raw()[len(prompt.get_raw()):]) == {0}  # signed 16 bit silence is all zero bytes
+    assert prompt.get_length() == pytest.approx(2.0)
+    assert HMI._audio_length == pytest.approx(2.0)
+
+
+@pytest.mark.parametrize("repeat_delay", [0.0, -1.0, float("nan")])
+def test_set_audio_without_positive_repeat_delay_loops_cached_prompt(hardware, repeat_delay):
+    """No delay (zero, negative or NaN) loops the cached prompt itself, back to back."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+
+    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD, repeat_delay) == ErrorCode.NORMAL_OPERATION
+
+    assert hardware.pygame.channel.play_calls[-1] == (HMI._audio_cache[HMI.AudioPrompt.UNFOLD], -1)
+
+
+@pytest.mark.parametrize("size, silent_sample", [(-16, b"\x00\x00"), (16, b"\x00\x80"), (8, b"\x80"), (-8, b"\x00")])
+def test_set_audio_repeat_delay_silence_matches_mixer_format(hardware, size, silent_sample):
+    """The appended silence uses the mixer's own silent sample: zero for signed formats, the midpoint for unsigned."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    frequency, _, channels = hardware.pygame.mixer_settings
+    hardware.pygame.mixer_settings = (frequency, size, channels)
+
+    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD, 0.5) == ErrorCode.NORMAL_OPERATION
+
+    prompt_raw = HMI._audio_cache[HMI.AudioPrompt.UNFOLD].get_raw()
+    silence = hardware.pygame.channel.play_calls[-1][0].get_raw()[len(prompt_raw):]
+    assert silence == silent_sample * (channels * round(0.5 * frequency))
+
+
+def test_set_audio_repeat_delay_failure_reports_pygame_failure(hardware):
+    """Failing to build the delayed copy (here, the mixer has been shut down) reports ERROR_PYGAME_FAILURE
+    without playing anything."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    HMI.set_audio(HMI.AudioPrompt.UNFOLD, 0.0)  # cache the prompt while the mixer is up
+    plays_before = len(hardware.pygame.channel.play_calls)
+    hardware.pygame.mixer_settings = None
+
+    assert HMI.set_audio(HMI.AudioPrompt.UNFOLD, 1.0) == ErrorCode.ERROR_PYGAME_FAILURE
+    assert len(hardware.pygame.channel.play_calls) == plays_before
 
 
 # Every real AudioPrompt currently has a file, so the no-audio (empty path)
@@ -419,10 +478,10 @@ def test_set_audio_with_no_prompt_stops_channel(hardware):
     import HMI
     HMI.init_HMI(hardware.pi)
 
-    HMI.set_audio(HMI.AudioPrompt.UNFOLD)
+    HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY)
     assert hardware.pygame.channel.sound is not None
 
-    assert HMI.set_audio(cast("HMI.AudioPrompt", _NO_AUDIO_PROMPT)) == ErrorCode.NORMAL_OPERATION
+    assert HMI.set_audio(cast("HMI.AudioPrompt", _NO_AUDIO_PROMPT), HMI.DEFAULT_AUDIO_REPEAT_DELAY) == ErrorCode.NORMAL_OPERATION
     assert hardware.pygame.channel.sound is None
 
 
@@ -465,7 +524,7 @@ def test_audio_finished_reports_elapsed_time_against_prompt_length(hardware, mon
     monkeypatch.setattr(HMI.time, "monotonic", lambda: fake_now["t"])
 
     hardware.pygame.sound_length_sec = 2.0
-    HMI.set_audio(HMI.AudioPrompt.UNFOLD)
+    HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY)
 
     assert HMI.audio_finished() is False
 
@@ -481,7 +540,7 @@ def test_audio_finished_true_when_no_prompt_is_set(hardware):
     import HMI
     HMI.init_HMI(hardware.pi)
 
-    HMI.set_audio(cast("HMI.AudioPrompt", _NO_AUDIO_PROMPT))
+    HMI.set_audio(cast("HMI.AudioPrompt", _NO_AUDIO_PROMPT), HMI.DEFAULT_AUDIO_REPEAT_DELAY)
 
     assert HMI.audio_finished() is True
 

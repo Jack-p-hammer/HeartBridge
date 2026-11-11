@@ -337,14 +337,23 @@ class FakePygameFont:
 
 
 class FakePygameSound:
-    """Stand-in for a pygame.mixer.Sound loaded from an audio prompt's path."""
+    """Stand-in for a pygame.mixer.Sound, loaded from an audio prompt's path or built from a raw sample buffer.
 
-    def __init__(self, path, length=1.0):
-        self.path = path
-        self._length = length
+    Like the real Sound, it holds raw samples in the mixer's format, and its length is computed from them.
+    Loaded prompts are filled with non-zero bytes, so silence appended to them (all zero bytes for the
+    default signed format) can be told apart.
+    """
+
+    def __init__(self, path, raw: bytes, bytes_per_sec: int):
+        self.path = path  # None when built from a buffer
+        self._raw = raw
+        self._bytes_per_sec = bytes_per_sec
 
     def get_length(self):
-        return self._length
+        return len(self._raw) / self._bytes_per_sec
+
+    def get_raw(self):
+        return self._raw
 
 
 class FakePygameChannel:
@@ -386,6 +395,7 @@ class PygameHarness:
         self.ticks = 0
         self.sound_length_sec = 1.0
         self.sound_loads: list = []  # paths actually passed to mixer.Sound()
+        self.mixer_settings: Optional[tuple[int, int, int]] = None  # mixer.get_init(): (frequency, format, channels), None until mixer.init()
         self.rendered: list = []  # strings rendered with pygame.font (the CPR timer)
         self.display_updates: int = 0  # partial display.update() calls (the CPR timer)
 
@@ -489,20 +499,32 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
         if pg.init_error is not None:
             raise pg.init_error
 
-    def mixer_init(frequency=44100, channels=1, buffer=2048):
+    def mixer_init(frequency=44100, size=-16, channels=1, buffer=2048):
         if pg.init_error is not None:
             raise pg.init_error
+        pg.mixer_settings = (frequency, size, channels)
+
+    def mixer_get_init():
+        return pg.mixer_settings
 
     def mixer_channel(index):
         return pg.channel
 
-    def mixer_sound(path):
+    def mixer_sound(file=None, buffer=None):
+        # Like the real mixer, sounds can only be made once the mixer is initialized
+        if pg.mixer_settings is None:
+            raise RuntimeError("mixer not initialized")
+        frequency, size, channels = pg.mixer_settings
+        frame_bytes = channels * abs(size) // 8
+        if buffer is not None:
+            return FakePygameSound(None, bytes(buffer), frequency * frame_bytes)
         if pg.audio_load_error is not None:
             raise pg.audio_load_error
-        pg.sound_loads.append(path)
-        return FakePygameSound(path, length=pg.sound_length_sec)
+        pg.sound_loads.append(file)
+        raw = b"\x01" * (round(pg.sound_length_sec * frequency) * frame_bytes)
+        return FakePygameSound(file, raw, frequency * frame_bytes)
 
-    mixer_ns = types.SimpleNamespace(init=mixer_init, Channel=mixer_channel, Sound=mixer_sound)
+    mixer_ns = types.SimpleNamespace(init=mixer_init, get_init=mixer_get_init, Channel=mixer_channel, Sound=mixer_sound)
 
     def display_info():
         if pg.display_error is not None:

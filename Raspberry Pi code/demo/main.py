@@ -11,9 +11,15 @@
 # External imports
 import time
 import sys
+import os
+import atexit
+import select
+import termios
+import tty
 import logging
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 DEMO_DIR = Path(__file__).resolve().parent
 SRC_DIR = DEMO_DIR.parent / "src"
@@ -42,6 +48,9 @@ LOOP_TICK_SEC = 0.05  # 50ms per tick, 20 Hz
 UNFOLD_FRAMES = [HMI.Image.UNFOLD_1, HMI.Image.UNFOLD_2, HMI.Image.UNFOLD_3, HMI.Image.UNFOLD_4]
 UNFOLD_FRAME_SEC = 0.5  # 2 frames per second
 
+# The battery voltage comes from the moteus, so it reads 0 V until the first reply. Wait this long for one at startup
+MOTOR_FIRST_REPLY_TIMEOUT_SEC = 5.0
+
 # Initialize log directory and file
 # 2x parent to get to project root
 LOG_DIR = Path(__file__).resolve().parent.parent / "Logs"
@@ -67,6 +76,11 @@ FATAL_ERRORS = {
     ErrorCode.ERROR_UNKNOWN_IMAGE,
 }
 
+ESCAPE_CHAR = "\x1b"  # Sent alone by the Esc key; also starts the multi-character sequences of arrow/function keys
+
+# Terminal settings from before enable_terminal_keys() changed them, None if the terminal wasn't changed
+_saved_terminal_settings: list[Any] | None = None
+
 
 def configure_logging():
     """Configure console and file logging for the CPR machine runtime."""
@@ -85,9 +99,72 @@ def configure_logging():
     )
 
 
+def enable_terminal_keys() -> None:
+    """Let the terminal the demo was started from (e.g. an SSH session) send key presses, alongside the pygame window.
+
+    Puts the terminal in cbreak mode, so each key press can be read straight away without waiting for Enter, and
+    isn't echoed. Ctrl+C still works. The original settings are restored when the process exits, however it exits.
+    Does nothing when stdin isn't a terminal (e.g. started by a service) or off Linux.
+    """
+    global _saved_terminal_settings
+    # Compared with != so Pylance skips the Linux-only termios calls when checking on Windows, like HMI.py
+    if sys.platform != "linux":
+        return
+    if not sys.stdin.isatty():
+        return
+
+    fd: int = sys.stdin.fileno()
+    _saved_terminal_settings = termios.tcgetattr(fd)
+    tty.setcbreak(fd)
+    atexit.register(restore_terminal)
+
+
+def restore_terminal() -> None:
+    """Put the terminal back the way it was before enable_terminal_keys(). Registered with atexit."""
+    global _saved_terminal_settings
+    if sys.platform != "linux":
+        return
+    if _saved_terminal_settings is None:
+        return
+
+    termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, _saved_terminal_settings)
+    _saved_terminal_settings = None
+
+
+def read_terminal_keys() -> list[int]:
+    """Return the keys typed in the terminal since the last tick, as pygame key codes. Non-blocking.
+
+    pygame's key codes for letters and digits are their lowercase ASCII codes (pygame.K_b == ord("b")), so a typed
+    character maps straight across. A lone Esc becomes pygame.K_ESCAPE. Arrow and function keys arrive as an Esc
+    followed by more characters in the same read, and are ignored so they don't count as Esc.
+
+    Returns:
+        list[int]: pygame key codes typed, empty if none or if enable_terminal_keys() didn't change the terminal
+    """
+    if sys.platform != "linux":
+        return []
+    if _saved_terminal_settings is None:
+        return []
+
+    fd: int = sys.stdin.fileno()
+    ready, _, _ = select.select([fd], [], [], 0)  # Timeout 0: only check, never wait
+    if not ready:
+        return []
+    typed: str = os.read(fd, 1024).decode(errors="ignore")
+
+    if typed == ESCAPE_CHAR:
+        return [pygame.K_ESCAPE]
+    if ESCAPE_CHAR in typed:
+        # Arrow/function key sequence, possibly with other keys typed in the same tick. Keep only the part before it
+        typed = typed.split(ESCAPE_CHAR)[0]
+    return [ord(char.lower()) for char in typed if char.isprintable()]
+
+
 def read_keys() -> tuple[ErrorCode, list[int]]:
     """Return the keys pressed since the last tick, and exit the demo if the window was closed. Non-blocking.
 
+    Keys come from both the pygame window (a keyboard plugged into the Pi) and the terminal the demo was started from
+    (e.g. over SSH, where key presses never reach the window).
     HMI.pump_events() keeps the window alive but never reads keys. This takes the key
     presses off pygame's queue, so it must be called exactly once per tick, and every
     key check in the loop reads its result.
@@ -96,9 +173,11 @@ def read_keys() -> tuple[ErrorCode, list[int]]:
         tuple[ErrorCode, list[int]]: NORMAL_OPERATION and the pygame key codes pressed, or ERROR_PYGAME_FAILURE and
             no keys if the event queue couldn't be read
     """
+    keys_pressed: list[int] = read_terminal_keys()
+
     # The display doesn't exist until HMI.init_HMI() runs in INIT_STARTUP
     if not pygame.display.get_init():
-        return ErrorCode.NORMAL_OPERATION, []
+        return ErrorCode.NORMAL_OPERATION, keys_pressed
 
     try:
         events = pygame.event.get((pygame.QUIT, pygame.KEYDOWN))
@@ -106,7 +185,6 @@ def read_keys() -> tuple[ErrorCode, list[int]]:
         logging.error(f"Failed to read keyboard events: {e}")
         return ErrorCode.ERROR_PYGAME_FAILURE, []
 
-    keys_pressed: list[int] = []
     for event in events:
         if event.type == pygame.QUIT:
             shutdown_demo()
@@ -146,6 +224,7 @@ def shutdown_demo() -> None:
 def main():
     """Run the main state-machine loop for the CPR machine."""
     configure_logging()
+    enable_terminal_keys()
 
     # Start by defining initial state and error code. The state machine will update these as it runs.
     state = CPRState.INIT_STARTUP
@@ -158,6 +237,7 @@ def main():
     compression_start: float | None = None  # time.monotonic() when the current run of compressions started, None while not compressing
     shown_sec: int | None = None  # Whole seconds currently drawn on the timer, None to force a redraw
     abort_carriage_home: bool = False  # True once ABORT has finished retracting the carriage, so it stops re-retracting
+    init_done_time: float = 0.0  # time.monotonic() when INIT_STARTUP's setup finished, to time out waiting for the moteus
 
     # Unfold animation position, reset when UNFOLD_CUT_CLOTHES is entered
     frame_idx: int = 0
@@ -207,21 +287,32 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = sensing.init_sensors(actuation.get_motor_controller(), HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    init_done_time = time.monotonic()
+
+                # Loop
+                # Until the moteus first replies its state is stale and the battery reads 0 V, so only check the
+                # battery once a reply has arrived. No reply within the timeout is a motor failure
+                if actuation.get_motor_controller().get_state().stale:
+                    if time.monotonic() - init_done_time > MOTOR_FIRST_REPLY_TIMEOUT_SEC:
+                        logging.error(f"No reply from the moteus within {MOTOR_FIRST_REPLY_TIMEOUT_SEC} s of startup")
+                        error = ErrorCode.ERROR_MOTOR_FAILURE
+                else:
                     error = sensing.battery_check()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    
-                    # Immediately go to the WAIT state, which is only used in the demo
+
+                    # Go to the WAIT state, which is only used in the demo
                     state = CPRState.WAIT
                     
             case(CPRState.WAIT):
                 # Wait for a keyboard input to start the demo. This state is only used in the demo, not in src/main.py.
                 if state != prev_state:
+                    # B starts the demo
+                    logging.debug(f"Press B to start the demo, Esc or Q to exit")
                     # No images yet, TODO: Add a black screen or sm
                     pass
 
                 # Loop
-                # B starts the demo
-                logging.debug(f"Press B to start the demo, Esc or Q to exit")
+
                 if pygame.K_b in keys_pressed:
                     logging.info("B pressed, starting demo")
                     state = CPRState.STARTUP

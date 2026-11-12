@@ -11,7 +11,10 @@ import threading
 import math
 import time
 import logging
-from typing import Optional
+import argparse
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Optional
 
 # Internal imports
 from Enums.error_codes import ErrorCode
@@ -22,6 +25,12 @@ COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
 REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1s watchdog, same as scripts/slow_jog.py
 STOP_ATTEMPTS: int = 5  # tries at the startup stop command before commanding anyway (the command loop then logs errors)
 RETRACT_VELOCITY_MPS: float = 0.08  # meters per second, velocity of the plunger along the ball screw during retract
+
+# Diagnostics: write every raw line sent to and received from the CAN adapter to Logs/moteus_raw_<timestamp>.log.
+# Each line is stamped with time.time(); the command loop's error messages include the same clock to line them up.
+# TODO: Turn off once the lost frames are diagnosed, it adds a file write per line on the moteus thread
+RAW_TRAFFIC_LOG: bool = True
+RAW_TRAFFIC_LOG_DIR: Path = Path(__file__).resolve().parent.parent / "Logs"  # same folder as the main logs
 
 # --- Ball screw constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
 BALL_SCREW_LEAD_M: float = 0.0254*0.5  # meters of plunger travel per ball screw revolution
@@ -129,7 +138,22 @@ class MoteusThread:
             # Q current is ignored by the default query, so request it explicitly
             query_resolution = moteus.QueryResolution()
             query_resolution.q_current = moteus.F32
-            self._controller = moteus.Controller(id=self._controller_id, query_resolution=query_resolution)
+            controller_kwargs: dict[str, Any] = {}
+            if RAW_TRAFFIC_LOG:
+                # The transport only takes a debug log when it's first built, so build it here instead of letting the
+                # controller build it on the first command. Built the same way, from moteus's own transport options
+                try:
+                    RAW_TRAFFIC_LOG_DIR.mkdir(parents=True, exist_ok=True)
+                    log_path: Path = RAW_TRAFFIC_LOG_DIR / f"moteus_raw_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
+                    parser = argparse.ArgumentParser()
+                    moteus.make_transport_args(parser) # pyright: ignore[reportAttributeAccessIssue]
+                    transport_args = parser.parse_args(["--can-debug", str(log_path)])
+                    controller_kwargs["transport"] = moteus.get_singleton_transport(transport_args) # pyright: ignore[reportAttributeAccessIssue]
+                    logging.info(f"Logging raw moteus traffic to {log_path}")
+                except Exception as e:
+                    # Diagnostics only: carry on exactly as without the log
+                    logging.warning(f"Raw moteus traffic log not started, continuing without it: {e}")
+            self._controller = moteus.Controller(id=self._controller_id, query_resolution=query_resolution, **controller_kwargs)
         except Exception:
             self._init_error = ErrorCode.ERROR_INIT_FAILURE
             self._ready.set()
@@ -156,6 +180,7 @@ class MoteusThread:
 
         while not self._stop_requested:
             cycle_start: float = time.monotonic()
+            cycle_wall_time: float = time.time()  # same clock as the raw traffic log, to find this cycle's lines in it
 
             # A reset (request_stop_sequence()) runs the same stop as startup. Cleared first, so a request made
             # while it runs gets its own stop next cycle
@@ -194,11 +219,12 @@ class MoteusThread:
                 self._last_error = ErrorCode.NORMAL_OPERATION
             except asyncio.TimeoutError:
                 # Lost reply. The next cycle sends the target again
-                logging.error(f"Moteus command loop failed: no reply within {REPLY_TIMEOUT_S} s")
+                logging.error(f"Moteus command loop failed: no reply within {REPLY_TIMEOUT_S} s "
+                              f"(sent at {cycle_wall_time:.6f}, raw log clock)")
                 self._last_error = ErrorCode.ERROR_MOTOR_FAILURE
             except Exception as e:
                 # Communication-level failure (timeout, transport, # error, etc).
-                logging.error(f"Moteus command loop failed: {e}")
+                logging.error(f"Moteus command loop failed: {e} (sent at {cycle_wall_time:.6f}, raw log clock)")
                 self._last_error = ErrorCode.ERROR_MOTOR_FAILURE
 
             elapsed: float = time.monotonic() - cycle_start

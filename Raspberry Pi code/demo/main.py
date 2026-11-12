@@ -441,7 +441,7 @@ def main():
                     shown_sec = None
 
                 # Loop
-                error = actuaion.compressions()
+                error = actuation.compressions()
                 if error != ErrorCode.NORMAL_OPERATION: continue
 
                 # Setup always sets this before the loop runs; this only narrows the type for the timer math below

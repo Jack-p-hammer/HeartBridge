@@ -58,39 +58,106 @@ def test_command_loop_without_controller_reports_init_failure(hardware, caplog):
     assert "Moteus controller not initialized" in caplog.text
 
 
-def test_lost_frame_is_only_a_motor_failure_after_tolerance(hardware):
-    """A lost frame shortly after a good reply is tolerated; with no good reply for LOST_REPLY_TOLERANCE_S, or none
-    yet at all, it's reported."""
+def _following_thread():
+    """A never-started MoteusThread whose latest reply, just now, was in position mode (following commands)."""
     import time
     import dataclasses
-    from moteus_thread import MoteusThread, LOST_REPLY_TOLERANCE_S
-    thread = MoteusThread()  # never started, state set by hand
+    from moteus_thread import MoteusThread, MODE_POSITION
+    thread = MoteusThread()
+    now = time.monotonic()
+    thread._state = dataclasses.replace(thread._state, stale=False, timestamp=now, mode=MODE_POSITION)
+    thread._last_error = ErrorCode.NORMAL_OPERATION
+    thread._last_following_time = now
+    return thread
+
+
+def test_motor_following_commands_is_normal(hardware):
+    assert _following_thread().get_last_error() == ErrorCode.NORMAL_OPERATION
+
+
+def test_errors_before_first_reply_are_reported_as_is(hardware):
+    from moteus_thread import MoteusThread
+    thread = MoteusThread()  # never started: no reply yet
+    assert thread.get_last_error() == ErrorCode.ERROR_INIT_FAILURE
     thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
     thread._last_error_from_lost_frame = True
-
-    # No reply yet: reported straight away
     assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
 
-    # Good reply just now: the lost frame is tolerated
-    thread._state = dataclasses.replace(thread._state, stale=False, timestamp=time.monotonic())
+
+def test_lost_frame_is_only_a_motor_failure_after_tolerance(hardware):
+    """A lost frame shortly after following a command is tolerated; not following for MOTOR_RESPONSE_TOLERANCE_S is
+    reported."""
+    import time
+    from moteus_thread import MOTOR_RESPONSE_TOLERANCE_S
+    thread = _following_thread()
+    thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+    thread._last_error_from_lost_frame = True
     assert thread.get_last_error() == ErrorCode.NORMAL_OPERATION
 
-    # No good reply for longer than the tolerance: reported
-    thread._state = dataclasses.replace(thread._state, timestamp=time.monotonic() - 2.0 * LOST_REPLY_TOLERANCE_S)
+    thread._last_following_time = time.monotonic() - 2.0 * MOTOR_RESPONSE_TOLERANCE_S
     assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
 
 
 def test_other_motor_errors_are_reported_straight_away(hardware):
-    """Only lost frames are tolerated: any other failed cycle is reported even right after a good reply."""
-    import time
-    import dataclasses
-    from moteus_thread import MoteusThread
-    thread = MoteusThread()  # never started, state set by hand
-    thread._state = dataclasses.replace(thread._state, stale=False, timestamp=time.monotonic())
+    """Only lost frames are tolerated: any other failed cycle is reported even right after following a command."""
+    thread = _following_thread()
     thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
     thread._last_error_from_lost_frame = False
-
     assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+def test_fault_is_reported_straight_away(hardware):
+    """A faulted moteus has stopped driving the motor, even though it's still replying."""
+    import dataclasses
+    from moteus_thread import MODE_FAULT
+    thread = _following_thread()
+    thread._state = dataclasses.replace(thread._state, mode=MODE_FAULT, fault=33)
+    assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+@pytest.mark.parametrize("mode_name", ["MODE_POSITION_TIMEOUT", "stopped"])
+def test_replying_but_not_following_is_a_motor_failure_after_tolerance(hardware, mode_name):
+    """The case that left the motor still with no abort: the moteus replies to every command, with no command errors,
+    but isn't in position mode, so it isn't following them. Tolerated briefly (a stop takes a cycle or two to clear),
+    then a motor failure."""
+    import time
+    import dataclasses
+    import moteus_thread
+    from moteus_thread import MOTOR_RESPONSE_TOLERANCE_S
+    mode = 0 if mode_name == "stopped" else getattr(moteus_thread, mode_name)
+    thread = _following_thread()
+
+    # Replies keep coming, in the wrong mode, and position mode was last seen just now: tolerated
+    thread._state = dataclasses.replace(thread._state, mode=mode, timestamp=time.monotonic())
+    assert thread.get_last_error() == ErrorCode.NORMAL_OPERATION
+
+    # Still replying in the wrong mode, last in position mode longer ago than the tolerance: a motor failure
+    thread._last_following_time = time.monotonic() - 2.0 * MOTOR_RESPONSE_TOLERANCE_S
+    assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+def test_motor_stuck_in_position_timeout_is_a_motor_failure(hardware):
+    """End to end through the command loop: a moteus that stays in position timeout mode, even after stops, is a motor
+    failure once the tolerance passes."""
+    import time
+    import actuation
+    from moteus_thread import MODE_POSITION_TIMEOUT, MOTOR_RESPONSE_TOLERANCE_S
+    actuation.init_motor()
+    time.sleep(0.05)
+    assert actuation.check_motor() == ErrorCode.NORMAL_OPERATION
+
+    # A stop no longer clears it
+    controller = hardware.moteus_controller
+    original_set_stop = controller.set_stop
+
+    async def set_stop_that_does_not_clear(**kwargs):
+        await original_set_stop(**kwargs)
+        controller.mode = MODE_POSITION_TIMEOUT
+    controller.set_stop = set_stop_that_does_not_clear
+    controller.mode = MODE_POSITION_TIMEOUT
+    time.sleep(MOTOR_RESPONSE_TOLERANCE_S + 0.1)
+
+    assert actuation.check_motor() == ErrorCode.ERROR_MOTOR_FAILURE
 
 
 @pytest.mark.parametrize("failure, from_lost_frame", [
@@ -115,7 +182,7 @@ def test_position_timeout_mode_is_cleared_with_a_stop(hardware, caplog):
     """A reply in position timeout mode (the moteus ignoring commands) makes the command loop send a stop to clear it."""
     import time
     import actuation
-    from moteus_thread import MODE_POSITION_TIMEOUT
+    from moteus_thread import MODE_POSITION_TIMEOUT, MODE_POSITION
     actuation.init_motor()
     time.sleep(0.05)  # startup stop done, commanding normally
     stops_before = hardware.moteus_controller.stop_count
@@ -123,9 +190,11 @@ def test_position_timeout_mode_is_cleared_with_a_stop(hardware, caplog):
     hardware.moteus_controller.mode = MODE_POSITION_TIMEOUT
     time.sleep(0.05)
 
-    assert hardware.moteus_controller.stop_count == stops_before + 1  # one stop clears it (the fake goes to mode 0)
-    assert hardware.moteus_controller.mode == 0
+    # One stop clears it: the fake goes to stopped (0), then the next command puts it back in position mode
+    assert hardware.moteus_controller.stop_count == stops_before + 1
+    assert hardware.moteus_controller.mode == MODE_POSITION
     assert "position timeout" in caplog.text
+    assert actuation.check_motor() == ErrorCode.NORMAL_OPERATION
 
 
 def _daemon_gone(*args, **kwargs):

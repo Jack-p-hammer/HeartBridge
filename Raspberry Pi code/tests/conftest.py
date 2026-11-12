@@ -288,6 +288,10 @@ class FakeMoteusController:
         if self.raise_on_set_position is not None:
             raise self.raise_on_set_position
         self.commands.append(kwargs)
+        # Like the real moteus, a position command takes it from stopped into position mode (10). Any other mode a
+        # test sets (fault, position timeout) is kept until a stop
+        if self.mode == 0:
+            self.mode = 10
         return FakeMoteusResult({
             _MOTEUS_REGISTERS.MODE: self.mode,
             _MOTEUS_REGISTERS.FAULT: self.fault,

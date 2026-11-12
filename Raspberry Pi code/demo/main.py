@@ -264,7 +264,13 @@ def main():
         if error != ErrorCode.NORMAL_OPERATION: continue
         if pygame.K_ESCAPE in keys_pressed or pygame.K_q in keys_pressed:
             shutdown_demo()
-        
+
+        # The motor not responding aborts from every state. INIT_STARTUP waits for it to respond before leaving, and
+        # ABORT is where this leads
+        if state not in (CPRState.INIT_STARTUP, CPRState.ABORT):
+            error = actuation.check_motor()
+            if error != ErrorCode.NORMAL_OPERATION: continue
+
 
         # --- State machine ---
         # Each state checks (state != prev_state) to detect first entry, and runs
@@ -290,12 +296,14 @@ def main():
                     init_done_time = time.monotonic()
 
                 # Loop
-                # Until the moteus first replies its state is stale: position and battery both read 0. So the sensors
-                # (which record the startup position that pause, abort, and the travel limits are measured from) and
-                # the battery check wait for a reply. No reply within the timeout is a motor failure
-                if actuation.get_motor_controller().get_state().stale:
+                # Wait for the motor to respond (replying and following commands). Until the moteus first replies its
+                # state is stale: position and battery both read 0, so the sensors (which record the startup position
+                # that pause, abort, and the travel limits are measured from) and the battery check need a reply. And
+                # startup can hold up the moteus thread long enough to trip its watchdog, which the moteus thread clears
+                # once it runs again. Not responding within the timeout is a motor failure
+                if actuation.get_motor_controller().get_last_error() != ErrorCode.NORMAL_OPERATION:
                     if time.monotonic() - init_done_time > MOTOR_FIRST_REPLY_TIMEOUT_SEC:
-                        logging.error(f"No reply from the moteus within {MOTOR_FIRST_REPLY_TIMEOUT_SEC} s of startup")
+                        logging.error(f"Motor not responding within {MOTOR_FIRST_REPLY_TIMEOUT_SEC} s of startup")
                         error = ErrorCode.ERROR_MOTOR_FAILURE
                 else:
                     error = sensing.init_sensors(actuation.get_motor_controller(), HMI.get_pi())

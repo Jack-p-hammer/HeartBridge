@@ -87,6 +87,21 @@ def init_steppers(pi) -> ErrorCode:
 
     return ErrorCode.NORMAL_OPERATION
 
+def check_motor() -> ErrorCode:
+    """Check the motor is responding (replying and following commands, see MoteusThread.get_last_error()). Non-blocking.
+    Call every tick once the motor is up, so the motor not responding aborts from any state.
+
+    Returns:
+        ErrorCode: NORMAL_OPERATION if the motor is responding, ERROR_MOTOR_FAILURE otherwise
+    """
+    global _motor_controller
+    error = _motor_controller.get_last_error()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Motor check failed: {error}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+    return ErrorCode.NORMAL_OPERATION
+
+
 def get_motor_controller() -> MoteusThread:
     """Get the shared moteus controller instance.
 

@@ -148,7 +148,12 @@ class MoteusThread:
                     parser = argparse.ArgumentParser()
                     moteus.make_transport_args(parser) # pyright: ignore[reportAttributeAccessIssue]
                     transport_args = parser.parse_args(["--can-debug", str(log_path)])
-                    controller_kwargs["transport"] = moteus.get_singleton_transport(transport_args) # pyright: ignore[reportAttributeAccessIssue]
+
+                    # The fdcanusb transport needs a running event loop to be built (it starts its reader task then),
+                    # so build it inside this thread's loop. The reader task waits in the loop until the command loop runs
+                    async def build_transport() -> Any:
+                        return moteus.get_singleton_transport(transport_args) # pyright: ignore[reportAttributeAccessIssue]
+                    controller_kwargs["transport"] = loop.run_until_complete(build_transport())
                     logging.info(f"Logging raw moteus traffic to {log_path}")
                 except Exception as e:
                     # Diagnostics only: carry on exactly as without the log

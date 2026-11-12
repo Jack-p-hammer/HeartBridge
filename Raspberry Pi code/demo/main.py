@@ -407,25 +407,25 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.COMPRESSION
 
-            case(CPRState.COMPRESSION_PREP):
-                # !!!!!!!!!! DEPRICATED !!!!!!!!!!!!!!!!
-                # Setup
-                if state != prev_state:
-                    logging.warning("COMPRESSION_PREP state is deprecated and should not be used. why are we here?")
-                    error = HMI.disable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.disable_pause_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
+            # case(CPRState.COMPRESSION_PREP):
+            #     # !!!!!!!!!! DEPRICATED !!!!!!!!!!!!!!!!
+            #     # Setup
+            #     if state != prev_state:
+            #         logging.warning("COMPRESSION_PREP state is deprecated and should not be used. why are we here?")
+            #         error = HMI.disable_next_button()
+            #         if error != ErrorCode.NORMAL_OPERATION: continue
+            #         error = HMI.disable_pause_button()
+            #         if error != ErrorCode.NORMAL_OPERATION: continue
 
-                    error = actuation.init_compressions()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
+            #         error = actuation.init_compressions()
+            #         if error != ErrorCode.NORMAL_OPERATION: continue
                     
-                    error = HMI.set_image_audio(HMI.Image.COMPRESSION_PREP, HMI.AudioPrompt.COMPRESSION_PREP)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
+            #         error = HMI.set_image_audio(HMI.Image.COMPRESSION_PREP, HMI.AudioPrompt.COMPRESSION_PREP)
+            #         if error != ErrorCode.NORMAL_OPERATION: continue
 
-                # Loop
-                if HMI.audio_finished():
-                    state = CPRState.COMPRESSION
+            #     # Loop
+            #     if HMI.audio_finished():
+            #         state = CPRState.COMPRESSION
 
             case(CPRState.COMPRESSION):
                 # Setup

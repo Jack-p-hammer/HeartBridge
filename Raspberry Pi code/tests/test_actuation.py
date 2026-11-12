@@ -400,50 +400,50 @@ def test_stepper_dir_pin_follows_gear_ratio_sign(hardware):
 
 # -------------------- computeCompressionSetpoint (pure) --------------------
 
-def test_compute_compression_setpoint_piecewise_profile(hardware, monkeypatch):
-    """The trapezoidal waveform should stay flat, ramp up, plateau, ramp down, and repeat."""
+def test_compute_compression_setpoint_stroke_profile(hardware, monkeypatch):
+    """Down stroke then up stroke, each a thirds trapezoid (quarter, half, quarter of the depth), repeating."""
     import actuation
 
     fake_time = {"t": 0.0}
     monkeypatch.setattr(actuation.time, "monotonic", lambda: fake_time["t"])
     actuation.init_compressions()  # compression_start_time = 0.0
-    peak = actuation.COMPRESSION_DEPTH_CM / 100.0
+    depth = actuation.COMPRESSION_DEPTH_CM / 100.0
+    stroke = actuation.STROKE_SEC
 
-    fake_time["t"] = 0.05  # 0.00-0.12s: still at the top
-    assert actuation.computeCompressionSetpoint() == pytest.approx(0.0)
+    expected = [
+        (0.0, 0.0),                       # top, starting the down stroke
+        (stroke / 3.0, 0.25 * depth),     # end of speeding up
+        (stroke / 2.0, 0.5 * depth),      # middle of the cruise
+        (2.0 * stroke / 3.0, 0.75 * depth),  # start of slowing down
+        (stroke, depth),                  # bottom, starting the up stroke
+        (1.5 * stroke, 0.5 * depth),      # middle of the up stroke
+        (2.0 * stroke, 0.0),              # back at the top, cycle repeats
+        (2.5 * stroke, 0.5 * depth),      # middle of the next down stroke
+    ]
+    for t, position in expected:
+        fake_time["t"] = t
+        assert actuation.computeCompressionSetpoint() == pytest.approx(position, abs=1e-9), t
 
-    fake_time["t"] = 0.18  # 0.12-0.24s: ramping down toward full compression
-    assert 0.0 < actuation.computeCompressionSetpoint() < peak
 
-    fake_time["t"] = 0.28  # 0.24-0.323s: fully compressed
-    assert actuation.computeCompressionSetpoint() == pytest.approx(peak)
-
-    fake_time["t"] = 0.50  # 0.323-0.56s: ramping back up
-    assert 0.0 < actuation.computeCompressionSetpoint() < peak
-
-    fake_time["t"] = 0.56 + 0.05  # cycle repeats every 0.56s
-    assert actuation.computeCompressionSetpoint() == pytest.approx(0.0)
-
-
-def test_compute_compression_setpoint_exact_boundary_values(hardware, monkeypatch):
-    """The test above checks interior points of each segment; this pins down the
-    exact transition instants so a boundary can't silently fall into the wrong
-    branch (e.g. an off-by-one in a `<` vs `<=` comparison)."""
+def test_compute_compression_setpoint_is_continuous(hardware, monkeypatch):
+    """No jumps anywhere in the cycle, including the segment and stroke boundaries, and never outside 0 to depth."""
     import actuation
 
     fake_time = {"t": 0.0}
     monkeypatch.setattr(actuation.time, "monotonic", lambda: fake_time["t"])
     actuation.init_compressions()
-    peak = actuation.COMPRESSION_DEPTH_CM / 100.0
+    depth = actuation.COMPRESSION_DEPTH_CM / 100.0
+    dt = 1e-5
+    # Fastest possible change per step is the cruise speed, 1.5 * depth / STROKE_SEC
+    max_step = 1.5 * depth / actuation.STROKE_SEC * dt * 1.01
 
-    fake_time["t"] = 0.12  # flat -> ramp boundary: ramp is just starting, still 0
-    assert actuation.computeCompressionSetpoint() == pytest.approx(0.0)
-
-    fake_time["t"] = 0.24  # ramp -> plateau boundary: ramp just finished, at peak
-    assert actuation.computeCompressionSetpoint() == pytest.approx(peak)
-
-    fake_time["t"] = 0.323  # plateau -> ramp-down boundary: still at peak
-    assert actuation.computeCompressionSetpoint() == pytest.approx(peak)
+    previous = actuation.computeCompressionSetpoint()
+    for i in range(1, int(2.0 * actuation.STROKE_SEC / dt) + 2):
+        fake_time["t"] = i * dt
+        position = actuation.computeCompressionSetpoint()
+        assert -1e-12 <= position <= depth + 1e-12
+        assert abs(position - previous) <= max_step
+        previous = position
 
 
 # -------------------- compressions --------------------

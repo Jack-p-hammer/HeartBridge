@@ -24,7 +24,9 @@ import stepper
 from stepper import LEAD_SCREW_TRAVEL_M, ZEROING_VELOCITY_MPS, RETRACT_VELOCITY_MPS
 
 
-COMPRESSION_DEPTH_CM: float = 7.0 # depth of compressions in cm, because compression setpoint math is in cm
+COMPRESSION_DEPTH_CM: float = 5.08 # depth of compressions in cm (2 in, same as demo/jog_compressions.py). AHA adult depth is 2 to 2.4 in
+COMPRESSIONS_PER_MIN: float = 110.0 # AHA rate is 100 to 120 per minute, same as demo/jog_compressions.py
+STROKE_SEC: float = 60.0 / COMPRESSIONS_PER_MIN / 2.0 # time for one stroke in one direction, half a compression
 EXTENSION_STROKE_LIMIT_M: float = LEAD_SCREW_TRAVEL_M # maximum carriage extension in meters, zeroing fails if the chest isn't found by here
 
 # 1.5x buffer on top of the time to reach max extension, for accel ramps. TODO: Tune
@@ -279,6 +281,40 @@ def abort_compressions() -> ErrorCode:
 
 
 def computeCompressionSetpoint() -> float:
+    """Computes the current compression setpoint, returns position relative to zeroed position.
+
+    Mimics demo/jog_compressions.py: each cycle is a down stroke of COMPRESSION_DEPTH_CM then an up stroke back to the
+    zeroed position, with no hold at either end, at COMPRESSIONS_PER_MIN. Each stroke takes STROKE_SEC and is a
+    trapezoidal velocity profile split into thirds: speed up, cruise, slow down to a stop. jog_compressions.py has the
+    moteus plan that profile (velocity_limit/accel_limit); here the position along it is computed directly instead.
+
+    Returns:
+        float: compression setpoint, relative to zeroed position, in meters. Down (towards the chest) is positive
+    """
+    global compression_start_time
+    time_sec: float = time.monotonic() - compression_start_time
+    cycle_time: float = time_sec % (2.0 * STROKE_SEC)
+    going_down: bool = cycle_time < STROKE_SEC
+    stroke_time: float = cycle_time if going_down else cycle_time - STROKE_SEC  # time into the current stroke
+
+    # Covering the stroke in STROKE_SEC with equal thirds needs an acceleration of 4.5 * stroke / time^2 (same as
+    # jog_compressions.py). Each third then covers a quarter, a half and a quarter of the stroke
+    depth_m: float = COMPRESSION_DEPTH_CM / 100.0
+    accel_mps2: float = 4.5 * depth_m / STROKE_SEC ** 2
+    speed_up_end: float = STROKE_SEC / 3.0
+    slow_down_start: float = 2.0 * STROKE_SEC / 3.0
+    if stroke_time < speed_up_end:
+        stroke_m: float = 0.5 * accel_mps2 * stroke_time ** 2
+    elif stroke_time < slow_down_start:
+        stroke_m: float = 0.25 * depth_m + accel_mps2 * speed_up_end * (stroke_time - speed_up_end)  # cruise speed
+    else:
+        stroke_m: float = depth_m - 0.5 * accel_mps2 * (STROKE_SEC - stroke_time) ** 2
+
+    # The up stroke runs the same profile from the bottom back to the zeroed position
+    return stroke_m if going_down else depth_m - stroke_m
+
+
+def DEPRICATED_computeCompressionSetpoint() -> float:
     """Computes the current compression setpoint from the trapezoidal waveform, returns position relative to zeroed position
 
     Returns:

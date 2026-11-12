@@ -279,8 +279,10 @@ class FakeMoteusController:
         self.stop_count = 0
 
     async def set_stop(self, **kwargs) -> None:
-        # Sent once when the command loop starts, to clear a latched watchdog timeout. Not recorded in `commands`
+        # Sent when the command loop starts, and whenever a reply shows position timeout mode, to clear a latched
+        # watchdog timeout. Not recorded in `commands`. Like the real moteus, a stop leaves it stopped (mode 0)
         self.stop_count += 1
+        self.mode = 0
 
     async def set_position(self, **kwargs) -> FakeMoteusResult:
         if self.raise_on_set_position is not None:

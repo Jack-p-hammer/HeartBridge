@@ -24,6 +24,15 @@ CONTROLLER_ID: int = 1  # The ID of the moteus-x1 controller on the CAN bus
 COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
 REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1s watchdog, same as scripts/slow_jog.py
 STOP_ATTEMPTS: int = 5  # tries at the startup stop command before commanding anyway (the command loop then logs errors)
+# About 0.2% of commands never fully reach the CAN adapter (seen in the raw traffic log), costing one or two cycles each:
+# the lost command times out with no reply, then the adapter rejects the next command, which it reads joined onto the
+# lost one, with "ERR unknown flag". For those two failures only, get_last_error() waits until there's been no good
+# reply for this long before reporting a motor failure, so one lost frame doesn't abort. Any other failure is reported
+# straight away. Two back-to-back lost frames take about 0.13 s; the moteus's own ~0.1 s watchdog still stops it sooner
+LOST_REPLY_TOLERANCE_S: float = 0.2
+LOST_FRAME_ADAPTER_ERROR: str = "unknown flag"  # in the adapter's reply to a command read joined onto a lost one
+# Mode the moteus latches when its watchdog sees no command for ~0.1 s. It ignores position commands until a stop
+MODE_POSITION_TIMEOUT: int = 11
 RETRACT_VELOCITY_MPS: float = 0.08  # meters per second, velocity of the plunger along the ball screw during retract
 
 # Diagnostics: write every raw line sent to and received from the CAN adapter to Logs/moteus_raw_<timestamp>.log.
@@ -114,6 +123,9 @@ class MoteusThread:
         # *controller's own* fault register (uncalibrated, out of
         # bounds, etc) -- that's read via get_state(), not this.
         self._last_error: ErrorCode = ErrorCode.ERROR_INIT_FAILURE
+        # True when _last_error came from a lost frame (no reply in time, or the adapter rejecting the next command
+        # joined onto the lost one), the only failures get_last_error() tolerates for LOST_REPLY_TOLERANCE_S
+        self._last_error_from_lost_frame: bool = False
         self._init_error: ErrorCode = ErrorCode.ERROR_INIT_FAILURE
 
     # --- lifecycle ---------------------------------------------------
@@ -177,6 +189,7 @@ class MoteusThread:
         except AssertionError:
             logging.error("Moteus controller not initialized - Command loop assert error")
             self._last_error = ErrorCode.ERROR_INIT_FAILURE
+            self._last_error_from_lost_frame = False
             return
 
         # When a previous run ends, commands stop and the moteus watchdog latches it in position timeout mode (11),
@@ -222,15 +235,28 @@ class MoteusThread:
                     timestamp=time.monotonic(),
                 )
                 self._last_error = ErrorCode.NORMAL_OPERATION
+                self._last_error_from_lost_frame = False
+
+                # If this thread was held up long enough for the moteus watchdog to trip (e.g. while pygame starts up),
+                # the moteus latched position timeout mode and is ignoring these commands. Clear it with the same stop
+                # as startup; the next cycle's command takes over again. Only sent when the moteus is already
+                # ignoring commands, so it never interrupts motion that's being followed
+                if self._state.mode == MODE_POSITION_TIMEOUT:
+                    logging.warning(f"Moteus in position timeout mode ({MODE_POSITION_TIMEOUT}), ignoring commands: "
+                                    f"sending a stop to clear it (reply at {time.time():.6f}, raw log clock)")
+                    await self._stop_sequence(self._controller, "position timeout")
             except asyncio.TimeoutError:
                 # Lost reply. The next cycle sends the target again
                 logging.error(f"Moteus command loop failed: no reply within {REPLY_TIMEOUT_S} s "
                               f"(sent at {cycle_wall_time:.6f}, raw log clock)")
                 self._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+                self._last_error_from_lost_frame = True
             except Exception as e:
-                # Communication-level failure (timeout, transport, # error, etc).
+                # Communication-level failure (transport, adapter error, etc). Only the adapter rejecting a command read
+                # joined onto a lost one counts as a lost frame; anything else is reported straight away
                 logging.error(f"Moteus command loop failed: {e} (sent at {cycle_wall_time:.6f}, raw log clock)")
                 self._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+                self._last_error_from_lost_frame = LOST_FRAME_ADAPTER_ERROR in str(e)
 
             elapsed: float = time.monotonic() - cycle_start
             await asyncio.sleep(max(0.0, self._period_s - elapsed))
@@ -242,7 +268,7 @@ class MoteusThread:
 
         Args:
             controller (moteus.Controller): The controller to stop
-            reason (str): What the stop is for ("startup" or "reset"), for logging
+            reason (str): What the stop is for ("startup", "reset" or "position timeout"), for logging
         """
         for attempt in range(1, STOP_ATTEMPTS + 1):
             try:
@@ -400,7 +426,23 @@ class MoteusThread:
         return self._state
 
     def get_last_error(self) -> ErrorCode:
-        """Returns the ErrorCode describing the failure/lack thereof from the motor controller thread"""
+        """Returns the ErrorCode describing the failure/lack thereof from the motor controller thread.
+        A lost frame (no reply in time, or the adapter's "ERR unknown flag" for the next command) is only reported once
+        there's been no good reply for LOST_REPLY_TOLERANCE_S, so an occasional lost frame isn't treated as a motor
+        failure. Each failed cycle is still logged. Every other error is reported straight away, as is any error before
+        the moteus has replied at least once.
+
+        Possible values:
+            NORMAL_OPERATION: the latest cycle got a good reply, or a lost frame within the tolerance
+            ERROR_INIT_FAILURE: the command loop hasn't run yet, or started without a controller
+            ERROR_MOTOR_FAILURE: a command failed (lost frames only after the tolerance)
+        """
+        if (self._last_error == ErrorCode.NORMAL_OPERATION or
+            not self._last_error_from_lost_frame or
+            self._state.stale):
+            return self._last_error
+        if time.monotonic() - self._state.timestamp <= LOST_REPLY_TOLERANCE_S:
+            return ErrorCode.NORMAL_OPERATION
         return self._last_error
     
     def get_battery_voltage(self) -> float:

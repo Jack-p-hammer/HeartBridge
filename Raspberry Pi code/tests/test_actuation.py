@@ -58,6 +58,76 @@ def test_command_loop_without_controller_reports_init_failure(hardware, caplog):
     assert "Moteus controller not initialized" in caplog.text
 
 
+def test_lost_frame_is_only_a_motor_failure_after_tolerance(hardware):
+    """A lost frame shortly after a good reply is tolerated; with no good reply for LOST_REPLY_TOLERANCE_S, or none
+    yet at all, it's reported."""
+    import time
+    import dataclasses
+    from moteus_thread import MoteusThread, LOST_REPLY_TOLERANCE_S
+    thread = MoteusThread()  # never started, state set by hand
+    thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+    thread._last_error_from_lost_frame = True
+
+    # No reply yet: reported straight away
+    assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+    # Good reply just now: the lost frame is tolerated
+    thread._state = dataclasses.replace(thread._state, stale=False, timestamp=time.monotonic())
+    assert thread.get_last_error() == ErrorCode.NORMAL_OPERATION
+
+    # No good reply for longer than the tolerance: reported
+    thread._state = dataclasses.replace(thread._state, timestamp=time.monotonic() - 2.0 * LOST_REPLY_TOLERANCE_S)
+    assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+def test_other_motor_errors_are_reported_straight_away(hardware):
+    """Only lost frames are tolerated: any other failed cycle is reported even right after a good reply."""
+    import time
+    import dataclasses
+    from moteus_thread import MoteusThread
+    thread = MoteusThread()  # never started, state set by hand
+    thread._state = dataclasses.replace(thread._state, stale=False, timestamp=time.monotonic())
+    thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+    thread._last_error_from_lost_frame = False
+
+    assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+@pytest.mark.parametrize("failure, from_lost_frame", [
+    (RuntimeError("Error: b'ERR unknown flag'"), True),   # adapter rejecting a command joined onto a lost one
+    (RuntimeError("comm lost"), False),                   # anything else
+])
+def test_command_loop_marks_only_lost_frame_errors(hardware, failure, from_lost_frame):
+    """The command loop marks the adapter's "unknown flag" error as a lost frame, and nothing else."""
+    import time
+    import actuation
+    actuation.init_motor()
+    time.sleep(0.05)  # commanding normally
+    hardware.moteus_controller.raise_on_set_position = failure
+    time.sleep(0.05)
+
+    motor = actuation.get_motor_controller()
+    assert motor._last_error == ErrorCode.ERROR_MOTOR_FAILURE
+    assert motor._last_error_from_lost_frame == from_lost_frame
+
+
+def test_position_timeout_mode_is_cleared_with_a_stop(hardware, caplog):
+    """A reply in position timeout mode (the moteus ignoring commands) makes the command loop send a stop to clear it."""
+    import time
+    import actuation
+    from moteus_thread import MODE_POSITION_TIMEOUT
+    actuation.init_motor()
+    time.sleep(0.05)  # startup stop done, commanding normally
+    stops_before = hardware.moteus_controller.stop_count
+
+    hardware.moteus_controller.mode = MODE_POSITION_TIMEOUT
+    time.sleep(0.05)
+
+    assert hardware.moteus_controller.stop_count == stops_before + 1  # one stop clears it (the fake goes to mode 0)
+    assert hardware.moteus_controller.mode == 0
+    assert "position timeout" in caplog.text
+
+
 def _daemon_gone(*args, **kwargs):
     """Stand-in for a pigpio call that raises, e.g. the daemon or its socket going away."""
     raise RuntimeError("daemon gone")

@@ -1,13 +1,14 @@
 # sensing.py (demo)
 """
 Demo stand-in for src/sensing.py. demo/main.py puts this folder ahead of src/ on the import path, so src/main.py and
-src/actuation.py import this module instead of the real one. Everything else runs from src/ unaltered.
+demo/actuation.py and src/actuation.py import this module instead of the real one.
 
 Same public functions as src/sensing.py, but none of the sensor suite is used: no force sensor/ADC, ToF sensor, IMU,
 I2C bus, or sensor validation. Readings that come from the moteus itself (rotary position, battery voltage) are kept,
 since actuation.py needs the rotary zero positions to command the BLDC.
 
-Zeroing finishes when the carriage reaches DEMO_ZERO_POSITION_M instead of when the force sensor detects the chest.
+Zeroing doesn't wait on any sensor: demo/actuation.py drives the carriage to a hardcoded position, so read_sensors()
+never reports ZEROING_FINISHED.
 
 BEFORE AND DURING ZEROING, THE zero_position VARIABLES MUST EQUAL THE absolute_zero_position VARIABLES
 """
@@ -19,15 +20,10 @@ import logging
 from Enums.error_codes import ErrorCode
 from moteus_thread import MoteusThread
 from Enums.control_modes import ControlMode
-import stepper
 
 # Global variables for shared instances
 _pi: pigpio.pi
 _motor_controller: MoteusThread
-
-# Carriage position that counts as reaching the chest, in meters from home. Must be below stepper.LEAD_SCREW_TRAVEL_M
-# The carriage stops up to CHUNK_DURATION_S * CHUNK_QUEUE_DEPTH of zeroing travel past this (see stepper.halt())
-DEMO_ZERO_POSITION_M: float = 0.05  # TODO: Placeholder
 
 # Battery voltage threshold for low battery detection. TODO: Calibrate this value based on actual battery performance.
 BATTERY_THRESHOLD_V: float = 21.6  # 6S LiPo battery, 3.6V per cell minimum, 4.2V per cell maximum. 6S = 21.6V minimum, 25.2V maximum.
@@ -58,15 +54,15 @@ def init_sensors(motor_controller: MoteusThread, pi: pigpio.pi) -> ErrorCode:
         logging.error(f"Rotary encoder absolute zeroing failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
 
-    logging.info(f"Sensors initialized (demo: zeroing stops at {DEMO_ZERO_POSITION_M} m)")
+    logging.info("Sensors initialized (demo: rotary encoder only)")
     return ErrorCode.NORMAL_OPERATION
 
 
 def read_sensors(control_mode: ControlMode) -> ErrorCode:
-    """No sensors are read. While zeroing, reports ZEROING_FINISHED once the carriage reaches DEMO_ZERO_POSITION_M
+    """No sensors are read. Zeroing finishes in demo/actuation.py once the carriage reaches its hardcoded position.
 
     Returns:
-        ErrorCode: ZEROING_FINISHED as above, NORMAL_OPERATION otherwise, ERROR_SENSOR_FAILURE on an invalid control mode
+        ErrorCode: NORMAL_OPERATION, or ERROR_SENSOR_FAILURE on an invalid control mode
     """
     match control_mode:
         case ControlMode.ZEROING | ControlMode.COMPRESSIONS | ControlMode.PAUSE_RETRACT:
@@ -75,27 +71,16 @@ def read_sensors(control_mode: ControlMode) -> ErrorCode:
             logging.error(f"Invalid control mode for sensor reading: {control_mode}")
             return ErrorCode.ERROR_SENSOR_FAILURE
 
-    carriage_position_m: float = stepper.get_position()
-    if (control_mode == ControlMode.ZEROING and
-        carriage_position_m >= DEMO_ZERO_POSITION_M
-    ):
-        logging.info(f"Zeroing complete: Carriage {carriage_position_m} m reached demo zero position {DEMO_ZERO_POSITION_M} m")
-        return ErrorCode.ZEROING_FINISHED
-
     return ErrorCode.NORMAL_OPERATION
 
 def zero_position() -> ErrorCode:
     """Set the zeroed position for the rotary encoder. This should be called after zeroing is complete, and the plunger is at the zeroed position.
+    main.py only calls this once actuation.zeroing() reports ZEROING_FINISHED, so there is nothing left to check here.
 
     Returns:
         ErrorCode: Error code describing the success or failure of the operation. Normal if successful, ERROR_SENSOR_FAILURE if failed.
     """
     global rotary_zero_position
-
-    error = read_sensors(ControlMode.ZEROING)
-    if error != ErrorCode.ZEROING_FINISHED:
-        logging.error(f"Zeroing not finished, cannot set zeroed positions: {error}")
-        return ErrorCode.ERROR_SENSOR_FAILURE
 
     if zero_rotary_encoder() != ErrorCode.NORMAL_OPERATION:
         logging.error("Failed to set zeroed positions for sensors")

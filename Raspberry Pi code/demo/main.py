@@ -2,30 +2,30 @@
 
 # Copy of the state machine in src/main.py, modified for the demo. Differences from src/main.py:
 #   - demo/sensing.py is used in place of src/sensing.py
+#   - demo/actuation.py is used in place of src/actuation.py: zeroing drives the carriage to a hardcoded position
+#     (DEMO_ZERO_POSITION_M) instead of finding the chest. Every other actuation function is src/actuation.py's
+#   - STARTUP lowers the carriage 1 inch (actuation.lower_carriage()) while the startup prompt plays
 #   - demo/Enums/states.py is used in place of src/Enums/states.py
 #   - Log files are named heartBridge_demo_<timestamp>.log
 #   - Esc or Q (or closing the window) stops the motor and steppers and exits back to the terminal from any state
-# Every other module (actuation, stepper, moteus_thread, HMI, Enums.error_codes, Enums.control_modes)
+# Every other module (stepper, moteus_thread, HMI, Enums.error_codes, Enums.control_modes)
 # is imported from src/ unaltered.
 
 # External imports
 import time
 import sys
 import logging
+import pygame
 from datetime import datetime
 from pathlib import Path
 
+# adds the demo directory as the primary path, followed by the src directory
+# sensing comes from demo/sensing.py; actuation from demo/actuation.py; Enum.states comes from demo/Enums/states.py
+# the rest comes from src/; 
+# DO NOT ADD __init__.py TO PACKAGE FOLDERS FOR demo/Enums or src/Enums
 DEMO_DIR = Path(__file__).resolve().parent
 SRC_DIR = DEMO_DIR.parent / "src"
-
-# demo/ goes first so `import sensing` finds demo/sensing.py and `Enums.states` finds demo/Enums/states.py;
-# everything else is only in src/.
-# Enums has no __init__.py in either folder, so Python merges demo/Enums and src/Enums into one package:
-# states comes from demo/Enums, error_codes and control_modes from src/Enums.
-# Adding an __init__.py to either Enums folder breaks this merge.
 sys.path[:0] = [str(DEMO_DIR), str(SRC_DIR)]
-
-import pygame
 
 # Internal imports
 import sensing
@@ -35,15 +35,17 @@ import HMI
 from Enums.error_codes import ErrorCode
 from Enums.states import CPRState  # demo/Enums/states.py
 
-# TODO: Optimize loop speed
-LOOP_TICK_SEC = 0.05  # 50ms per tick, 20 Hz
+########################
+# SYSTEM CONFIGURATION #
+########################
+
+LOOP_TICK_SEC = 0.05  # 50ms per tick, 20 Hz; TODO: Optimize loop speed
 
 # Frames cycled during the unfold step, and how long each one stays up
 UNFOLD_FRAMES = [HMI.Image.UNFOLD_1, HMI.Image.UNFOLD_2, HMI.Image.UNFOLD_3, HMI.Image.UNFOLD_4]
 UNFOLD_FRAME_SEC = 0.5  # 2 frames per second
 
 # Initialize log directory and file
-# 2x parent to get to project root
 LOG_DIR = Path(__file__).resolve().parent.parent / "Logs"
 LOG_DIR.mkdir(parents=True, exist_ok=True)  # Ensure logs directory exists
 RUN_TIMESTAMP = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -67,13 +69,15 @@ FATAL_ERRORS = {
     ErrorCode.ERROR_UNKNOWN_IMAGE,
 }
 
-
 def configure_logging():
-    """Configure console and file logging for the CPR machine runtime."""
-    # Write to both console and log file simultaneously.
-    # Each line is prefixed with a timestamp and severity level, e.g.:
-    #   2026-05-10 12:00:00 - DEBUG - Sensors initialized
-    # Severity levels: DEBUG < WARNING < ERROR < CRITICAL
+    """
+    Configure console and file logging for the CPR machine runtime.
+    Details
+        - Writes to both console and log file simutaneously.
+        - Each line prefixed with timestamp and severity level:
+            - 2026-05-10 12:00:00 - DEBUG - Sensors initialized
+            - Severity levels: DEBUG < WARNING < ERROR < CRITICAL
+    """
     logging.basicConfig(
         level=logging.DEBUG,
         format="%(asctime)s - %(levelname)s - %(message)s",
@@ -86,7 +90,8 @@ def configure_logging():
 
 
 def read_keys() -> tuple[ErrorCode, list[int]]:
-    """Return the keys pressed since the last tick, and exit the demo if the window was closed. Non-blocking.
+    """
+    Return the keys pressed since the last tick, and exit the demo if the window was closed. Non-blocking.
 
     HMI.pump_events() keeps the window alive but never reads keys. This takes the key
     presses off pygame's queue, so it must be called exactly once per tick, and every
@@ -115,7 +120,8 @@ def read_keys() -> tuple[ErrorCode, list[int]]:
 
 
 def shutdown_demo() -> None:
-    """Stop the motor and steppers, turn off lasers and button LEDs, close the window and exit cleanly.
+    """
+    Stop the motor and steppers, turn off lasers and button LEDs, close the window and exit cleanly.
 
     Only called once a key press or window close has been read, which needs HMI.init_HMI() to have run.
     INIT_STARTUP only gets there after init_motor() and init_steppers() succeed, so both are initialized here.
@@ -144,30 +150,30 @@ def shutdown_demo() -> None:
 
 
 def main():
-    """Run the main state-machine loop for the CPR machine."""
+    """
+    Run the main state-machine loop for the CPR machine
+    """
     configure_logging()
 
-    # Start by defining initial state and error code. The state machine will update these as it runs.
+    # Define initial state and error code
     state = CPRState.INIT_STARTUP
     prev_state = None
     error = ErrorCode.NORMAL_OPERATION
 
-    # Total time spent in COMPRESSION across all runs. Pausing (or a kneel failure) freezes it and
-    # resuming carries on from the same total, so it reads total CPR time.
+    # Initialize total Compression run time
+    # Freezes when paused or knee failure occurs
     cpr_elapsed_sec: float = 0.0
-    compression_start: float | None = None  # time.monotonic() when the current run of compressions started, None while not compressing
+    compression_start: float | None = None
     shown_sec: int | None = None  # Whole seconds currently drawn on the timer, None to force a redraw
 
-    # Unfold animation position, reset when UNFOLD_CUT_CLOTHES is entered
+    # initialize animation position and timer
     frame_idx: int = 0
-    last_frame_time: float = 0.0  # time.monotonic() when the current frame was shown
+    last_frame_time: float = 0.0
 
     while error not in FATAL_ERRORS:
-        # Record the start time of each loop iteration to maintain a consistent tick rate
         loop_start = time.monotonic()
 
         # If an error occurred, override the current state
-        # Whenever an error occurs, system must be forced back to this point via continue
         if error in ERROR_STATE_MAP:
             logging.warning(f"Error occurred: {error}, forcing state to {ERROR_STATE_MAP[error]}")
             state = ERROR_STATE_MAP[error]
@@ -177,8 +183,7 @@ def main():
         # the first tick), or the OS can mark the window as unresponsive
         # Neither error code returned by pump_events will cause an actual error, so no check
         error = HMI.pump_events()
-        # Demo only: Esc or Q (or closing the window) exits back to the terminal from any state
-        error, keys_pressed = read_keys()
+        error, keys_pressed = read_keys() # Demo only: Esc or Q (or closing the window) exits back to the terminal from any state
         if error != ErrorCode.NORMAL_OPERATION: continue
         if pygame.K_ESCAPE in keys_pressed or pygame.K_q in keys_pressed:
             shutdown_demo()
@@ -208,13 +213,11 @@ def main():
                     error = sensing.battery_check()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     
-                    # Immediately go to the WAIT state, which is only used in the demo
-                    state = CPRState.WAIT
+                    state = CPRState.WAIT # DEMO ONLY: go to WAIT state after init
                     
             case(CPRState.WAIT):
-                # Wait for a keyboard input to start the demo. This state is only used in the demo, not in src/main.py.
                 if state != prev_state:
-                    # No images yet, TODO: Add a black screen or sm
+                    # TODO: No images yet, Add a black screen or something
                     pass
 
                 # Loop
@@ -233,7 +236,12 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
 
                 # Loop
-                if HMI.audio_finished():
+                # DEMO ONLY: lower the carriage 1 inch from fully retracted while the startup prompt plays.
+                # The steppers only move while being updated, so this runs every tick until both are done
+                error, carriage_lowered = actuation.lower_carriage()
+                if error != ErrorCode.NORMAL_OPERATION: continue
+                if carriage_lowered and HMI.audio_finished():
+                    logging.info(f"Carriage lowered to {stepper.get_position()} m")
                     state = CPRState.UNFOLD_CUT_CLOTHES
 
             case(CPRState.UNFOLD_CUT_CLOTHES):
@@ -312,22 +320,6 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.COMPRESSION
 
-            case(CPRState.COMPRESSION_PREP):
-                # !!!!!!!!!! DEPRICATED !!!!!!!!!!!!!!!!
-                # Setup
-                if state != prev_state:
-                    logging.warning("COMPRESSION_PREP state is deprecated and should not be used. why are we here?")
-                    error = HMI.disable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.disable_pause_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
-                    error = actuation.init_compressions()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-                    
-                    error = HMI.set_image_audio(HMI.Image.COMPRESSION_PREP, HMI.AudioPrompt.COMPRESSION_PREP)
-                    if error != ErrorCode.NORMAL_OPERATION: continue
-
                 # Loop
                 if HMI.audio_finished():
                     state = CPRState.COMPRESSION
@@ -338,6 +330,9 @@ def main():
                     error = HMI.enable_pause_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.set_image_audio(HMI.Image.COMPRESSION, HMI.AudioPrompt.COMPRESSION)
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    # Restart the compression waveform at the top of its stroke, including on resume from PAUSE
+                    error = actuation.init_compressions()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     # Start of this run of compressions; the timer is drawn on the first loop tick
                     compression_start = time.monotonic()

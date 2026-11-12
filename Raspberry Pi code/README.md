@@ -89,7 +89,7 @@ Running over SSH works: if no display is set, the screen and audio are sent to t
 
 ### Demo mode
 
-`python demo/main.py` runs the same state machine from `src/`, but with `demo/sensing.py` in place of `src/sensing.py`. The force sensor, ToF sensor and IMU aren't used, and zeroing stops when the carriage reaches `DEMO_ZERO_POSITION_M` (set in `demo/sensing.py`). The motor and steppers still move. Press Esc or Q to stop the motor and exit. Demo runs log to `Logs/heartBridge_demo_<timestamp>.log`.
+`python demo/main.py` runs a copy of the state machine in `src/main.py`, with `demo/sensing.py` and `demo/actuation.py` in place of the `src/` versions. The force sensor, ToF sensor and IMU aren't used. STARTUP lowers the carriage `STARTUP_LOWER_M` (1 inch) from fully retracted, and zeroing drives it to the hardcoded `DEMO_ZERO_POSITION_M` (both set in `demo/actuation.py`). The motor and steppers still move. Press Esc or Q to stop the motor and exit. Demo runs log to `Logs/heartBridge_demo_<timestamp>.log`.
 
 ## Bench and bring-up scripts
 

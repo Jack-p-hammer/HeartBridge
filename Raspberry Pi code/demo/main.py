@@ -434,14 +434,14 @@ def main():
                     error = HMI.set_image_audio(HMI.Image.COMPRESSION, HMI.AudioPrompt.COMPRESSION)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     # Bench test: cycle a fixed stroke down and up from wherever the plunger is now
-                    error = jog_compressions.init_jog_compressions(actuation.get_motor_controller())
+                    error = actuation.init_compressions()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     # Start of this run of compressions; the timer is drawn on the first loop tick
                     compression_start = time.monotonic()
                     shown_sec = None
 
                 # Loop
-                error = jog_compressions.jog_compressions(actuation.get_motor_controller())
+                error = actuaion.compressions()
                 if error != ErrorCode.NORMAL_OPERATION: continue
 
                 # Setup always sets this before the loop runs; this only narrows the type for the timer math below

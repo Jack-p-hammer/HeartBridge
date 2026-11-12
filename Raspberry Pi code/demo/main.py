@@ -42,8 +42,8 @@ import jog_compressions  # demo/jog_compressions.py, used in place of actuation.
 from Enums.error_codes import ErrorCode
 from Enums.states import CPRState  # demo/Enums/states.py
 
-# TODO: Optimize loop speed
-LOOP_TICK_SEC = 0.05  # 50ms per tick, 20 Hz
+# Matches moteus_thread.py's COMMAND_RATE_HZ (100 Hz): setpoints computed any faster would never be sent
+LOOP_TICK_SEC = 0.01  # 10ms per tick, 100 Hz
 
 # Frames cycled during the unfold step, and how long each one stays up
 UNFOLD_FRAMES = [HMI.Image.UNFOLD_1, HMI.Image.UNFOLD_2, HMI.Image.UNFOLD_3, HMI.Image.UNFOLD_4]
@@ -572,9 +572,14 @@ def main():
             case(_):
                 error = ErrorCode.EXIT_UNKNOWN
 
+        # Warn when a tick's work doesn't fit in LOOP_TICK_SEC. State entry ticks are skipped, since their one-time
+        # setup (e.g. loading and drawing a full-screen image) is expected to overrun
+        elapsed = time.monotonic() - loop_start
+        if elapsed > LOOP_TICK_SEC and current_state == prev_state:
+            logging.warning(f"Tick overran in {current_state}: {elapsed * 1000:.1f} ms (tick {LOOP_TICK_SEC * 1000:.0f} ms)")
+
         # Record the previous state and sleep for the remainder of the tick duration
         prev_state = current_state
-        elapsed = time.monotonic() - loop_start
         time.sleep(max(0, LOOP_TICK_SEC - elapsed))
 
     logging.critical(f"Fatal error: {error}")

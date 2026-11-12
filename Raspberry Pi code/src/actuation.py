@@ -278,7 +278,7 @@ def abort_compressions() -> ErrorCode:
     
     logging.info("Stopping compressions")
     return ErrorCode.NORMAL_OPERATION
-
+    
 
 def computeCompressionSetpoint() -> float:
     """Computes the current compression setpoint, returns position relative to zeroed position.

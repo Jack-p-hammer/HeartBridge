@@ -410,7 +410,7 @@ def test_stepper_dir_pin_follows_gear_ratio_sign(hardware):
 # -------------------- computeCompressionSetpoint (pure) --------------------
 
 def test_compute_compression_setpoint_flips_between_stroke_ends(hardware, monkeypatch):
-    """The setpoint is the end of the current stroke: the bottom for the first half of each cycle, the top for the second."""
+    """The setpoint is the extreme of the current stroke: the bottom for the first half of each cycle, the top for the second."""
     import actuation
 
     fake_time = {"t": 0.0}
@@ -433,8 +433,8 @@ def test_compute_compression_setpoint_flips_between_stroke_ends(hardware, monkey
         assert actuation.computeCompressionSetpoint() == pytest.approx(position), t
 
 
-def test_compression_limits_plan_each_stroke_in_stroke_sec(hardware):
-    """A trapezoid from rest to rest at the speed and accel limits covers the depth in exactly STROKE_SEC, in thirds."""
+def test_compression_caps_make_each_stroke_take_stroke_sec(hardware):
+    """Speeding up and slowing down at the acceleration cap, cruising at the speed cap, covers the depth from rest to rest in exactly STROKE_SEC, a third each."""
     import actuation
 
     depth = actuation.COMPRESSION_DEPTH_CM / 100.0
@@ -445,8 +445,8 @@ def test_compression_limits_plan_each_stroke_in_stroke_sec(hardware):
     assert 2.0 * accel_time + cruise_time == pytest.approx(actuation.STROKE_SEC)
 
 
-def test_compressions_target_rejected_without_planner_limits(hardware):
-    """COMPRESSIONS without both limits would step instead of planning, so it's refused."""
+def test_compressions_target_rejected_without_caps(hardware):
+    """COMPRESSIONS without both the speed and acceleration caps would jump to each extreme, so it's refused."""
     import math
     from Enums.control_modes import ControlMode
     from moteus_thread import MoteusThread
@@ -529,8 +529,8 @@ def test_compressions_normal_operation(hardware):
     assert actuation.compressions() == ErrorCode.NORMAL_OPERATION
 
 
-def test_compressions_sends_stroke_end_with_planner_limits(hardware):
-    """compressions() commands the bottom of the first stroke with velocity 0 and both planner limits set."""
+def test_compressions_sends_stroke_extreme_with_caps(hardware):
+    """compressions() commands the bottom of the first stroke with velocity 0 and both speed and acceleration caps set."""
     import time
     import actuation
     import sensing
@@ -550,7 +550,7 @@ def test_compressions_sends_stroke_end_with_planner_limits(hardware):
 
 
 def test_compressions_streamed_deprecated_sends_position_and_velocity(hardware):
-    """The deprecated streamed mode still runs, sending a position and velocity with the planner off."""
+    """The deprecated streamed mode still runs, sending a position and velocity with no speed or acceleration caps."""
     import math
     import time
     import actuation

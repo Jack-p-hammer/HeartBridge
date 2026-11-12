@@ -4,9 +4,10 @@ Bench-test compressions for the demo, modeled on the cycling stage of scripts/sl
 is when COMPRESSION starts, move down STROKE_IN inches and back up, over and over, at COMPRESSIONS_PER_MIN.
 
 Used by demo/main.py in place of actuation.compressions(). There is no dependence on zeroing, and the torque is capped
-low like slow_jog. Each stroke is planned by the moteus itself: it is sent the stroke's end position with velocity 0,
-a velocity_limit and an accel_limit, so each stroke is a smooth trapezoid (speed up, cruise, slow down) that ends
-just as the next one starts, even though main.py only updates every LOOP_TICK_SEC.
+low like slow_jog. The moteus is only sent the extreme of the current stroke (bottom, then top) with velocity 0 there,
+with its speed capped (velocity_limit) and its acceleration capped (accel_limit). So each stroke speeds up, cruises at
+the speed cap and slows down to stop at the extreme, smoothly, just as the setpoint flips to the other extreme, even
+though main.py only updates every LOOP_TICK_SEC.
 Pause and abort still go through actuation.pause_compressions() / abort_compressions().
 """
 # External imports
@@ -29,8 +30,9 @@ M_PER_IN: float = 0.0254
 ROTATIONS_PER_IN: float = M_PER_IN * BLDC_ROTATIONS_PER_M
 STROKE_SEC: float = 60.0 / COMPRESSIONS_PER_MIN / 2.0  # time for one stroke in one direction, half a compression
 
-# Each stroke is a trapezoid split into thirds: speed up, cruise, slow down. Covering STROKE_IN in STROKE_SEC that way
-# needs a cruise speed of 1.5 * stroke / time and an acceleration reaching it in a third of the time (4.5 * stroke / time^2)
+# Speed and acceleration caps. Each stroke speeds up at the acceleration cap, cruises at the speed cap and slows down at
+# the acceleration cap, a third of STROKE_SEC each. Covering STROKE_IN that way needs a speed cap of 1.5 * stroke / time
+# and an acceleration cap reaching it in a third of the time (4.5 * stroke / time^2)
 STROKE_REV: float = abs(STROKE_IN * ROTATIONS_PER_IN)
 SPEED_RPS: float = 1.5 * STROKE_REV / STROKE_SEC  # velocity_limit is a magnitude
 ACCEL_RPS2: float = 4.5 * STROKE_REV / STROKE_SEC ** 2
@@ -100,8 +102,8 @@ def jog_compressions(motor_controller: MoteusThread) -> ErrorCode:
         logging.error(f"Jog compressions failed on stepper: {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE
 
-    # First half of each cycle heads for the bottom, second half back to the top. The moteus plans each stroke as a
-    # trapezoid from SPEED_RPS and ACCEL_RPS2 that takes exactly STROKE_SEC, so it arrives just as the target flips
+    # First half of each cycle the setpoint is the bottom, second half the top. Capped at SPEED_RPS and ACCEL_RPS2, the
+    # moteus takes exactly STROKE_SEC to get to each extreme, so it stops there just as the setpoint flips
     going_down: bool = (time.monotonic() - _cycle_start) % (2.0 * STROKE_SEC) < STROKE_SEC
     if going_down != _going_down:
         logging.debug(f"Jog compressions: stroke {'down' if going_down else 'up'}")

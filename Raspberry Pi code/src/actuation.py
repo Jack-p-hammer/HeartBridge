@@ -256,6 +256,20 @@ def pause_compressions() -> ErrorCode:
     return ErrorCode.NORMAL_OPERATION
 
 
+def reset_motor() -> ErrorCode:
+    """Put the motor back the way it is after a power cycle: target back to the startup default (hold position) and
+    the same stop sequence the moteus thread sends at startup. Non-blocking, the stop goes out on the moteus thread's
+    next cycle.
+
+    Returns:
+        ErrorCode: Normal operation
+    """
+    global _motor_controller
+    _motor_controller.request_stop_sequence()
+    logging.info("Motor reset requested")
+    return ErrorCode.NORMAL_OPERATION
+
+
 def abort_compressions() -> ErrorCode:
     """Return plunger to the top of its ball screw travel for compressions abort. Non-blocking.
     NOTE: This does not move the carriage, since PAUSE also calls this every tick. Use retract_carriage() to fully retract.

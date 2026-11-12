@@ -91,6 +91,8 @@ class MoteusThread:
         )
         self._ready: threading.Event = threading.Event()
         self._stop_requested: bool = False
+        # Set by request_stop_sequence(), cleared by the command loop when it runs the stop sequence
+        self._stop_sequence_requested: bool = False
 
         self._target: MotorTarget = MotorTarget(position=math.nan, velocity=0.0)
         self._state: MotorState = MotorState(
@@ -149,20 +151,18 @@ class MoteusThread:
             return
 
         # When a previous run ends, commands stop and the moteus watchdog latches it in position timeout mode (11),
-        # which ignores position commands until a stop is received. Clear it first, like scripts/slow_jog.py.
-        # Queried so a lost frame (common right after connecting) is retried instead of silently skipped
-        for attempt in range(1, STOP_ATTEMPTS + 1):
-            try:
-                await asyncio.wait_for(self._controller.set_stop(query=True), timeout=REPLY_TIMEOUT_S) # pyright: ignore[reportAttributeAccessIssue]
-                break
-            except Exception as e:
-                if attempt == STOP_ATTEMPTS:
-                    logging.error(f"Moteus startup stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
-                else:
-                    logging.warning(f"Moteus startup stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
+        # which ignores position commands until a stop is received. Clear it first, like scripts/slow_jog.py
+        await self._stop_sequence(self._controller, "startup")
 
         while not self._stop_requested:
             cycle_start: float = time.monotonic()
+
+            # A reset (request_stop_sequence()) runs the same stop as startup. Cleared first, so a request made
+            # while it runs gets its own stop next cycle
+            if self._stop_sequence_requested:
+                self._stop_sequence_requested = False
+                await self._stop_sequence(self._controller, "reset")
+
             target: MotorTarget = self._target
 
             # No controlMode decoding here, just pass values through to the controller
@@ -204,7 +204,35 @@ class MoteusThread:
             elapsed: float = time.monotonic() - cycle_start
             await asyncio.sleep(max(0.0, self._period_s - elapsed))
 
+    async def _stop_sequence(self, controller: moteus.Controller, reason: str) -> None:
+        """Send a stop, retrying up to STOP_ATTEMPTS times. Clears any latched fault or position timeout mode (11).
+        Queried so a lost frame (common right after connecting) is retried instead of silently skipped.
+        If every attempt fails it carries on anyway, and the command loop then logs errors.
+
+        Args:
+            controller (moteus.Controller): The controller to stop
+            reason (str): What the stop is for ("startup" or "reset"), for logging
+        """
+        for attempt in range(1, STOP_ATTEMPTS + 1):
+            try:
+                await asyncio.wait_for(controller.set_stop(query=True), timeout=REPLY_TIMEOUT_S) # pyright: ignore[reportAttributeAccessIssue]
+                logging.info(f"Moteus {reason} stop sent")
+                return
+            except Exception as e:
+                if attempt == STOP_ATTEMPTS:
+                    logging.error(f"Moteus {reason} stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
+                else:
+                    logging.warning(f"Moteus {reason} stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
+
     # --- public, non-blocking API --------------------------------------
+
+    def request_stop_sequence(self) -> None:
+        """Put the motor back the way it is after a power cycle: the target goes back to the startup default (hold
+        position), and the command loop runs the same stop sequence as at startup at the start of its next cycle.
+        The target is reset here, before the request, so a set_target() made after this call is never overwritten.
+        """
+        self._target = MotorTarget(position=math.nan, velocity=0.0)
+        self._stop_sequence_requested = True
 
     def set_target(self, control_mode: ControlMode, zero_position: float, abs_zero_position: float, compressionSetpoint: float = 0) -> ErrorCode:
         """Set the target values for the motor controller. The MoteusThread will pick up these values in its next loop and send them to the motor controller.

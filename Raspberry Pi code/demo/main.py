@@ -542,6 +542,9 @@ def main():
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 
                 if retreat_success:
+                    # Leave the motor as a power cycle would: startup default target and the startup stop sequence
+                    error = actuation.reset_motor()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.WAIT  # Return to the demo's WAIT state
                 
             case(CPRState.ABORT):

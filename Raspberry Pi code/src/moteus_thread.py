@@ -260,7 +260,11 @@ class MoteusThread:
         self._target = MotorTarget(position=math.nan, velocity=0.0)
         self._stop_sequence_requested = True
 
-    def set_target(self, control_mode: ControlMode, zero_position: float, abs_zero_position: float, compressionSetpoint: float = 0) -> ErrorCode:
+    def set_target(self, control_mode: ControlMode, zero_position: float, abs_zero_position: float,
+                   compressionSetpoint: float = 0,
+                   compressionVelocity: float = 0.0,
+                   compressionVelocityLimit: float = math.nan,
+                   compressionAccelLimit: float = math.nan) -> ErrorCode:
         """Set the target values for the motor controller. The MoteusThread will pick up these values in its next loop and send them to the motor controller.
         Setpoints come in as meters of ball screw travel and are converted to motor rotations here.
 
@@ -268,12 +272,20 @@ class MoteusThread:
                 control_mode (ControlMode): What the plunger should be doing
                 zero_position (float): Zeroed (chest contact) motor position, in rotations
                 abs_zero_position (float): Startup (top of ball screw travel) motor position, in rotations
-                compressionSetpoint (float): Compression depth below zero_position, in meters. Only used for COMPRESSIONS
+                compressionSetpoint (float): Compression depth below zero_position, in meters. COMPRESSIONS: the end of
+                    the current stroke. COMPRESSIONS_STREAMED_DEPRECATED: the current position along the stroke
+                compressionVelocity (float): Plunger velocity at compressionSetpoint, in meters per second, positive down.
+                    Only used for COMPRESSIONS_STREAMED_DEPRECATED
+                compressionVelocityLimit (float): Peak plunger speed the moteus plans each stroke with, in meters per
+                    second. Required (positive) for COMPRESSIONS
+                compressionAccelLimit (float): Plunger acceleration the moteus plans each stroke with, in meters per
+                    second squared. Required (positive) for COMPRESSIONS
 
             Returns:
-                ErrorCode: ERROR_MOTOR_FAILURE if the control mode is invalid or the target is outside the ball screw travel, NORMAL_OPERATION otherwise
+                ErrorCode: ERROR_MOTOR_FAILURE if the control mode is invalid, a COMPRESSIONS limit is missing, or the target is outside the ball screw travel, NORMAL_OPERATION otherwise
         """
         retract_velocity_rps: float = RETRACT_VELOCITY_MPS * abs(BLDC_ROTATIONS_PER_M)  # velocity_limit is a magnitude
+        accel_limit: float = math.nan  # NaN leaves accel_limit out of the command, only COMPRESSIONS sets it
         match control_mode:
             # Setpoints are meters of plunger travel, positive down. Multiplying by BLDC_ROTATIONS_PER_M converts them to
             # motor rotations, including the gear train's reversal
@@ -287,8 +299,28 @@ class MoteusThread:
                 velocity_limit: float = retract_velocity_rps # rotations per second
                 maximum_torque: float = TORQUE_LIMIT_NM
             case ControlMode.COMPRESSIONS:
+                # Same as demo/jog_compressions.py: the target is the end of the current stroke, with velocity 0 there.
+                # The moteus planner gets there along a trapezoid from the velocity and accel limits, so the motion is
+                # smooth between main loop ticks and a lost frame doesn't interrupt the stroke.
+                # Without both limits the planner is off and each stroke would be a step, so they're required.
+                # Written so NaN fails
+                if not (compressionVelocityLimit > 0.0 and compressionAccelLimit > 0.0):
+                    logging.error(f"Compressions need positive velocity and accel limits, got "
+                                  f"{compressionVelocityLimit} m/s and {compressionAccelLimit} m/s^2")
+                    return ErrorCode.ERROR_MOTOR_FAILURE
                 position: float = zero_position + compressionSetpoint * BLDC_ROTATIONS_PER_M # rotations, relative to zeroed position
-                velocity: float = math.nan
+                velocity: float = 0.0 # stop at the end of the stroke
+                kp_scale: float = 1.0
+                kd_scale: float = 1.0
+                feedforward_torque: float = 0.0
+                velocity_limit: float = compressionVelocityLimit * abs(BLDC_ROTATIONS_PER_M) # rotations per second, a magnitude
+                accel_limit = compressionAccelLimit * abs(BLDC_ROTATIONS_PER_M) # rotations per second squared, a magnitude
+                maximum_torque: float = TORQUE_LIMIT_NM # Torque command should never exceed MAX_PLUNGER_FORCE_N out of the ball screw
+            case ControlMode.COMPRESSIONS_STREAMED_DEPRECATED:
+                # Deprecated: every position along the stroke is streamed from the main loop, with the matching velocity so
+                # the moteus keeps moving between commands instead of stepping. The planner is off (no limits)
+                position: float = zero_position + compressionSetpoint * BLDC_ROTATIONS_PER_M # rotations, relative to zeroed position
+                velocity: float = compressionVelocity * BLDC_ROTATIONS_PER_M # rotations per second, signed like position
                 kp_scale: float = 1.0
                 kd_scale: float = 1.0
                 feedforward_torque: float = 0.0
@@ -336,8 +368,9 @@ class MoteusThread:
             kp_scale=kp_scale, 
             kd_scale=kd_scale, 
             feedforward_torque=feedforward_torque, 
-            velocity_limit=velocity_limit, 
-            maximum_torque=maximum_torque
+            velocity_limit=velocity_limit,
+            maximum_torque=maximum_torque,
+            accel_limit=accel_limit
         )
         
         return ErrorCode.NORMAL_OPERATION

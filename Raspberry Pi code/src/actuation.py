@@ -27,6 +27,10 @@ from stepper import LEAD_SCREW_TRAVEL_M, ZEROING_VELOCITY_MPS, RETRACT_VELOCITY_
 COMPRESSION_DEPTH_CM: float = 5.08 # depth of compressions in cm (2 in, same as demo/jog_compressions.py). AHA adult depth is 2 to 2.4 in
 COMPRESSIONS_PER_MIN: float = 110.0 # AHA rate is 100 to 120 per minute, same as demo/jog_compressions.py
 STROKE_SEC: float = 60.0 / COMPRESSIONS_PER_MIN / 2.0 # time for one stroke in one direction, half a compression
+# Each stroke is a trapezoid split into thirds: speed up, cruise, slow down (same as demo/jog_compressions.py). Covering
+# the depth in STROKE_SEC that way needs a cruise speed of 1.5 * depth / time, reached in a third of the time
+COMPRESSION_SPEED_MPS: float = 1.5 * (COMPRESSION_DEPTH_CM / 100.0) / STROKE_SEC # peak plunger speed, meters per second
+COMPRESSION_ACCEL_MPS2: float = 4.5 * (COMPRESSION_DEPTH_CM / 100.0) / STROKE_SEC ** 2 # meters per second squared
 EXTENSION_STROKE_LIMIT_M: float = LEAD_SCREW_TRAVEL_M # maximum carriage extension in meters, zeroing fails if the chest isn't found by here
 
 # 1.5x buffer on top of the time to reach max extension, for accel ramps. TODO: Tune
@@ -204,15 +208,63 @@ def compressions() -> ErrorCode:
         logging.error(f"Compressions failed on stepper: {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE
 
-    # Update compression setpoint
-    error = _motor_controller.set_target(ControlMode.COMPRESSIONS, 
-                                         sensing.get_rotary_zero_position(), 
-                                         sensing.get_rotary_absolute_zero_position(), 
-                                         computeCompressionSetpoint())
+    # Update compression setpoint: the end of the current stroke, which the moteus plans its way to
+    error = _motor_controller.set_target(ControlMode.COMPRESSIONS,
+                                         sensing.get_rotary_zero_position(),
+                                         sensing.get_rotary_absolute_zero_position(),
+                                         computeCompressionSetpoint(),
+                                         compressionVelocityLimit=COMPRESSION_SPEED_MPS,
+                                         compressionAccelLimit=COMPRESSION_ACCEL_MPS2)
     if error != ErrorCode.NORMAL_OPERATION:
         logging.error(f"Compressions failed on motor command: {error}")
         return ErrorCode.ERROR_MOTOR_FAILURE
-    
+
+    return ErrorCode.NORMAL_OPERATION
+
+
+def compressions_streamed_deprecated() -> ErrorCode:
+    """DEPRECATED: use compressions(). Perform compressions by streaming every position and velocity along the stroke
+    profile from the main loop, instead of sending one velocity-limited position command. Kept for profiles the moteus planner can't
+    produce. Follows the main loop's tick, so late ticks and lost frames show up in the motion. Non-blocking.
+    Call init_compressions() first, same as compressions().
+
+    Returns:
+        ErrorCode: Normal operation while compressing, ERROR_SENSOR_FAILURE if sensor failure detected
+    """
+    global _motor_controller
+
+    # Read sensors. Same sensor limits as compressions(), so the sensing modules don't need the deprecated mode
+    error = sensing.read_sensors(ControlMode.COMPRESSIONS)
+    if error == ErrorCode.ERROR_IMU_KNEEL_FAILURE:
+        logging.error(f"Compressions failed on IMU kneel: {error}")
+        return ErrorCode.ERROR_IMU_KNEEL_FAILURE
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Compressions failed on sensors: {error}")
+        return ErrorCode.ERROR_SENSOR_FAILURE
+
+    # Check for motor failure
+    error = _motor_controller.get_last_error()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Compressions failed on motor: {error}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+
+    # Carriage holds at its zeroed position, finish playing out any steps still queued from zeroing
+    error = stepper.update()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Compressions failed on stepper: {error}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+
+    # Update compression setpoint: the current position along the profile, and its velocity
+    position_m, velocity_mps = computeCompressionSetpoint_streamed_deprecated()
+    error = _motor_controller.set_target(ControlMode.COMPRESSIONS_STREAMED_DEPRECATED,
+                                         sensing.get_rotary_zero_position(),
+                                         sensing.get_rotary_absolute_zero_position(),
+                                         position_m,
+                                         compressionVelocity=velocity_mps)
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Compressions failed on motor command: {error}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+
     return ErrorCode.NORMAL_OPERATION
 
 
@@ -297,13 +349,32 @@ def abort_compressions() -> ErrorCode:
 def computeCompressionSetpoint() -> float:
     """Computes the current compression setpoint, returns position relative to zeroed position.
 
-    Mimics demo/jog_compressions.py: each cycle is a down stroke of COMPRESSION_DEPTH_CM then an up stroke back to the
-    zeroed position, with no hold at either end, at COMPRESSIONS_PER_MIN. Each stroke takes STROKE_SEC and is a
-    trapezoidal velocity profile split into thirds: speed up, cruise, slow down to a stop. jog_compressions.py has the
-    moteus plan that profile (velocity_limit/accel_limit); here the position along it is computed directly instead.
+    Same as demo/jog_compressions.py: the setpoint is the end of the current stroke, COMPRESSION_DEPTH_CM down for the
+    first half of each cycle, then back to the zeroed position for the second half, at COMPRESSIONS_PER_MIN. The moteus
+    plans each stroke from COMPRESSION_SPEED_MPS and COMPRESSION_ACCEL_MPS2 so it takes exactly STROKE_SEC, arriving
+    just as the setpoint flips.
 
     Returns:
         float: compression setpoint, relative to zeroed position, in meters. Down (towards the chest) is positive
+    """
+    global compression_start_time
+    cycle_time: float = (time.monotonic() - compression_start_time) % (2.0 * STROKE_SEC)
+    going_down: bool = cycle_time < STROKE_SEC
+    return COMPRESSION_DEPTH_CM / 100.0 if going_down else 0.0
+
+
+def computeCompressionSetpoint_streamed_deprecated() -> tuple[float, float]:
+    """DEPRECATED: used by compressions_streamed_deprecated(). Computes the current position and velocity along the
+    stroke profile, relative to zeroed position.
+
+    Same motion as computeCompressionSetpoint() plans: each cycle is a down stroke of COMPRESSION_DEPTH_CM then an up
+    stroke back to the zeroed position, with no hold at either end, at COMPRESSIONS_PER_MIN. Each stroke takes
+    STROKE_SEC and is a trapezoidal velocity profile split into thirds: speed up, cruise, slow down to a stop. Here the
+    position and velocity along it are computed directly instead of planned by the moteus.
+
+    Returns:
+        tuple[float, float]: position in meters and velocity in meters per second, relative to zeroed position.
+            Down (towards the chest) is positive for both
     """
     global compression_start_time
     time_sec: float = time.monotonic() - compression_start_time
@@ -311,21 +382,24 @@ def computeCompressionSetpoint() -> float:
     going_down: bool = cycle_time < STROKE_SEC
     stroke_time: float = cycle_time if going_down else cycle_time - STROKE_SEC  # time into the current stroke
 
-    # Covering the stroke in STROKE_SEC with equal thirds needs an acceleration of 4.5 * stroke / time^2 (same as
-    # jog_compressions.py). Each third then covers a quarter, a half and a quarter of the stroke
+    # Each third covers a quarter, a half and a quarter of the stroke
     depth_m: float = COMPRESSION_DEPTH_CM / 100.0
-    accel_mps2: float = 4.5 * depth_m / STROKE_SEC ** 2
     speed_up_end: float = STROKE_SEC / 3.0
     slow_down_start: float = 2.0 * STROKE_SEC / 3.0
     if stroke_time < speed_up_end:
-        stroke_m: float = 0.5 * accel_mps2 * stroke_time ** 2
+        stroke_m: float = 0.5 * COMPRESSION_ACCEL_MPS2 * stroke_time ** 2
+        speed_mps: float = COMPRESSION_ACCEL_MPS2 * stroke_time
     elif stroke_time < slow_down_start:
-        stroke_m: float = 0.25 * depth_m + accel_mps2 * speed_up_end * (stroke_time - speed_up_end)  # cruise speed
+        stroke_m: float = 0.25 * depth_m + COMPRESSION_SPEED_MPS * (stroke_time - speed_up_end)
+        speed_mps: float = COMPRESSION_SPEED_MPS
     else:
-        stroke_m: float = depth_m - 0.5 * accel_mps2 * (STROKE_SEC - stroke_time) ** 2
+        stroke_m: float = depth_m - 0.5 * COMPRESSION_ACCEL_MPS2 * (STROKE_SEC - stroke_time) ** 2
+        speed_mps: float = COMPRESSION_ACCEL_MPS2 * (STROKE_SEC - stroke_time)
 
-    # The up stroke runs the same profile from the bottom back to the zeroed position
-    return stroke_m if going_down else depth_m - stroke_m
+    # The up stroke runs the same profile from the bottom back to the zeroed position, moving up (negative)
+    if going_down:
+        return stroke_m, speed_mps
+    return depth_m - stroke_m, -speed_mps
 
 
 def DEPRICATED_computeCompressionSetpoint() -> float:

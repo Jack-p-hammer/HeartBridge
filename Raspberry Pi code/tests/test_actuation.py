@@ -368,15 +368,24 @@ def test_bldc_targets_follow_gear_ratio_sign(hardware):
     assert math.copysign(1.0, thread._target.position - abs_zero) == math.copysign(1.0, BLDC_GEAR_RATIO)
     assert thread._target.velocity_limit > 0
 
-    assert thread.set_target(ControlMode.COMPRESSIONS, zero, abs_zero, 0.07) == ErrorCode.NORMAL_OPERATION
+    assert thread.set_target(ControlMode.COMPRESSIONS, zero, abs_zero, 0.07,
+                             compressionVelocityLimit=0.5, compressionAccelLimit=5.0) == ErrorCode.NORMAL_OPERATION
     assert math.copysign(1.0, thread._target.position - zero) == math.copysign(1.0, BLDC_GEAR_RATIO)
+    assert thread._target.velocity_limit > 0
+    assert thread._target.accel_limit > 0
+
+    # Plunger moving down (positive velocity) turns the motor the same way as moving the position down
+    assert thread.set_target(ControlMode.COMPRESSIONS_STREAMED_DEPRECATED, zero, abs_zero, 0.03,
+                             compressionVelocity=0.5) == ErrorCode.NORMAL_OPERATION
+    assert math.copysign(1.0, thread._target.velocity) == math.copysign(1.0, BLDC_GEAR_RATIO)
 
     for mode in (ControlMode.PAUSE_RETRACT, ControlMode.ABORT_RETRACT):
         assert thread.set_target(mode, zero, abs_zero) == ErrorCode.NORMAL_OPERATION
         assert thread._target.velocity_limit > 0
 
     # Above the top of travel (the wrong way for the gear train) is still rejected
-    assert thread.set_target(ControlMode.COMPRESSIONS, abs_zero, abs_zero, -0.01) == ErrorCode.ERROR_MOTOR_FAILURE
+    assert thread.set_target(ControlMode.COMPRESSIONS, abs_zero, abs_zero, -0.01,
+                             compressionVelocityLimit=0.5, compressionAccelLimit=5.0) == ErrorCode.ERROR_MOTOR_FAILURE
 
 
 def test_stepper_dir_pin_follows_gear_ratio_sign(hardware):
@@ -400,8 +409,8 @@ def test_stepper_dir_pin_follows_gear_ratio_sign(hardware):
 
 # -------------------- computeCompressionSetpoint (pure) --------------------
 
-def test_compute_compression_setpoint_stroke_profile(hardware, monkeypatch):
-    """Down stroke then up stroke, each a thirds trapezoid (quarter, half, quarter of the depth), repeating."""
+def test_compute_compression_setpoint_flips_between_stroke_ends(hardware, monkeypatch):
+    """The setpoint is the end of the current stroke: the bottom for the first half of each cycle, the top for the second."""
     import actuation
 
     fake_time = {"t": 0.0}
@@ -411,22 +420,77 @@ def test_compute_compression_setpoint_stroke_profile(hardware, monkeypatch):
     stroke = actuation.STROKE_SEC
 
     expected = [
-        (0.0, 0.0),                       # top, starting the down stroke
-        (stroke / 3.0, 0.25 * depth),     # end of speeding up
-        (stroke / 2.0, 0.5 * depth),      # middle of the cruise
-        (2.0 * stroke / 3.0, 0.75 * depth),  # start of slowing down
-        (stroke, depth),                  # bottom, starting the up stroke
-        (1.5 * stroke, 0.5 * depth),      # middle of the up stroke
-        (2.0 * stroke, 0.0),              # back at the top, cycle repeats
-        (2.5 * stroke, 0.5 * depth),      # middle of the next down stroke
+        (0.0, depth),                 # down stroke starts straight away
+        (0.5 * stroke, depth),
+        (0.999 * stroke, depth),
+        (stroke, 0.0),                # bottom reached, head back up
+        (1.5 * stroke, 0.0),
+        (2.0 * stroke, depth),        # cycle repeats
+        (2.5 * stroke, depth),
     ]
     for t, position in expected:
         fake_time["t"] = t
-        assert actuation.computeCompressionSetpoint() == pytest.approx(position, abs=1e-9), t
+        assert actuation.computeCompressionSetpoint() == pytest.approx(position), t
 
 
-def test_compute_compression_setpoint_is_continuous(hardware, monkeypatch):
-    """No jumps anywhere in the cycle, including the segment and stroke boundaries, and never outside 0 to depth."""
+def test_compression_limits_plan_each_stroke_in_stroke_sec(hardware):
+    """A trapezoid from rest to rest at the speed and accel limits covers the depth in exactly STROKE_SEC, in thirds."""
+    import actuation
+
+    depth = actuation.COMPRESSION_DEPTH_CM / 100.0
+    accel_time = actuation.COMPRESSION_SPEED_MPS / actuation.COMPRESSION_ACCEL_MPS2
+    assert accel_time == pytest.approx(actuation.STROKE_SEC / 3.0)
+    ramps_m = actuation.COMPRESSION_SPEED_MPS * accel_time  # both ramps together
+    cruise_time = (depth - ramps_m) / actuation.COMPRESSION_SPEED_MPS
+    assert 2.0 * accel_time + cruise_time == pytest.approx(actuation.STROKE_SEC)
+
+
+def test_compressions_target_rejected_without_planner_limits(hardware):
+    """COMPRESSIONS without both limits would step instead of planning, so it's refused."""
+    import math
+    from Enums.control_modes import ControlMode
+    from moteus_thread import MoteusThread
+
+    thread = MoteusThread()  # never started, set_target() only stores the target
+    for velocity_limit, accel_limit in ((math.nan, 5.0), (0.5, math.nan), (0.0, 5.0), (0.5, -1.0)):
+        assert thread.set_target(ControlMode.COMPRESSIONS, 3.0, 3.0, 0.03,
+                                 compressionVelocityLimit=velocity_limit,
+                                 compressionAccelLimit=accel_limit) == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+# -------------------- computeCompressionSetpoint_streamed_deprecated (pure) --------------------
+
+def test_streamed_setpoint_stroke_profile(hardware, monkeypatch):
+    """Down stroke then up stroke, each a thirds trapezoid (quarter, half, quarter of the depth), repeating,
+    with the matching velocity: zero at each end, the cruise speed in the middle, negative on the way up."""
+    import actuation
+
+    fake_time = {"t": 0.0}
+    monkeypatch.setattr(actuation.time, "monotonic", lambda: fake_time["t"])
+    actuation.init_compressions()  # compression_start_time = 0.0
+    depth = actuation.COMPRESSION_DEPTH_CM / 100.0
+    stroke = actuation.STROKE_SEC
+    speed = actuation.COMPRESSION_SPEED_MPS
+
+    expected = [
+        (0.0, 0.0, 0.0),                            # top, at rest, starting the down stroke
+        (stroke / 3.0, 0.25 * depth, speed),        # end of speeding up
+        (stroke / 2.0, 0.5 * depth, speed),         # middle of the cruise
+        (2.0 * stroke / 3.0, 0.75 * depth, speed),  # start of slowing down
+        (stroke, depth, 0.0),                       # bottom, at rest, starting the up stroke
+        (1.5 * stroke, 0.5 * depth, -speed),        # middle of the up stroke
+        (2.0 * stroke, 0.0, 0.0),                   # back at the top, cycle repeats
+        (2.5 * stroke, 0.5 * depth, speed),         # middle of the next down stroke
+    ]
+    for t, position, velocity in expected:
+        fake_time["t"] = t
+        actual_position, actual_velocity = actuation.computeCompressionSetpoint_streamed_deprecated()
+        assert actual_position == pytest.approx(position, abs=1e-9), t
+        assert actual_velocity == pytest.approx(velocity, abs=1e-9), t
+
+
+def test_streamed_setpoint_is_continuous_and_velocity_matches(hardware, monkeypatch):
+    """No jumps anywhere in the cycle, never outside 0 to depth, and the velocity matches how fast the position changes."""
     import actuation
 
     fake_time = {"t": 0.0}
@@ -434,15 +498,18 @@ def test_compute_compression_setpoint_is_continuous(hardware, monkeypatch):
     actuation.init_compressions()
     depth = actuation.COMPRESSION_DEPTH_CM / 100.0
     dt = 1e-5
-    # Fastest possible change per step is the cruise speed, 1.5 * depth / STROKE_SEC
-    max_step = 1.5 * depth / actuation.STROKE_SEC * dt * 1.01
+    # Fastest possible change per step is the cruise speed
+    max_step = actuation.COMPRESSION_SPEED_MPS * dt * 1.01
+    # Velocity changes by at most COMPRESSION_ACCEL_MPS2 * dt within a step, so the finite difference is that close to it
+    velocity_tolerance = actuation.COMPRESSION_ACCEL_MPS2 * dt * 1.01
 
-    previous = actuation.computeCompressionSetpoint()
+    previous, _ = actuation.computeCompressionSetpoint_streamed_deprecated()
     for i in range(1, int(2.0 * actuation.STROKE_SEC / dt) + 2):
         fake_time["t"] = i * dt
-        position = actuation.computeCompressionSetpoint()
+        position, velocity = actuation.computeCompressionSetpoint_streamed_deprecated()
         assert -1e-12 <= position <= depth + 1e-12
         assert abs(position - previous) <= max_step
+        assert abs((position - previous) / dt - velocity) <= velocity_tolerance
         previous = position
 
 
@@ -460,6 +527,45 @@ def test_compressions_normal_operation(hardware):
     time.sleep(0.05)
 
     assert actuation.compressions() == ErrorCode.NORMAL_OPERATION
+
+
+def test_compressions_sends_stroke_end_with_planner_limits(hardware):
+    """compressions() commands the bottom of the first stroke with velocity 0 and both planner limits set."""
+    import time
+    import actuation
+    import sensing
+    from moteus_thread import BLDC_ROTATIONS_PER_M
+    actuation.init_motor()
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    time.sleep(0.05)  # let the background command loop complete its first tick
+
+    actuation.init_compressions()
+    assert actuation.compressions() == ErrorCode.NORMAL_OPERATION
+    target = actuation.get_motor_controller()._target
+    bottom = sensing.get_rotary_zero_position() + actuation.COMPRESSION_DEPTH_CM / 100.0 * BLDC_ROTATIONS_PER_M
+    assert target.position == pytest.approx(bottom)
+    assert target.velocity == 0.0
+    assert target.velocity_limit == pytest.approx(actuation.COMPRESSION_SPEED_MPS * abs(BLDC_ROTATIONS_PER_M))
+    assert target.accel_limit == pytest.approx(actuation.COMPRESSION_ACCEL_MPS2 * abs(BLDC_ROTATIONS_PER_M))
+
+
+def test_compressions_streamed_deprecated_sends_position_and_velocity(hardware):
+    """The deprecated streamed mode still runs, sending a position and velocity with the planner off."""
+    import math
+    import time
+    import actuation
+    import sensing
+    actuation.init_motor()
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    time.sleep(0.05)  # let the background command loop complete its first tick
+
+    actuation.init_compressions()
+    assert actuation.compressions_streamed_deprecated() == ErrorCode.NORMAL_OPERATION
+    target = actuation.get_motor_controller()._target
+    assert not math.isnan(target.position)
+    assert not math.isnan(target.velocity)
+    assert math.isnan(target.velocity_limit)
+    assert math.isnan(target.accel_limit)
 
 
 def test_compressions_fails_on_sensor_error(hardware):

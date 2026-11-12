@@ -281,7 +281,6 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = actuation.init_motor()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    time.sleep(0.5)  # Wait for the motor controller to be ready
                     error = actuation.init_steppers(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.init_HMI(HMI.get_pi())
@@ -403,8 +402,8 @@ def main():
                 if error not in (ErrorCode.NORMAL_OPERATION, ErrorCode.ZEROING_FINISHED): continue
 
                 if error == ErrorCode.ZEROING_FINISHED:
-                    error = sensing.zero_position()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    # error = sensing.zero_position() # Zeroing stage on steppers for now, so don't zero the rotary encoder
+                    # if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.COMPRESSION
 
             # case(CPRState.COMPRESSION_PREP):
@@ -471,7 +470,6 @@ def main():
                 if state != prev_state:
                     error = actuation.pause_compressions()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-
                     error = HMI.disable_pause_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
@@ -484,8 +482,6 @@ def main():
 
                 # Loop
                 # TODO: Must track kneel failure during pause as well
-                error = actuation.abort_compressions()
-                if error != ErrorCode.NORMAL_OPERATION: continue
                 
                 error, next_pressed = HMI.next_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue

@@ -273,6 +273,8 @@ def main():
         
         # Capture current state to avoid issues with state changing mid-loop
         current_state = state
+        if current_state != prev_state:
+            logging.debug(f"State transition: {prev_state} -> {current_state}")
         match(current_state):
             case(CPRState.INIT_STARTUP):
                 # Power cycle Setup

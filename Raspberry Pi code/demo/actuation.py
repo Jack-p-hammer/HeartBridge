@@ -48,6 +48,8 @@ pause_compressions = _src.pause_compressions
 abort_compressions = _src.abort_compressions
 computeCompressionSetpoint = _src.computeCompressionSetpoint
 retract_carriage = _src.retract_carriage
+check_motor = _src.check_motor
+reset_motor = _src.reset_motor
 
 # Carriage position zeroing drives to, in meters from home (startup position), positive is down.
 # Must be within stepper.LEAD_SCREW_TRAVEL_M, or stepper.set_target() rejects it and zeroing aborts.

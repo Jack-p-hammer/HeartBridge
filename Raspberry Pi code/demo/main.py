@@ -14,10 +14,16 @@
 # External imports
 import time
 import sys
+import os
+import atexit
+import select
+import termios
+import tty
 import logging
 import pygame
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 # adds the demo directory as the primary path, followed by the src directory
 # sensing comes from demo/sensing.py; actuation from demo/actuation.py; Enum.states comes from demo/Enums/states.py
@@ -32,18 +38,19 @@ import sensing
 import actuation
 import stepper
 import HMI
+import jog_compressions  # demo/jog_compressions.py, used in place of actuation.compressions()
 from Enums.error_codes import ErrorCode
 from Enums.states import CPRState  # demo/Enums/states.py
 
-########################
-# SYSTEM CONFIGURATION #
-########################
-
-LOOP_TICK_SEC = 0.05  # 50ms per tick, 20 Hz; TODO: Optimize loop speed
+# Matches moteus_thread.py's COMMAND_RATE_HZ (100 Hz): setpoints computed any faster would never be sent
+LOOP_TICK_SEC = 0.01  # 10ms per tick, 100 Hz
 
 # Frames cycled during the unfold step, and how long each one stays up
 UNFOLD_FRAMES = [HMI.Image.UNFOLD_1, HMI.Image.UNFOLD_2, HMI.Image.UNFOLD_3, HMI.Image.UNFOLD_4]
 UNFOLD_FRAME_SEC = 0.5  # 2 frames per second
+
+# The battery voltage comes from the moteus, so it reads 0 V until the first reply. Wait this long for one at startup
+MOTOR_FIRST_REPLY_TIMEOUT_SEC = 5.0
 
 # Initialize log directory and file
 LOG_DIR = Path(__file__).resolve().parent.parent / "Logs"
@@ -69,6 +76,12 @@ FATAL_ERRORS = {
     ErrorCode.ERROR_UNKNOWN_IMAGE,
 }
 
+ESCAPE_CHAR = "\x1b"  # Sent alone by the Esc key; also starts the multi-character sequences of arrow/function keys
+
+# Terminal settings from before enable_terminal_keys() changed them, None if the terminal wasn't changed
+_saved_terminal_settings: list[Any] | None = None
+
+
 def configure_logging():
     """
     Configure console and file logging for the CPR machine runtime.
@@ -89,10 +102,73 @@ def configure_logging():
     )
 
 
+def enable_terminal_keys() -> None:
+    """Let the terminal the demo was started from (e.g. an SSH session) send key presses, alongside the pygame window.
+
+    Puts the terminal in cbreak mode, so each key press can be read straight away without waiting for Enter, and
+    isn't echoed. Ctrl+C still works. The original settings are restored when the process exits, however it exits.
+    Does nothing when stdin isn't a terminal (e.g. started by a service) or off Linux.
+    """
+    global _saved_terminal_settings
+    # Compared with != so Pylance skips the Linux-only termios calls when checking on Windows, like HMI.py
+    if sys.platform != "linux":
+        return
+    if not sys.stdin.isatty():
+        return
+
+    fd: int = sys.stdin.fileno()
+    _saved_terminal_settings = termios.tcgetattr(fd)
+    tty.setcbreak(fd)
+    atexit.register(restore_terminal)
+
+
+def restore_terminal() -> None:
+    """Put the terminal back the way it was before enable_terminal_keys(). Registered with atexit."""
+    global _saved_terminal_settings
+    if sys.platform != "linux":
+        return
+    if _saved_terminal_settings is None:
+        return
+
+    termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, _saved_terminal_settings)
+    _saved_terminal_settings = None
+
+
+def read_terminal_keys() -> list[int]:
+    """Return the keys typed in the terminal since the last tick, as pygame key codes. Non-blocking.
+
+    pygame's key codes for letters and digits are their lowercase ASCII codes (pygame.K_b == ord("b")), so a typed
+    character maps straight across. A lone Esc becomes pygame.K_ESCAPE. Arrow and function keys arrive as an Esc
+    followed by more characters in the same read, and are ignored so they don't count as Esc.
+
+    Returns:
+        list[int]: pygame key codes typed, empty if none or if enable_terminal_keys() didn't change the terminal
+    """
+    if sys.platform != "linux":
+        return []
+    if _saved_terminal_settings is None:
+        return []
+
+    fd: int = sys.stdin.fileno()
+    ready, _, _ = select.select([fd], [], [], 0)  # Timeout 0: only check, never wait
+    if not ready:
+        return []
+    typed: str = os.read(fd, 1024).decode(errors="ignore")
+
+    if typed == ESCAPE_CHAR:
+        return [pygame.K_ESCAPE]
+    if ESCAPE_CHAR in typed:
+        # Arrow/function key sequence, possibly with other keys typed in the same tick. Keep only the part before it
+        typed = typed.split(ESCAPE_CHAR)[0]
+    return [ord(char.lower()) for char in typed if char.isprintable()]
+
+
 def read_keys() -> tuple[ErrorCode, list[int]]:
     """
     Return the keys pressed since the last tick, and exit the demo if the window was closed. Non-blocking.
 
+    Keys come from both the pygame window (a keyboard plugged into the Pi) and the terminal the demo was started from
+    (e.g. over SSH, where key presses never reach the window).
     HMI.pump_events() keeps the window alive but never reads keys. This takes the key
     presses off pygame's queue, so it must be called exactly once per tick, and every
     key check in the loop reads its result.
@@ -101,9 +177,11 @@ def read_keys() -> tuple[ErrorCode, list[int]]:
         tuple[ErrorCode, list[int]]: NORMAL_OPERATION and the pygame key codes pressed, or ERROR_PYGAME_FAILURE and
             no keys if the event queue couldn't be read
     """
+    keys_pressed: list[int] = read_terminal_keys()
+
     # The display doesn't exist until HMI.init_HMI() runs in INIT_STARTUP
     if not pygame.display.get_init():
-        return ErrorCode.NORMAL_OPERATION, []
+        return ErrorCode.NORMAL_OPERATION, keys_pressed
 
     try:
         events = pygame.event.get((pygame.QUIT, pygame.KEYDOWN))
@@ -111,7 +189,6 @@ def read_keys() -> tuple[ErrorCode, list[int]]:
         logging.error(f"Failed to read keyboard events: {e}")
         return ErrorCode.ERROR_PYGAME_FAILURE, []
 
-    keys_pressed: list[int] = []
     for event in events:
         if event.type == pygame.QUIT:
             shutdown_demo()
@@ -154,6 +231,7 @@ def main():
     Run the main state-machine loop for the CPR machine
     """
     configure_logging()
+    enable_terminal_keys()
 
     # Define initial state and error code
     state = CPRState.INIT_STARTUP
@@ -165,6 +243,8 @@ def main():
     cpr_elapsed_sec: float = 0.0
     compression_start: float | None = None
     shown_sec: int | None = None  # Whole seconds currently drawn on the timer, None to force a redraw
+    abort_carriage_home: bool = False  # True once ABORT has finished retracting the carriage, so it stops re-retracting
+    init_done_time: float = 0.0  # time.monotonic() when INIT_STARTUP's setup finished, to time out waiting for the moteus
 
     # initialize animation position and timer
     frame_idx: int = 0
@@ -187,7 +267,13 @@ def main():
         if error != ErrorCode.NORMAL_OPERATION: continue
         if pygame.K_ESCAPE in keys_pressed or pygame.K_q in keys_pressed:
             shutdown_demo()
-        
+
+        # The motor not responding aborts from every state. INIT_STARTUP waits for it to respond before leaving, and
+        # ABORT is where this leads
+        if state not in (CPRState.INIT_STARTUP, CPRState.ABORT):
+            error = actuation.check_motor()
+            if error != ErrorCode.NORMAL_OPERATION: continue
+
 
         # --- State machine ---
         # Each state checks (state != prev_state) to detect first entry, and runs
@@ -196,6 +282,8 @@ def main():
         
         # Capture current state to avoid issues with state changing mid-loop
         current_state = state
+        if current_state != prev_state:
+            logging.debug(f"State transition: {prev_state} -> {current_state}")
         match(current_state):
             case(CPRState.INIT_STARTUP):
                 # Power cycle Setup
@@ -208,21 +296,36 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.init_HMI(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    init_done_time = time.monotonic()
+
+                # Loop
+                # Wait for the motor to respond (replying and following commands). Until the moteus first replies its
+                # state is stale: position and battery both read 0, so the sensors (which record the startup position
+                # that pause, abort, and the travel limits are measured from) and the battery check need a reply. And
+                # startup can hold up the moteus thread long enough to trip its watchdog, which the moteus thread clears
+                # once it runs again. Not responding within the timeout is a motor failure
+                if actuation.get_motor_controller().get_last_error() != ErrorCode.NORMAL_OPERATION:
+                    if time.monotonic() - init_done_time > MOTOR_FIRST_REPLY_TIMEOUT_SEC:
+                        logging.error(f"Motor not responding within {MOTOR_FIRST_REPLY_TIMEOUT_SEC} s of startup")
+                        error = ErrorCode.ERROR_MOTOR_FAILURE
+                else:
                     error = sensing.init_sensors(actuation.get_motor_controller(), HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = sensing.battery_check()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    
-                    state = CPRState.WAIT # DEMO ONLY: go to WAIT state after init
+
+                    # Go to the WAIT state, which is only used in the demo
+                    state = CPRState.WAIT
                     
             case(CPRState.WAIT):
                 if state != prev_state:
-                    # TODO: No images yet, Add a black screen or something
+                    # B starts the demo
+                    logging.debug(f"Press B to start the demo, Esc or Q to exit")
+                    # No images yet, TODO: Add a black screen or sm
                     pass
 
                 # Loop
-                # B starts the demo
-                logging.debug(f"Press B to start the demo, Esc or Q to exit")
+
                 if pygame.K_b in keys_pressed:
                     logging.info("B pressed, starting demo")
                     state = CPRState.STARTUP
@@ -320,9 +423,6 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.COMPRESSION
 
-                # Loop
-                if HMI.audio_finished():
-                    state = CPRState.COMPRESSION
 
             case(CPRState.COMPRESSION):
                 # Setup
@@ -368,7 +468,6 @@ def main():
                 if state != prev_state:
                     error = actuation.pause_compressions()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-
                     error = HMI.disable_pause_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
@@ -381,8 +480,6 @@ def main():
 
                 # Loop
                 # TODO: Must track kneel failure during pause as well
-                error = actuation.abort_compressions()
-                if error != ErrorCode.NORMAL_OPERATION: continue
                 
                 error, next_pressed = HMI.next_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue
@@ -439,6 +536,9 @@ def main():
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 
                 if retreat_success:
+                    # Leave the motor as a power cycle would: startup default target and the startup stop sequence
+                    error = actuation.reset_motor()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.WAIT  # Return to the demo's WAIT state
                 
             case(CPRState.ABORT):
@@ -454,20 +554,29 @@ def main():
                     error = HMI.set_image_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     logging.error(f"Abort state tripped: {error}")
+                    abort_carriage_home = False
 
                 # Loop
-                # The steppers only move while being updated, so keep retracting the carriage every tick
+                # The steppers only move while being updated, so keep retracting the carriage every tick until home.
+                # Once home, stop calling retract_carriage(): it resets its target when done, so each further call
+                # would start (and log) a fresh zero-length retraction
                 # No continue on failure: the error is still routed back to ABORT next tick, but prev_state is
                 # recorded first so ABORT's setup doesn't re-run, and the tick still sleeps
-                error, _ = actuation.retract_carriage()
+                if not abort_carriage_home:
+                    error, abort_carriage_home = actuation.retract_carriage()
                 # Halt — only a power cycle exits this state
 
             case(_):
                 error = ErrorCode.EXIT_UNKNOWN
 
+        # Warn when a tick's work doesn't fit in LOOP_TICK_SEC. State entry ticks are skipped, since their one-time
+        # setup (e.g. loading and drawing a full-screen image) is expected to overrun
+        elapsed = time.monotonic() - loop_start
+        if elapsed > LOOP_TICK_SEC and current_state == prev_state:
+            logging.warning(f"Tick overran in {current_state}: {elapsed * 1000:.1f} ms (tick {LOOP_TICK_SEC * 1000:.0f} ms)")
+
         # Record the previous state and sleep for the remainder of the tick duration
         prev_state = current_state
-        elapsed = time.monotonic() - loop_start
         time.sleep(max(0, LOOP_TICK_SEC - elapsed))
 
     logging.critical(f"Fatal error: {error}")

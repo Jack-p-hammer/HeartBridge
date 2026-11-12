@@ -58,6 +58,145 @@ def test_command_loop_without_controller_reports_init_failure(hardware, caplog):
     assert "Moteus controller not initialized" in caplog.text
 
 
+def _following_thread():
+    """A never-started MoteusThread whose latest reply, just now, was in position mode (following commands)."""
+    import time
+    import dataclasses
+    from moteus_thread import MoteusThread, MODE_POSITION
+    thread = MoteusThread()
+    now = time.monotonic()
+    thread._state = dataclasses.replace(thread._state, stale=False, timestamp=now, mode=MODE_POSITION)
+    thread._last_error = ErrorCode.NORMAL_OPERATION
+    thread._last_following_time = now
+    return thread
+
+
+def test_motor_following_commands_is_normal(hardware):
+    assert _following_thread().get_last_error() == ErrorCode.NORMAL_OPERATION
+
+
+def test_errors_before_first_reply_are_reported_as_is(hardware):
+    from moteus_thread import MoteusThread
+    thread = MoteusThread()  # never started: no reply yet
+    assert thread.get_last_error() == ErrorCode.ERROR_INIT_FAILURE
+    thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+    thread._last_error_from_lost_frame = True
+    assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+def test_lost_frame_is_only_a_motor_failure_after_tolerance(hardware):
+    """A lost frame shortly after following a command is tolerated; not following for MOTOR_RESPONSE_TOLERANCE_S is
+    reported."""
+    import time
+    from moteus_thread import MOTOR_RESPONSE_TOLERANCE_S
+    thread = _following_thread()
+    thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+    thread._last_error_from_lost_frame = True
+    assert thread.get_last_error() == ErrorCode.NORMAL_OPERATION
+
+    thread._last_following_time = time.monotonic() - 2.0 * MOTOR_RESPONSE_TOLERANCE_S
+    assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+def test_other_motor_errors_are_reported_straight_away(hardware):
+    """Only lost frames are tolerated: any other failed cycle is reported even right after following a command."""
+    thread = _following_thread()
+    thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+    thread._last_error_from_lost_frame = False
+    assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+def test_fault_is_reported_straight_away(hardware):
+    """A faulted moteus has stopped driving the motor, even though it's still replying."""
+    import dataclasses
+    from moteus_thread import MODE_FAULT
+    thread = _following_thread()
+    thread._state = dataclasses.replace(thread._state, mode=MODE_FAULT, fault=33)
+    assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+@pytest.mark.parametrize("mode_name", ["MODE_POSITION_TIMEOUT", "stopped"])
+def test_replying_but_not_following_is_a_motor_failure_after_tolerance(hardware, mode_name):
+    """The case that left the motor still with no abort: the moteus replies to every command, with no command errors,
+    but isn't in position mode, so it isn't following them. Tolerated briefly (a stop takes a cycle or two to clear),
+    then a motor failure."""
+    import time
+    import dataclasses
+    import moteus_thread
+    from moteus_thread import MOTOR_RESPONSE_TOLERANCE_S
+    mode = 0 if mode_name == "stopped" else getattr(moteus_thread, mode_name)
+    thread = _following_thread()
+
+    # Replies keep coming, in the wrong mode, and position mode was last seen just now: tolerated
+    thread._state = dataclasses.replace(thread._state, mode=mode, timestamp=time.monotonic())
+    assert thread.get_last_error() == ErrorCode.NORMAL_OPERATION
+
+    # Still replying in the wrong mode, last in position mode longer ago than the tolerance: a motor failure
+    thread._last_following_time = time.monotonic() - 2.0 * MOTOR_RESPONSE_TOLERANCE_S
+    assert thread.get_last_error() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+def test_motor_stuck_in_position_timeout_is_a_motor_failure(hardware):
+    """End to end through the command loop: a moteus that stays in position timeout mode, even after stops, is a motor
+    failure once the tolerance passes."""
+    import time
+    import actuation
+    from moteus_thread import MODE_POSITION_TIMEOUT, MOTOR_RESPONSE_TOLERANCE_S
+    actuation.init_motor()
+    time.sleep(0.05)
+    assert actuation.check_motor() == ErrorCode.NORMAL_OPERATION
+
+    # A stop no longer clears it
+    controller = hardware.moteus_controller
+    original_set_stop = controller.set_stop
+
+    async def set_stop_that_does_not_clear(**kwargs):
+        await original_set_stop(**kwargs)
+        controller.mode = MODE_POSITION_TIMEOUT
+    controller.set_stop = set_stop_that_does_not_clear
+    controller.mode = MODE_POSITION_TIMEOUT
+    time.sleep(MOTOR_RESPONSE_TOLERANCE_S + 0.1)
+
+    assert actuation.check_motor() == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+@pytest.mark.parametrize("failure, from_lost_frame", [
+    (RuntimeError("Error: b'ERR unknown flag'"), True),   # adapter rejecting a command joined onto a lost one
+    (RuntimeError("comm lost"), False),                   # anything else
+])
+def test_command_loop_marks_only_lost_frame_errors(hardware, failure, from_lost_frame):
+    """The command loop marks the adapter's "unknown flag" error as a lost frame, and nothing else."""
+    import time
+    import actuation
+    actuation.init_motor()
+    time.sleep(0.05)  # commanding normally
+    hardware.moteus_controller.raise_on_set_position = failure
+    time.sleep(0.05)
+
+    motor = actuation.get_motor_controller()
+    assert motor._last_error == ErrorCode.ERROR_MOTOR_FAILURE
+    assert motor._last_error_from_lost_frame == from_lost_frame
+
+
+def test_position_timeout_mode_is_cleared_with_a_stop(hardware, caplog):
+    """A reply in position timeout mode (the moteus ignoring commands) makes the command loop send a stop to clear it."""
+    import time
+    import actuation
+    from moteus_thread import MODE_POSITION_TIMEOUT, MODE_POSITION
+    actuation.init_motor()
+    time.sleep(0.05)  # startup stop done, commanding normally
+    stops_before = hardware.moteus_controller.stop_count
+
+    hardware.moteus_controller.mode = MODE_POSITION_TIMEOUT
+    time.sleep(0.05)
+
+    # One stop clears it: the fake goes to stopped (0), then the next command puts it back in position mode
+    assert hardware.moteus_controller.stop_count == stops_before + 1
+    assert hardware.moteus_controller.mode == MODE_POSITION
+    assert "position timeout" in caplog.text
+    assert actuation.check_motor() == ErrorCode.NORMAL_OPERATION
+
+
 def _daemon_gone(*args, **kwargs):
     """Stand-in for a pigpio call that raises, e.g. the daemon or its socket going away."""
     raise RuntimeError("daemon gone")
@@ -368,15 +507,24 @@ def test_bldc_targets_follow_gear_ratio_sign(hardware):
     assert math.copysign(1.0, thread._target.position - abs_zero) == math.copysign(1.0, BLDC_GEAR_RATIO)
     assert thread._target.velocity_limit > 0
 
-    assert thread.set_target(ControlMode.COMPRESSIONS, zero, abs_zero, 0.07) == ErrorCode.NORMAL_OPERATION
+    assert thread.set_target(ControlMode.COMPRESSIONS, zero, abs_zero, 0.07,
+                             compressionVelocityLimit=0.5, compressionAccelLimit=5.0) == ErrorCode.NORMAL_OPERATION
     assert math.copysign(1.0, thread._target.position - zero) == math.copysign(1.0, BLDC_GEAR_RATIO)
+    assert thread._target.velocity_limit > 0
+    assert thread._target.accel_limit > 0
+
+    # Plunger moving down (positive velocity) turns the motor the same way as moving the position down
+    assert thread.set_target(ControlMode.COMPRESSIONS_STREAMED_DEPRECATED, zero, abs_zero, 0.03,
+                             compressionVelocity=0.5) == ErrorCode.NORMAL_OPERATION
+    assert math.copysign(1.0, thread._target.velocity) == math.copysign(1.0, BLDC_GEAR_RATIO)
 
     for mode in (ControlMode.PAUSE_RETRACT, ControlMode.ABORT_RETRACT):
         assert thread.set_target(mode, zero, abs_zero) == ErrorCode.NORMAL_OPERATION
         assert thread._target.velocity_limit > 0
 
     # Above the top of travel (the wrong way for the gear train) is still rejected
-    assert thread.set_target(ControlMode.COMPRESSIONS, abs_zero, abs_zero, -0.01) == ErrorCode.ERROR_MOTOR_FAILURE
+    assert thread.set_target(ControlMode.COMPRESSIONS, abs_zero, abs_zero, -0.01,
+                             compressionVelocityLimit=0.5, compressionAccelLimit=5.0) == ErrorCode.ERROR_MOTOR_FAILURE
 
 
 def test_stepper_dir_pin_follows_gear_ratio_sign(hardware):
@@ -400,50 +548,108 @@ def test_stepper_dir_pin_follows_gear_ratio_sign(hardware):
 
 # -------------------- computeCompressionSetpoint (pure) --------------------
 
-def test_compute_compression_setpoint_piecewise_profile(hardware, monkeypatch):
-    """The trapezoidal waveform should stay flat, ramp up, plateau, ramp down, and repeat."""
+def test_compute_compression_setpoint_flips_between_stroke_ends(hardware, monkeypatch):
+    """The setpoint is the extreme of the current stroke: the bottom for the first half of each cycle, the top for the second."""
     import actuation
 
     fake_time = {"t": 0.0}
     monkeypatch.setattr(actuation.time, "monotonic", lambda: fake_time["t"])
     actuation.init_compressions()  # compression_start_time = 0.0
-    peak = actuation.COMPRESSION_DEPTH_CM / 100.0
+    depth = actuation.COMPRESSION_DEPTH_CM / 100.0
+    stroke = actuation.STROKE_SEC
 
-    fake_time["t"] = 0.05  # 0.00-0.12s: still at the top
-    assert actuation.computeCompressionSetpoint() == pytest.approx(0.0)
-
-    fake_time["t"] = 0.18  # 0.12-0.24s: ramping down toward full compression
-    assert 0.0 < actuation.computeCompressionSetpoint() < peak
-
-    fake_time["t"] = 0.28  # 0.24-0.323s: fully compressed
-    assert actuation.computeCompressionSetpoint() == pytest.approx(peak)
-
-    fake_time["t"] = 0.50  # 0.323-0.56s: ramping back up
-    assert 0.0 < actuation.computeCompressionSetpoint() < peak
-
-    fake_time["t"] = 0.56 + 0.05  # cycle repeats every 0.56s
-    assert actuation.computeCompressionSetpoint() == pytest.approx(0.0)
+    expected = [
+        (0.0, depth),                 # down stroke starts straight away
+        (0.5 * stroke, depth),
+        (0.999 * stroke, depth),
+        (stroke, 0.0),                # bottom reached, head back up
+        (1.5 * stroke, 0.0),
+        (2.0 * stroke, depth),        # cycle repeats
+        (2.5 * stroke, depth),
+    ]
+    for t, position in expected:
+        fake_time["t"] = t
+        assert actuation.computeCompressionSetpoint() == pytest.approx(position), t
 
 
-def test_compute_compression_setpoint_exact_boundary_values(hardware, monkeypatch):
-    """The test above checks interior points of each segment; this pins down the
-    exact transition instants so a boundary can't silently fall into the wrong
-    branch (e.g. an off-by-one in a `<` vs `<=` comparison)."""
+def test_compression_caps_make_each_stroke_take_stroke_sec(hardware):
+    """Speeding up and slowing down at the acceleration cap, cruising at the speed cap, covers the depth from rest to rest in exactly STROKE_SEC, a third each."""
+    import actuation
+
+    depth = actuation.COMPRESSION_DEPTH_CM / 100.0
+    accel_time = actuation.COMPRESSION_SPEED_MPS / actuation.COMPRESSION_ACCEL_MPS2
+    assert accel_time == pytest.approx(actuation.STROKE_SEC / 3.0)
+    ramps_m = actuation.COMPRESSION_SPEED_MPS * accel_time  # both ramps together
+    cruise_time = (depth - ramps_m) / actuation.COMPRESSION_SPEED_MPS
+    assert 2.0 * accel_time + cruise_time == pytest.approx(actuation.STROKE_SEC)
+
+
+def test_compressions_target_rejected_without_caps(hardware):
+    """COMPRESSIONS without both the speed and acceleration caps would jump to each extreme, so it's refused."""
+    import math
+    from Enums.control_modes import ControlMode
+    from moteus_thread import MoteusThread
+
+    thread = MoteusThread()  # never started, set_target() only stores the target
+    for velocity_limit, accel_limit in ((math.nan, 5.0), (0.5, math.nan), (0.0, 5.0), (0.5, -1.0)):
+        assert thread.set_target(ControlMode.COMPRESSIONS, 3.0, 3.0, 0.03,
+                                 compressionVelocityLimit=velocity_limit,
+                                 compressionAccelLimit=accel_limit) == ErrorCode.ERROR_MOTOR_FAILURE
+
+
+# -------------------- computeCompressionSetpoint_streamed_deprecated (pure) --------------------
+
+def test_streamed_setpoint_stroke_profile(hardware, monkeypatch):
+    """Down stroke then up stroke, each a thirds trapezoid (quarter, half, quarter of the depth), repeating,
+    with the matching velocity: zero at each end, the cruise speed in the middle, negative on the way up."""
+    import actuation
+
+    fake_time = {"t": 0.0}
+    monkeypatch.setattr(actuation.time, "monotonic", lambda: fake_time["t"])
+    actuation.init_compressions()  # compression_start_time = 0.0
+    depth = actuation.COMPRESSION_DEPTH_CM / 100.0
+    stroke = actuation.STROKE_SEC
+    speed = actuation.COMPRESSION_SPEED_MPS
+
+    expected = [
+        (0.0, 0.0, 0.0),                            # top, at rest, starting the down stroke
+        (stroke / 3.0, 0.25 * depth, speed),        # end of speeding up
+        (stroke / 2.0, 0.5 * depth, speed),         # middle of the cruise
+        (2.0 * stroke / 3.0, 0.75 * depth, speed),  # start of slowing down
+        (stroke, depth, 0.0),                       # bottom, at rest, starting the up stroke
+        (1.5 * stroke, 0.5 * depth, -speed),        # middle of the up stroke
+        (2.0 * stroke, 0.0, 0.0),                   # back at the top, cycle repeats
+        (2.5 * stroke, 0.5 * depth, speed),         # middle of the next down stroke
+    ]
+    for t, position, velocity in expected:
+        fake_time["t"] = t
+        actual_position, actual_velocity = actuation.computeCompressionSetpoint_streamed_deprecated()
+        assert actual_position == pytest.approx(position, abs=1e-9), t
+        assert actual_velocity == pytest.approx(velocity, abs=1e-9), t
+
+
+def test_streamed_setpoint_is_continuous_and_velocity_matches(hardware, monkeypatch):
+    """No jumps anywhere in the cycle, never outside 0 to depth, and the velocity matches how fast the position changes."""
     import actuation
 
     fake_time = {"t": 0.0}
     monkeypatch.setattr(actuation.time, "monotonic", lambda: fake_time["t"])
     actuation.init_compressions()
-    peak = actuation.COMPRESSION_DEPTH_CM / 100.0
+    depth = actuation.COMPRESSION_DEPTH_CM / 100.0
+    dt = 1e-5
+    # Fastest possible change per step is the cruise speed
+    max_step = actuation.COMPRESSION_SPEED_MPS * dt * 1.01
+    # Velocity changes by at most COMPRESSION_ACCEL_MPS2 * dt within a step, so the finite difference is that close to it
+    velocity_tolerance = actuation.COMPRESSION_ACCEL_MPS2 * dt * 1.01
 
-    fake_time["t"] = 0.12  # flat -> ramp boundary: ramp is just starting, still 0
-    assert actuation.computeCompressionSetpoint() == pytest.approx(0.0)
-
-    fake_time["t"] = 0.24  # ramp -> plateau boundary: ramp just finished, at peak
-    assert actuation.computeCompressionSetpoint() == pytest.approx(peak)
-
-    fake_time["t"] = 0.323  # plateau -> ramp-down boundary: still at peak
-    assert actuation.computeCompressionSetpoint() == pytest.approx(peak)
+    previous, _ = actuation.computeCompressionSetpoint_streamed_deprecated()
+    for i in range(1, int(2.0 * actuation.STROKE_SEC / dt) + 2):
+        fake_time["t"] = i * dt
+        position, velocity = actuation.computeCompressionSetpoint_streamed_deprecated()
+        assert -1e-12 <= position <= depth + 1e-12
+        assert abs(position - previous) <= max_step
+        assert abs((position - previous) / dt - velocity) <= velocity_tolerance
+        previous = position
 
 
 # -------------------- compressions --------------------
@@ -460,6 +666,45 @@ def test_compressions_normal_operation(hardware):
     time.sleep(0.05)
 
     assert actuation.compressions() == ErrorCode.NORMAL_OPERATION
+
+
+def test_compressions_sends_stroke_extreme_with_caps(hardware):
+    """compressions() commands the bottom of the first stroke with velocity 0 and both speed and acceleration caps set."""
+    import time
+    import actuation
+    import sensing
+    from moteus_thread import BLDC_ROTATIONS_PER_M
+    actuation.init_motor()
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    time.sleep(0.05)  # let the background command loop complete its first tick
+
+    actuation.init_compressions()
+    assert actuation.compressions() == ErrorCode.NORMAL_OPERATION
+    target = actuation.get_motor_controller()._target
+    bottom = sensing.get_rotary_zero_position() + actuation.COMPRESSION_DEPTH_CM / 100.0 * BLDC_ROTATIONS_PER_M
+    assert target.position == pytest.approx(bottom)
+    assert target.velocity == 0.0
+    assert target.velocity_limit == pytest.approx(actuation.COMPRESSION_SPEED_MPS * abs(BLDC_ROTATIONS_PER_M))
+    assert target.accel_limit == pytest.approx(actuation.COMPRESSION_ACCEL_MPS2 * abs(BLDC_ROTATIONS_PER_M))
+
+
+def test_compressions_streamed_deprecated_sends_position_and_velocity(hardware):
+    """The deprecated streamed mode still runs, sending a position and velocity with no speed or acceleration caps."""
+    import math
+    import time
+    import actuation
+    import sensing
+    actuation.init_motor()
+    init_sensing(sensing, actuation.get_motor_controller(), hardware)
+    time.sleep(0.05)  # let the background command loop complete its first tick
+
+    actuation.init_compressions()
+    assert actuation.compressions_streamed_deprecated() == ErrorCode.NORMAL_OPERATION
+    target = actuation.get_motor_controller()._target
+    assert not math.isnan(target.position)
+    assert not math.isnan(target.velocity)
+    assert math.isnan(target.velocity_limit)
+    assert math.isnan(target.accel_limit)
 
 
 def test_compressions_fails_on_sensor_error(hardware):

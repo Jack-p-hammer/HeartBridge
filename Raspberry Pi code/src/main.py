@@ -339,6 +339,7 @@ def main():
                 # No continue on failure: the error is still routed back to ABORT next tick, but prev_state is
                 # recorded first so ABORT's setup doesn't re-run, and the tick still sleeps
                 error, _ = actuation.retract_carriage()
+                
                 # Halt — only a power cycle exits this state
 
             case(_):

@@ -11,7 +11,10 @@ import threading
 import math
 import time
 import logging
-from typing import Optional
+import argparse
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Optional
 
 # Internal imports
 from Enums.error_codes import ErrorCode
@@ -21,7 +24,27 @@ CONTROLLER_ID: int = 1  # The ID of the moteus-x1 controller on the CAN bus
 COMMAND_RATE_HZ: float = 100.0  # well under the ~0.1s watchdog timeout
 REPLY_TIMEOUT_S: float = 0.05  # give up on a reply well before the ~0.1s watchdog, same as scripts/slow_jog.py
 STOP_ATTEMPTS: int = 5  # tries at the startup stop command before commanding anyway (the command loop then logs errors)
+# The motor counts as responding only while the moteus replies in position mode (MODE_POSITION), i.e. it is following
+# the commands. get_last_error() reports a motor failure once there's been no such reply for this long: lost replies,
+# a fault, position timeout mode, or anything else that keeps the motor from following. Covers the normal gaps:
+# about 0.2% of commands never fully reach the CAN adapter (seen in the raw traffic log), costing one or two cycles
+# each (the lost command times out with no reply, then the adapter rejects the next command, which it reads joined
+# onto the lost one, with "ERR unknown flag"), about 0.13 s for two back to back; and a stop (startup, reset, clearing
+# position timeout) takes a cycle or two to get back to position mode. The moteus's own ~0.1 s watchdog still stops it
+# sooner when commands stop arriving
+MOTOR_RESPONSE_TOLERANCE_S: float = 0.2
+LOST_FRAME_ADAPTER_ERROR: str = "unknown flag"  # in the adapter's reply to a command read joined onto a lost one
+# moteus modes (moteus.Mode), as reported in each reply
+MODE_FAULT: int = 1  # the moteus has faulted (MotorState.fault says why) and stopped driving the motor
+MODE_POSITION: int = 10  # following position commands: the only mode the motor counts as responding in
+MODE_POSITION_TIMEOUT: int = 11  # latched when its watchdog sees no command for ~0.1 s, ignores commands until a stop
 RETRACT_VELOCITY_MPS: float = 0.08  # meters per second, velocity of the plunger along the ball screw during retract
+
+# Diagnostics: write every raw line sent to and received from the CAN adapter to Logs/moteus_raw_<timestamp>.log.
+# Each line is stamped with time.time(); the command loop's error messages include the same clock to line them up.
+# TODO: Turn off once the lost frames are diagnosed, it adds a file write per line on the moteus thread
+RAW_TRAFFIC_LOG: bool = True
+RAW_TRAFFIC_LOG_DIR: Path = Path(__file__).resolve().parent.parent / "Logs"  # same folder as the main logs
 
 # --- Ball screw constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
 BALL_SCREW_LEAD_M: float = 0.0254*0.5  # meters of plunger travel per ball screw revolution
@@ -52,6 +75,9 @@ class MotorTarget:
     feedforward_torque: float = 0.0
     velocity_limit: float = 0.0
     maximum_torque: float = TORQUE_LIMIT_NM # Torque command should never exceed MAX_PLUNGER_FORCE_N out of the ball screw
+    # Acceleration cap on the way to position, in rotations per second squared. NaN leaves it out of the command entirely,
+    # so the controller uses its configured default (servo.default_accel_limit), exactly as before this field existed
+    accel_limit: float = math.nan
 
 
 @dataclasses.dataclass(frozen=True)
@@ -88,6 +114,8 @@ class MoteusThread:
         )
         self._ready: threading.Event = threading.Event()
         self._stop_requested: bool = False
+        # Set by request_stop_sequence(), cleared by the command loop when it runs the stop sequence
+        self._stop_sequence_requested: bool = False
 
         self._target: MotorTarget = MotorTarget(position=math.nan, velocity=0.0)
         self._state: MotorState = MotorState(
@@ -100,6 +128,12 @@ class MoteusThread:
         # *controller's own* fault register (uncalibrated, out of
         # bounds, etc) -- that's read via get_state(), not this.
         self._last_error: ErrorCode = ErrorCode.ERROR_INIT_FAILURE
+        # True when _last_error came from a lost frame (no reply in time, or the adapter rejecting the next command
+        # joined onto the lost one), the only failures get_last_error() tolerates for MOTOR_RESPONSE_TOLERANCE_S
+        self._last_error_from_lost_frame: bool = False
+        # time.monotonic() of the latest reply in MODE_POSITION. Also set at the first reply, so the moteus gets
+        # MOTOR_RESPONSE_TOLERANCE_S from then to reach position mode
+        self._last_following_time: float = 0.0
         self._init_error: ErrorCode = ErrorCode.ERROR_INIT_FAILURE
 
     # --- lifecycle ---------------------------------------------------
@@ -124,7 +158,27 @@ class MoteusThread:
             # Q current is ignored by the default query, so request it explicitly
             query_resolution = moteus.QueryResolution()
             query_resolution.q_current = moteus.F32
-            self._controller = moteus.Controller(id=self._controller_id, query_resolution=query_resolution)
+            controller_kwargs: dict[str, Any] = {}
+            if RAW_TRAFFIC_LOG:
+                # The transport only takes a debug log when it's first built, so build it here instead of letting the
+                # controller build it on the first command. Built the same way, from moteus's own transport options
+                try:
+                    RAW_TRAFFIC_LOG_DIR.mkdir(parents=True, exist_ok=True)
+                    log_path: Path = RAW_TRAFFIC_LOG_DIR / f"moteus_raw_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
+                    parser = argparse.ArgumentParser()
+                    moteus.make_transport_args(parser) # pyright: ignore[reportAttributeAccessIssue]
+                    transport_args = parser.parse_args(["--can-debug", str(log_path)])
+
+                    # The fdcanusb transport needs a running event loop to be built (it starts its reader task then),
+                    # so build it inside this thread's loop. The reader task waits in the loop until the command loop runs
+                    async def build_transport() -> Any:
+                        return moteus.get_singleton_transport(transport_args) # pyright: ignore[reportAttributeAccessIssue]
+                    controller_kwargs["transport"] = loop.run_until_complete(build_transport())
+                    logging.info(f"Logging raw moteus traffic to {log_path}")
+                except Exception as e:
+                    # Diagnostics only: carry on exactly as without the log
+                    logging.warning(f"Raw moteus traffic log not started, continuing without it: {e}")
+            self._controller = moteus.Controller(id=self._controller_id, query_resolution=query_resolution, **controller_kwargs)
         except Exception:
             self._init_error = ErrorCode.ERROR_INIT_FAILURE
             self._ready.set()
@@ -143,23 +197,23 @@ class MoteusThread:
         except AssertionError:
             logging.error("Moteus controller not initialized - Command loop assert error")
             self._last_error = ErrorCode.ERROR_INIT_FAILURE
+            self._last_error_from_lost_frame = False
             return
 
         # When a previous run ends, commands stop and the moteus watchdog latches it in position timeout mode (11),
-        # which ignores position commands until a stop is received. Clear it first, like scripts/slow_jog.py.
-        # Queried so a lost frame (common right after connecting) is retried instead of silently skipped
-        for attempt in range(1, STOP_ATTEMPTS + 1):
-            try:
-                await asyncio.wait_for(self._controller.set_stop(query=True), timeout=REPLY_TIMEOUT_S) # pyright: ignore[reportAttributeAccessIssue]
-                break
-            except Exception as e:
-                if attempt == STOP_ATTEMPTS:
-                    logging.error(f"Moteus startup stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
-                else:
-                    logging.warning(f"Moteus startup stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
+        # which ignores position commands until a stop is received. Clear it first, like scripts/slow_jog.py
+        await self._stop_sequence(self._controller, "startup")
 
         while not self._stop_requested:
             cycle_start: float = time.monotonic()
+            cycle_wall_time: float = time.time()  # same clock as the raw traffic log, to find this cycle's lines in it
+
+            # A reset (request_stop_sequence()) runs the same stop as startup. Cleared first, so a request made
+            # while it runs gets its own stop next cycle
+            if self._stop_sequence_requested:
+                self._stop_sequence_requested = False
+                await self._stop_sequence(self._controller, "reset")
+
             target: MotorTarget = self._target
 
             # No controlMode decoding here, just pass values through to the controller
@@ -174,8 +228,11 @@ class MoteusThread:
                     feedforward_torque=target.feedforward_torque,
                     velocity_limit=target.velocity_limit,
                     maximum_torque=target.maximum_torque,
+                    # None omits the register, so commands without an accel limit are unchanged on the bus
+                    accel_limit=None if math.isnan(target.accel_limit) else target.accel_limit,
                     query=True,
                 ), timeout=REPLY_TIMEOUT_S)
+                first_reply: bool = self._state.stale
                 self._state = MotorState(
                     mode=result.values[moteus.Register.MODE],
                     fault=result.values[moteus.Register.FAULT],
@@ -187,21 +244,69 @@ class MoteusThread:
                     timestamp=time.monotonic(),
                 )
                 self._last_error = ErrorCode.NORMAL_OPERATION
+                self._last_error_from_lost_frame = False
+                if first_reply or self._state.mode == MODE_POSITION:
+                    self._last_following_time = self._state.timestamp
+
+                # If this thread was held up long enough for the moteus watchdog to trip (e.g. while pygame starts up),
+                # the moteus latched position timeout mode and is ignoring these commands. Clear it with the same stop
+                # as startup; the next cycle's command takes over again. Only sent when the moteus is already
+                # ignoring commands, so it never interrupts motion that's being followed
+                if self._state.mode == MODE_POSITION_TIMEOUT:
+                    logging.warning(f"Moteus in position timeout mode ({MODE_POSITION_TIMEOUT}), ignoring commands: "
+                                    f"sending a stop to clear it (reply at {time.time():.6f}, raw log clock)")
+                    await self._stop_sequence(self._controller, "position timeout")
             except asyncio.TimeoutError:
                 # Lost reply. The next cycle sends the target again
-                logging.error(f"Moteus command loop failed: no reply within {REPLY_TIMEOUT_S} s")
+                logging.error(f"Moteus command loop failed: no reply within {REPLY_TIMEOUT_S} s "
+                              f"(sent at {cycle_wall_time:.6f}, raw log clock)")
                 self._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+                self._last_error_from_lost_frame = True
             except Exception as e:
-                # Communication-level failure (timeout, transport, # error, etc).
-                logging.error(f"Moteus command loop failed: {e}")
+                # Communication-level failure (transport, adapter error, etc). Only the adapter rejecting a command read
+                # joined onto a lost one counts as a lost frame; anything else is reported straight away
+                logging.error(f"Moteus command loop failed: {e} (sent at {cycle_wall_time:.6f}, raw log clock)")
                 self._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+                self._last_error_from_lost_frame = LOST_FRAME_ADAPTER_ERROR in str(e)
 
             elapsed: float = time.monotonic() - cycle_start
             await asyncio.sleep(max(0.0, self._period_s - elapsed))
 
+    async def _stop_sequence(self, controller: moteus.Controller, reason: str) -> None:
+        """Send a stop, retrying up to STOP_ATTEMPTS times. Clears any latched fault or position timeout mode (11).
+        Queried so a lost frame (common right after connecting) is retried instead of silently skipped.
+        If every attempt fails it carries on anyway, and the command loop then logs errors.
+
+        Args:
+            controller (moteus.Controller): The controller to stop
+            reason (str): What the stop is for ("startup", "reset" or "position timeout"), for logging
+        """
+        for attempt in range(1, STOP_ATTEMPTS + 1):
+            try:
+                await asyncio.wait_for(controller.set_stop(query=True), timeout=REPLY_TIMEOUT_S) # pyright: ignore[reportAttributeAccessIssue]
+                logging.info(f"Moteus {reason} stop sent")
+                return
+            except Exception as e:
+                if attempt == STOP_ATTEMPTS:
+                    logging.error(f"Moteus {reason} stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
+                else:
+                    logging.warning(f"Moteus {reason} stop attempt {attempt}/{STOP_ATTEMPTS} failed: {str(e) or 'no reply'}")
+
     # --- public, non-blocking API --------------------------------------
 
-    def set_target(self, control_mode: ControlMode, zero_position: float, abs_zero_position: float, compressionSetpoint: float = 0) -> ErrorCode:
+    def request_stop_sequence(self) -> None:
+        """Put the motor back the way it is after a power cycle: the target goes back to the startup default (hold
+        position), and the command loop runs the same stop sequence as at startup at the start of its next cycle.
+        The target is reset here, before the request, so a set_target() made after this call is never overwritten.
+        """
+        self._target = MotorTarget(position=math.nan, velocity=0.0)
+        self._stop_sequence_requested = True
+
+    def set_target(self, control_mode: ControlMode, zero_position: float, abs_zero_position: float,
+                   compressionSetpoint: float = 0,
+                   compressionVelocity: float = 0.0,
+                   compressionVelocityLimit: float = math.nan,
+                   compressionAccelLimit: float = math.nan) -> ErrorCode:
         """Set the target values for the motor controller. The MoteusThread will pick up these values in its next loop and send them to the motor controller.
         Setpoints come in as meters of ball screw travel and are converted to motor rotations here.
 
@@ -209,12 +314,20 @@ class MoteusThread:
                 control_mode (ControlMode): What the plunger should be doing
                 zero_position (float): Zeroed (chest contact) motor position, in rotations
                 abs_zero_position (float): Startup (top of ball screw travel) motor position, in rotations
-                compressionSetpoint (float): Compression depth below zero_position, in meters. Only used for COMPRESSIONS
+                compressionSetpoint (float): Compression depth below zero_position, in meters. COMPRESSIONS: the extreme
+                    of the current stroke. COMPRESSIONS_STREAMED_DEPRECATED: the current position along the stroke
+                compressionVelocity (float): Plunger velocity at compressionSetpoint, in meters per second, positive down.
+                    Only used for COMPRESSIONS_STREAMED_DEPRECATED
+                compressionVelocityLimit (float): Speed cap on the way to the stroke's extreme, in meters per second.
+                    Required (positive) for COMPRESSIONS
+                compressionAccelLimit (float): Acceleration cap on the way to the stroke's extreme, in meters per second
+                    squared. Required (positive) for COMPRESSIONS
 
             Returns:
-                ErrorCode: ERROR_MOTOR_FAILURE if the control mode is invalid or the target is outside the ball screw travel, NORMAL_OPERATION otherwise
+                ErrorCode: ERROR_MOTOR_FAILURE if the control mode is invalid, a COMPRESSIONS limit is missing, or the target is outside the ball screw travel, NORMAL_OPERATION otherwise
         """
         retract_velocity_rps: float = RETRACT_VELOCITY_MPS * abs(BLDC_ROTATIONS_PER_M)  # velocity_limit is a magnitude
+        accel_limit: float = math.nan  # NaN leaves accel_limit out of the command, only COMPRESSIONS sets it
         match control_mode:
             # Setpoints are meters of plunger travel, positive down. Multiplying by BLDC_ROTATIONS_PER_M converts them to
             # motor rotations, including the gear train's reversal
@@ -228,8 +341,29 @@ class MoteusThread:
                 velocity_limit: float = retract_velocity_rps # rotations per second
                 maximum_torque: float = TORQUE_LIMIT_NM
             case ControlMode.COMPRESSIONS:
+                # Same as demo/jog_compressions.py: the position is the extreme of the current stroke, with velocity 0
+                # there. The moteus moves toward it with speed capped at velocity_limit and acceleration capped at
+                # accel_limit, so it speeds up, cruises, and slows down to stop at the extreme. That happens inside the
+                # moteus, so the motion is smooth between main loop ticks and a lost frame doesn't interrupt the stroke.
+                # Without both caps the moteus would jump to each extreme as fast as it can, so they're required.
+                # Written so NaN fails
+                if not (compressionVelocityLimit > 0.0 and compressionAccelLimit > 0.0):
+                    logging.error(f"Compressions need positive velocity and accel limits, got "
+                                  f"{compressionVelocityLimit} m/s and {compressionAccelLimit} m/s^2")
+                    return ErrorCode.ERROR_MOTOR_FAILURE
                 position: float = zero_position + compressionSetpoint * BLDC_ROTATIONS_PER_M # rotations, relative to zeroed position
-                velocity: float = math.nan
+                velocity: float = 0.0 # stop at the end of the stroke
+                kp_scale: float = 1.0
+                kd_scale: float = 1.0
+                feedforward_torque: float = 0.0
+                velocity_limit: float = compressionVelocityLimit * abs(BLDC_ROTATIONS_PER_M) # rotations per second, a magnitude
+                accel_limit = compressionAccelLimit * abs(BLDC_ROTATIONS_PER_M) # rotations per second squared, a magnitude
+                maximum_torque: float = TORQUE_LIMIT_NM # Torque command should never exceed MAX_PLUNGER_FORCE_N out of the ball screw
+            case ControlMode.COMPRESSIONS_STREAMED_DEPRECATED:
+                # Deprecated: every position along the stroke is streamed from the main loop, with the matching velocity so
+                # the moteus keeps moving between commands instead of stepping. No speed or acceleration caps
+                position: float = zero_position + compressionSetpoint * BLDC_ROTATIONS_PER_M # rotations, relative to zeroed position
+                velocity: float = compressionVelocity * BLDC_ROTATIONS_PER_M # rotations per second, signed like position
                 kp_scale: float = 1.0
                 kd_scale: float = 1.0
                 feedforward_torque: float = 0.0
@@ -277,11 +411,22 @@ class MoteusThread:
             kp_scale=kp_scale, 
             kd_scale=kd_scale, 
             feedforward_torque=feedforward_torque, 
-            velocity_limit=velocity_limit, 
-            maximum_torque=maximum_torque
+            velocity_limit=velocity_limit,
+            maximum_torque=maximum_torque,
+            accel_limit=accel_limit
         )
         
         return ErrorCode.NORMAL_OPERATION
+
+    def set_raw_target(self, target: MotorTarget) -> None:
+        """Send a target in raw motor units (rotations, rotations per second), bypassing set_target()'s ControlMode
+        conversion and ball screw travel check. The caller must keep the target inside the ball screw travel.
+        Used by demo/jog_compressions.py for its fixed-stroke bench test
+
+        Args:
+            target (MotorTarget): Every value the moteus is sent on its next command loop tick
+        """
+        self._target = target
 
     def get_state(self) -> MotorState:
         """Get motor state
@@ -292,8 +437,34 @@ class MoteusThread:
         return self._state
 
     def get_last_error(self) -> ErrorCode:
-        """Returns the ErrorCode describing the failure/lack thereof from the motor controller thread"""
-        return self._last_error
+        """Returns whether the motor is responding: NORMAL_OPERATION only while the moteus is replying and following
+        commands (in MODE_POSITION). Anything that keeps the motor from following is a motor failure:
+        - a fault (MODE_FAULT): reported straight away
+        - a command failure other than a lost frame (transport error, other adapter error): reported straight away
+        - no reply in MODE_POSITION for MOTOR_RESPONSE_TOLERANCE_S, for any reason: lost replies, position timeout mode
+          that a stop didn't clear, stuck stopped, etc. Shorter gaps (an occasional lost frame, the cycle or two after a
+          stop) are tolerated. Each failed cycle is still logged by the command loop.
+        Before the moteus has replied at least once, the latest error is reported as is.
+
+        Possible values:
+            NORMAL_OPERATION: the motor is following commands (allowing for the short gaps above)
+            ERROR_INIT_FAILURE: the command loop hasn't run yet, or started without a controller
+            ERROR_MOTOR_FAILURE: the motor isn't responding, as above
+        """
+        if self._state.stale:
+            return self._last_error
+        if self._last_error != ErrorCode.NORMAL_OPERATION and not self._last_error_from_lost_frame:
+            return self._last_error
+        if self._state.mode == MODE_FAULT:
+            logging.error(f"Moteus faulted: fault code {self._state.fault}")
+            return ErrorCode.ERROR_MOTOR_FAILURE
+        not_following_s: float = time.monotonic() - self._last_following_time
+        if not_following_s > MOTOR_RESPONSE_TOLERANCE_S:
+            logging.error(f"Moteus not following commands for {not_following_s:.3f} s: latest reply mode "
+                          f"{self._state.mode} (position mode is {MODE_POSITION}), latest command "
+                          f"{'failed' if self._last_error != ErrorCode.NORMAL_OPERATION else 'replied'}")
+            return ErrorCode.ERROR_MOTOR_FAILURE
+        return ErrorCode.NORMAL_OPERATION
     
     def get_battery_voltage(self) -> float:
         """Returns the battery voltage of the 6S Lipo battery pack, as reported by the moteus controller."""

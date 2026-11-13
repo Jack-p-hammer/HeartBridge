@@ -41,7 +41,7 @@ LEAD_SCREW_TRAVEL_M: float = 0.12  # meters, usable carriage travel from home (s
 # --- Motion constants ---
 CHUNK_DURATION_S: float = 0.04  # Duration of each queued chunk of steps
 CHUNK_QUEUE_DEPTH: int = 2  # Chunks kept queued, CHUNK_DURATION_S * CHUNK_QUEUE_DEPTH must exceed main.py LOOP_TICK_SEC plus jitter or motion stutters
-ZEROING_VELOCITY_MPS: float = 0.04  # meters per second, carriage velocity while seeking the chest during zeroing
+ZEROING_VELOCITY_MPS: float = 0.02  #(starting 0.04) meters per second, carriage velocity while seeking the chest during zeroing
 RETRACT_VELOCITY_MPS: float = 2*ZEROING_VELOCITY_MPS  # meters per second, carriage velocity when retracting to home
 STEPPER_ACCEL_MPS2: float = 0.2  # meters per second^2, ramp limit so the steppers don't stall. TODO: Tune
 STEP_PULSE_HIGH_US: int = 5  # STEP high time, most drivers need 1-2us

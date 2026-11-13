@@ -17,13 +17,13 @@ import logging
 # Internal imports
 from Enums.error_codes import ErrorCode
 
-# TODO: Set actual GPIO pin numbers to match the hardware hat
+# These are real pins
 STEPPER_STEP_PIN: int = 20
 STEPPER_DIR_PIN: int = 21
 STEPPER_SLEEP_PIN: int = 16
 STEPPER_SLEEP_ACTIVE_LOW: bool = False  # Most stepper drivers (A4988, DRV8825, TMC2209) enable on a LOW EN pin
 
-# --- Mechanical constants (PLACEHOLDERS, TODO: replace with real hardware values) ---
+# --- Mechanical constants ---
 LEAD_SCREW_PITCH_M: float = 0.0254*0.1  # meters of carriage travel per lead screw revolution (the lead; equals pitch only for single-start screws)
 # Signed: the 1:1 gear train reverses rotation, so negative. This sign is the only place the steppers' direction is set;
 # flip it to reverse them. Carriage positions and step counts are always positive down

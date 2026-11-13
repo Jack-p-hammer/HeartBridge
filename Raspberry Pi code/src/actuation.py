@@ -22,6 +22,7 @@ from Enums.control_modes import ControlMode
 from moteus_thread import MoteusThread, CONTROLLER_ID
 import stepper
 from stepper import LEAD_SCREW_TRAVEL_M, ZEROING_VELOCITY_MPS, RETRACT_VELOCITY_MPS
+from zeroing_key_test import move_carriage
 
 
 COMPRESSION_DEPTH_CM: float = 5.08 # depth of compressions in cm (2 in, same as demo/jog_compressions.py). AHA adult depth is 2 to 2.4 in

@@ -54,11 +54,11 @@ reset_motor = _src.reset_motor
 # Carriage position zeroing drives to, in meters from home (startup position), positive is down.
 # Must be within stepper.LEAD_SCREW_TRAVEL_M, or stepper.set_target() rejects it and zeroing aborts.
 # Must also be at or below STARTUP_LOWER_M, i.e. >= since down is positive (checked below)
-DEMO_ZERO_POSITION_M: float = 0.05  # TODO: Placeholder, measure on the rig
+DEMO_ZERO_POSITION_M: float = 0.08  # 0.05 TODO: Placeholder, measure on the rig
 
 # Carriage position STARTUP lowers to, in meters from home, positive is down. Assumes the carriage starts fully
 # retracted, since stepper positions are measured from wherever it was at startup
-STARTUP_LOWER_M: float = 0.0254*0.25  # 0.25 inch
+STARTUP_LOWER_M: float = .01 #0.0254*0.25  # 0.25 inch
 
 # retract_carriage() (src/actuation.py) only undoes downward steps, so the carriage must never move up except while
 # retracting. Zeroing would move it up from where STARTUP leaves it, and RESET_DEMO/ABORT could then never get it home

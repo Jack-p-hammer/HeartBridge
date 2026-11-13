@@ -26,6 +26,7 @@ import stepper
 from Enums.error_codes import ErrorCode
 from Enums.control_modes import ControlMode
 from stepper import ZEROING_VELOCITY_MPS
+from zeroing_key_test import move_carriage
 
 # Load src/actuation.py under its own name. A plain `import actuation` here would find this file again, since demo/
 # is first on the import path

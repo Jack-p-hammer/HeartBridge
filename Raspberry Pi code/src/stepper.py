@@ -112,7 +112,11 @@ def update() -> ErrorCode:
     if error != ErrorCode.NORMAL_OPERATION:
         return error
 
-    while len(chunk_queue) < CHUNK_QUEUE_DEPTH and queued_end_steps() != target_steps:
+    # Every chunk shares the one DIR pin, which is set as each chunk is queued. So a chunk in the other direction waits
+    # until every chunk already queued has played, or the DIR change would reverse the steps still playing (and they
+    # would be counted in the wrong direction). Reversing while moving only happens in demo manual jogging and when
+    # retracting straight after a move, and waits at most CHUNK_DURATION_S * CHUNK_QUEUE_DEPTH
+    while len(chunk_queue) < CHUNK_QUEUE_DEPTH and queued_end_steps() != target_steps and not reversing():
         error = queue_next_chunk()
         if error != ErrorCode.NORMAL_OPERATION:
             return error
@@ -172,6 +176,12 @@ def get_setpoint() -> float:
     return target_steps / STEPS_PER_M
 
 
+def get_queued_end() -> float:
+    """Returns where the carriage will be once every queued chunk has played, in meters from home, positive is down.
+    Queued chunks always play out, so the carriage can't be stopped short of this"""
+    return queued_end_steps() / STEPS_PER_M
+
+
 def at_target() -> bool:
     """Returns True once all steps to the target have been sent and played out"""
     global chunk_queue, position_steps, target_steps
@@ -191,12 +201,30 @@ def reset_extended_steps() -> None:
     extended_steps = 0
 
 
+def sync_extended_steps() -> None:
+    """Set the extending step count to where the queued steps end, so actuation.retract_carriage() retracts all the way
+    home (0) from wherever the carriage is. For motion that goes up as well as down (demo manual jogging): the count
+    only grows with extending steps, so moving up would otherwise leave it too large, and the retraction would aim
+    above home and fail. Call after update(), so the steps it queued are included"""
+    global extended_steps
+    extended_steps = queued_end_steps()
+
+
 # -------- PRIVATE FUNCTIONS --------
 
 def queued_end_steps() -> int:
     """Returns the position the carriage will be at once every queued chunk has played"""
     global position_steps, chunk_queue
     return position_steps + sum(steps for _, steps in chunk_queue)
+
+
+def reversing() -> bool:
+    """Returns True while the target is in the other direction from the chunks still queued, so the next chunk has to
+    wait for them to finish playing (they share the DIR pin)"""
+    global chunk_queue, target_steps
+    if not chunk_queue:
+        return False
+    return (target_steps - queued_end_steps()) * chunk_queue[-1][1] < 0
 
 
 def retire_finished_chunks() -> ErrorCode:

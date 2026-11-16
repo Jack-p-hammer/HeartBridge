@@ -6,6 +6,7 @@ from enum import Enum, auto
 class CPRState(Enum):
     INIT_STARTUP = auto()
     WAIT = auto()
+    MANUAL = auto()
     STARTUP = auto()
     UNFOLD_CUT_CLOTHES = auto()
     ALIGNMENT = auto()

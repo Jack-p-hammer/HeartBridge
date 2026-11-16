@@ -8,6 +8,8 @@
 #   - demo/Enums/states.py is used in place of src/Enums/states.py
 #   - Log files are named heartBridge_demo_<timestamp>.log
 #   - Esc or Q (or closing the window) stops the motor and steppers and exits back to the terminal from any state
+#   - M in WAIT or PAUSE enters MANUAL: keys drive the carriage and plunger, in case the hardcoded positions drift
+#     (demo/manual.py). M again leaves it
 # Every other module (stepper, moteus_thread, HMI, Enums.error_codes, Enums.control_modes)
 # is imported from src/ unaltered.
 
@@ -38,6 +40,7 @@ import sensing
 import actuation
 import stepper
 import HMI
+import manual  # demo/manual.py, the MANUAL state's keyboard control
 import jog_compressions  # demo/jog_compressions.py, used in place of actuation.compressions()
 from Enums.error_codes import ErrorCode
 from Enums.states import CPRState  # demo/Enums/states.py
@@ -245,6 +248,7 @@ def main():
     shown_sec: int | None = None  # Whole seconds currently drawn on the timer, None to force a redraw
     abort_carriage_home: bool = False  # True once ABORT has finished retracting the carriage, so it stops re-retracting
     init_done_time: float = 0.0  # time.monotonic() when INIT_STARTUP's setup finished, to time out waiting for the moteus
+    manual_return_state: CPRState = CPRState.RESET_DEMO  # Where MANUAL goes when M is pressed again
 
     # initialize animation position and timer
     frame_idx: int = 0
@@ -318,6 +322,7 @@ def main():
                     state = CPRState.WAIT
                     
             case(CPRState.WAIT):
+                # Setup
                 if state != prev_state:
                     # Black screen and silence while waiting, e.g. after a reset
                     error = HMI.stop_audio()
@@ -325,13 +330,43 @@ def main():
                     error = HMI.clear_screen()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     # B starts the demo
-                    logging.debug(f"Press B to start the demo, Esc or Q to exit")
+                    logging.debug(f"Press B to start the demo, M for manual control, Esc or Q to exit")
 
                 # Loop
-
+                
+                # start demo key press
                 if pygame.K_b in keys_pressed:
                     logging.info("B pressed, starting demo")
                     state = CPRState.STARTUP
+
+                # manual mode key press
+                if pygame.K_m in keys_pressed:
+                    logging.info("M pressed, entering manual mode")
+                    # Leaving manual goes through RESET_DEMO, which brings the carriage and plunger home first:
+                    # STARTUP assumes the carriage starts there
+                    manual_return_state = CPRState.RESET_DEMO
+                    state = CPRState.MANUAL
+
+            case(CPRState.MANUAL):
+                # Setup
+                if state != prev_state:
+                    # The buttons do nothing in manual mode. PAUSE turns Next back on when it's returned to
+                    error = HMI.disable_next_button()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    error = HMI.disable_pause_button()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    error = manual.init_manual(actuation.get_motor_controller())
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+
+                # Loop
+                # W/S carriage, I/K plunger, Z save the zeroing position
+                error = manual.manual(actuation.get_motor_controller(), keys_pressed)
+                if error != ErrorCode.NORMAL_OPERATION: continue
+
+                if pygame.K_m in keys_pressed:
+                    manual.exit_manual(actuation.get_motor_controller())
+                    logging.info(f"M pressed, leaving manual mode for {manual_return_state.name}")
+                    state = manual_return_state
 
             case(CPRState.STARTUP):
                 # Setup
@@ -479,7 +514,7 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     
                     logging.debug("Device Paused")
-                    logging.debug("Press R to reset the demo")
+                    logging.debug("Press R to reset the demo, M for manual control")
 
                 # Loop
                 # TODO: Must track kneel failure during pause as well
@@ -492,6 +527,13 @@ def main():
                 if pygame.K_r in keys_pressed:
                     logging.info("R pressed, resetting demo")
                     state = CPRState.RESET_DEMO
+
+                # Manual control mid-demo. Coming back re-runs PAUSE's setup, which returns the plunger to its zeroed
+                # position; the carriage stays where manual mode left it, so compressions resume from there
+                if pygame.K_m in keys_pressed:
+                    logging.info("M pressed, entering manual mode")
+                    manual_return_state = CPRState.PAUSE
+                    state = CPRState.MANUAL
 
             case(CPRState.KNEEL_FAILURE):
                 # Setup

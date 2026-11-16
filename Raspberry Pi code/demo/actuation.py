@@ -5,7 +5,8 @@ Demo stand-in for src/actuation.py. demo/main.py puts this folder ahead of src/ 
 
 Two changes from src/actuation.py:
 - zeroing() drives the carriage straight to the hardcoded DEMO_ZERO_POSITION_M, instead of lowering until the force
-  sensor detects the chest
+  sensor detects the chest. Manual mode (demo/manual.py, Z key) can replace it for the rest of the run with
+  set_zero_position()
 - lower_carriage() is new: it lowers the carriage STARTUP_LOWER_M during the STARTUP state
 Every other function is src/actuation.py's, unaltered, and re-exported below, so the shared motor controller and the
 compression and retraction state all live in src/actuation.py.
@@ -73,6 +74,39 @@ if DEMO_ZERO_POSITION_M < STARTUP_LOWER_M:
 ZEROING_TIMEOUT_SEC: float = _src.ZEROING_TIMEOUT_SEC
 
 zeroing_start_time: float = 0.0  # time.monotonic() of when zeroing started
+# Carriage position zeroing drives to. Starts at DEMO_ZERO_POSITION_M, and set_zero_position() (manual mode's Z key)
+# changes it until the demo exits. To keep a new value, copy it from the log into DEMO_ZERO_POSITION_M
+zero_position_m: float = DEMO_ZERO_POSITION_M
+
+
+def get_zero_position() -> float:
+    """Returns the carriage position zeroing drives to, in meters from home, positive is down"""
+    global zero_position_m
+    return zero_position_m
+
+
+def set_zero_position(position_m: float) -> bool:
+    """Change the carriage position zeroing drives to, for every zeroing until the demo exits.
+    Held to the same limits as DEMO_ZERO_POSITION_M: inside the lead screw travel, and at or below STARTUP_LOWER_M so
+    zeroing never moves the carriage up.
+
+    Args:
+        position_m (float): Carriage position in meters from home, positive is down
+
+    Returns:
+        bool: True if saved, False (keeping the old position) if it's outside those limits
+    """
+    global zero_position_m
+
+    # Written so NaN fails
+    if not (STARTUP_LOWER_M <= position_m <= stepper.LEAD_SCREW_TRAVEL_M):
+        logging.warning(f"Zeroing position not changed: {position_m} m must be from STARTUP_LOWER_M ({STARTUP_LOWER_M} m) "
+                        f"to the lead screw travel ({stepper.LEAD_SCREW_TRAVEL_M} m). Still {zero_position_m} m")
+        return False
+
+    zero_position_m = position_m
+    logging.info(f"Zeroing position set to {zero_position_m} m (hardcoded DEMO_ZERO_POSITION_M is {DEMO_ZERO_POSITION_M} m)")
+    return True
 
 
 def init_zeroing() -> ErrorCode:
@@ -84,7 +118,7 @@ def init_zeroing() -> ErrorCode:
     global zeroing_start_time
 
     zeroing_start_time = time.monotonic()
-    logging.debug(f"Zeroing initialized (demo: hardcoded at {DEMO_ZERO_POSITION_M} m)")
+    logging.debug(f"Zeroing initialized (demo: zero position {zero_position_m} m)")
 
     return ErrorCode.NORMAL_OPERATION
 
@@ -94,14 +128,14 @@ def zeroing() -> ErrorCode:
     Perform the hardcoded zeroing procedure. Non-blocking.
     The procedure is as follows:
     1. Hold the plunger just below the top of its ball screw travel
-    2. Command the steppers to DEMO_ZERO_POSITION_M at zeroing velocity
+    2. Command the steppers to the zero position (DEMO_ZERO_POSITION_M, unless changed in manual mode) at zeroing velocity
     3. Report ZEROING_FINISHED once every step to it has played. The carriage holds there for the rest of compressions
 
     Returns:
         ErrorCode: Normal while zeroing, ZEROING_FINISHED when finished, ERROR_ZEROING_FAILURE on timeout,
-            ERROR_MOTOR_FAILURE on a motor or stepper failure (including DEMO_ZERO_POSITION_M outside the lead screw travel)
+            ERROR_MOTOR_FAILURE on a motor or stepper failure (including the zero position outside the lead screw travel)
     """
-    global zeroing_start_time
+    global zeroing_start_time, zero_position_m
 
     # Check for timeout
     if time.monotonic() - zeroing_start_time > ZEROING_TIMEOUT_SEC:
@@ -124,7 +158,7 @@ def zeroing() -> ErrorCode:
         return ErrorCode.ERROR_MOTOR_FAILURE
 
     # Drive the carriage to the hardcoded zero, can be done repeatedly since it is non-blocking
-    error = stepper.set_target(DEMO_ZERO_POSITION_M, ZEROING_VELOCITY_MPS)
+    error = stepper.set_target(zero_position_m, ZEROING_VELOCITY_MPS)
     if error == ErrorCode.NORMAL_OPERATION:
         error = stepper.update()
     if error != ErrorCode.NORMAL_OPERATION:
@@ -133,9 +167,9 @@ def zeroing() -> ErrorCode:
         return ErrorCode.ERROR_MOTOR_FAILURE
 
     # Done once every step to the target has played. Checked in steps with at_target(), not by comparing
-    # get_position() to DEMO_ZERO_POSITION_M: the target rounds to a whole step, so the position can read just under it
+    # get_position() to the zero position: the target rounds to a whole step, so the position can read just under it
     if stepper.at_target():
-        logging.info(f"Carriage zeroed at {stepper.get_position()} m (demo: hardcoded at {DEMO_ZERO_POSITION_M} m)")
+        logging.info(f"Carriage zeroed at {stepper.get_position()} m (demo: zero position {zero_position_m} m)")
         return ErrorCode.ZEROING_FINISHED
     return ErrorCode.NORMAL_OPERATION
 

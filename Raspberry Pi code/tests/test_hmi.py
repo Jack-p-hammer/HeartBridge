@@ -357,6 +357,29 @@ def test_set_image_success_and_failure(hardware):
     assert HMI.set_image(HMI.Image.UNFOLD_1) == ErrorCode.ERROR_UNKNOWN_IMAGE
 
 
+def test_clear_screen_fills_black(hardware):
+    """clear_screen() fills the display with black, after an image was shown."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    HMI.set_image(HMI.Image.UNFOLD_1)
+
+    assert HMI.clear_screen() == ErrorCode.NORMAL_OPERATION
+    assert hardware.pygame.screen.fill_color == (0, 0, 0)
+
+
+def test_stop_audio_stops_prompt_and_reports_finished(hardware):
+    """stop_audio() stops the playing prompt, and audio_finished() then reports True."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY)
+    assert hardware.pygame.channel.sound is not None
+    assert not HMI.audio_finished()
+
+    assert HMI.stop_audio() == ErrorCode.NORMAL_OPERATION
+    assert hardware.pygame.channel.sound is None
+    assert HMI.audio_finished()
+
+
 def test_set_audio_plays_prompt_and_reports_failures(hardware):
     """set_audio() should start playback on the shared channel, looping, and surface failures."""
     import HMI

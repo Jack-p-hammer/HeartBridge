@@ -251,6 +251,41 @@ def set_image(image: Image) -> ErrorCode:
     return ErrorCode.NORMAL_OPERATION
 
 
+def clear_screen() -> ErrorCode:
+    """Fill the screen with black, removing the current image and any CPR timer drawn over it
+
+    Returns:
+        ErrorCode: NORMAL_OPERATION if successful, ERROR_PYGAME_FAILURE if failed
+    """
+    global _screen, _background, _timer_rect
+    try:
+        _screen.fill((0, 0, 0))
+        # No image to erase old timer text with; the black fill already covers it
+        _background = None
+        _timer_rect = None
+        pygame.display.flip()
+    except Exception as e:
+        logging.error(f"Failed to clear screen: {e}")
+        return ErrorCode.ERROR_PYGAME_FAILURE
+    return ErrorCode.NORMAL_OPERATION
+
+
+def stop_audio() -> ErrorCode:
+    """Stop the audio prompt that's playing, if any. audio_finished() then reports True
+
+    Returns:
+        ErrorCode: NORMAL_OPERATION if successful, ERROR_PYGAME_FAILURE if failed
+    """
+    global _audio_channel, _audio_length
+    try:
+        _audio_channel.stop()
+        _audio_length = 0.0
+    except Exception as e:
+        logging.error(f"Failed to stop audio: {e}")
+        return ErrorCode.ERROR_PYGAME_FAILURE
+    return ErrorCode.NORMAL_OPERATION
+
+
 def draw_timer(elapsed_sec: float) -> ErrorCode:
     """Draw elapsed CPR time in the bottom right corner over the current image.
     Only that corner of the screen is updated, so this is cheap enough to call every tick,

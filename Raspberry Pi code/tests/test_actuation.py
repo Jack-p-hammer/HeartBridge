@@ -206,7 +206,7 @@ def _daemon_gone(*args, **kwargs):
     ("set_mode", None),
     ("write", "STEPPER_STEP_PIN"),
     ("write", "STEPPER_DIR_PIN"),
-    ("write", "STEPPER_ENABLE_PIN"),
+    ("write", "STEPPER_SLEEP_PIN"),
     ("wave_clear", None),
 ])
 def test_init_steppers_reports_pigpio_failure(hardware, monkeypatch, caplog, pigpio_method, pin_name):
@@ -349,7 +349,7 @@ def test_stepper_update_reports_rejected_waveform(hardware, monkeypatch, caplog)
     """pigpio rejecting a waveform (negative wave_create status) is a motor failure, not an exception."""
     import stepper
     stepper.init_steppers(hardware.pi)
-    stepper.set_target(0.05, stepper.ZEROING_VELOCITY_MPS)
+    assert stepper.set_target(0.5 * stepper.LEAD_SCREW_TRAVEL_M, stepper.ZEROING_VELOCITY_MPS) == ErrorCode.NORMAL_OPERATION
     monkeypatch.setattr(hardware.pi, "wave_create", lambda: -1)
 
     assert stepper.update() == ErrorCode.ERROR_MOTOR_FAILURE
@@ -369,7 +369,8 @@ def test_stepper_update_reports_pigpio_failure(hardware, monkeypatch, caplog, pi
     import stepper
     stepper.init_steppers(hardware.pi)
     stepper.chunk_queue = [(0, 1)]  # a finished chunk to retire (fake daemon reports nothing playing)
-    stepper.set_target(0.05, stepper.ZEROING_VELOCITY_MPS)  # and more steps to queue
+    # and more steps to queue
+    assert stepper.set_target(0.5 * stepper.LEAD_SCREW_TRAVEL_M, stepper.ZEROING_VELOCITY_MPS) == ErrorCode.NORMAL_OPERATION
     monkeypatch.setattr(hardware.pi, pigpio_method, _daemon_gone)
 
     assert stepper.update() == ErrorCode.ERROR_MOTOR_FAILURE
@@ -424,13 +425,15 @@ def test_stepper_counts_only_extending_steps(hardware):
     """Every step commanded down adds to the extending count, and steps commanded up don't reduce it."""
     import stepper
     stepper.init_steppers(hardware.pi)
+    deep_m = 0.8 * stepper.LEAD_SCREW_TRAVEL_M
+    shallow_m = 0.5 * stepper.LEAD_SCREW_TRAVEL_M
 
-    _run_steppers_to(stepper, 0.05, stepper.ZEROING_VELOCITY_MPS)
-    assert stepper.extended_steps == round(0.05 * stepper.STEPS_PER_M)
+    _run_steppers_to(stepper, deep_m, stepper.ZEROING_VELOCITY_MPS)
+    assert stepper.extended_steps == round(deep_m * stepper.STEPS_PER_M)
 
-    _run_steppers_to(stepper, 0.03, stepper.RETRACT_VELOCITY_MPS)
-    assert stepper.extended_steps == round(0.05 * stepper.STEPS_PER_M)
-    assert stepper.get_extended_distance() == pytest.approx(0.05)
+    _run_steppers_to(stepper, shallow_m, stepper.RETRACT_VELOCITY_MPS)
+    assert stepper.extended_steps == round(deep_m * stepper.STEPS_PER_M)
+    assert stepper.get_extended_distance() == pytest.approx(deep_m, abs=1.0 / stepper.STEPS_PER_M)
 
     stepper.reset_extended_steps()
     assert stepper.extended_steps == 0
@@ -443,7 +446,7 @@ def test_retract_carriage_retracts_exactly_the_extended_steps(hardware):
     import stepper
     actuation.init_steppers(hardware.pi)
 
-    for depth_m in (0.05, 0.02):
+    for depth_m in (0.8 * stepper.LEAD_SCREW_TRAVEL_M, 0.3 * stepper.LEAD_SCREW_TRAVEL_M):
         _run_steppers_to(stepper, depth_m, stepper.ZEROING_VELOCITY_MPS)
         assert stepper.extended_steps == round(depth_m * stepper.STEPS_PER_M)
 
@@ -479,9 +482,9 @@ def test_zeroing_succeeds_when_sensors_healthy(hardware):
 # -------------------- motor directions --------------------
 
 def test_gear_trains_reverse_both_motors(hardware):
-    """Both 1:1 gear trains reverse rotation (matching scripts/slow_jog.py), so both gear ratios are negative and
-    the steppers drive down with DIR low. Every other direction is derived from these signs; update this test
-    only if the gear trains change."""
+    """Both 1:1 gear trains reverse rotation (matching scripts/slow_jog.py), so both gear ratios are negative, and
+    the steppers drive down with DIR high (as wired). Every other direction is derived from these; update this test
+    only if the gear trains or the wiring change."""
     import moteus_thread
     import stepper
 
@@ -489,7 +492,7 @@ def test_gear_trains_reverse_both_motors(hardware):
     assert moteus_thread.BLDC_ROTATIONS_PER_M < 0  # down on the ball screw is negative motor rotation
     assert moteus_thread.TORQUE_LIMIT_NM > 0
     assert stepper.STEPPER_GEAR_RATIO == -1.0
-    assert stepper.STEPPER_DIR_DOWN_LEVEL == 0
+    assert stepper.STEPPER_DIR_DOWN_LEVEL == 1
     assert stepper.STEPS_PER_M > 0  # step counts stay positive down, DIR carries the direction
 
 
@@ -535,12 +538,12 @@ def test_stepper_dir_pin_follows_gear_ratio_sign(hardware):
     def last_dir_write() -> int:
         return [value for pin, value in hardware.pi.writes if pin == stepper.STEPPER_DIR_PIN][-1]
 
-    stepper.set_target(0.05, stepper.ZEROING_VELOCITY_MPS)
+    assert stepper.set_target(0.5 * stepper.LEAD_SCREW_TRAVEL_M, stepper.ZEROING_VELOCITY_MPS) == ErrorCode.NORMAL_OPERATION
     assert stepper.update() == ErrorCode.NORMAL_OPERATION
     assert last_dir_write() == stepper.STEPPER_DIR_DOWN_LEVEL
 
     stepper.init_steppers(hardware.pi)
-    stepper.position_steps = round(0.05 * stepper.STEPS_PER_M)  # carriage lowered, so retracting moves up
+    stepper.position_steps = round(0.5 * stepper.LEAD_SCREW_TRAVEL_M * stepper.STEPS_PER_M)  # carriage lowered, so retracting moves up
     stepper.set_target(0.0, stepper.RETRACT_VELOCITY_MPS)
     assert stepper.update() == ErrorCode.NORMAL_OPERATION
     assert last_dir_write() == 1 - stepper.STEPPER_DIR_DOWN_LEVEL

@@ -32,8 +32,7 @@ STEPPER_FULL_STEPS_PER_REV: int = 200  # 1.8 degree steppers
 STEPPER_MICROSTEPS: int = 1  # Microstepping set on the drivers
 STEPS_PER_M: float = STEPPER_FULL_STEPS_PER_REV * STEPPER_MICROSTEPS * abs(STEPPER_GEAR_RATIO) / LEAD_SCREW_PITCH_M  # magnitude, direction comes from the DIR pin
 
-# DIR pin level that drives the carriage down: high drives down through a non-reversing gear train, so the gear train's
-# reversal makes it low. TODO: Verify against wiring
+# DIR pin level that drives the carriage down. High, as wired (verified on hardware), with the gear train's reversal
 STEPPER_DIR_DOWN_LEVEL: int = 1
 
 LEAD_SCREW_TRAVEL_M: float = .09-(2*.0254) #(ACTUAL MAX EXTENSION: 0.12)  # meters, usable carriage travel from home (startup) position, 8" placeholder

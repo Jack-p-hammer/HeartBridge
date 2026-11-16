@@ -319,10 +319,13 @@ def main():
                     
             case(CPRState.WAIT):
                 if state != prev_state:
+                    # Black screen and silence while waiting, e.g. after a reset
+                    error = HMI.stop_audio()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    error = HMI.clear_screen()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     # B starts the demo
                     logging.debug(f"Press B to start the demo, Esc or Q to exit")
-                    # No images yet, TODO: Add a black screen or sm
-                    pass
 
                 # Loop
 

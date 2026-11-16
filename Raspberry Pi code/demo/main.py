@@ -54,14 +54,14 @@ UNFOLD_FRAME_SEC = 0.5  # 2 frames per second
 # its state is left. The gap is played by the audio mixer as part of the looped sound, so it never holds up the main
 # loop: buttons, sensors and motors carry on as normal. 1.0 is what every prompt used before (HMI.DEFAULT_AUDIO_REPEAT_DELAY)
 STARTUP_AUDIO_REPEAT_DELAY_SEC: float = 1.0  # STARTUP leaves once the prompt has played once, so this only matters if the carriage is slower
-UNFOLD_AUDIO_REPEAT_DELAY_SEC: float = 1.0
-ALIGNMENT_AUDIO_REPEAT_DELAY_SEC: float = 1.0
-KNEELING_AUDIO_REPEAT_DELAY_SEC: float = 1.0
-ZEROING_AUDIO_REPEAT_DELAY_SEC: float = 1.0
-COMPRESSION_AUDIO_REPEAT_DELAY_SEC: float = 1.0
-PAUSE_AUDIO_REPEAT_DELAY_SEC: float = 1.0
-KNEEL_FAILURE_AUDIO_REPEAT_DELAY_SEC: float = 1.0
-ABORT_AUDIO_REPEAT_DELAY_SEC: float = 1.0
+UNFOLD_AUDIO_REPEAT_DELAY_SEC: float = 5.0
+ALIGNMENT_AUDIO_REPEAT_DELAY_SEC: float = 1.5
+KNEELING_AUDIO_REPEAT_DELAY_SEC: float = 2.0
+ZEROING_AUDIO_REPEAT_DELAY_SEC: float = 2.0
+COMPRESSION_AUDIO_REPEAT_DELAY_SEC: float = 5.0
+PAUSE_AUDIO_REPEAT_DELAY_SEC: float = 8.0
+KNEEL_FAILURE_AUDIO_REPEAT_DELAY_SEC: float = 2.0
+ABORT_AUDIO_REPEAT_DELAY_SEC: float = 8.0
 
 # The battery voltage comes from the moteus, so it reads 0 V until the first reply. Wait this long for one at startup
 MOTOR_FIRST_REPLY_TIMEOUT_SEC = 5.0

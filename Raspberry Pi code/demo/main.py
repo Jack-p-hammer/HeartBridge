@@ -8,6 +8,7 @@
 #   - demo/Enums/states.py is used in place of src/Enums/states.py
 #   - Log files are named heartBridge_demo_<timestamp>.log
 #   - Esc or Q (or closing the window) stops the motor and steppers and exits back to the terminal from any state
+#   - The lasers are turned off on entering every state except ALIGNMENT
 # Every other module (stepper, moteus_thread, HMI, Enums.error_codes, Enums.control_modes)
 # is imported from src/ unaltered.
 
@@ -284,6 +285,12 @@ def main():
         current_state = state
         if current_state != prev_state:
             logging.debug(f"State transition: {prev_state} -> {current_state}")
+            # The lasers are only for ALIGNMENT. Turn them off on entering any other state, so they can't stay on into
+            # compressions however ALIGNMENT was left (e.g. an error in ALIGNMENT going to ABORT). INIT_STARTUP is
+            # skipped: the lasers aren't set up until its init_HMI(), which starts them off
+            if current_state not in (CPRState.INIT_STARTUP, CPRState.ALIGNMENT, CPRState.KNEELING):
+                error = HMI.disable_lasers()
+                if error != ErrorCode.NORMAL_OPERATION: continue
         match(current_state):
             case(CPRState.INIT_STARTUP):
                 # Power cycle Setup

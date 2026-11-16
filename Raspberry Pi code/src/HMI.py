@@ -428,7 +428,7 @@ def enable_lasers() -> ErrorCode:
 
 
 def disable_lasers() -> ErrorCode:
-    """Disables alignment lasers
+    """Disables alignment lasers: stops the PWM and drives the laser pin low, the same state init_HMI() leaves it in
 
     Returns:
         ErrorCode: NORMAL_OPERATION if successful, ERROR_PI_DAEMON_FAILURE if failed
@@ -441,6 +441,10 @@ def disable_lasers() -> ErrorCode:
         if error_num < 0:
             logging.error(f"Failed to disable lasers: {error_num}")
             return ErrorCode.ERROR_PI_DAEMON_FAILURE
+        # Then drive the pin low as an output, so the lasers are held off rather than relying on how pigpio leaves the
+        # pin once PWM stops. enable_lasers() switches it back to PWM, just as after init_HMI()
+        _pi.set_mode(LASER_PIN, pigpio.OUTPUT)
+        _pi.write(LASER_PIN, 0)
     except Exception as e:
         logging.error(f"Failed to communicate with pigpio daemon: {e}")
         return ErrorCode.ERROR_PI_DAEMON_FAILURE

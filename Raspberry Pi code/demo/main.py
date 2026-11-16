@@ -50,6 +50,19 @@ LOOP_TICK_SEC = 0.01  # 10ms per tick, 100 Hz
 UNFOLD_FRAMES = [HMI.Image.UNFOLD_1, HMI.Image.UNFOLD_2, HMI.Image.UNFOLD_3, HMI.Image.UNFOLD_4]
 UNFOLD_FRAME_SEC = 0.5  # 2 frames per second
 
+# Silence between repeats of each state's audio prompt, in seconds (0 plays it back to back). Each prompt loops until
+# its state is left. The gap is played by the audio mixer as part of the looped sound, so it never holds up the main
+# loop: buttons, sensors and motors carry on as normal. 1.0 is what every prompt used before (HMI.DEFAULT_AUDIO_REPEAT_DELAY)
+STARTUP_AUDIO_REPEAT_DELAY_SEC: float = 1.0  # STARTUP leaves once the prompt has played once, so this only matters if the carriage is slower
+UNFOLD_AUDIO_REPEAT_DELAY_SEC: float = 1.0
+ALIGNMENT_AUDIO_REPEAT_DELAY_SEC: float = 1.0
+KNEELING_AUDIO_REPEAT_DELAY_SEC: float = 1.0
+ZEROING_AUDIO_REPEAT_DELAY_SEC: float = 1.0
+COMPRESSION_AUDIO_REPEAT_DELAY_SEC: float = 1.0
+PAUSE_AUDIO_REPEAT_DELAY_SEC: float = 1.0
+KNEEL_FAILURE_AUDIO_REPEAT_DELAY_SEC: float = 1.0
+ABORT_AUDIO_REPEAT_DELAY_SEC: float = 1.0
+
 # The battery voltage comes from the moteus, so it reads 0 V until the first reply. Wait this long for one at startup
 MOTOR_FIRST_REPLY_TIMEOUT_SEC = 5.0
 
@@ -343,7 +356,8 @@ def main():
             case(CPRState.STARTUP):
                 # Setup
                 if state != prev_state:
-                    error = HMI.set_image_audio(HMI.Image.STARTUP, HMI.AudioPrompt.STARTUP)
+                    error = HMI.set_image_audio(HMI.Image.STARTUP, HMI.AudioPrompt.STARTUP,
+                                                STARTUP_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
@@ -362,7 +376,8 @@ def main():
                 if state != prev_state:
                     frame_idx = 0
                     last_frame_time = time.monotonic()
-                    error = HMI.set_image_audio(UNFOLD_FRAMES[frame_idx], HMI.AudioPrompt.UNFOLD)
+                    error = HMI.set_image_audio(UNFOLD_FRAMES[frame_idx], HMI.AudioPrompt.UNFOLD,
+                                                UNFOLD_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
@@ -385,7 +400,8 @@ def main():
                 if state != prev_state:
                     error = HMI.enable_lasers()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.ALIGNMENT, HMI.AudioPrompt.ALIGNMENT)
+                    error = HMI.set_image_audio(HMI.Image.ALIGNMENT, HMI.AudioPrompt.ALIGNMENT,
+                                                ALIGNMENT_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
@@ -401,7 +417,9 @@ def main():
             case(CPRState.KNEELING):
                 # Setup
                 if state != prev_state:
-                    error = HMI.set_image_audio(HMI.Image.KNEELING, HMI.AudioPrompt.KNEELING)
+                    error = HMI.enable_lasers()
+                    error = HMI.set_image_audio(HMI.Image.KNEELING, HMI.AudioPrompt.KNEELING,
+                                                KNEELING_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
@@ -417,7 +435,8 @@ def main():
                 if state != prev_state:
                     error = HMI.disable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.ZEROING, HMI.AudioPrompt.ZEROING)
+                    error = HMI.set_image_audio(HMI.Image.ZEROING, HMI.AudioPrompt.ZEROING,
+                                                ZEROING_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
 
                     error = actuation.init_zeroing()
@@ -439,7 +458,8 @@ def main():
                 if state != prev_state:
                     error = HMI.enable_pause_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.COMPRESSION, HMI.AudioPrompt.COMPRESSION)
+                    error = HMI.set_image_audio(HMI.Image.COMPRESSION, HMI.AudioPrompt.COMPRESSION,
+                                                COMPRESSION_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     # Restart the compression waveform at the top of its stroke, including on resume from PAUSE
                     error = actuation.init_compressions()
@@ -482,7 +502,8 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.PAUSE, HMI.AudioPrompt.PAUSE)
+                    error = HMI.set_image_audio(HMI.Image.PAUSE, HMI.AudioPrompt.PAUSE,
+                                                PAUSE_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     
                     logging.debug("Device Paused")
@@ -517,7 +538,8 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.KNEEL_FAILURE, HMI.AudioPrompt.KNEEL_FAILURE)
+                    error = HMI.set_image_audio(HMI.Image.KNEEL_FAILURE, HMI.AudioPrompt.KNEEL_FAILURE,
+                                                KNEEL_FAILURE_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     
 
@@ -561,7 +583,8 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.disable_pause_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.set_image_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT)
+                    error = HMI.set_image_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT,
+                                                ABORT_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     logging.error(f"Abort state tripped: {error}")
                     abort_carriage_home = False

@@ -436,6 +436,8 @@ def main():
                 error, next_pressed = HMI.next_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 if next_pressed:
+                    error = HMI.disable_lasers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.ZEROING
 
             case(CPRState.ZEROING):

@@ -367,6 +367,50 @@ def test_clear_screen_fills_black(hardware):
     assert hardware.pygame.screen.fill_color == (0, 0, 0)
 
 
+def test_draw_voltage_shows_then_erases(hardware):
+    """draw_voltage() renders the voltage on the black screen, erases the old text before a redraw, and erases it
+    without drawing anything new when given None."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    HMI.clear_screen()
+    screen = hardware.pygame.screen
+    screen.fill_rects.clear()
+
+    assert HMI.draw_voltage(24.46) == ErrorCode.NORMAL_OPERATION
+    assert hardware.pygame.rendered[-1] == "Battery: 24.5 V"
+    assert screen.fill_rects == []  # nothing drawn before, so nothing to erase
+    updates = hardware.pygame.display_updates
+
+    assert HMI.draw_voltage(24.3) == ErrorCode.NORMAL_OPERATION
+    assert hardware.pygame.rendered[-1] == "Battery: 24.3 V"
+    assert len(screen.fill_rects) == 1 and screen.fill_rects[0] is not None  # old text erased, not the whole screen
+    assert screen.fill_color == (0, 0, 0)
+
+    rendered = len(hardware.pygame.rendered)
+    assert HMI.draw_voltage(None) == ErrorCode.NORMAL_OPERATION
+    assert len(hardware.pygame.rendered) == rendered  # nothing new drawn
+    assert len(screen.fill_rects) == 2
+    assert hardware.pygame.display_updates == updates + 2
+
+    # Already erased: nothing more to erase or update
+    assert HMI.draw_voltage(None) == ErrorCode.NORMAL_OPERATION
+    assert len(screen.fill_rects) == 2
+    assert hardware.pygame.display_updates == updates + 2
+
+
+def test_clear_screen_forgets_drawn_voltage(hardware):
+    """After clear_screen() the voltage is already gone, so draw_voltage() doesn't erase where it used to be."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    HMI.clear_screen()
+    HMI.draw_voltage(24.0)
+    HMI.clear_screen()
+    hardware.pygame.screen.fill_rects.clear()
+
+    assert HMI.draw_voltage(24.1) == ErrorCode.NORMAL_OPERATION
+    assert hardware.pygame.screen.fill_rects == []
+
+
 def test_stop_audio_stops_prompt_and_reports_finished(hardware):
     """stop_audio() stops the playing prompt, and audio_finished() then reports True."""
     import HMI

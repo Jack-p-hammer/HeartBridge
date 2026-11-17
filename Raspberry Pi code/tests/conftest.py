@@ -308,9 +308,11 @@ class FakePygameSurface:
     def __init__(self, size=(800, 600)):
         self._size = size
         self.fill_color: Optional[tuple] = None  # last color passed to fill(), None if never filled
+        self.fill_rects: list = []  # rect passed to each fill(), None for the whole surface
 
-    def fill(self, color):
+    def fill(self, color, rect=None):
         self.fill_color = tuple(color)
+        self.fill_rects.append(rect)
 
     def get_size(self):
         return self._size

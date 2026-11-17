@@ -10,6 +10,7 @@
 #   - Esc or Q (or closing the window) stops the motor and steppers and exits back to the terminal from any state
 #   - The lasers are turned off on entering every state except ALIGNMENT
 #   - L toggles the lasers on and off in WAIT and PAUSE (they're turned off again on leaving, as above)
+#   - V shows or hides the battery voltage on WAIT's black screen
 # Every other module (stepper, moteus_thread, HMI, Enums.error_codes, Enums.control_modes)
 # is imported from src/ unaltered.
 
@@ -261,6 +262,8 @@ def main():
     abort_carriage_home: bool = False  # True once ABORT has finished retracting the carriage, so it stops re-retracting
     init_done_time: float = 0.0  # time.monotonic() when INIT_STARTUP's setup finished, to time out waiting for the moteus
     lasers_on: bool = False  # Whether L has toggled the lasers on in WAIT or PAUSE. Both start with them off
+    voltage_visible: bool = False  # Whether V has toggled the battery voltage on in WAIT. Starts hidden
+    shown_voltage_dv: int | None = None  # Battery voltage currently drawn, in tenths of a volt, None if none is drawn
 
     # initialize animation position and timer
     frame_idx: int = 0
@@ -347,8 +350,11 @@ def main():
                     error = HMI.clear_screen()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     lasers_on = False  # turned off on entering this state
+                    voltage_visible = False  # the black screen has no voltage on it
+                    shown_voltage_dv = None
                     # B starts the demo
-                    logging.debug(f"Press B to start the demo, L to toggle the lasers, Esc or Q to exit")
+                    logging.debug(f"Press B to start the demo, L to toggle the lasers, V to toggle the battery "
+                                  f"voltage, Esc or Q to exit")
 
                 # Loop
                 if pygame.K_l in keys_pressed:
@@ -356,6 +362,21 @@ def main():
                     error = HMI.enable_lasers() if lasers_on else HMI.disable_lasers()
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     logging.info(f"Lasers {'on' if lasers_on else 'off'}")
+
+                # V shows or hides the battery voltage. While shown, it's redrawn only when the shown tenth of a volt changes
+                if pygame.K_v in keys_pressed:
+                    voltage_visible = not voltage_visible
+                    logging.info(f"Battery voltage {'shown' if voltage_visible else 'hidden'}")
+                    if not voltage_visible:
+                        error = HMI.draw_voltage(None)
+                        if error != ErrorCode.NORMAL_OPERATION: continue
+                        shown_voltage_dv = None
+                if voltage_visible:
+                    voltage_dv: int = round(actuation.get_motor_controller().get_battery_voltage() * 10)
+                    if voltage_dv != shown_voltage_dv:
+                        error = HMI.draw_voltage(voltage_dv / 10)
+                        if error != ErrorCode.NORMAL_OPERATION: continue
+                        shown_voltage_dv = voltage_dv
 
                 if pygame.K_b in keys_pressed:
                     logging.info("B pressed, starting demo")

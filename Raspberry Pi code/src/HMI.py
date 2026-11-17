@@ -94,6 +94,10 @@ _timer_font: pygame.font.Font
 _timer_rect: pygame.Rect | None = None      # screen area covered by the last drawn timer
 TIMER_COLOR: tuple[int, int, int] = (0, 0, 0)   # black, to match the text in the images
 
+# Battery voltage overlay state, drawn on the black screen (clear_screen())
+_voltage_rect: pygame.Rect | None = None    # screen area covered by the last drawn voltage, None if not shown
+VOLTAGE_COLOR: tuple[int, int, int] = (255, 255, 255)   # white, to show on the black screen
+
 def init_Pi() -> ErrorCode:
     """Initialize pigpio daemon and return the pi instance.
 
@@ -236,7 +240,7 @@ def set_image(image: Image) -> ErrorCode:
     Returns:
         ErrorCode: NORMAL_OPERATION if successful, ERROR_UNKNOWN_IMAGE if failed
     """
-    global _screen, _background, _timer_rect
+    global _screen, _background, _timer_rect, _voltage_rect
     try:
         surf = pygame.image.load(image.value)
         surf = pygame.transform.scale(surf, _screen.get_size())
@@ -244,6 +248,7 @@ def set_image(image: Image) -> ErrorCode:
         # Keep the image so draw_timer can erase its old text; the new image already covers it
         _background = surf
         _timer_rect = None
+        _voltage_rect = None
         pygame.display.flip()
     except Exception as e:
         logging.error(f"Failed to set image {image.name}: {e}")
@@ -252,20 +257,54 @@ def set_image(image: Image) -> ErrorCode:
 
 
 def clear_screen() -> ErrorCode:
-    """Fill the screen with black, removing the current image and any CPR timer drawn over it
+    """Fill the screen with black, removing the current image and any CPR timer or voltage drawn over it
 
     Returns:
         ErrorCode: NORMAL_OPERATION if successful, ERROR_PYGAME_FAILURE if failed
     """
-    global _screen, _background, _timer_rect
+    global _screen, _background, _timer_rect, _voltage_rect
     try:
         _screen.fill((0, 0, 0))
         # No image to erase old timer text with; the black fill already covers it
         _background = None
         _timer_rect = None
+        _voltage_rect = None
         pygame.display.flip()
     except Exception as e:
         logging.error(f"Failed to clear screen: {e}")
+        return ErrorCode.ERROR_PYGAME_FAILURE
+    return ErrorCode.NORMAL_OPERATION
+
+
+def draw_voltage(voltage_v: float | None) -> ErrorCode:
+    """Draw the battery voltage in the middle of the black screen (clear_screen()), or erase it.
+    Only the text's area of the screen is updated, but callers should only redraw when the displayed value changes.
+    Old text is erased by filling it with black, so this is only for the black screen, not over an image.
+
+    Args:
+        voltage_v (float | None): Battery voltage to show, in volts, or None to erase it
+
+    Returns:
+        ErrorCode: NORMAL_OPERATION if successful, ERROR_PYGAME_FAILURE if failed
+    """
+    global _screen, _voltage_rect, _timer_font
+    try:
+        dirty = _voltage_rect
+        if _voltage_rect is not None:
+            _screen.fill((0, 0, 0), _voltage_rect)
+        _voltage_rect = None
+
+        if voltage_v is not None:
+            text_surf = _timer_font.render(f"Battery: {voltage_v:.1f} V", True, VOLTAGE_COLOR)
+            new_rect = text_surf.get_rect(center=(_screen.get_width() // 2, _screen.get_height() // 2))
+            _screen.blit(text_surf, new_rect)
+            dirty = new_rect if dirty is None else new_rect.union(dirty)
+            _voltage_rect = new_rect
+
+        if dirty is not None:
+            pygame.display.update(dirty)
+    except Exception as e:
+        logging.error(f"Failed to draw battery voltage: {e}")
         return ErrorCode.ERROR_PYGAME_FAILURE
     return ErrorCode.NORMAL_OPERATION
 

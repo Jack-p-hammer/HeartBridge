@@ -9,6 +9,7 @@
 #   - Log files are named heartBridge_demo_<timestamp>.log
 #   - Esc or Q (or closing the window) stops the motor and steppers and exits back to the terminal from any state
 #   - The lasers are turned off on entering every state except ALIGNMENT
+#   - L toggles the lasers on and off in WAIT and PAUSE (they're turned off again on leaving, as above)
 # Every other module (stepper, moteus_thread, HMI, Enums.error_codes, Enums.control_modes)
 # is imported from src/ unaltered.
 
@@ -259,6 +260,7 @@ def main():
     shown_sec: int | None = None  # Whole seconds currently drawn on the timer, None to force a redraw
     abort_carriage_home: bool = False  # True once ABORT has finished retracting the carriage, so it stops re-retracting
     init_done_time: float = 0.0  # time.monotonic() when INIT_STARTUP's setup finished, to time out waiting for the moteus
+    lasers_on: bool = False  # Whether L has toggled the lasers on in WAIT or PAUSE. Both start with them off
 
     # initialize animation position and timer
     frame_idx: int = 0
@@ -344,10 +346,16 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.clear_screen()
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    lasers_on = False  # turned off on entering this state
                     # B starts the demo
-                    logging.debug(f"Press B to start the demo, Esc or Q to exit")
+                    logging.debug(f"Press B to start the demo, L to toggle the lasers, Esc or Q to exit")
 
                 # Loop
+                if pygame.K_l in keys_pressed:
+                    lasers_on = not lasers_on
+                    error = HMI.enable_lasers() if lasers_on else HMI.disable_lasers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    logging.info(f"Lasers {'on' if lasers_on else 'off'}")
 
                 if pygame.K_b in keys_pressed:
                     logging.info("B pressed, starting demo")
@@ -506,12 +514,18 @@ def main():
                                                 PAUSE_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     
+                    lasers_on = False  # turned off on entering this state
                     logging.debug("Device Paused")
-                    logging.debug("Press R to reset the demo")
+                    logging.debug("Press R to reset the demo, L to toggle the lasers")
 
                 # Loop
                 # TODO: Must track kneel failure during pause as well
-                
+                if pygame.K_l in keys_pressed:
+                    lasers_on = not lasers_on
+                    error = HMI.enable_lasers() if lasers_on else HMI.disable_lasers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    logging.info(f"L pressed, lasers {'on' if lasers_on else 'off'}")
+
                 error, next_pressed = HMI.next_button_pressed()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 if next_pressed:

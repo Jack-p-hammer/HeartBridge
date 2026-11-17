@@ -227,6 +227,9 @@ def shutdown_demo() -> None:
     if error != ErrorCode.NORMAL_OPERATION:
         logging.error(f"Motor abort on exit failed: {error}")
     stepper.halt()
+    error = stepper.disable_steppers()
+    if error != ErrorCode.NORMAL_OPERATION:
+        logging.error(f"Disabling steppers on exit failed: {error}")
 
     error = HMI.disable_lasers()
     if error != ErrorCode.NORMAL_OPERATION:
@@ -322,6 +325,10 @@ def main():
                     error = HMI.init_HMI(HMI.get_pi())
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     init_done_time = time.monotonic()
+                    
+                    # Disable steppers until we need them
+                    error = stepper.disable_steppers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
 
                 # Loop
                 # Wait for the motor to respond (replying and following commands). Until the moteus first replies its
@@ -380,6 +387,9 @@ def main():
 
                 if pygame.K_b in keys_pressed:
                     logging.info("B pressed, starting demo")
+                    # Wake the steppers a tick before STARTUP uses them, so the drivers are ready for the first step
+                    error = stepper.enable_steppers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.STARTUP
 
             case(CPRState.STARTUP):
@@ -397,6 +407,10 @@ def main():
                 error, carriage_lowered = actuation.lower_carriage()
                 if error != ErrorCode.NORMAL_OPERATION: continue
                 if carriage_lowered and HMI.audio_finished():
+                    # Done with steppers, disable
+                    error = stepper.disable_steppers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    
                     logging.info(f"Carriage lowered to {stepper.get_position()} m")
                     state = CPRState.UNFOLD_CUT_CLOTHES
 
@@ -459,6 +473,9 @@ def main():
                 if next_pressed:
                     error = HMI.disable_lasers()
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    # Wake the steppers a tick before ZEROING steps them, so the drivers are ready for the first step
+                    error = stepper.enable_steppers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.ZEROING
 
             case(CPRState.ZEROING):
@@ -481,6 +498,9 @@ def main():
                 if error == ErrorCode.ZEROING_FINISHED:
                     error = sensing.zero_position()
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    error = stepper.disable_steppers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    
                     state = CPRState.COMPRESSION
 
 
@@ -556,6 +576,9 @@ def main():
                     
                 if pygame.K_r in keys_pressed:
                     logging.info("R pressed, resetting demo")
+                    # Wake the steppers a tick before RESET_DEMO steps them, so the drivers are ready for the first step
+                    error = stepper.enable_steppers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     state = CPRState.RESET_DEMO
 
             case(CPRState.KNEEL_FAILURE):
@@ -596,7 +619,7 @@ def main():
                     if error != ErrorCode.NORMAL_OPERATION: continue
                     error = actuation.abort_compressions()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    
+
                     # Reset CPR timer
                     cpr_elapsed_sec = 0.0
 
@@ -608,6 +631,10 @@ def main():
                     # Leave the motor as a power cycle would: startup default target and the startup stop sequence
                     error = actuation.reset_motor()
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    # Done with steppers, disable
+                    error = stepper.disable_steppers() 
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    
                     state = CPRState.WAIT  # Return to the demo's WAIT state
                 
             case(CPRState.ABORT):
@@ -623,6 +650,10 @@ def main():
                     error = HMI.set_image_audio(HMI.Image.ABORT, HMI.AudioPrompt.ABORT,
                                                 ABORT_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    # Need steppers, enable them
+                    error = stepper.enable_steppers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    
                     logging.error(f"Abort state tripped: {error}")
                     abort_carriage_home = False
 
@@ -634,6 +665,9 @@ def main():
                 # recorded first so ABORT's setup doesn't re-run, and the tick still sleeps
                 if not abort_carriage_home:
                     error, abort_carriage_home = actuation.retract_carriage()
+                    # Carriage is home (retract_carriage() checks stepper.at_target()), steppers no longer needed
+                    if abort_carriage_home:
+                        error = stepper.disable_steppers()
                 # Halt — only a power cycle exits this state
 
             case(_):

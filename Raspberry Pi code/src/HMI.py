@@ -177,6 +177,8 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
             pygame.FULLSCREEN
         )
         pygame.display.set_caption("CPR Machine")
+        # Touchless kiosk display: no mouse cursor over the prompts in any state
+        pygame.mouse.set_visible(False)
         # Timer text scales with the screen, roughly the size of the image text
         _timer_font = pygame.font.Font(None, info.current_h // 8)
     except Exception as e:

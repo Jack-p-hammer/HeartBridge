@@ -357,6 +357,15 @@ def test_set_image_success_and_failure(hardware):
     assert HMI.set_image(HMI.Image.UNFOLD_1) == ErrorCode.ERROR_UNKNOWN_IMAGE
 
 
+def test_init_hmi_hides_mouse_cursor(hardware):
+    """The cursor is hidden once, at init, so it's hidden in every state."""
+    import HMI
+    assert hardware.pygame.mouse_visible
+
+    assert HMI.init_HMI(hardware.pi) == ErrorCode.NORMAL_OPERATION
+    assert not hardware.pygame.mouse_visible
+
+
 def test_clear_screen_fills_black(hardware):
     """clear_screen() fills the display with black, after an image was shown."""
     import HMI

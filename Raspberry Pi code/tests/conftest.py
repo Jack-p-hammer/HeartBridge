@@ -410,6 +410,7 @@ class PygameHarness:
         self.mixer_settings: Optional[tuple[int, int, int]] = None  # mixer.get_init(): (frequency, format, channels), None until mixer.init()
         self.rendered: list = []  # strings rendered with pygame.font (the CPR timer)
         self.display_updates: int = 0  # partial display.update() calls (the CPR timer)
+        self.mouse_visible: bool = True  # pygame.mouse.set_visible(), shown until hidden like the real cursor
 
         self.init_error: Optional[Exception] = None
         self.display_error: Optional[Exception] = None
@@ -565,6 +566,11 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
     )
     font_ns = types.SimpleNamespace(Font=lambda name, size: FakePygameFont(pg))
 
+    def mouse_set_visible(visible):
+        pg.mouse_visible = bool(visible)
+
+    mouse_ns = types.SimpleNamespace(set_visible=mouse_set_visible)
+
     def image_load(path):
         if pg.image_load_error is not None:
             raise pg.image_load_error
@@ -589,6 +595,7 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
         mixer=mixer_ns,
         display=display_ns,
         font=font_ns,
+        mouse=mouse_ns,
         image=image_ns,
         transform=transform_ns,
         event=event_ns,

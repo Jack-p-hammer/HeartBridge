@@ -187,6 +187,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 59.055) (xy 142.24 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "82877d9f-eee0-47a5-8c09-dfe1c9606316")
+	)
+	(wire
+		(pts
 			(xy 185.42 127) (xy 196.85 127)
 		)
 		(stroke
@@ -244,6 +254,16 @@
 			(type default)
 		)
 		(uuid "b0d8b984-7e96-434d-a56b-fef328c706ef")
+	)
+	(wire
+		(pts
+			(xy 142.24 39.37) (xy 110.49 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b619bcd1-88e7-43a8-a371-38519bd00416")
 	)
 	(wire
 		(pts
@@ -390,7 +410,7 @@
 		(size 44.45 31.75)
 		(exclude_from_sim no)
 		(in_bom yes)
-		(on_board yes)
+		(on_board no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
@@ -613,6 +633,16 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(pin "PGOOD" output
+			(at 110.49 39.37 0)
+			(uuid "e7566679-7113-450b-a38c-b4666f50c73a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 		(instances
@@ -1045,6 +1075,16 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+			)
+		)
+		(pin "PGOOD" input
+			(at 142.24 59.055 90)
+			(uuid "d56a8648-9822-4427-96e7-13e2156740ce")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 		(instances

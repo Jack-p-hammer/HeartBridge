@@ -2709,7 +2709,7 @@
 	)
 	(rectangle
 		(start 14.605 84.455)
-		(end 83.82 119.38)
+		(end 103.124 119.38)
 		(stroke
 			(width 0)
 			(type default)
@@ -2792,7 +2792,13 @@
 		(uuid "16672d0a-8951-4f3d-8a1d-cfbac2db4255")
 	)
 	(junction
-		(at 43.18 97.79)
+		(at 45.72 97.79)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1904d10b-741c-4ca1-8db3-dff7c84ea3c7")
+	)
+	(junction
+		(at 62.23 97.79)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2eb82f89-677d-4675-9200-9030027bc8ee")
@@ -2808,6 +2814,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "48961d70-c940-4c36-a488-86d1c5aba992")
+	)
+	(junction
+		(at 45.72 100.33)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "49d0cd2b-d1a9-4927-b26d-378c0bfa7875")
 	)
 	(junction
 		(at 62.23 57.15)
@@ -2828,13 +2840,13 @@
 		(uuid "6006154e-f40d-4c0e-b986-c09992b7f65e")
 	)
 	(junction
-		(at 64.77 92.71)
+		(at 85.09 92.71)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8e5af389-5469-46e4-a3dd-f5a3bc331db5")
 	)
 	(junction
-		(at 46.99 100.33)
+		(at 66.04 100.33)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a20e8134-ecfb-4c0a-a471-dd92c1f3110f")
@@ -2907,7 +2919,7 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 92.71) (xy 64.77 92.71)
+			(xy 87.63 92.71) (xy 85.09 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2937,7 +2949,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 92.71) (xy 64.77 105.41)
+			(xy 85.09 92.71) (xy 85.09 105.41)
 		)
 		(stroke
 			(width 0)
@@ -2947,7 +2959,7 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 97.79) (xy 43.18 105.41)
+			(xy 62.23 97.79) (xy 62.23 105.41)
 		)
 		(stroke
 			(width 0)
@@ -3037,7 +3049,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 97.79) (xy 43.18 97.79)
+			(xy 39.37 97.79) (xy 45.72 97.79)
 		)
 		(stroke
 			(width 0)
@@ -3057,7 +3069,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 95.25) (xy 59.69 92.71)
+			(xy 80.01 92.71) (xy 80.01 95.25)
 		)
 		(stroke
 			(width 0)
@@ -3084,6 +3096,16 @@
 			(type default)
 		)
 		(uuid "4e4135c7-7071-42a4-bb14-441e72489af6")
+	)
+	(wire
+		(pts
+			(xy 45.72 97.79) (xy 62.23 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4e9fcc97-f1db-4b85-b3da-d07a37220d5d")
 	)
 	(wire
 		(pts
@@ -3137,7 +3159,7 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 97.79) (xy 50.8 97.79)
+			(xy 62.23 97.79) (xy 69.85 97.79)
 		)
 		(stroke
 			(width 0)
@@ -3207,16 +3229,6 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 97.79) (xy 67.31 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "82d94a6e-5424-49b4-bf27-e38b38ee137f")
-	)
-	(wire
-		(pts
 			(xy 66.04 35.56) (xy 67.31 35.56)
 		)
 		(stroke
@@ -3257,6 +3269,16 @@
 	)
 	(wire
 		(pts
+			(xy 77.47 100.33) (xy 87.63 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92cf62b0-c35a-475c-89e6-64e29b9174eb")
+	)
+	(wire
+		(pts
 			(xy 62.23 66.04) (xy 62.23 57.15)
 		)
 		(stroke
@@ -3277,7 +3299,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 100.33) (xy 50.8 100.33)
+			(xy 66.04 100.33) (xy 69.85 100.33)
 		)
 		(stroke
 			(width 0)
@@ -3287,7 +3309,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 100.33) (xy 46.99 100.33)
+			(xy 39.37 100.33) (xy 45.72 100.33)
 		)
 		(stroke
 			(width 0)
@@ -3307,13 +3329,13 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 100.33) (xy 67.31 100.33)
+			(xy 45.72 100.33) (xy 66.04 100.33)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ac0482ba-2c27-48ff-883c-8df7ab4e41ee")
+		(uuid "ae4e9fc2-25aa-4d9a-94b0-c079fd749969")
 	)
 	(wire
 		(pts
@@ -3367,7 +3389,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 95.25) (xy 67.31 95.25)
+			(xy 80.01 95.25) (xy 87.63 95.25)
 		)
 		(stroke
 			(width 0)
@@ -3387,13 +3409,23 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 100.33) (xy 46.99 105.41)
+			(xy 66.04 100.33) (xy 66.04 105.41)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "db8e17cc-6362-446e-a191-a1f864a6d863")
+	)
+	(wire
+		(pts
+			(xy 77.47 97.79) (xy 87.63 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df13071e-1544-4e66-9ab3-d6723284baf1")
 	)
 	(wire
 		(pts
@@ -3515,7 +3547,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x04_Pin")
-		(at 72.39 95.25 0)
+		(at 92.71 95.25 0)
 		(mirror y)
 		(unit 1)
 		(body_style 1)
@@ -3527,7 +3559,7 @@
 		(fields_autoplaced yes)
 		(uuid "0721c988-55a0-4bab-9a2c-2ff0fecb5035")
 		(property "Reference" "J6"
-			(at 73.66 95.2499 0)
+			(at 93.98 95.2499 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3538,7 +3570,7 @@
 			)
 		)
 		(property "Value" "I2C Port"
-			(at 73.66 97.7899 0)
+			(at 93.98 97.7899 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3549,7 +3581,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
-			(at 72.39 95.25 0)
+			(at 92.71 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3560,7 +3592,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 72.39 95.25 0)
+			(at 92.71 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3571,7 +3603,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated"
-			(at 72.39 95.25 0)
+			(at 92.71 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3582,7 +3614,7 @@
 			)
 		)
 		(property "Notes" ""
-			(at 72.39 95.25 0)
+			(at 92.71 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3593,7 +3625,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 72.39 95.25 0)
+			(at 92.71 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3604,7 +3636,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 72.39 95.25 0)
+			(at 92.71 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3615,7 +3647,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 72.39 95.25 0)
+			(at 92.71 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3626,7 +3658,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 72.39 95.25 0)
+			(at 92.71 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3637,7 +3669,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 72.39 95.25 0)
+			(at 92.71 95.25 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3749,7 +3781,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 46.99 113.03 0)
+		(at 66.04 113.03 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3760,7 +3792,7 @@
 		(fields_autoplaced yes)
 		(uuid "1a3518bf-68b4-40e2-9751-463b7a7fddbb")
 		(property "Reference" "#PWR080"
-			(at 46.99 119.38 0)
+			(at 66.04 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3771,7 +3803,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 46.99 118.11 0)
+			(at 66.04 118.11 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3781,7 +3813,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 46.99 113.03 0)
+			(at 66.04 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3792,7 +3824,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 46.99 113.03 0)
+			(at 66.04 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3803,7 +3835,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 46.99 113.03 0)
+			(at 66.04 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3820,6 +3852,84 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
 					(reference "#PWR080")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 45.72 107.95 0)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "2160fb9a-faa1-40a5-8dd9-3fe9270fc3ef")
+		(property "Reference" "#PWR068"
+			(at 45.72 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 45.72 113.03 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 45.72 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e41cd1e8-471d-493b-9891-c07cf475f8bc")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
+					(reference "#PWR068")
 					(unit 1)
 				)
 			)
@@ -4253,6 +4363,84 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
 					(reference "#PWR036")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 45.72 90.17 0)
+		(mirror y)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "2672f764-390e-432d-b9f4-c457d9a21805")
+		(property "Reference" "#PWR0153"
+			(at 45.72 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 45.466 86.614 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 45.72 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "04b42072-e8b3-41e3-913e-0684096c7244")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
+					(reference "#PWR0153")
 					(unit 1)
 				)
 			)
@@ -5124,6 +5312,86 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R_US")
+		(at 45.72 104.14 0)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "406c338a-7beb-4760-9428-2446c4ab96a5")
+		(property "Reference" "R45"
+			(at 43.434 103.886 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2k"
+			(at 40.894 103.886 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 46.736 103.886 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 45.72 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "27c70abe-d472-4bbe-8094-4981da6a7460")
+		)
+		(pin "2"
+			(uuid "006999e7-7708-4b60-a746-571ce82ffc3a")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
+					(reference "R45")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+5V")
 		(at 29.21 25.4 0)
 		(unit 1)
@@ -5203,7 +5471,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 54.61 100.33 270)
+		(at 73.66 100.33 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5213,7 +5481,7 @@
 		(dnp no)
 		(uuid "4b00d9fa-fb57-4fc0-808f-438395871ea9")
 		(property "Reference" "R25"
-			(at 54.356 102.87 90)
+			(at 73.406 102.87 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5223,7 +5491,7 @@
 			)
 		)
 		(property "Value" "33 Ohm"
-			(at 54.356 105.41 90)
+			(at 73.406 105.41 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5233,7 +5501,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 54.356 101.346 90)
+			(at 73.406 101.346 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5244,7 +5512,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 54.61 100.33 0)
+			(at 73.66 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5255,7 +5523,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 54.61 100.33 0)
+			(at 73.66 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5266,7 +5534,7 @@
 			)
 		)
 		(property "Notes" ""
-			(at 54.61 100.33 0)
+			(at 73.66 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5277,7 +5545,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 54.61 100.33 0)
+			(at 73.66 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5288,7 +5556,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 54.61 100.33 0)
+			(at 73.66 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5299,7 +5567,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 54.61 100.33 0)
+			(at 73.66 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5310,7 +5578,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 54.61 100.33 0)
+			(at 73.66 100.33 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5320,7 +5588,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 54.61 100.33 0)
+			(at 73.66 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5347,7 +5615,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 59.69 92.71 180)
+		(at 80.01 92.71 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5358,7 +5626,7 @@
 		(fields_autoplaced yes)
 		(uuid "4e51d078-fbdb-4119-929f-1b8894fdc616")
 		(property "Reference" "#PWR033"
-			(at 59.69 86.36 0)
+			(at 80.01 86.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5369,7 +5637,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 59.69 87.63 0)
+			(at 80.01 87.63 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5379,7 +5647,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 59.69 92.71 0)
+			(at 80.01 92.71 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5390,7 +5658,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 59.69 92.71 0)
+			(at 80.01 92.71 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5401,7 +5669,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 59.69 92.71 0)
+			(at 80.01 92.71 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5504,7 +5772,7 @@
 	)
 	(symbol
 		(lib_id "Diode:PTVS5V0Z1USK")
-		(at 46.99 109.22 270)
+		(at 66.04 109.22 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5514,7 +5782,7 @@
 		(dnp no)
 		(uuid "5c4cb879-e015-46d8-9601-abbc02bfda24")
 		(property "Reference" "D3"
-			(at 49.022 108.712 90)
+			(at 68.072 108.712 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5525,7 +5793,7 @@
 			)
 		)
 		(property "Value" "ESD351DPYR"
-			(at 49.022 110.744 90)
+			(at 68.072 110.744 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5536,7 +5804,7 @@
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_0402_1005Metric_Pad0.77x0.64mm_HandSolder"
-			(at 42.545 109.22 0)
+			(at 61.595 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5547,7 +5815,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/esd351.pdf?HQS=dis-dk-null-digikeymode-dsf-pf-null-wwe&ts=1791812746519&ref_url=https%253A%252F%252Fwww.ti.com%252Fgeneral%252Fdocs%252Fsuppproductinfo.tsp%253FdistId%253D10%2526gotoUrl%253Dhttps%253A%252F%252Fwww.ti.com%252Flit%252Fgpn%252Fesd351"
-			(at 46.99 109.22 0)
+			(at 66.04 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5558,7 +5826,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 46.99 109.22 0)
+			(at 66.04 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5569,7 +5837,7 @@
 			)
 		)
 		(property "digikey" "296-51109-1-ND"
-			(at 46.99 109.22 90)
+			(at 66.04 109.22 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5725,7 +5993,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 64.77 113.03 0)
+		(at 85.09 113.03 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5736,7 +6004,7 @@
 		(fields_autoplaced yes)
 		(uuid "637747c2-65fc-4a92-93d1-eb8e5dfe6fe8")
 		(property "Reference" "#PWR082"
-			(at 64.77 119.38 0)
+			(at 85.09 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5747,7 +6015,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 64.77 118.11 0)
+			(at 85.09 118.11 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5757,7 +6025,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 64.77 113.03 0)
+			(at 85.09 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5768,7 +6036,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 64.77 113.03 0)
+			(at 85.09 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5779,7 +6047,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 64.77 113.03 0)
+			(at 85.09 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7164,7 +7432,7 @@
 	)
 	(symbol
 		(lib_id "Diode:PTVS5V0Z1USK")
-		(at 64.77 109.22 270)
+		(at 85.09 109.22 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7174,7 +7442,7 @@
 		(dnp no)
 		(uuid "94a6bd35-db9a-4289-9430-b7c249c6956c")
 		(property "Reference" "D11"
-			(at 66.802 108.712 90)
+			(at 87.122 108.712 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7185,7 +7453,7 @@
 			)
 		)
 		(property "Value" "ESD321DYAR"
-			(at 66.802 110.744 90)
+			(at 87.122 110.744 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7196,7 +7464,7 @@
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SOD-523"
-			(at 60.325 109.22 0)
+			(at 80.645 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7207,7 +7475,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/esd321.pdf"
-			(at 64.77 109.22 0)
+			(at 85.09 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7218,7 +7486,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 64.77 109.22 0)
+			(at 85.09 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7229,7 +7497,7 @@
 			)
 		)
 		(property "digikey" "296-ESD321DYARCT-ND"
-			(at 64.77 109.22 90)
+			(at 85.09 109.22 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7500,7 +7768,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 43.18 113.03 0)
+		(at 62.23 113.03 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7511,7 +7779,7 @@
 		(fields_autoplaced yes)
 		(uuid "aafbd92e-e152-4642-8ec3-485a81d4a55d")
 		(property "Reference" "#PWR079"
-			(at 43.18 119.38 0)
+			(at 62.23 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7522,7 +7790,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 43.18 118.11 0)
+			(at 62.23 118.11 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7532,7 +7800,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 43.18 113.03 0)
+			(at 62.23 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7543,7 +7811,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 43.18 113.03 0)
+			(at 62.23 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7554,7 +7822,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 43.18 113.03 0)
+			(at 62.23 113.03 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8018,7 +8286,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 54.61 97.79 90)
+		(at 73.66 97.79 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8028,7 +8296,7 @@
 		(dnp no)
 		(uuid "cab9d577-0ede-444d-9ee2-5c64a6e4a9c7")
 		(property "Reference" "R24"
-			(at 54.61 92.456 90)
+			(at 73.66 92.456 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8038,7 +8306,7 @@
 			)
 		)
 		(property "Value" "33 Ohm"
-			(at 54.61 94.996 90)
+			(at 73.66 94.996 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8048,7 +8316,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 54.864 96.774 90)
+			(at 73.914 96.774 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8059,7 +8327,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 54.61 97.79 0)
+			(at 73.66 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8070,7 +8338,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 54.61 97.79 0)
+			(at 73.66 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8081,7 +8349,7 @@
 			)
 		)
 		(property "Notes" ""
-			(at 54.61 97.79 0)
+			(at 73.66 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8092,7 +8360,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 54.61 97.79 0)
+			(at 73.66 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8103,7 +8371,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 54.61 97.79 0)
+			(at 73.66 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8114,7 +8382,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 54.61 97.79 0)
+			(at 73.66 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8125,7 +8393,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 54.61 97.79 0)
+			(at 73.66 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8136,7 +8404,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 54.61 97.79 0)
+			(at 73.66 97.79 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8614,7 +8882,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 64.77 92.71 0)
+		(at 85.09 92.71 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8625,7 +8893,7 @@
 		(fields_autoplaced yes)
 		(uuid "dac00ee6-eb9b-4af7-869e-0468cacde4cb")
 		(property "Reference" "#PWR032"
-			(at 64.77 96.52 0)
+			(at 85.09 96.52 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8636,7 +8904,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 64.77 87.63 0)
+			(at 85.09 87.63 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8646,7 +8914,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 64.77 92.71 0)
+			(at 85.09 92.71 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8657,7 +8925,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 64.77 92.71 0)
+			(at 85.09 92.71 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8668,7 +8936,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 64.77 92.71 0)
+			(at 85.09 92.71 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8772,7 +9040,7 @@
 	)
 	(symbol
 		(lib_id "Diode:PTVS5V0Z1USK")
-		(at 43.18 109.22 270)
+		(at 62.23 109.22 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8782,7 +9050,7 @@
 		(dnp no)
 		(uuid "e62025a9-34fa-4c51-92f7-4206cc548d7a")
 		(property "Reference" "D2"
-			(at 38.608 108.712 90)
+			(at 57.658 108.712 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8793,7 +9061,7 @@
 			)
 		)
 		(property "Value" "ESD351DPYR"
-			(at 28.956 110.998 90)
+			(at 48.006 110.998 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8804,7 +9072,7 @@
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_0402_1005Metric_Pad0.77x0.64mm_HandSolder"
-			(at 38.735 109.22 0)
+			(at 57.785 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8815,7 +9083,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/esd351.pdf?HQS=dis-dk-null-digikeymode-dsf-pf-null-wwe&ts=1791812746519&ref_url=https%253A%252F%252Fwww.ti.com%252Fgeneral%252Fdocs%252Fsuppproductinfo.tsp%253FdistId%253D10%2526gotoUrl%253Dhttps%253A%252F%252Fwww.ti.com%252Flit%252Fgpn%252Fesd351"
-			(at 43.18 109.22 0)
+			(at 62.23 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8826,7 +9094,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 43.18 109.22 0)
+			(at 62.23 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8837,7 +9105,7 @@
 			)
 		)
 		(property "digikey" "296-51109-1-ND"
-			(at 43.18 109.22 90)
+			(at 62.23 109.22 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9093,6 +9361,86 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
 					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 45.72 93.98 0)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "f784e1d4-f3d0-4782-a3f1-d758bb65f28c")
+		(property "Reference" "R44"
+			(at 43.434 93.726 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2k"
+			(at 40.894 93.726 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+			(at 46.736 93.726 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 45.72 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "675b7207-5a01-4424-8869-dff169fdd990")
+		)
+		(pin "2"
+			(uuid "fd45e677-7cc4-47a1-af02-b950d814d127")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
+					(reference "R44")
 					(unit 1)
 				)
 			)

@@ -8,4 +8,5 @@
 	(lib (name "ATA6563_GAQW1") (type "KiCad") (uri "${KIPRJMOD}/Part Library/ATA6563_GAQW1/KiCADv6/footprints.pretty") (options "") (descr ""))
 	(lib (name "MMBZ27VCLT1G") (type "KiCad") (uri "${KIPRJMOD}/Part Library/MMBZ27VCLT1G/KiCADv6/footprints.pretty") (options "") (descr ""))
 	(lib (name "THVD1429DT") (type "KiCad") (uri "${KIPRJMOD}/Part Library/THVD1429DT/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "MAX42406AFOB_") (type "KiCad") (uri "${KIPRJMOD}/Part Library/MAX42406AFOB_/KiCADv6/footprints.pretty") (options "") (descr ""))
 )

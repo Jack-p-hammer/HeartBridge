@@ -28,7 +28,7 @@ LASER_PIN = 12
 LASER_PWM_SCALE: int = 1000000
 # For now, 25 kHz PWM
 LASER_PWM_FREQUENCY:int = 25000
-LASER_PWM_DUTY_CYCLE: float = 0.5  # 50% duty cycle for now
+LASER_PWM_DUTY_CYCLE: float = 1  # 50% duty cycle for now
 
 # After a press is accepted, ignore both buttons for a time
 BUTTON_TIMEOUT_SEC: float = 1.0

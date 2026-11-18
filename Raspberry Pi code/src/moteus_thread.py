@@ -258,19 +258,33 @@ class MoteusThread:
                     await self._stop_sequence(self._controller, "position timeout")
             except asyncio.TimeoutError:
                 # Lost reply. The next cycle sends the target again
-                logging.error(f"Moteus command loop failed: no reply within {REPLY_TIMEOUT_S} s "
-                              f"(sent at {cycle_wall_time:.6f}, raw log clock)")
                 self._last_error = ErrorCode.ERROR_MOTOR_FAILURE
                 self._last_error_from_lost_frame = True
+                logging.log(self._failed_cycle_log_level(),
+                            f"Moteus command loop failed: no reply within {REPLY_TIMEOUT_S} s "
+                            f"(sent at {cycle_wall_time:.6f}, raw log clock)")
             except Exception as e:
                 # Communication-level failure (transport, adapter error, etc). Only the adapter rejecting a command read
                 # joined onto a lost one counts as a lost frame; anything else is reported straight away
-                logging.error(f"Moteus command loop failed: {e} (sent at {cycle_wall_time:.6f}, raw log clock)")
                 self._last_error = ErrorCode.ERROR_MOTOR_FAILURE
                 self._last_error_from_lost_frame = LOST_FRAME_ADAPTER_ERROR in str(e)
+                logging.log(self._failed_cycle_log_level(),
+                            f"Moteus command loop failed: {e} (sent at {cycle_wall_time:.6f}, raw log clock)")
 
             elapsed: float = time.monotonic() - cycle_start
             await asyncio.sleep(max(0.0, self._period_s - elapsed))
+
+    def _failed_cycle_log_level(self) -> int:
+        """Log level for a failed command cycle: ERROR exactly when get_last_error() reports a motor failure for it,
+        since both come from _motor_status(). That's any failure but a lost frame, a lost frame before the moteus has
+        replied at all, a lost frame past MOTOR_RESPONSE_TOLERANCE_S, or one while faulted. WARNING otherwise: the
+        occasional lost frame, tolerated. Call after setting _last_error and _last_error_from_lost_frame.
+
+        Returns:
+            int: logging.WARNING or logging.ERROR
+        """
+        error, _ = self._motor_status()
+        return logging.WARNING if error == ErrorCode.NORMAL_OPERATION else logging.ERROR
 
     async def _stop_sequence(self, controller: moteus.Controller, reason: str) -> None:
         """Send a stop, retrying up to STOP_ATTEMPTS times. Clears any latched fault or position timeout mode (11).
@@ -451,20 +465,33 @@ class MoteusThread:
             ERROR_INIT_FAILURE: the command loop hasn't run yet, or started without a controller
             ERROR_MOTOR_FAILURE: the motor isn't responding, as above
         """
+        error, reason = self._motor_status()
+        if reason is not None:
+            logging.error(reason)
+        return error
+
+    def _motor_status(self) -> tuple[ErrorCode, Optional[str]]:
+        """The one check behind both get_last_error() and the command loop's log levels, so a failed cycle is logged
+        as an ERROR exactly when get_last_error() reports a failure at that moment, and as a WARNING only when it's
+        tolerated. Doesn't log.
+
+        Returns:
+            tuple[ErrorCode, Optional[str]]: what get_last_error() reports, and why the motor counts as not responding
+                when that's the fault or not-following check (logged by get_last_error()), None otherwise
+        """
         if self._state.stale:
-            return self._last_error
+            return self._last_error, None
         if self._last_error != ErrorCode.NORMAL_OPERATION and not self._last_error_from_lost_frame:
-            return self._last_error
+            return self._last_error, None
         if self._state.mode == MODE_FAULT:
-            logging.error(f"Moteus faulted: fault code {self._state.fault}")
-            return ErrorCode.ERROR_MOTOR_FAILURE
+            return ErrorCode.ERROR_MOTOR_FAILURE, f"Moteus faulted: fault code {self._state.fault}"
         not_following_s: float = time.monotonic() - self._last_following_time
         if not_following_s > MOTOR_RESPONSE_TOLERANCE_S:
-            logging.error(f"Moteus not following commands for {not_following_s:.3f} s: latest reply mode "
-                          f"{self._state.mode} (position mode is {MODE_POSITION}), latest command "
-                          f"{'failed' if self._last_error != ErrorCode.NORMAL_OPERATION else 'replied'}")
-            return ErrorCode.ERROR_MOTOR_FAILURE
-        return ErrorCode.NORMAL_OPERATION
+            return ErrorCode.ERROR_MOTOR_FAILURE, (
+                f"Moteus not following commands for {not_following_s:.3f} s: latest reply mode {self._state.mode} "
+                f"(position mode is {MODE_POSITION}), latest command "
+                f"{'failed' if self._last_error != ErrorCode.NORMAL_OPERATION else 'replied'}")
+        return ErrorCode.NORMAL_OPERATION, None
     
     def get_battery_voltage(self) -> float:
         """Returns the battery voltage of the 6S Lipo battery pack, as reported by the moteus controller."""

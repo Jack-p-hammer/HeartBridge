@@ -178,6 +178,83 @@ def test_command_loop_marks_only_lost_frame_errors(hardware, failure, from_lost_
     assert motor._last_error_from_lost_frame == from_lost_frame
 
 
+def test_failed_cycle_log_level_warns_only_for_tolerated_lost_frames(hardware):
+    """A lost frame shortly after the motor last followed a command is logged as a warning; a lost frame past the
+    tolerance, before any reply, or any other failure is logged as an error."""
+    import time
+    import dataclasses
+    import logging
+    from moteus_thread import MoteusThread, MOTOR_RESPONSE_TOLERANCE_S
+
+    thread = _following_thread()
+    thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+    thread._last_error_from_lost_frame = True
+    assert thread._failed_cycle_log_level() == logging.WARNING
+
+    thread._last_following_time = time.monotonic() - 2.0 * MOTOR_RESPONSE_TOLERANCE_S
+    assert thread._failed_cycle_log_level() == logging.ERROR
+
+    thread = _following_thread()
+    thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+    thread._last_error_from_lost_frame = False
+    assert thread._failed_cycle_log_level() == logging.ERROR
+
+    thread = MoteusThread()  # no reply yet
+    thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+    thread._last_error_from_lost_frame = True
+    assert thread._state.stale
+    assert thread._failed_cycle_log_level() == logging.ERROR
+
+
+@pytest.mark.parametrize("scenario", ["lost_recent", "lost_old", "lost_while_faulted", "other_failure", "no_reply_yet"])
+def test_failed_cycle_logs_error_exactly_when_motor_failure_is_reported(hardware, scenario):
+    """Every failed cycle logged as an ERROR comes with get_last_error() (and so check_motor()) reporting a motor
+    failure, and every WARNING with NORMAL_OPERATION, so an error in the log always means the system aborts."""
+    import time
+    import dataclasses
+    import logging
+    from moteus_thread import MoteusThread, MODE_FAULT, MOTOR_RESPONSE_TOLERANCE_S
+
+    thread = MoteusThread() if scenario == "no_reply_yet" else _following_thread()
+    thread._last_error = ErrorCode.ERROR_MOTOR_FAILURE
+    thread._last_error_from_lost_frame = scenario != "other_failure"
+    if scenario == "lost_old":
+        thread._last_following_time = time.monotonic() - 2.0 * MOTOR_RESPONSE_TOLERANCE_S
+    if scenario == "lost_while_faulted":
+        thread._state = dataclasses.replace(thread._state, mode=MODE_FAULT, fault=33)
+
+    level = thread._failed_cycle_log_level()
+    reported = thread.get_last_error()
+    expect_error = scenario != "lost_recent"
+    assert level == (logging.ERROR if expect_error else logging.WARNING)
+    assert (reported != ErrorCode.NORMAL_OPERATION) == expect_error
+
+
+@pytest.mark.parametrize("failure, level", [
+    (RuntimeError("Error: b'ERR unknown flag'"), "WARNING"),   # a lost frame, tolerated
+    (RuntimeError("comm lost"), "ERROR"),                      # a real failure
+])
+def test_command_loop_logs_lost_frames_as_warnings(hardware, caplog, failure, level):
+    """End to end: the first failed cycle after normal commanding is logged at the level matching how it's reported."""
+    import time
+    import actuation
+    actuation.init_motor()
+    time.sleep(0.05)  # commanding normally
+    caplog.clear()
+    hardware.moteus_controller.raise_on_set_position = failure
+
+    # Wait for the first failed cycle. It comes one cycle after the last good reply, well within the tolerance
+    deadline = time.monotonic() + 1.0
+    while time.monotonic() < deadline:
+        failed = [r for r in caplog.records if "Moteus command loop failed" in r.getMessage()]
+        if failed:
+            break
+        time.sleep(0.005)
+    else:
+        raise AssertionError("No failed cycle was logged")
+    assert failed[0].levelname == level
+
+
 def test_position_timeout_mode_is_cleared_with_a_stop(hardware, caplog):
     """A reply in position timeout mode (the moteus ignoring commands) makes the command loop send a stop to clear it."""
     import time
@@ -188,9 +265,14 @@ def test_position_timeout_mode_is_cleared_with_a_stop(hardware, caplog):
     stops_before = hardware.moteus_controller.stop_count
 
     hardware.moteus_controller.mode = MODE_POSITION_TIMEOUT
-    time.sleep(0.05)
 
-    # One stop clears it: the fake goes to stopped (0), then the next command puts it back in position mode
+    # One stop clears it: the fake goes to stopped (0), then the next command puts it back in position mode. Waits for
+    # that rather than a fixed time, since the command loop thread can be scheduled late
+    deadline = time.monotonic() + 1.0
+    while time.monotonic() < deadline:
+        if hardware.moteus_controller.stop_count > stops_before and hardware.moteus_controller.mode == MODE_POSITION:
+            break
+        time.sleep(0.005)
     assert hardware.moteus_controller.stop_count == stops_before + 1
     assert hardware.moteus_controller.mode == MODE_POSITION
     assert "position timeout" in caplog.text

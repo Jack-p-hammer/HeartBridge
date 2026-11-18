@@ -358,12 +358,23 @@ def test_set_image_success_and_failure(hardware):
 
 
 def test_init_hmi_hides_mouse_cursor(hardware):
-    """The cursor is hidden once, at init, so it's hidden in every state."""
+    """The cursor is hidden once, at init, so it's hidden in every state: set invisible, and swapped for a fully
+    transparent 8x8 cursor (every mask byte 0) where hiding is ignored."""
     import HMI
     assert hardware.pygame.mouse_visible
 
     assert HMI.init_HMI(hardware.pi) == ErrorCode.NORMAL_OPERATION
     assert not hardware.pygame.mouse_visible
+    assert hardware.pygame.mouse_cursor == ((8, 8), (0, 0), (0,) * 8, (0,) * 8)
+
+
+def test_init_hmi_carries_on_when_cursor_cannot_be_hidden(hardware, caplog):
+    """Hiding the cursor is cosmetic, so failing to is logged, not an init failure."""
+    import HMI
+    hardware.pygame.mouse_error = RuntimeError("no cursor support")
+
+    assert HMI.init_HMI(hardware.pi) == ErrorCode.NORMAL_OPERATION
+    assert "Failed to hide the mouse cursor" in caplog.text
 
 
 def test_clear_screen_fills_black(hardware):

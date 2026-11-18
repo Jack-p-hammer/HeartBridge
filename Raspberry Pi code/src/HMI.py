@@ -177,13 +177,21 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
             pygame.FULLSCREEN
         )
         pygame.display.set_caption("CPR Machine")
-        # Touchless kiosk display: no mouse cursor over the prompts in any state
-        pygame.mouse.set_visible(False)
         # Timer text scales with the screen, roughly the size of the image text
         _timer_font = pygame.font.Font(None, info.current_h // 8)
     except Exception as e:
         logging.error(f"Display initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
+
+    # Touchless kiosk display: no mouse cursor over the prompts in any state. set_visible(False) alone didn't hide it on
+    # the Pi's desktop, so the window's cursor is also swapped for a fully transparent one (an 8x8 cursor with every
+    # pixel transparent), which hides it even where hiding is ignored. Cosmetic, so a failure is logged, not fatal
+    try:
+        logging.debug(f"Video driver: {pygame.display.get_driver()}")
+        pygame.mouse.set_cursor((8, 8), (0, 0), (0,) * 8, (0,) * 8)
+        pygame.mouse.set_visible(False)
+    except Exception as e:
+        logging.warning(f"Failed to hide the mouse cursor: {e}")
 
     # Initialize GPIO pins for buttons, LEDs, and lasers
     try:

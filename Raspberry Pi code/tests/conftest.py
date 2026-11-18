@@ -411,6 +411,8 @@ class PygameHarness:
         self.rendered: list = []  # strings rendered with pygame.font (the CPR timer)
         self.display_updates: int = 0  # partial display.update() calls (the CPR timer)
         self.mouse_visible: bool = True  # pygame.mouse.set_visible(), shown until hidden like the real cursor
+        self.mouse_cursor: Optional[tuple] = None  # args of the last pygame.mouse.set_cursor(), None if never set
+        self.mouse_error: Optional[Exception] = None  # makes pygame.mouse calls fail
 
         self.init_error: Optional[Exception] = None
         self.display_error: Optional[Exception] = None
@@ -562,14 +564,21 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
 
     display_ns = types.SimpleNamespace(
         Info=display_info, set_mode=display_set_mode, set_caption=display_set_caption, flip=display_flip,
-        update=display_update,
+        update=display_update, get_driver=lambda: "fake",
     )
     font_ns = types.SimpleNamespace(Font=lambda name, size: FakePygameFont(pg))
 
     def mouse_set_visible(visible):
+        if pg.mouse_error is not None:
+            raise pg.mouse_error
         pg.mouse_visible = bool(visible)
 
-    mouse_ns = types.SimpleNamespace(set_visible=mouse_set_visible)
+    def mouse_set_cursor(*args):
+        if pg.mouse_error is not None:
+            raise pg.mouse_error
+        pg.mouse_cursor = args
+
+    mouse_ns = types.SimpleNamespace(set_visible=mouse_set_visible, set_cursor=mouse_set_cursor)
 
     def image_load(path):
         if pg.image_load_error is not None:

@@ -189,6 +189,36 @@ def reset_extended_steps() -> None:
     """Zero the extending step count, once the carriage has been retracted by that many steps"""
     global extended_steps
     extended_steps = 0
+    
+    
+def enable_steppers() -> ErrorCode:
+    """Enable the stepper drivers by taking the SLEEP pin active. The drivers are enabled for the whole run, so this is only needed if they were disabled for some reason.
+
+    Returns:
+        ErrorCode: NORMAL_OPERATION if successful, ERROR_MOTOR_FAILURE on a pigpio failure
+    """
+    global _pi
+    try:
+        _pi.write(STEPPER_SLEEP_PIN, 0 if STEPPER_SLEEP_ACTIVE_LOW else 1)
+    except Exception as e:
+        logging.error(f"Failed to enable stepper drivers: {e}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+    return ErrorCode.NORMAL_OPERATION
+
+
+def disable_steppers() -> ErrorCode:
+    """Disable the stepper drivers by taking the SLEEP pin inactive. The drivers are enabled for the whole run, so this is only needed if they were enabled for some reason.
+
+    Returns:
+        ErrorCode: NORMAL_OPERATION if successful, ERROR_MOTOR_FAILURE on a pigpio failure
+    """
+    global _pi
+    try:
+        _pi.write(STEPPER_SLEEP_PIN, 1 if STEPPER_SLEEP_ACTIVE_LOW else 0)
+    except Exception as e:
+        logging.error(f"Failed to disable stepper drivers: {e}")
+        return ErrorCode.ERROR_MOTOR_FAILURE
+    return ErrorCode.NORMAL_OPERATION
 
 
 # -------- PRIVATE FUNCTIONS --------

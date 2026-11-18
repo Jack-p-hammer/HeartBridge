@@ -398,8 +398,7 @@ def main():
                     error = HMI.set_image_audio(HMI.Image.STARTUP, HMI.AudioPrompt.STARTUP,
                                                 STARTUP_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.enable_next_button()
-                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    
 
                 # Loop
                 # DEMO ONLY: lower the carriage 1 inch from fully retracted while the startup prompt plays.

@@ -368,6 +368,49 @@ def test_init_hmi_hides_mouse_cursor(hardware):
     assert hardware.pygame.mouse_cursor == ((8, 8), (0, 0), (0,) * 8, (0,) * 8)
 
 
+def test_wayland_driver_preferred_on_wayland_desktop(hardware, monkeypatch):
+    """On a Wayland desktop pygame is started on its native Wayland driver, not X11 (where the cursor stayed)."""
+    import os
+    import sys
+    import HMI
+    monkeypatch.setattr(sys, "platform", "linux")
+    monkeypatch.setenv("WAYLAND_DISPLAY", "wayland-0")
+    monkeypatch.delenv("SDL_VIDEODRIVER", raising=False)
+
+    assert HMI.init_HMI(hardware.pi) == ErrorCode.NORMAL_OPERATION
+    assert hardware.pygame.display_init_drivers == ["wayland"]
+    assert os.environ["SDL_VIDEODRIVER"] == "wayland"
+
+
+def test_wayland_driver_falls_back_to_x11_when_unavailable(hardware, monkeypatch, caplog):
+    """If pygame can't start on Wayland, the driver choice is cleared so pygame.init() uses its default (X11)."""
+    import os
+    import sys
+    import HMI
+    monkeypatch.setattr(sys, "platform", "linux")
+    monkeypatch.setenv("WAYLAND_DISPLAY", "wayland-0")
+    monkeypatch.delenv("SDL_VIDEODRIVER", raising=False)
+    hardware.pygame.display_init_error = RuntimeError("wayland not available")
+
+    assert HMI.init_HMI(hardware.pi) == ErrorCode.NORMAL_OPERATION
+    assert "SDL_VIDEODRIVER" not in os.environ
+    assert "falling back to X11" in caplog.text
+
+
+def test_forced_video_driver_is_left_alone(hardware, monkeypatch):
+    """A driver already chosen in SDL_VIDEODRIVER is kept."""
+    import os
+    import sys
+    import HMI
+    monkeypatch.setattr(sys, "platform", "linux")
+    monkeypatch.setenv("WAYLAND_DISPLAY", "wayland-0")
+    monkeypatch.setenv("SDL_VIDEODRIVER", "x11")
+
+    assert HMI.init_HMI(hardware.pi) == ErrorCode.NORMAL_OPERATION
+    assert hardware.pygame.display_init_drivers == []
+    assert os.environ["SDL_VIDEODRIVER"] == "x11"
+
+
 def test_init_hmi_carries_on_when_cursor_cannot_be_hidden(hardware, caplog):
     """Hiding the cursor is cosmetic, so failing to is logged, not an init failure."""
     import HMI

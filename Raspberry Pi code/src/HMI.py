@@ -143,6 +143,26 @@ def _use_local_display() -> None:
     os.environ["DISPLAY"] = ":0"    # X11 fallback (older desktops / Xwayland)
 
 
+def _prefer_wayland_display() -> None:
+    """Use pygame's native Wayland video driver on a Wayland desktop (the Pi's), falling back to X11.
+
+    pygame picks X11 by default whenever DISPLAY is set, which on the Pi runs it through Xwayland, where the desktop
+    kept showing the mouse cursor even with it hidden and transparent. A native Wayland window hides it.
+    Skipped when SDL_VIDEODRIVER is already set, so a driver can still be forced from the environment.
+    """
+    if sys.platform != "linux":
+        return
+    if not os.environ.get("WAYLAND_DISPLAY") or "SDL_VIDEODRIVER" in os.environ:
+        return
+    os.environ["SDL_VIDEODRIVER"] = "wayland"
+    try:
+        pygame.display.init()
+    except Exception as e:
+        # e.g. pygame built without Wayland support. pygame.init() then starts the display with the default (X11)
+        logging.warning(f"Wayland video driver unavailable, falling back to X11: {e}")
+        del os.environ["SDL_VIDEODRIVER"]
+
+
 def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
     """Initialize screens, audio, lasers, and buttons.
 
@@ -161,6 +181,7 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
     # Initialize Pygame and audio mixer for sound playback
     try:
         _use_local_display()
+        _prefer_wayland_display()
         pygame.init()
         pygame.mixer.init(frequency=44100, channels=1, buffer=2048)
         # Reserve a dedicated channel for audio prompts
@@ -183,9 +204,9 @@ def init_HMI(pi_instance: pigpio.pi) -> ErrorCode:
         logging.error(f"Display initialization failed: {e}")
         return ErrorCode.ERROR_INIT_FAILURE
 
-    # Touchless kiosk display: no mouse cursor over the prompts in any state. set_visible(False) alone didn't hide it on
-    # the Pi's desktop, so the window's cursor is also swapped for a fully transparent one (an 8x8 cursor with every
-    # pixel transparent), which hides it even where hiding is ignored. Cosmetic, so a failure is logged, not fatal
+    # Touchless kiosk display: no mouse cursor over the prompts in any state. Both hidden and swapped for a fully
+    # transparent cursor (8x8, every pixel transparent), in case either is ignored. Under X11 (Xwayland) on the Pi the
+    # desktop still showed it, hence _prefer_wayland_display(). Cosmetic, so a failure is logged, not fatal
     try:
         logging.debug(f"Video driver: {pygame.display.get_driver()}")
         pygame.mouse.set_cursor((8, 8), (0, 0), (0,) * 8, (0,) * 8)

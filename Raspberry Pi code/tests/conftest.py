@@ -25,6 +25,7 @@ sensing.init_sensors() as a parameter, so no module needs to reach back into
 one that imports it. Any of the three can be imported first in a test.
 """
 import logging
+import os
 import sys
 import types
 from pathlib import Path
@@ -413,6 +414,9 @@ class PygameHarness:
         self.mouse_visible: bool = True  # pygame.mouse.set_visible(), shown until hidden like the real cursor
         self.mouse_cursor: Optional[tuple] = None  # args of the last pygame.mouse.set_cursor(), None if never set
         self.mouse_error: Optional[Exception] = None  # makes pygame.mouse calls fail
+        # SDL_VIDEODRIVER at each pygame.display.init(); `display_init_error` makes it fail like a missing driver
+        self.display_init_drivers: list = []
+        self.display_init_error: Optional[Exception] = None
 
         self.init_error: Optional[Exception] = None
         self.display_error: Optional[Exception] = None
@@ -559,12 +563,17 @@ def _make_pygame_module(harness: HardwareHarness) -> types.ModuleType:
     def display_flip():
         pass
 
+    def display_init():
+        pg.display_init_drivers.append(os.environ.get("SDL_VIDEODRIVER"))
+        if pg.display_init_error is not None:
+            raise pg.display_init_error
+
     def display_update(rects=None):
         pg.display_updates += 1
 
     display_ns = types.SimpleNamespace(
         Info=display_info, set_mode=display_set_mode, set_caption=display_set_caption, flip=display_flip,
-        update=display_update, get_driver=lambda: "fake",
+        update=display_update, get_driver=lambda: "fake", init=display_init,
     )
     font_ns = types.SimpleNamespace(Font=lambda name, size: FakePygameFont(pg))
 

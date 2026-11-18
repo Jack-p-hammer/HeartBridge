@@ -642,7 +642,8 @@ def test_set_image_audio_propagates_audio_failure_when_image_succeeds(hardware):
 # -------------------- audio_finished --------------------
 
 def test_audio_finished_reports_elapsed_time_against_prompt_length(hardware, monkeypatch):
-    """audio_finished() should flip true once one full loop of the prompt has elapsed.
+    """audio_finished() should flip true once the prompt's speech has played once: its length less the silence at the
+    end of the file (AUDIO_TRAILING_SILENCE_SEC).
 
     HMI.py times this with time.monotonic() (not pygame.time.get_ticks()), so
     the fake clock here patches HMI's own time.monotonic directly.
@@ -655,13 +656,26 @@ def test_audio_finished_reports_elapsed_time_against_prompt_length(hardware, mon
 
     hardware.pygame.sound_length_sec = 2.0
     HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY)
+    speech_end = 2.0 - HMI.AUDIO_TRAILING_SILENCE_SEC
 
     assert HMI.audio_finished() is False
 
-    fake_now["t"] = 1.5  # < 2.0s prompt length
+    fake_now["t"] = speech_end - 0.01  # speech still playing
     assert HMI.audio_finished() is False
 
-    fake_now["t"] = 2.0  # exactly one full loop elapsed
+    fake_now["t"] = speech_end  # speech done, only the file's trailing silence left
+    assert HMI.audio_finished() is True
+
+
+def test_audio_finished_straight_away_for_prompt_shorter_than_trailing_silence(hardware, monkeypatch):
+    """A prompt no longer than the trailing silence allowance counts as finished as soon as it starts."""
+    import HMI
+    HMI.init_HMI(hardware.pi)
+    monkeypatch.setattr(HMI.time, "monotonic", lambda: 0.0)
+
+    hardware.pygame.sound_length_sec = HMI.AUDIO_TRAILING_SILENCE_SEC / 2
+    HMI.set_audio(HMI.AudioPrompt.UNFOLD, HMI.DEFAULT_AUDIO_REPEAT_DELAY)
+
     assert HMI.audio_finished() is True
 
 

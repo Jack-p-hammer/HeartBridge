@@ -36,6 +36,14 @@ BUTTON_TIMEOUT_SEC: float = 1.0
 # Default audio repeat delay for prompts that don't have a specific one
 DEFAULT_AUDIO_REPEAT_DELAY: float = 1.0
 
+# The prompt .wav files end in silence, so audio_finished() reports the prompt finished this long before its file
+# ends, as soon as the speech does. Measured below -50 dBFS on 2026-11-18: 0.85 to 0.89 s for every prompt except
+# kneelFailure.wav (0.32 s) and compressionsPrep.wav (silent throughout). Uses the shortest of the prompts the demo
+# waits on before enabling Next: unfoldExpose.wav (0.846 s, rounded down), alignment.wav (0.863 s) and
+# zeroingPrep.wav (0.874 s). startup.wav (0.864 s), also waited on, has more. kneelFailure.wav isn't waited on; if it
+# ever is, it would be reported finished about 0.53 s before its speech ends. Re-measure if the audio files change
+AUDIO_TRAILING_SILENCE_SEC: float = 0.84
+
 # Declare paths for images and audio files relative to this script's directory
 IMAGES = Path(__file__).resolve().parent / "Images"
 AUDIO = Path(__file__).resolve().parent / "Audio"
@@ -522,17 +530,18 @@ def disable_lasers() -> ErrorCode:
 
 
 def audio_finished() -> bool:
-    """Check if the current audio prompt has completed its first loop.
-    Playback continues looping regardless; this only reports elapsed time.
+    """Check if the current audio prompt has finished playing once: its speech, not the silence at the end of its file
+    (AUDIO_TRAILING_SILENCE_SEC). Playback continues looping regardless; this only reports elapsed time.
 
     Returns:
-        bool: True once one full loop has elapsed (or no audio is set), False otherwise
+        bool: True once the first play's speech has finished (or no audio is set), False otherwise
     """
     global _audio_start_time, _audio_length
 
     if _audio_length == 0.0:
         return True
-    return (time.monotonic() - _audio_start_time) >= _audio_length
+    speech_length: float = max(0.0, _audio_length - AUDIO_TRAILING_SILENCE_SEC)
+    return (time.monotonic() - _audio_start_time) >= speech_length
 
 
 # The next and pause buttons each share a ground connection with their built-in LED.

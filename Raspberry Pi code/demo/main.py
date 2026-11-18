@@ -46,7 +46,7 @@ from Enums.error_codes import ErrorCode
 from Enums.states import CPRState  # demo/Enums/states.py
 
 # Matches moteus_thread.py's COMMAND_RATE_HZ (100 Hz): setpoints computed any faster would never be sent
-LOOP_TICK_SEC = 0.01  # 10ms per tick, 100 Hz
+LOOP_TICK_SEC = 0.02  # 20ms per tick, 50 Hz
 
 # Frames cycled during the unfold step, and how long each one stays up
 UNFOLD_FRAMES = [HMI.Image.UNFOLD_1, HMI.Image.UNFOLD_2, HMI.Image.UNFOLD_3, HMI.Image.UNFOLD_4]

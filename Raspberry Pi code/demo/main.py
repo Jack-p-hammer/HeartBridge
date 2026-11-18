@@ -266,6 +266,9 @@ def main():
     init_done_time: float = 0.0  # time.monotonic() when INIT_STARTUP's setup finished, to time out waiting for the moteus
     lasers_on: bool = False  # Whether L has toggled the lasers on in WAIT or PAUSE. Both start with them off
     voltage_visible: bool = False  # Whether V has toggled the battery voltage on in WAIT. Starts hidden
+    # Whether the Next button has been enabled in UNFOLD_CUT_CLOTHES, ALIGNMENT or KNEELING. Each disables it on entry
+    # and only enables it once its audio prompt has played through once
+    next_enabled: bool = False
     shown_voltage_dv: int | None = None  # Battery voltage currently drawn, in tenths of a volt, None if none is drawn
 
     # initialize animation position and timer
@@ -421,8 +424,10 @@ def main():
                     error = HMI.set_image_audio(UNFOLD_FRAMES[frame_idx], HMI.AudioPrompt.UNFOLD,
                                                 UNFOLD_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.enable_next_button()
+                    # Next is enabled once the prompt has played through once, below
+                    error = HMI.disable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    next_enabled = False
 
                 # Loop
                 # Advance the animation. set_image only, so the audio prompt isn't restarted
@@ -432,10 +437,16 @@ def main():
                     error = HMI.set_image(UNFOLD_FRAMES[frame_idx])
                     if error != ErrorCode.NORMAL_OPERATION: continue
 
-                error, next_pressed = HMI.next_button_pressed()
-                if error != ErrorCode.NORMAL_OPERATION: continue
-                if next_pressed:
-                    state = CPRState.ALIGNMENT
+                if not next_enabled and HMI.audio_finished():
+                    error = HMI.enable_next_button()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    next_enabled = True
+
+                if next_enabled:
+                    error, next_pressed = HMI.next_button_pressed()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    if next_pressed:
+                        state = CPRState.ALIGNMENT
 
             case(CPRState.ALIGNMENT):
                 # Setup
@@ -445,37 +456,54 @@ def main():
                     error = HMI.set_image_audio(HMI.Image.ALIGNMENT, HMI.AudioPrompt.ALIGNMENT,
                                                 ALIGNMENT_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.enable_next_button()
+                    # Next is enabled once the prompt has played through once, below
+                    error = HMI.disable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    next_enabled = False
 
                 # Loop
-                error, next_pressed = HMI.next_button_pressed()
-                if error != ErrorCode.NORMAL_OPERATION: continue
-                if next_pressed:
-                    error = HMI.disable_lasers()
+                if not next_enabled and HMI.audio_finished():
+                    error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    state = CPRState.KNEELING
+                    next_enabled = True
+
+                if next_enabled:
+                    error, next_pressed = HMI.next_button_pressed()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
+                    if next_pressed:
+                        error = HMI.disable_lasers()
+                        if error != ErrorCode.NORMAL_OPERATION: continue
+                        state = CPRState.KNEELING
 
             case(CPRState.KNEELING):
                 # Setup
                 if state != prev_state:
                     error = HMI.enable_lasers()
+                    if error != ErrorCode.NORMAL_OPERATION: continue
                     error = HMI.set_image_audio(HMI.Image.KNEELING, HMI.AudioPrompt.KNEELING,
                                                 KNEELING_AUDIO_REPEAT_DELAY_SEC)
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    error = HMI.enable_next_button()
+                    # Next is enabled once the prompt has played through once, below
+                    error = HMI.disable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
+                    next_enabled = False
 
                 # Loop
-                error, next_pressed = HMI.next_button_pressed()
-                if error != ErrorCode.NORMAL_OPERATION: continue
-                if next_pressed:
-                    error = HMI.disable_lasers()
+                if not next_enabled and HMI.audio_finished():
+                    error = HMI.enable_next_button()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    # Wake the steppers a tick before ZEROING steps them, so the drivers are ready for the first step
-                    error = stepper.enable_steppers()
+                    next_enabled = True
+
+                if next_enabled:
+                    error, next_pressed = HMI.next_button_pressed()
                     if error != ErrorCode.NORMAL_OPERATION: continue
-                    state = CPRState.ZEROING
+                    if next_pressed:
+                        error = HMI.disable_lasers()
+                        if error != ErrorCode.NORMAL_OPERATION: continue
+                        # Wake the steppers a tick before ZEROING steps them, so the drivers are ready for the first step
+                        error = stepper.enable_steppers()
+                        if error != ErrorCode.NORMAL_OPERATION: continue
+                        state = CPRState.ZEROING
 
             case(CPRState.ZEROING):
                 # Setup

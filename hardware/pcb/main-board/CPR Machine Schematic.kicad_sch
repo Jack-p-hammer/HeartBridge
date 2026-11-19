@@ -409,7 +409,7 @@
 		(at 196.85 116.84)
 		(size 44.45 31.75)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board no)
 		(dnp no)
 		(fields_autoplaced yes)

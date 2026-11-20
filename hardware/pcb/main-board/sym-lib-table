@@ -12,4 +12,6 @@
 	(lib (name "THVD1429DT") (type "KiCad") (uri "${KIPRJMOD}/Part Library/THVD1429DT/KiCADv6/2026-10-28_14-01-04.kicad_sym") (options "") (descr ""))
 	(lib (name "LSM6DSV16XTR") (type "KiCad") (uri "${KIPRJMOD}/Part Library/LSM6DSV16XTR/KiCADv6/2026-10-29_17-21-07.kicad_sym") (options "") (descr ""))
 	(lib (name "MAX42406AFOB_") (type "KiCad") (uri "${KIPRJMOD}/Part Library/MAX42406AFOB_/KiCADv6/2026-11-18_17-03-08.kicad_sym") (options "") (descr ""))
+	(lib (name "DMT6007LFG-7") (type "KiCad") (uri "${KIPRJMOD}/Part Library/DMT6007LFG_7/KiCADv6/2026-11-13_15-43-18.kicad_sym") (options "") (descr ""))
+	(lib (name "Molex USB-C") (type "KiCad") (uri "${KIPRJMOD}/Part Library/Molex USB-C/KiCADv6/2026-11-20_18-40-30.kicad_sym") (options "") (descr ""))
 )

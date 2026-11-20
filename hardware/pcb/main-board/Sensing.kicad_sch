@@ -5898,7 +5898,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 57.15 65.0748 0)
 			(hide yes)
 			(show_name no)
@@ -5909,7 +5909,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/609/CL10C470JB8NNNC_Spec.pdf"
 			(at 53.34 66.04 0)
 			(hide yes)
 			(show_name no)
@@ -5931,7 +5931,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "1276-1037-1-ND"
 			(at 53.34 66.04 90)
 			(hide yes)
 			(show_name no)

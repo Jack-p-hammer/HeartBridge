@@ -9681,7 +9681,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 220.98 30.7848 0)
 			(hide yes)
 			(show_name no)
@@ -9692,7 +9692,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/609/CL10B472KB8NNNC_Spec.pdf"
 			(at 217.17 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -9847,6 +9847,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 217.17 31.75 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "1276-1098-1-ND"
 			(at 217.17 31.75 90)
 			(hide yes)
 			(show_name no)
@@ -10707,7 +10718,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 232.1052 40.64 0)
 			(hide yes)
 			(show_name no)
@@ -10718,7 +10729,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/1040/UMK107B7474KA-TR_SS.pdf"
 			(at 231.14 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -10873,6 +10884,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 231.14 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "587-3170-1-ND"
 			(at 231.14 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -11561,7 +11583,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 196.85 48.5648 0)
 			(hide yes)
 			(show_name no)
@@ -11572,7 +11594,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 193.04 49.53 0)
 			(hide yes)
 			(show_name no)
@@ -11727,6 +11749,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 193.04 49.53 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "399-C0603C104K4RACTUCT-ND"
 			(at 193.04 49.53 90)
 			(hide yes)
 			(show_name no)
@@ -13606,7 +13639,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 232.1052 29.21 0)
 			(hide yes)
 			(show_name no)
@@ -13617,7 +13650,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/1040/UMK107B7474KA-TR_SS.pdf"
 			(at 231.14 25.4 0)
 			(hide yes)
 			(show_name no)
@@ -13772,6 +13805,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 231.14 25.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "587-3170-1-ND"
 			(at 231.14 25.4 0)
 			(hide yes)
 			(show_name no)
@@ -14366,7 +14410,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 150.1648 50.8 0)
 			(hide yes)
 			(show_name no)
@@ -14377,7 +14421,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 151.13 54.61 0)
 			(hide yes)
 			(show_name no)
@@ -14532,6 +14576,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 151.13 54.61 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "399-C0603C104K4RACTUCT-ND"
 			(at 151.13 54.61 90)
 			(hide yes)
 			(show_name no)

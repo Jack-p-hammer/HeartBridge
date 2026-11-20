@@ -12972,7 +12972,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 167.3352 91.44 0)
 			(hide yes)
 			(show_name no)
@@ -12983,7 +12983,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/download/specsheet/CC0402JRNPO9BN101"
 			(at 166.37 87.63 0)
 			(hide yes)
 			(show_name no)
@@ -13005,7 +13005,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "311-1024-1-ND"
 			(at 166.37 87.63 0)
 			(hide yes)
 			(show_name no)
@@ -17889,7 +17889,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 40.9448 20.32 0)
 			(hide yes)
 			(show_name no)
@@ -17900,7 +17900,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://pim.murata.com/asset/pim4/ceramicCapacitorSMD/GCM188R71H473KA55-01A-EN_PDF_CERAMICCAPACITORSMD"
 			(at 41.91 24.13 0)
 			(hide yes)
 			(show_name no)
@@ -17922,7 +17922,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "490-4934-1-ND"
 			(at 41.91 24.13 0)
 			(hide yes)
 			(show_name no)
@@ -19663,7 +19663,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 165.4048 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -19674,7 +19674,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8942/Chip_Multilayer_CAT2021_MLCC.pdf"
 			(at 166.37 97.79 0)
 			(hide yes)
 			(show_name no)
@@ -19696,7 +19696,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "490-6418-1-ND"
 			(at 166.37 97.79 0)
 			(hide yes)
 			(show_name no)
@@ -28482,7 +28482,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:CP_Elec_10x10.5"
 			(at 59.3852 74.93 0)
 			(hide yes)
 			(show_name no)
@@ -28493,7 +28493,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.cde.com/resources/catalogs/AFK.pdf"
 			(at 58.42 71.12 0)
 			(hide yes)
 			(show_name no)
@@ -28515,7 +28515,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "338-2146-1-ND"
 			(at 58.42 71.12 0)
 			(hide yes)
 			(show_name no)

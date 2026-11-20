@@ -4923,7 +4923,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 82.8548 25.4 0)
 			(hide yes)
 			(show_name no)
@@ -4934,7 +4934,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.passivecomponent.com/wp-content/uploads/datasheet/WTC_MLCC_General_Purpose.pdf"
 			(at 83.82 29.21 0)
 			(hide yes)
 			(show_name no)
@@ -5144,6 +5144,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 83.82 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "1292-1643-1-ND"
 			(at 83.82 29.21 0)
 			(hide yes)
 			(show_name no)
@@ -8449,7 +8460,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 82.8548 68.58 0)
 			(hide yes)
 			(show_name no)
@@ -8460,7 +8471,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.passivecomponent.com/wp-content/uploads/datasheet/WTC_MLCC_General_Purpose.pdf"
 			(at 83.82 72.39 0)
 			(hide yes)
 			(show_name no)
@@ -8670,6 +8681,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 83.82 72.39 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "1292-1643-1-ND"
 			(at 83.82 72.39 0)
 			(hide yes)
 			(show_name no)
@@ -10902,7 +10924,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 176.2252 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -10913,7 +10935,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.passivecomponent.com/wp-content/uploads/datasheet/WTC_MLCC_General_Purpose.pdf"
 			(at 175.26 27.94 0)
 			(hide yes)
 			(show_name no)
@@ -11123,6 +11145,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 175.26 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "1292-1643-1-ND"
 			(at 175.26 27.94 0)
 			(hide yes)
 			(show_name no)

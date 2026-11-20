@@ -5587,7 +5587,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0402_1005Metric_Pad0.77x0.64mm_HandSolder"
+		(property "Footprint" "Diode_SMD:D_0402_1005Metric"
 			(at 38.735 73.66 0)
 			(hide yes)
 			(show_name no)
@@ -6355,7 +6355,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 46.736 103.886 90)
 			(hide yes)
 			(show_name no)
@@ -6366,7 +6366,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
 			(at 45.72 104.14 0)
 			(hide yes)
 			(show_name no)
@@ -6521,6 +6521,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 45.72 104.14 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "311-2.2KGRCT-ND"
 			(at 45.72 104.14 90)
 			(hide yes)
 			(show_name no)
@@ -7101,7 +7112,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0402_1005Metric_Pad0.77x0.64mm_HandSolder"
+		(property "Footprint" "Diode_SMD:D_0402_1005Metric"
 			(at 61.595 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -8789,7 +8800,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" ""
 			(at 53.086 58.166 90)
 			(hide yes)
 			(show_name no)
@@ -11620,7 +11631,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" ""
 			(at 30.226 29.464 90)
 			(hide yes)
 			(show_name no)
@@ -12514,7 +12525,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0402_1005Metric_Pad0.77x0.64mm_HandSolder"
+		(property "Footprint" "Diode_SMD:D_0402_1005Metric"
 			(at 57.785 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -12984,7 +12995,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 46.736 93.726 90)
 			(hide yes)
 			(show_name no)
@@ -12995,7 +13006,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
 			(at 45.72 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -13150,6 +13161,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 45.72 93.98 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "311-2.2KGRCT-ND"
 			(at 45.72 93.98 90)
 			(hide yes)
 			(show_name no)

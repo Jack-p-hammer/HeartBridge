@@ -8800,7 +8800,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 53.086 58.166 90)
 			(hide yes)
 			(show_name no)
@@ -8811,7 +8811,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.seielect.com/catalog/SEI-RMCF_RMCP.pdf"
 			(at 53.34 57.15 0)
 			(hide yes)
 			(show_name no)
@@ -8833,7 +8833,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "RMCF0603FT80K6CT-ND"
 			(at 53.34 57.15 90)
 			(hide yes)
 			(show_name no)
@@ -11620,7 +11620,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "90 kOhm"
+		(property "Value" "90.9 kOhm"
 			(at 31.75 30.4799 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11631,7 +11631,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 30.226 29.464 90)
 			(hide yes)
 			(show_name no)
@@ -11642,7 +11642,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://bourns.com/docs/product-datasheets/cr.pdf?sfvrsn=574d41f6_14"
 			(at 29.21 29.21 0)
 			(hide yes)
 			(show_name no)
@@ -11664,7 +11664,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "CR0603-FX-9092ELFCT-ND"
 			(at 29.21 29.21 0)
 			(hide yes)
 			(show_name no)

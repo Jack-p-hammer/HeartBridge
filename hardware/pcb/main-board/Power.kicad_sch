@@ -20340,7 +20340,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 126.746 80.264 90)
 			(hide yes)
 			(show_name no)
@@ -20351,7 +20351,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.susumu.co.jp/dl/?filename=n_catalog_partition01_en.pdf&type=application/pdf"
 			(at 125.73 80.01 0)
 			(hide yes)
 			(show_name no)
@@ -20719,7 +20719,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 136.906 30.226 90)
 			(hide yes)
 			(show_name no)
@@ -20730,7 +20730,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.seielect.com/catalog/SEI-RMCF_RMCP.pdf"
 			(at 135.89 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -20752,7 +20752,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "RMCF0603FT1K50CT-ND"
 			(at 135.89 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -21031,7 +21031,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.susumu.co.jp/dl/?filename=n_catalog_partition01_en.pdf&type=application/pdf"
 			(at 171.45 87.63 0)
 			(hide yes)
 			(show_name no)
@@ -21321,7 +21321,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 45.466 162.814 90)
 			(hide yes)
 			(show_name no)
@@ -21332,7 +21332,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C301.pdf"
 			(at 44.45 162.56 0)
 			(hide yes)
 			(show_name no)
@@ -21354,7 +21354,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "P47KGCT-ND"
 			(at 44.45 162.56 90)
 			(hide yes)
 			(show_name no)
@@ -28429,7 +28429,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "dc7d55d8-f2e0-4480-8d5c-878c9756fee3")
-		(property "Reference" "L2"
+		(property "Reference" "L1"
 			(at 61.976 97.79 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28451,7 +28451,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Imports:IND_1217AS-H-2R2N=P3"
+		(property "Footprint" "ul_0630CDMCCDS-3R3MC:IND_CCDS-3R3MC_SUM"
 			(at 69.85 99.06 0)
 			(hide yes)
 			(show_name no)
@@ -28462,7 +28462,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://products.sumida.com/products/pdf/0630CDMCCDS%20new%20ver.pdf?t=1779169831"
 			(at 69.85 99.06 0)
 			(hide yes)
 			(show_name no)
@@ -28484,7 +28484,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "308-2465-1-ND"
 			(at 69.85 99.06 90)
 			(hide yes)
 			(show_name no)
@@ -28713,7 +28713,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "L2")
+					(reference "L1")
 					(unit 1)
 				)
 			)

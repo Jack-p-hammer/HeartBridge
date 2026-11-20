@@ -5865,7 +5865,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 74.676 20.066 90)
 			(hide yes)
 			(show_name no)
@@ -5876,7 +5876,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 74.93 19.05 0)
 			(hide yes)
 			(show_name no)
@@ -5898,7 +5898,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-49.9HCT-ND"
 			(at 74.93 19.05 90)
 			(hide yes)
 			(show_name no)
@@ -6418,7 +6418,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 75.946 63.246 90)
 			(hide yes)
 			(show_name no)
@@ -6429,7 +6429,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 76.2 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -6451,7 +6451,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-49.9HCT-ND"
 			(at 76.2 62.23 90)
 			(hide yes)
 			(show_name no)
@@ -9405,7 +9405,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 189.484 39.116 90)
 			(hide yes)
 			(show_name no)
@@ -9416,7 +9416,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 190.5 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -9438,7 +9438,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-120HCT-ND"
 			(at 190.5 39.37 90)
 			(hide yes)
 			(show_name no)

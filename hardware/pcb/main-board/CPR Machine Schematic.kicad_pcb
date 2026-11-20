@@ -137,7 +137,6 @@
 		)
 		(capping no)
 		(filling no)
-		(zone_defaults)
 		(pcbplotparams
 			(layerselection 0x00000000_00000000_55555555_5755f5ff)
 			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
@@ -33856,7 +33855,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(gr_text "{dblquote}Urethra!{dblquote}"
+	(gr_text "{dblquote}What's a 2D printer?{dblquote}"
 		(at 141.478 53.848 0)
 		(layer "F.SilkS")
 		(uuid "e55aaee2-56c6-4da6-826a-4bfc00941dc6")
@@ -33977,20 +33976,20 @@
 		)
 	)
 	(segment
-		(start 218.899167 88.177797)
-		(end 216.198 88.177797)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "/HMI/Stop Button")
-		(uuid "d8786ab0-1462-42b1-88f0-2475e716675f")
-	)
-	(segment
 		(start 218.8695 76.84529)
 		(end 216.168333 76.84529)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/HMI/Go Button")
 		(uuid "9591e585-7b60-42be-9af4-3d6c479a9468")
+	)
+	(segment
+		(start 218.899167 88.177797)
+		(end 216.198 88.177797)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "/HMI/Stop Button")
+		(uuid "d8786ab0-1462-42b1-88f0-2475e716675f")
 	)
 	(embedded_fonts no)
 )

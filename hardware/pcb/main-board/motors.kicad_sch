@@ -7508,7 +7508,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 221.234 36.576 90)
 			(hide yes)
 			(show_name no)
@@ -7519,7 +7519,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf"
 			(at 222.25 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -7674,6 +7674,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 222.25 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "P60.4HCT-ND"
 			(at 222.25 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -7888,7 +7899,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 221.234 25.146 90)
 			(hide yes)
 			(show_name no)
@@ -7899,7 +7910,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf"
 			(at 222.25 25.4 0)
 			(hide yes)
 			(show_name no)
@@ -8054,6 +8065,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 222.25 25.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "P60.4HCT-ND"
 			(at 222.25 25.4 0)
 			(hide yes)
 			(show_name no)

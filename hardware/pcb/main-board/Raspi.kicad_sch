@@ -2309,26 +2309,6 @@
 		)
 		(uuid "511d8c3a-5897-4a8c-bbcb-3c0195f06489")
 	)
-	(label "I2C_SCL"
-		(at 27.94 72.39 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "583a45a2-a260-4925-b8cc-86f10491d599")
-	)
-	(label "I2C_SDA"
-		(at 27.94 69.85 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6c8d787f-8664-4074-934a-9bba52b5b068")
-	)
 	(label "PC0"
 		(at 34.29 24.13 0)
 		(effects
@@ -2420,6 +2400,17 @@
 		)
 		(uuid "05ad13f0-f73d-4b34-8df0-966a5c4b236a")
 	)
+	(hierarchical_label "I2C_SCL"
+		(shape output)
+		(at 27.94 72.39 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1d7853fd-ac06-4702-b0b5-146faf966441")
+	)
 	(hierarchical_label "Stepper Sleep"
 		(shape output)
 		(at 40.64 77.47 0)
@@ -2463,6 +2454,17 @@
 			(justify right)
 		)
 		(uuid "4783946d-b735-434b-b181-c4ead283ab6b")
+	)
+	(hierarchical_label "I2C_SDA"
+		(shape bidirectional)
+		(at 27.94 69.85 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4c84bec1-9610-45ba-9d73-83d8b3befdf0")
 	)
 	(hierarchical_label "TX_CAN"
 		(shape input)

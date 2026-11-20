@@ -827,7 +827,7 @@
 				(justify left)
 			)
 		)
-		(pin "I2C_SCL" bidirectional
+		(pin "I2C_SCL" output
 			(at 120.65 80.01 180)
 			(uuid "7b8e536f-1f4d-4f14-a085-d2847cdc68fa")
 			(effects

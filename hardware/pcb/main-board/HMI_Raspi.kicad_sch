@@ -6176,7 +6176,7 @@
 				)
 			)
 		)
-		(property "Footprint" "D8_TEX"
+		(property "Footprint" "THVD1429DT:D8_TEX"
 			(at 132.08 31.75 0)
 			(hide yes)
 			(show_name no)

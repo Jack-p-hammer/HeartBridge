@@ -10149,7 +10149,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MCP6004:SOIC14_SL_MCH"
+		(property "Footprint" "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm"
 			(at 54.61 35.56 0)
 			(hide yes)
 			(show_name no)

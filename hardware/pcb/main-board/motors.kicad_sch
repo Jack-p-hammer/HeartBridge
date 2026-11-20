@@ -16341,7 +16341,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOIC8_SN_MCH"
+		(property "Footprint" "ATA6563_GAQW1:SOIC8_SN_MCH"
 			(at 156.21 31.75 0)
 			(hide yes)
 			(show_name no)

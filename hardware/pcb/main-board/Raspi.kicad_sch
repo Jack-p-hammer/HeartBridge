@@ -3025,7 +3025,7 @@
 				)
 			)
 		)
-		(property "Value" ""
+		(property "Value" "MCU Port"
 			(at 41.91 118.364 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4127,7 +4127,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x05_Odd_Even"
+		(property "Value" "MCU Spare Headers"
 			(at 27.94 20.32 0)
 			(show_name no)
 			(do_not_autoplace no)

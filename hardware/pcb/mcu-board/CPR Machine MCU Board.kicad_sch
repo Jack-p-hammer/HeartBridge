@@ -12325,7 +12325,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/UPY-GPHC_X7R_6_3V-TO-250V"
 			(at 99.06 130.81 0)
 			(hide yes)
 			(show_name no)
@@ -12585,7 +12585,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 73.66 203.2 0)
 			(hide yes)
 			(show_name no)
@@ -12688,7 +12688,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://optoelectronics.liteon.com/upload/download/DS22-2000-228/LTST-C191KGKT.PDF"
 			(at 200.66 194.31 0)
 			(hide yes)
 			(show_name no)
@@ -13029,7 +13029,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 132.08 113.03 0)
 			(hide yes)
 			(show_name no)
@@ -13527,7 +13527,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://ckswitches.com/media/1476/pts810.pdf"
 			(at 281.94 52.07 0)
 			(hide yes)
 			(show_name no)
@@ -13788,7 +13788,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.littelfuse.com/assetdocs/tvs-diodes-smaj-datasheet"
+		(property "Datasheet" "https://www.littelfuse.com/assetdocs/tvs-diodes-smaj-datasheet?assetguid=13c2a823-03b8-4d1f-9ddc-9b44670aed9d"
 			(at 77.47 222.25 0)
 			(hide yes)
 			(show_name no)
@@ -13893,7 +13893,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 278.13 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -14392,7 +14392,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 289.56 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -14656,7 +14656,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 312.42 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -14759,7 +14759,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/UPY-GPHC_X7R_6_3V-TO-250V"
 			(at 97.79 196.85 0)
 			(hide yes)
 			(show_name no)
@@ -14940,7 +14940,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/937/Female_Headers.100_DS.pdf"
 			(at 48.26 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -15189,7 +15189,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/UPY-GPHC_X7R_6_3V-TO-250V"
 			(at 121.92 130.81 0)
 			(hide yes)
 			(show_name no)
@@ -15368,7 +15368,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf"
 			(at 100.33 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -15470,7 +15470,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip"
+		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail-pdf/2171790001?display=pdf"
 			(at 35.56 201.93 0)
 			(hide yes)
 			(show_name no)
@@ -15855,7 +15855,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://optoelectronics.liteon.com/upload/download/DS22-2000-228/LTST-C191KGKT.PDF"
 			(at 223.52 194.31 0)
 			(hide yes)
 			(show_name no)
@@ -15958,7 +15958,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://optoelectronics.liteon.com/upload/download/DS22-2000-223/LTST-C191KRKT.PDF"
 			(at 246.38 194.31 0)
 			(hide yes)
 			(show_name no)
@@ -16063,7 +16063,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 252.73 53.34 0)
 			(hide yes)
 			(show_name no)
@@ -16245,7 +16245,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.seielect.com/catalog/SEI-RMCF_RMCP.pdf"
 			(at 223.52 187.96 0)
 			(hide yes)
 			(show_name no)
@@ -16427,7 +16427,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.seielect.com/catalog/SEI-RMCF_RMCP.pdf"
 			(at 200.66 187.96 0)
 			(hide yes)
 			(show_name no)
@@ -16689,7 +16689,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 325.12 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -16790,7 +16790,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 67.31 203.2 0)
 			(hide yes)
 			(show_name no)
@@ -17291,7 +17291,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/UPY-GPHC_X7R_6_3V-TO-250V"
 			(at 170.18 199.39 0)
 			(hide yes)
 			(show_name no)
@@ -17554,7 +17554,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 300.99 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -17657,7 +17657,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.murata.com/en-us/products/productdetail?partno=BLM18PG121SN1D"
 			(at 110.49 125.73 0)
 			(hide yes)
 			(show_name no)
@@ -18077,7 +18077,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.seielect.com/catalog/SEI-RMCF_RMCP.pdf"
 			(at 246.38 187.96 0)
 			(hide yes)
 			(show_name no)
@@ -18373,7 +18373,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-c1f-series.pdf"
 			(at 170.18 186.69 0)
 			(hide yes)
 			(show_name no)
@@ -18904,7 +18904,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/UPY-GPHC_X7R_6_3V-TO-250V"
 			(at 121.92 113.03 0)
 			(hide yes)
 			(show_name no)
@@ -19005,7 +19005,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://content.kemet.com/datasheets/KEM_C1003_C0G_SMD.pdf"
 			(at 130.81 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -19110,7 +19110,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 273.05 63.5 0)
 			(hide yes)
 			(show_name no)
@@ -19293,7 +19293,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.seielect.com/catalog/SEI-RMCF_RMCP.pdf"
 			(at 138.43 68.58 0)
 			(hide yes)
 			(show_name no)
@@ -19476,7 +19476,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 142.24 72.39 0)
 			(hide yes)
 			(show_name no)
@@ -19800,7 +19800,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://product.samsungsem.com/mlcc/CL10A475KO8NNN.do"
 			(at 336.55 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -19905,7 +19905,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 133.35 130.81 0)
 			(hide yes)
 			(show_name no)
@@ -20169,7 +20169,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/KEM_C1002_X7R_SMD"
 			(at 266.7 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -20428,7 +20428,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.ecsxtal.com/store/pdf/ecx-32.pdf"
 			(at 115.57 72.39 0)
 			(hide yes)
 			(show_name no)

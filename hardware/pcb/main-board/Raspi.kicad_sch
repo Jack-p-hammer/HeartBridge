@@ -3757,7 +3757,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Fuse:Fuse_0603_1608Metric"
 			(at 47.752 59.69 90)
 			(hide yes)
 			(show_name no)
@@ -3768,7 +3768,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-c2q-series.pdf"
 			(at 49.53 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -3790,7 +3790,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "5923-C2Q250CT-ND"
 			(at 49.53 59.69 0)
 			(hide yes)
 			(show_name no)

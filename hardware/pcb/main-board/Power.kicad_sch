@@ -10122,7 +10122,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -10149,7 +10149,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 243.586 94.234 90)
 			(hide yes)
 			(show_name no)
@@ -10160,7 +10160,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 243.84 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -10381,6 +10381,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 243.84 95.25 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "541-22.0KHCT-ND"
 			(at 243.84 95.25 90)
 			(hide yes)
 			(show_name no)
@@ -11744,7 +11755,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Fuse:Fuse_1206_3216Metric"
 			(at 243.84 84.328 90)
 			(hide yes)
 			(show_name no)
@@ -11755,7 +11766,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-c1t-series.pdf"
 			(at 243.84 82.55 0)
 			(hide yes)
 			(show_name no)
@@ -11777,7 +11788,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "5923-0685T1500-01CT-ND"
 			(at 243.84 82.55 90)
 			(hide yes)
 			(show_name no)
@@ -13236,7 +13247,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -13263,7 +13274,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 244.094 98.806 90)
 			(hide yes)
 			(show_name no)
@@ -13274,7 +13285,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 243.84 97.79 0)
 			(hide yes)
 			(show_name no)
@@ -13505,6 +13516,17 @@
 				)
 			)
 		)
+		(property "digikey" "541-22.0KHCT-ND"
+			(at 243.84 97.79 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "65aa7852-9823-402b-bbdd-0a2c391f4b0d")
 		)
@@ -13629,7 +13651,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Fuse:Fuse_1206_3216Metric"
 			(at 209.55 44.958 90)
 			(hide yes)
 			(show_name no)
@@ -13640,7 +13662,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-c1t-series.pdf"
 			(at 209.55 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -13662,7 +13684,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "5923-0685T1000-01CT-ND"
 			(at 209.55 43.18 90)
 			(hide yes)
 			(show_name no)
@@ -18220,7 +18242,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -18247,7 +18269,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 199.644 98.806 90)
 			(hide yes)
 			(show_name no)
@@ -18258,7 +18280,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 199.39 97.79 0)
 			(hide yes)
 			(show_name no)
@@ -18479,6 +18501,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 199.39 97.79 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "541-22.0KHCT-ND"
 			(at 199.39 97.79 90)
 			(hide yes)
 			(show_name no)
@@ -25251,7 +25284,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Fuse:Fuse_1206_3216Metric"
 			(at 210.82 24.638 90)
 			(hide yes)
 			(show_name no)
@@ -25262,7 +25295,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-c1t-series.pdf"
 			(at 210.82 22.86 0)
 			(hide yes)
 			(show_name no)
@@ -25284,7 +25317,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "5923-0685T1000-01CT-ND"
 			(at 210.82 22.86 90)
 			(hide yes)
 			(show_name no)
@@ -26035,7 +26068,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Fuse:Fuse_1206_3216Metric"
 			(at 199.39 84.328 90)
 			(hide yes)
 			(show_name no)
@@ -26046,7 +26079,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-c1t-series.pdf"
 			(at 199.39 82.55 0)
 			(hide yes)
 			(show_name no)
@@ -26068,7 +26101,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "5923-0685T1500-01CT-ND"
 			(at 199.39 82.55 90)
 			(hide yes)
 			(show_name no)
@@ -26868,7 +26901,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Fuse:Fuse_1206_3216Metric"
 			(at 36.83 22.098 90)
 			(hide yes)
 			(show_name no)
@@ -26879,7 +26912,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-c1t-series.pdf"
 			(at 36.83 20.32 0)
 			(hide yes)
 			(show_name no)
@@ -26901,7 +26934,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "5923-0685T1000-01CT-ND"
 			(at 36.83 20.32 90)
 			(hide yes)
 			(show_name no)
@@ -27860,7 +27893,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Fuse:Fuse_1206_3216Metric"
 			(at 226.06 39.878 90)
 			(hide yes)
 			(show_name no)
@@ -27871,7 +27904,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.belfuse.com/media/datasheets/products/circuit-protection/ds-cp-c1t-series.pdf"
 			(at 226.06 38.1 0)
 			(hide yes)
 			(show_name no)
@@ -27893,7 +27926,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "5923-0685T1500-01CT-ND"
 			(at 226.06 38.1 90)
 			(hide yes)
 			(show_name no)
@@ -31466,7 +31499,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -31493,7 +31526,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 199.136 94.234 90)
 			(hide yes)
 			(show_name no)
@@ -31504,7 +31537,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 199.39 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -31725,6 +31758,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 199.39 95.25 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "541-22.0KHCT-ND"
 			(at 199.39 95.25 90)
 			(hide yes)
 			(show_name no)

@@ -39,15 +39,15 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 2.0,
-          "height": 4.0,
-          "width": 4.0
+          "drill": 0.6096,
+          "height": 1.8034,
+          "width": 0.9906
         },
-        "silk_line_width": 0.1,
+        "silk_line_width": 0.15,
         "silk_text_italic": false,
         "silk_text_size_h": 1.0,
         "silk_text_size_v": 1.0,
-        "silk_text_thickness": 0.1,
+        "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
           "border_display_style": 2,
@@ -76,52 +76,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        [
-          "extra_footprint|137222336|100839240|5cea6f29-600f-44b2-8578-960d572834b6|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "extra_footprint|158750000|88300000|a10b1fb4-055f-4a48-861a-dbab412fb489|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|116532000|114086000|21f84bf5-383e-48ce-bcde-66a68fa2b90e|00000000-0000-0000-0000-000000000000",
-          "Edited to prevent silkscreen overlap"
-        ],
-        [
-          "lib_footprint_mismatch|116532000|99608000|9868c78a-eb4d-48da-bb74-bc1585f19e3c|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|131711900|88700000|f082c5ab-94d8-4157-b769-f6b14b999975|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|135376067|88700000|f7f370bd-f6a1-4403-a252-e25bce2327c4|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|138974733|88700000|c85dc727-265d-487c-9eed-04438048bee7|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|142575400|88700000|566b4e74-131f-4ceb-8fb7-b0e14c4138a5|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "lib_footprint_mismatch|154800000|107100000|53197291-2cd5-4843-b9b0-f8f00843f2b1|00000000-0000-0000-0000-000000000000",
-          "Changed ID pos"
-        ],
-        [
-          "starved_thermal|148212500|106000000|2e7c7677-4870-4651-8be7-023a069b446b|27724dbf-760a-493f-a7cb-537935f30690|F.Cu",
-          ""
-        ],
-        [
-          "starved_thermal|148212500|108200000|2e7c7677-4870-4651-8be7-023a069b446b|ad38b3aa-4e0f-42f8-828f-792fff080a68|F.Cu",
-          ""
-        ]
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -196,19 +151,19 @@
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.5,
         "min_groove_width": 0.0,
-        "min_hole_clearance": 0.25,
+        "min_hole_clearance": 0.3,
         "min_hole_to_hole": 0.2,
         "min_microvia_diameter": 0.25,
         "min_microvia_drill": 0.15,
         "min_resolved_spokes": 2,
         "min_silk_clearance": 0.0,
-        "min_text_height": 0.8,
-        "min_text_thickness": 0.08,
+        "min_text_height": 1.0,
+        "min_text_thickness": 0.15,
         "min_through_hole_diameter": 0.3,
         "min_track_width": 0.127,
         "min_via_annular_width": 0.2,
         "min_via_diameter": 0.5,
-        "solder_mask_to_copper_clearance": 0.005,
+        "solder_mask_to_copper_clearance": 0.09,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -577,32 +532,13 @@
         "via_diameter": 0.7,
         "via_drill": 0.3,
         "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.2,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
-        "name": "Raspi Power",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 0,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 1.37,
-        "tuning_profile": "",
-        "via_diameter": 2.74,
-        "via_drill": 1.37,
-        "wire_width": 6
       }
     ],
     "meta": {
       "version": 5
     },
-    "net_colors": {},
-    "netclass_assignments": {},
+    "net_colors": null,
+    "netclass_assignments": null,
     "netclass_patterns": []
   },
   "pcbnew": {
@@ -650,7 +586,7 @@
           "group_by": false,
           "label": "Qty",
           "name": "${QUANTITY}",
-          "show": false
+          "show": true
         },
         {
           "group_by": true,
@@ -668,25 +604,25 @@
           "group_by": true,
           "label": "Exclude from BOM",
           "name": "${EXCLUDE_FROM_BOM}",
-          "show": true
+          "show": false
         },
         {
           "group_by": true,
           "label": "Exclude from Board",
           "name": "${EXCLUDE_FROM_BOARD}",
-          "show": true
+          "show": false
         },
         {
           "group_by": true,
           "label": "Footprint",
           "name": "Footprint",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
           "label": "Datasheet",
           "name": "Datasheet",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
@@ -836,13 +772,13 @@
           "group_by": false,
           "label": "Notes",
           "name": "Notes",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
           "label": "gobilda",
           "name": "gobilda",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
@@ -854,7 +790,7 @@
           "group_by": false,
           "label": "DigiKey",
           "name": "DigiKey",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,
@@ -867,7 +803,7 @@
       "group_symbols": true,
       "include_excluded_from_bom": false,
       "name": "",
-      "sort_asc": false,
+      "sort_asc": true,
       "sort_field": "Reference"
     },
     "bus_aliases": {},
@@ -919,7 +855,7 @@
         "uuid": "8991fc77-975f-4978-a089-6b2a5e33f59b"
       }
     ],
-    "used_designators": "#PWR9,#PWR11-12,#PWR19-20,#PWR23-24,#PWR34-38,#PWR55,#PWR62,#PWR68,#PWR77-84,#PWR87-177,C12-34,C48-55,C_IN5,D1-15,F5-6,J2,J12-19,L2,R24-45,U2,U6-10,U12,Y1",
+    "used_designators": "#PWR4,#PWR8-9,#PWR11-12,#PWR17-21,#PWR23-31,#PWR34-38,#PWR52,#PWR55,#PWR62,#PWR68,#PWR77-84,#PWR87-177,#PWR184,D1-15,C12-34,C48-55,J2,J9,J12-29,R24-45,U2,U6-10,U12,Y1,F5-9,L2,C_IN4-8,COUT2-4",
     "variants": []
   },
   "sheets": [

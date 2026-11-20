@@ -821,7 +821,7 @@
       "group_symbols": true,
       "include_excluded_from_bom": false,
       "name": "",
-      "sort_asc": false,
+      "sort_asc": true,
       "sort_field": "Reference"
     },
     "bus_aliases": {},
@@ -873,7 +873,7 @@
         "uuid": "8991fc77-975f-4978-a089-6b2a5e33f59b"
       }
     ],
-    "used_designators": "#PWR9,#PWR11-12,#PWR19-20,#PWR34-38,#PWR52,#PWR55,#PWR62,#PWR68,#PWR77-84,#PWR87-177,D1-15,C12-34,C48-55,J2,J12-19,R24-45,U2,U6-10,U12,Y1,F5-9,L2,C_IN4-8,COUT2-4",
+    "used_designators": "#PWR9,#PWR11-12,#PWR19-20,#PWR34-38,#PWR52,#PWR55,#PWR62,#PWR68,#PWR77-84,#PWR87-177,#PWR184,D1-15,C12-34,C48-55,J2,J12-19,R24-45,U2,U6-10,U12,Y1,F5-9,L2,C_IN4-8,COUT2-4",
     "variants": []
   },
   "sheets": [

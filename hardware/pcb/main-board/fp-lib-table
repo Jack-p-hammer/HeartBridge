@@ -11,4 +11,8 @@
 	(lib (name "MAX42406AFOB_") (type "KiCad") (uri "${KIPRJMOD}/Part Library/MAX42406AFOB_/KiCADv6/footprints.pretty") (options "") (descr ""))
 	(lib (name "DMT6007LFG-7") (type "KiCad") (uri "${KIPRJMOD}/Part Library/DMT6007LFG_7/KiCADv6/footprints.pretty") (options "") (descr ""))
 	(lib (name "ul_0630CDMCCDS-3R3MC") (type "KiCad") (uri "${KIPRJMOD}/Part Library/ul_0630CDMCCDS-3R3MC/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "Molex USB-C") (type "KiCad") (uri "${KIPRJMOD}/Part Library/Molex USB-C/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "2-X1SON") (type "KiCad") (uri "${KIPRJMOD}/Part Library/2-X1SON/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "LSM6DSV16XTR") (type "KiCad") (uri "${KIPRJMOD}/Part Library/LSM6DSV16XTR/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "LM74700MDDFREPCT-ND") (type "KiCad") (uri "${KIPRJMOD}/Part Library/LM74700MDDFREP/KiCADv6/footprints.pretty") (options "") (descr ""))
 )

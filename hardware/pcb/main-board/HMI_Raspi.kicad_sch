@@ -3048,7 +3048,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -3646,7 +3646,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -3671,7 +3671,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 76.454 40.894 90)
 			(hide yes)
 			(show_name no)
@@ -3682,7 +3682,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 76.2 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -3903,6 +3903,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 76.2 41.91 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "541-100HCT-ND"
 			(at 76.2 41.91 90)
 			(hide yes)
 			(show_name no)
@@ -5563,7 +5574,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -5588,7 +5599,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 21.336 44.704 90)
 			(hide yes)
 			(show_name no)
@@ -5599,7 +5610,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1773204&DocType=Data%20Sheet&DocLang=English&DocFormat=pdf&PartCntxt=4-1622826-1"
 			(at 20.32 44.45 0)
 			(hide yes)
 			(show_name no)
@@ -5820,6 +5831,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 20.32 44.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "A121523CT-ND"
 			(at 20.32 44.45 0)
 			(hide yes)
 			(show_name no)
@@ -6703,7 +6725,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -6728,7 +6750,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 40.386 24.384 90)
 			(hide yes)
 			(show_name no)
@@ -6739,7 +6761,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
 			(at 39.37 24.13 0)
 			(hide yes)
 			(show_name no)
@@ -6761,7 +6783,7 @@
 				)
 			)
 		)
-		(property "digikey" "RMCF1206ZT0R00CT-ND"
+		(property "digikey" "311-0.0GRCT-ND"
 			(at 39.37 24.13 90)
 			(hide yes)
 			(show_name no)
@@ -8801,7 +8823,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -8826,7 +8848,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 26.924 38.354 90)
 			(hide yes)
 			(show_name no)
@@ -8837,7 +8859,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 26.67 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -9058,6 +9080,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 26.67 39.37 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "541-100HCT-ND"
 			(at 26.67 39.37 90)
 			(hide yes)
 			(show_name no)
@@ -9935,7 +9968,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -9960,7 +9993,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 76.454 85.344 90)
 			(hide yes)
 			(show_name no)
@@ -9971,7 +10004,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
 			(at 76.2 86.36 0)
 			(hide yes)
 			(show_name no)
@@ -10192,6 +10225,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 76.2 86.36 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "541-100HCT-ND"
 			(at 76.2 86.36 90)
 			(hide yes)
 			(show_name no)
@@ -10223,7 +10267,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -10248,7 +10292,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 72.136 45.974 90)
 			(hide yes)
 			(show_name no)
@@ -10259,7 +10303,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1773204&DocType=Data%20Sheet&DocLang=English&DocFormat=pdf&PartCntxt=4-1622826-1"
 			(at 71.12 45.72 0)
 			(hide yes)
 			(show_name no)
@@ -10480,6 +10524,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 71.12 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "A121523CT-ND"
 			(at 71.12 45.72 0)
 			(hide yes)
 			(show_name no)
@@ -12171,7 +12226,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
@@ -12196,7 +12251,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 70.866 90.424 90)
 			(hide yes)
 			(show_name no)
@@ -12207,7 +12262,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1773204&DocType=Data%20Sheet&DocLang=English&DocFormat=pdf&PartCntxt=4-1622826-1"
 			(at 69.85 90.17 0)
 			(hide yes)
 			(show_name no)
@@ -12438,6 +12493,17 @@
 				)
 			)
 		)
+		(property "digikey" "A121523CT-ND"
+			(at 69.85 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "d71a370a-6a0c-42e4-85a2-d58e724ebd45")
 		)
@@ -12459,7 +12525,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)

@@ -1,0 +1,10 @@
+﻿"Symbol";"Value";"Unit";
+"TraceParts.PartNumber";"34-25082025-113527";"";
+"REFERENCE";"2171790001";"";
+"TraceParts.PartTitle";"USB";"";
+"TraceParts.InstanceId";"34-25082025-1135274F4G25DKBYKZOX1PC4S27YSVG";"";
+"SUPPLIER";"Molex";"";
+"DESIGN";"Universal Serial Bus (USB) Shielded I/O Receptacle, Type C, Right-Angle, Top Mount, Surface Mount, Single Row, 16 Circuits, Gold (Au) Plating";"";
+"TRACEPARTS";"TRACEPARTS";"";
+"TraceParts.PartLanguage";"en";"";
+"TraceParts.PartVersion";"1.0.4";"";

@@ -405,189 +405,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector:Conn_01x02_Socket"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "J"
-				(at 0 2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Conn_01x02_Socket"
-				(at 0 -5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Generic connector, single row, 01x02, script generated"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_locked" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "Conn_01x02_Socket_1_1"
-				(polyline
-					(pts
-						(xy -1.27 0) (xy -0.508 0)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 -2.54) (xy -0.508 -2.54)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 -0.508)
-					(mid -0.5058 0)
-					(end 0 0.508)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 -3.048)
-					(mid -0.5058 -2.54)
-					(end 0 -2.032)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 3.81)
-					(name "Pin_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -2.54 0)
-					(length 3.81)
-					(name "Pin_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Connector:Conn_01x04_Pin"
 			(pin_names
 				(offset 1.016)
@@ -841,6 +658,441 @@
 						)
 					)
 					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector:Conn_01x08_Socket"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 10.16 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x08_Socket"
+				(at 0 -12.7 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x08, script generated"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Conn_01x08_Socket_1_1"
+				(polyline
+					(pts
+						(xy -1.27 7.62) (xy -0.508 7.62)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 5.08) (xy -0.508 5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 2.54) (xy -0.508 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 0) (xy -0.508 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -2.54) (xy -0.508 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -5.08) (xy -0.508 -5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -7.62) (xy -0.508 -7.62)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -10.16) (xy -0.508 -10.16)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 7.112)
+					(mid -0.5058 7.62)
+					(end 0 8.128)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 4.572)
+					(mid -0.5058 5.08)
+					(end 0 5.588)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 2.032)
+					(mid -0.5058 2.54)
+					(end 0 3.048)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -0.508)
+					(mid -0.5058 0)
+					(end 0 0.508)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -3.048)
+					(mid -0.5058 -2.54)
+					(end 0 -2.032)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -5.588)
+					(mid -0.5058 -5.08)
+					(end 0 -4.572)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -8.128)
+					(mid -0.5058 -7.62)
+					(end 0 -7.112)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -10.668)
+					(mid -0.5058 -10.16)
+					(end 0 -9.652)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 7.62 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 5.08 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 2.54 0)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -5.08 0)
+					(length 3.81)
+					(name "Pin_6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -7.62 0)
+					(length 3.81)
+					(name "Pin_7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -10.16 0)
+					(length 3.81)
+					(name "Pin_8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2484,7 +2736,7 @@
 	)
 	(rectangle
 		(start 14.605 15.24)
-		(end 90.932 84.455)
+		(end 90.932 50.8)
 		(stroke
 			(width 0)
 			(type default)
@@ -2496,7 +2748,7 @@
 	)
 	(rectangle
 		(start 17.78 19.558)
-		(end 58.166 78.232)
+		(end 58.166 48.895)
 		(stroke
 			(width 0)
 			(type default)
@@ -2507,8 +2759,8 @@
 		(uuid "5804975b-e707-41d1-9775-67958e40449b")
 	)
 	(rectangle
-		(start 14.605 86.995)
-		(end 103.124 121.92)
+		(start 14.605 51.435)
+		(end 103.124 86.36)
 		(stroke
 			(width 0)
 			(type default)
@@ -2520,7 +2772,7 @@
 	)
 	(rectangle
 		(start 61.722 19.558)
-		(end 86.868 78.232)
+		(end 86.868 48.895)
 		(stroke
 			(width 0)
 			(type default)
@@ -2544,7 +2796,7 @@
 	)
 	(text "I2C Port"
 		(exclude_from_sim no)
-		(at 19.558 89.154 0)
+		(at 19.558 53.594 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2599,13 +2851,13 @@
 		(uuid "0925ef40-b031-4487-8d60-28d4eb0358eb")
 	)
 	(junction
-		(at 45.72 100.33)
+		(at 45.72 64.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1904d10b-741c-4ca1-8db3-dff7c84ea3c7")
 	)
 	(junction
-		(at 62.23 100.33)
+		(at 62.23 64.77)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2eb82f89-677d-4675-9200-9030027bc8ee")
@@ -2617,13 +2869,7 @@
 		(uuid "41ba4965-63c7-4fd0-a5fd-a9ee35ca43e0")
 	)
 	(junction
-		(at 26.67 92.71)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "48961d70-c940-4c36-a488-86d1c5aba992")
-	)
-	(junction
-		(at 45.72 102.87)
+		(at 45.72 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "49d0cd2b-d1a9-4927-b26d-378c0bfa7875")
@@ -2641,22 +2887,22 @@
 		(uuid "6006154e-f40d-4c0e-b986-c09992b7f65e")
 	)
 	(junction
-		(at 85.09 95.25)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8e5af389-5469-46e4-a3dd-f5a3bc331db5")
-	)
-	(junction
-		(at 66.04 102.87)
+		(at 66.04 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a20e8134-ecfb-4c0a-a471-dd92c1f3110f")
 	)
 	(junction
-		(at 26.67 105.41)
+		(at 26.67 57.15)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a98f6bde-025e-4397-bb04-0f07d0810ad3")
+		(uuid "a8a4a669-7c72-43c2-b02a-d3d601e9d702")
+	)
+	(junction
+		(at 82.55 62.23)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b16aff2e-16c9-49ea-8dde-5e207ec3b344")
 	)
 	(junction
 		(at 129.54 30.48)
@@ -2669,6 +2915,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e2b39b0f-9a61-4dd6-9ba5-4624d8184a6e")
+	)
+	(junction
+		(at 26.67 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e8f78632-7bb4-4ddc-9acf-2fd18961bf76")
 	)
 	(no_connect
 		(at 195.58 40.64)
@@ -2704,7 +2956,7 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 95.25) (xy 85.09 95.25)
+			(xy 87.63 59.69) (xy 85.09 59.69)
 		)
 		(stroke
 			(width 0)
@@ -2724,6 +2976,16 @@
 	)
 	(wire
 		(pts
+			(xy 26.67 57.15) (xy 39.37 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0658edf2-01a8-4359-84d4-67bcc5daba3d")
+	)
+	(wire
+		(pts
 			(xy 127 78.74) (xy 129.54 78.74)
 		)
 		(stroke
@@ -2734,17 +2996,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 95.25) (xy 85.09 107.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "14760e23-b253-431e-a94b-1666da869bfc")
-	)
-	(wire
-		(pts
-			(xy 62.23 100.33) (xy 62.23 107.95)
+			(xy 62.23 64.77) (xy 62.23 72.39)
 		)
 		(stroke
 			(width 0)
@@ -2754,7 +3006,7 @@
 	)
 	(wire
 		(pts
-			(xy 26.67 105.41) (xy 25.4 105.41)
+			(xy 25.4 69.85) (xy 26.67 69.85)
 		)
 		(stroke
 			(width 0)
@@ -2774,6 +3026,16 @@
 	)
 	(wire
 		(pts
+			(xy 82.55 62.23) (xy 82.55 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "24455479-8b71-48a8-88bd-8d137656900a")
+	)
+	(wire
+		(pts
 			(xy 115.57 73.66) (xy 116.84 73.66)
 		)
 		(stroke
@@ -2781,16 +3043,6 @@
 			(type default)
 		)
 		(uuid "27c315a2-1013-46a4-b118-6285d0f5587a")
-	)
-	(wire
-		(pts
-			(xy 39.37 105.41) (xy 26.67 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "28ef5d65-ba5d-4b41-b00a-9a57074278fe")
 	)
 	(wire
 		(pts
@@ -2804,7 +3056,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 100.33) (xy 45.72 100.33)
+			(xy 39.37 64.77) (xy 45.72 64.77)
 		)
 		(stroke
 			(width 0)
@@ -2814,7 +3066,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 95.25) (xy 80.01 97.79)
+			(xy 80.01 59.69) (xy 80.01 62.23)
 		)
 		(stroke
 			(width 0)
@@ -2834,7 +3086,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 100.33) (xy 62.23 100.33)
+			(xy 45.72 64.77) (xy 52.07 64.77)
 		)
 		(stroke
 			(width 0)
@@ -2844,23 +3096,13 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 92.71) (xy 39.37 100.33)
+			(xy 39.37 57.15) (xy 39.37 64.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "508d061a-2c91-4575-abea-5a85b074fc4d")
-	)
-	(wire
-		(pts
-			(xy 26.67 92.71) (xy 39.37 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "56c30423-6d68-4252-9b95-59be47b0a32a")
 	)
 	(wire
 		(pts
@@ -2874,7 +3116,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 100.33) (xy 69.85 100.33)
+			(xy 59.69 64.77) (xy 87.63 64.77)
 		)
 		(stroke
 			(width 0)
@@ -2904,7 +3146,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 92.71) (xy 26.67 92.71)
+			(xy 25.4 57.15) (xy 26.67 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2944,7 +3186,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 102.87) (xy 39.37 105.41)
+			(xy 39.37 67.31) (xy 39.37 69.85)
 		)
 		(stroke
 			(width 0)
@@ -2954,7 +3196,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 102.87) (xy 87.63 102.87)
+			(xy 59.69 67.31) (xy 87.63 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2964,17 +3206,7 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 102.87) (xy 69.85 102.87)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9d1d303e-ce42-4534-8682-6c738a87bac5")
-	)
-	(wire
-		(pts
-			(xy 39.37 102.87) (xy 45.72 102.87)
+			(xy 39.37 67.31) (xy 45.72 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2984,7 +3216,27 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 102.87) (xy 66.04 102.87)
+			(xy 26.67 69.85) (xy 39.37 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a67cde3a-8ac7-4944-b1ba-9b6dd36f473a")
+	)
+	(wire
+		(pts
+			(xy 82.55 62.23) (xy 87.63 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a8f680a0-eace-4c1d-b6dd-2913facc80de")
+	)
+	(wire
+		(pts
+			(xy 45.72 67.31) (xy 52.07 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3024,7 +3276,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 97.79) (xy 87.63 97.79)
+			(xy 80.01 62.23) (xy 82.55 62.23)
 		)
 		(stroke
 			(width 0)
@@ -3034,23 +3286,13 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 102.87) (xy 66.04 107.95)
+			(xy 66.04 67.31) (xy 66.04 72.39)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "db8e17cc-6362-446e-a191-a1f864a6d863")
-	)
-	(wire
-		(pts
-			(xy 77.47 100.33) (xy 87.63 100.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "df13071e-1544-4e66-9ab3-d6723284baf1")
 	)
 	(wire
 		(pts
@@ -3062,6 +3304,50 @@
 		)
 		(uuid "e57bdf89-cff1-4671-8e4d-a9c8177021d7")
 	)
+	(hierarchical_label "Hip 2 1"
+		(shape output)
+		(at 27.94 39.37 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "298f29c9-b182-4499-93d7-2a6f2a38db80")
+	)
+	(hierarchical_label "Hip 1 2"
+		(shape output)
+		(at 27.94 34.29 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "55ad603d-aa6f-4d4d-9f84-1d35ba54c793")
+	)
+	(hierarchical_label "Pad 4"
+		(shape output)
+		(at 72.39 44.45 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "56b4d0a1-779a-434a-a5bf-04604bd542d7")
+	)
+	(hierarchical_label "Knee 2"
+		(shape output)
+		(at 44.45 34.29 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "636d093b-bcd1-4b72-9b21-bfb9cf85090d")
+	)
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
 		(at 195.58 63.5 0)
@@ -3072,6 +3358,83 @@
 			(justify left)
 		)
 		(uuid "65a3cd4e-a6c4-4ec0-bec8-ddf086ed5e26")
+	)
+	(hierarchical_label "Pad 2"
+		(shape output)
+		(at 72.39 34.29 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "663fd1b1-0040-400b-b891-34d08f51075b")
+	)
+	(hierarchical_label "Hip 1 1"
+		(shape output)
+		(at 27.94 29.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6ea996fb-4e9c-45f4-b743-3f030275c8e0")
+	)
+	(hierarchical_label "Hip 2 2"
+		(shape output)
+		(at 27.94 44.45 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "71d448f3-4f0a-4737-8a24-f14682fb9e28")
+	)
+	(hierarchical_label "Pad 1"
+		(shape output)
+		(at 72.39 29.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "72ff3674-242f-46c7-9656-646d3965dedc")
+	)
+	(hierarchical_label "Knee 3"
+		(shape output)
+		(at 44.45 39.37 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "75a18a5e-3d90-4e5e-93b8-e698cff7b9d7")
+	)
+	(hierarchical_label "Knee 4"
+		(shape output)
+		(at 44.45 44.45 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7917e3f7-c2ec-4100-9191-a3fa77e2fd01")
+	)
+	(hierarchical_label "Pad 3"
+		(shape output)
+		(at 72.39 39.37 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "823527b9-7871-432a-a72a-6c3651ccc6f0")
 	)
 	(hierarchical_label "I2C_SCL"
 		(shape input)
@@ -3086,7 +3449,7 @@
 	)
 	(hierarchical_label "I2C_SCL"
 		(shape input)
-		(at 25.4 105.41 180)
+		(at 25.4 57.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3106,9 +3469,20 @@
 		)
 		(uuid "afcbfab3-0e68-4821-aac9-a6dcab7a6dca")
 	)
+	(hierarchical_label "Knee 1"
+		(shape output)
+		(at 44.45 29.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b32ee9a9-9ab7-4192-8d7f-e89a8ddc7266")
+	)
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
-		(at 25.4 92.71 180)
+		(at 25.4 69.85 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3130,7 +3504,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x04_Pin")
-		(at 92.71 97.79 0)
+		(at 92.71 62.23 0)
 		(mirror y)
 		(unit 1)
 		(body_style 1)
@@ -3142,7 +3516,7 @@
 		(fields_autoplaced yes)
 		(uuid "0721c988-55a0-4bab-9a2c-2ff0fecb5035")
 		(property "Reference" "J6"
-			(at 93.98 97.7899 0)
+			(at 93.98 62.2299 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3153,7 +3527,7 @@
 			)
 		)
 		(property "Value" "I2C Port"
-			(at 93.98 100.3299 0)
+			(at 93.98 64.7699 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3164,7 +3538,7 @@
 			)
 		)
 		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-04P_1x04_P5.00mm"
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3175,7 +3549,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1308389_EUROSTYLE_TERMINAL_BLOCKS&DocType=CS&DocLang=English"
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3186,7 +3560,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated"
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3197,7 +3571,7 @@
 			)
 		)
 		(property "Notes" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3208,7 +3582,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3219,7 +3593,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3230,7 +3604,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3241,7 +3615,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3252,7 +3626,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3263,7 +3637,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3274,7 +3648,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3285,7 +3659,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3296,7 +3670,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3307,7 +3681,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3318,7 +3692,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3329,7 +3703,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3340,7 +3714,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3351,7 +3725,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3362,7 +3736,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3373,7 +3747,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3384,7 +3758,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3395,7 +3769,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3406,7 +3780,7 @@
 			)
 		)
 		(property "digikey" "A98078-ND"
-			(at 92.71 97.79 0)
+			(at 92.71 62.23 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3517,8 +3891,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 22.86 69.85 180)
+		(lib_id "Connector:Conn_01x08_Socket")
+		(at 22.86 39.37 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3529,7 +3903,7 @@
 		(fields_autoplaced yes)
 		(uuid "0a13f920-9c86-4cd2-9728-345bb0e344b7")
 		(property "Reference" "J21"
-			(at 23.495 62.23 0)
+			(at 23.495 24.13 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3538,8 +3912,8 @@
 				)
 			)
 		)
-		(property "Value" "Hip 1 2"
-			(at 23.495 64.77 0)
+		(property "Value" "Hip"
+			(at 23.495 26.67 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3548,8 +3922,8 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 22.86 69.85 0)
+		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-08P_1x08_P5.00mm"
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3560,7 +3934,7 @@
 			)
 		)
 		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3570,8 +3944,8 @@
 				)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 22.86 69.85 0)
+		(property "Description" "Generic connector, single row, 01x08, script generated"
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3582,7 +3956,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3593,7 +3967,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3604,7 +3978,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3615,7 +3989,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3626,7 +4000,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3637,7 +4011,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3648,7 +4022,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3659,7 +4033,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3670,7 +4044,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3681,7 +4055,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3692,7 +4066,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3703,7 +4077,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3714,7 +4088,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3725,7 +4099,7 @@
 			)
 		)
 		(property "digikey" "277-1667-ND"
-			(at 22.86 69.85 0)
+			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3741,6 +4115,24 @@
 		(pin "2"
 			(uuid "2d50d810-a9fb-4e6c-a1f2-d43a9f124e18")
 		)
+		(pin "3"
+			(uuid "0e0f1221-70ae-436a-9605-e7295391fa2d")
+		)
+		(pin "4"
+			(uuid "c8467fc8-7dc4-4e20-b245-3f6c3845b6e3")
+		)
+		(pin "5"
+			(uuid "94ded590-6e2e-4e98-bcfe-5cfbe17d4143")
+		)
+		(pin "6"
+			(uuid "ebc42ba9-96bd-4b41-89e5-0765630ba89a")
+		)
+		(pin "7"
+			(uuid "0b578218-01dc-4be9-9c8b-2b0aed73c381")
+		)
+		(pin "8"
+			(uuid "ba7ea309-8041-4f07-9c6d-5a526bb7d1da")
+		)
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
@@ -3752,7 +4144,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 66.04 115.57 0)
+		(at 66.04 80.01 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3763,7 +4155,7 @@
 		(fields_autoplaced yes)
 		(uuid "1a3518bf-68b4-40e2-9751-463b7a7fddbb")
 		(property "Reference" "#PWR080"
-			(at 66.04 121.92 0)
+			(at 66.04 86.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3774,7 +4166,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 66.04 120.65 0)
+			(at 66.04 85.09 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3784,7 +4176,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 66.04 115.57 0)
+			(at 66.04 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3795,7 +4187,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 66.04 115.57 0)
+			(at 66.04 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3806,7 +4198,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 66.04 115.57 0)
+			(at 66.04 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3830,7 +4222,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 45.72 110.49 0)
+		(at 45.72 74.93 0)
 		(mirror x)
 		(unit 1)
 		(body_style 1)
@@ -3841,7 +4233,7 @@
 		(dnp no)
 		(uuid "2160fb9a-faa1-40a5-8dd9-3fe9270fc3ef")
 		(property "Reference" "#PWR068"
-			(at 45.72 106.68 0)
+			(at 45.72 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3852,7 +4244,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 45.72 115.57 0)
+			(at 45.72 80.01 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3862,7 +4254,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 45.72 110.49 0)
+			(at 45.72 74.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3873,7 +4265,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 45.72 110.49 0)
+			(at 45.72 74.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3884,7 +4276,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 45.72 110.49 0)
+			(at 45.72 74.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4549,7 +4941,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 45.72 92.71 0)
+		(at 45.72 57.15 0)
 		(mirror y)
 		(unit 1)
 		(body_style 1)
@@ -4560,7 +4952,7 @@
 		(dnp no)
 		(uuid "2672f764-390e-432d-b9f4-c457d9a21805")
 		(property "Reference" "#PWR0153"
-			(at 45.72 96.52 0)
+			(at 45.72 60.96 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4571,7 +4963,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 45.466 89.154 0)
+			(at 45.466 53.594 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4581,7 +4973,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 45.72 92.71 0)
+			(at 45.72 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4592,7 +4984,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 45.72 92.71 0)
+			(at 45.72 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4603,7 +4995,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 45.72 92.71 0)
+			(at 45.72 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4996,7 +5388,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 46.99 44.45 0)
+		(at 44.45 36.83 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5007,7 +5399,7 @@
 		(fields_autoplaced yes)
 		(uuid "295896ef-33da-4df2-b9ec-567729598580")
 		(property "Reference" "#PWR025"
-			(at 46.99 50.8 0)
+			(at 50.8 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5018,17 +5410,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 46.99 49.53 0)
+			(at 48.26 36.8299 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 46.99 44.45 0)
+			(at 44.45 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5039,7 +5432,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 46.99 44.45 0)
+			(at 44.45 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5050,7 +5443,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 46.99 44.45 0)
+			(at 44.45 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5153,7 +5546,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 45.72 106.68 0)
+		(at 45.72 71.12 0)
 		(mirror x)
 		(unit 1)
 		(body_style 1)
@@ -5164,7 +5557,7 @@
 		(dnp no)
 		(uuid "406c338a-7beb-4760-9428-2446c4ab96a5")
 		(property "Reference" "R45"
-			(at 43.434 106.426 90)
+			(at 43.434 70.866 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5174,7 +5567,7 @@
 			)
 		)
 		(property "Value" "2.2k"
-			(at 40.894 106.426 90)
+			(at 40.894 70.866 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5184,7 +5577,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 46.736 106.426 90)
+			(at 46.736 70.866 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5195,7 +5588,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 45.72 106.68 0)
+			(at 45.72 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5206,7 +5599,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 45.72 106.68 0)
+			(at 45.72 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5217,7 +5610,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5228,7 +5621,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5239,7 +5632,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5250,7 +5643,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5261,7 +5654,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5272,7 +5665,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5283,7 +5676,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5294,7 +5687,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5305,7 +5698,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5316,7 +5709,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5327,7 +5720,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5338,7 +5731,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5349,7 +5742,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5360,7 +5753,7 @@
 			)
 		)
 		(property "digikey" "311-2.2KGRCT-ND"
-			(at 45.72 106.68 90)
+			(at 45.72 71.12 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5387,7 +5780,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 46.99 69.85 0)
+		(at 44.45 46.99 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5398,7 +5791,7 @@
 		(fields_autoplaced yes)
 		(uuid "48a1a3c0-68db-49c6-84b2-4dc6ba2768db")
 		(property "Reference" "#PWR027"
-			(at 46.99 76.2 0)
+			(at 50.8 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5409,17 +5802,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 46.99 74.93 0)
+			(at 48.26 46.9899 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 46.99 69.85 0)
+			(at 44.45 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5430,7 +5824,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 46.99 69.85 0)
+			(at 44.45 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5441,7 +5835,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 46.99 69.85 0)
+			(at 44.45 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5464,242 +5858,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 41.91 69.85 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "48fa1511-1016-4253-9a5b-0a4a69bdb8f4")
-		(property "Reference" "J25"
-			(at 42.545 62.23 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Knee 4"
-			(at 42.545 64.77 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "CREATOR" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Check_prices" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DUPLICATE" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey_Part_Number" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MF" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MP" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Package" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "VERIFIER" ""
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "277-1667-ND"
-			(at 41.91 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "cd5645a5-f9a5-4837-8625-a0f204ee36f9")
-		)
-		(pin "2"
-			(uuid "a61cc48b-14e5-4b53-92dc-ca03d2fc0949")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
-					(reference "J25")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_US")
-		(at 73.66 102.87 270)
+		(at 55.88 67.31 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5709,7 +5869,7 @@
 		(dnp no)
 		(uuid "4b00d9fa-fb57-4fc0-808f-438395871ea9")
 		(property "Reference" "R25"
-			(at 73.406 105.41 90)
+			(at 55.626 69.85 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5719,7 +5879,7 @@
 			)
 		)
 		(property "Value" "33 Ohm"
-			(at 73.406 107.95 90)
+			(at 55.626 72.39 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5729,7 +5889,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 73.406 103.886 90)
+			(at 55.626 68.326 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5740,7 +5900,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.vishay.com/docs/28773/crcwce3.pdf"
-			(at 73.66 102.87 0)
+			(at 55.88 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5751,7 +5911,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 73.66 102.87 0)
+			(at 55.88 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5762,7 +5922,7 @@
 			)
 		)
 		(property "Notes" ""
-			(at 73.66 102.87 0)
+			(at 55.88 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5773,7 +5933,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 73.66 102.87 0)
+			(at 55.88 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5784,7 +5944,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 73.66 102.87 0)
+			(at 55.88 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5795,7 +5955,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 73.66 102.87 0)
+			(at 55.88 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5806,7 +5966,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 73.66 102.87 0)
+			(at 55.88 67.31 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5816,7 +5976,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 73.66 102.87 0)
+			(at 55.88 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5827,7 +5987,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5838,7 +5998,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5849,7 +6009,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5860,7 +6020,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5871,7 +6031,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5882,7 +6042,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5893,7 +6053,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5904,7 +6064,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5915,7 +6075,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5926,7 +6086,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5937,7 +6097,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5948,7 +6108,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5959,7 +6119,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5970,7 +6130,7 @@
 			)
 		)
 		(property "digikey" "541-3988-1-ND"
-			(at 73.66 102.87 90)
+			(at 55.88 67.31 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5996,242 +6156,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 41.91 31.75 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4def0a67-69cb-4dbb-8372-30487214fb69")
-		(property "Reference" "J22"
-			(at 42.545 24.13 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Knee 1"
-			(at 42.545 26.67 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "CREATOR" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Check_prices" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DUPLICATE" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey_Part_Number" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MF" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MP" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Package" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "VERIFIER" ""
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "277-1667-ND"
-			(at 41.91 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "29f7c088-0ac8-4359-846c-c94b7fb48a1a")
-		)
-		(pin "2"
-			(uuid "f11b8604-0390-4825-bebe-c576c3eccf04")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
-					(reference "J22")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
-		(at 80.01 95.25 180)
+		(at 85.09 59.69 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6242,7 +6168,7 @@
 		(fields_autoplaced yes)
 		(uuid "4e51d078-fbdb-4119-929f-1b8894fdc616")
 		(property "Reference" "#PWR033"
-			(at 80.01 88.9 0)
+			(at 85.09 53.34 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6253,7 +6179,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 80.01 90.17 0)
+			(at 85.09 54.61 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6263,7 +6189,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 80.01 95.25 0)
+			(at 85.09 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6274,7 +6200,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 80.01 95.25 0)
+			(at 85.09 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6285,7 +6211,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 80.01 95.25 0)
+			(at 85.09 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6309,7 +6235,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 46.99 31.75 0)
+		(at 44.45 31.75 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6320,7 +6246,7 @@
 		(fields_autoplaced yes)
 		(uuid "517a6b36-9c31-4d3b-a3d6-f945b3cb3b42")
 		(property "Reference" "#PWR024"
-			(at 46.99 38.1 0)
+			(at 50.8 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6331,17 +6257,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 46.99 36.83 0)
+			(at 48.26 31.7499 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 46.99 31.75 0)
+			(at 44.45 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6352,7 +6279,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 46.99 31.75 0)
+			(at 44.45 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6363,7 +6290,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 46.99 31.75 0)
+			(at 44.45 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6387,7 +6314,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 72.39 44.45 0)
+		(at 72.39 36.83 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6398,7 +6325,7 @@
 		(fields_autoplaced yes)
 		(uuid "554e328f-eaa3-4153-962d-6afb8a7575c4")
 		(property "Reference" "#PWR029"
-			(at 72.39 50.8 0)
+			(at 78.74 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6409,17 +6336,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 72.39 49.53 0)
+			(at 76.2 36.8299 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 72.39 44.45 0)
+			(at 72.39 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6430,7 +6358,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 72.39 44.45 0)
+			(at 72.39 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6441,7 +6369,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 72.39 44.45 0)
+			(at 72.39 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6465,7 +6393,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 27.94 69.85 0)
+		(at 27.94 46.99 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6476,7 +6404,7 @@
 		(fields_autoplaced yes)
 		(uuid "56e45389-bbf3-4804-9f3f-abf0d2f71da3")
 		(property "Reference" "#PWR023"
-			(at 27.94 76.2 0)
+			(at 34.29 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6487,17 +6415,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 27.94 74.93 0)
+			(at 31.75 46.9899 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 27.94 69.85 0)
+			(at 27.94 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6508,7 +6437,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 27.94 69.85 0)
+			(at 27.94 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6519,7 +6448,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 27.94 69.85 0)
+			(at 27.94 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6622,7 +6551,7 @@
 	)
 	(symbol
 		(lib_id "Diode:PTVS5V0Z1USK")
-		(at 66.04 111.76 270)
+		(at 66.04 76.2 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -6632,7 +6561,7 @@
 		(dnp no)
 		(uuid "5c4cb879-e015-46d8-9601-abbc02bfda24")
 		(property "Reference" "D3"
-			(at 68.072 111.252 90)
+			(at 68.072 75.692 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6643,7 +6572,7 @@
 			)
 		)
 		(property "Value" "ESD351DPYR"
-			(at 68.072 113.284 90)
+			(at 68.072 77.724 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -6654,7 +6583,7 @@
 			)
 		)
 		(property "Footprint" "2-X1SON:DPY2_TEX"
-			(at 61.595 111.76 0)
+			(at 61.595 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6665,7 +6594,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/esd351.pdf?HQS=dis-dk-null-digikeymode-dsf-pf-null-wwe&ts=1791812746519&ref_url=https%253A%252F%252Fwww.ti.com%252Fgeneral%252Fdocs%252Fsuppproductinfo.tsp%253FdistId%253D10%2526gotoUrl%253Dhttps%253A%252F%252Fwww.ti.com%252Flit%252Fgpn%252Fesd351"
-			(at 66.04 111.76 0)
+			(at 66.04 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6676,7 +6605,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 66.04 111.76 0)
+			(at 66.04 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6687,7 +6616,7 @@
 			)
 		)
 		(property "digikey" "296-51109-1-ND"
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6698,7 +6627,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6709,7 +6638,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6720,7 +6649,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6731,7 +6660,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6742,7 +6671,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6753,7 +6682,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6764,7 +6693,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6775,7 +6704,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6786,7 +6715,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6797,7 +6726,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6808,7 +6737,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6819,7 +6748,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6830,7 +6759,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 66.04 111.76 90)
+			(at 66.04 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7129,7 +7058,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 85.09 115.57 0)
+		(at 82.55 80.01 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7140,7 +7069,7 @@
 		(fields_autoplaced yes)
 		(uuid "637747c2-65fc-4a92-93d1-eb8e5dfe6fe8")
 		(property "Reference" "#PWR082"
-			(at 85.09 121.92 0)
+			(at 82.55 86.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7151,7 +7080,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 85.09 120.65 0)
+			(at 82.55 85.09 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7161,7 +7090,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 85.09 115.57 0)
+			(at 82.55 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7172,7 +7101,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 85.09 115.57 0)
+			(at 82.55 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7183,7 +7112,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 85.09 115.57 0)
+			(at 82.55 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7653,240 +7582,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 22.86 31.75 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6b1a9ac1-4eda-4877-80dc-534fa1013b3c")
-		(property "Reference" "J2"
-			(at 23.495 24.13 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Hip 1 1"
-			(at 23.495 26.67 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "CREATOR" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Check_prices" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DUPLICATE" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey_Part_Number" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MF" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MP" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Package" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "VERIFIER" ""
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "277-1667-ND"
-			(at 22.86 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "00f46db9-6e50-4aa5-b74f-9634f71e112b")
-		)
-		(pin "2"
-			(uuid "1ed49318-3c8d-423f-ad7f-4f56afc65847")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
-					(reference "J2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 127 78.74 270)
 		(unit 1)
@@ -8046,7 +7741,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 46.99 57.15 0)
+		(at 44.45 41.91 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8057,7 +7752,7 @@
 		(fields_autoplaced yes)
 		(uuid "762a70cd-37e5-4afa-9ad6-65f64a4bd609")
 		(property "Reference" "#PWR026"
-			(at 46.99 63.5 0)
+			(at 50.8 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8068,17 +7763,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 46.99 62.23 0)
+			(at 48.26 41.9099 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 46.99 57.15 0)
+			(at 44.45 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8089,7 +7785,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 46.99 57.15 0)
+			(at 44.45 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8100,7 +7796,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 46.99 57.15 0)
+			(at 44.45 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8412,8 +8108,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 41.91 44.45 180)
+		(lib_id "Connector:Conn_01x08_Socket")
+		(at 67.31 39.37 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8422,9 +8118,9 @@
 		(in_pos_files yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "85d22cf0-71e6-4321-a1d4-bdba24a853d3")
+		(uuid "7daa6f09-3613-465a-a5be-033abbe7dd08")
 		(property "Reference" "J23"
-			(at 42.545 36.83 0)
+			(at 67.945 24.13 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8433,8 +8129,8 @@
 				)
 			)
 		)
-		(property "Value" "Knee 2"
-			(at 42.545 39.37 0)
+		(property "Value" "Pads"
+			(at 67.945 26.67 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8443,8 +8139,8 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 41.91 44.45 0)
+		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-08P_1x08_P5.00mm"
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8455,7 +8151,7 @@
 			)
 		)
 		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8465,8 +8161,8 @@
 				)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 41.91 44.45 0)
+		(property "Description" "Generic connector, single row, 01x08, script generated"
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8477,7 +8173,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8488,7 +8184,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8499,7 +8195,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8510,7 +8206,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8521,7 +8217,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8532,7 +8228,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8543,7 +8239,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8554,7 +8250,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8565,7 +8261,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8576,7 +8272,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8587,7 +8283,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8598,7 +8294,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8609,7 +8305,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8620,7 +8316,7 @@
 			)
 		)
 		(property "digikey" "277-1667-ND"
-			(at 41.91 44.45 0)
+			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8631,10 +8327,28 @@
 			)
 		)
 		(pin "1"
-			(uuid "a1d1b68a-a8bd-40f1-9084-9df5a7519dcf")
+			(uuid "1d0147c1-559b-4503-86ee-8e7ceef0db30")
 		)
 		(pin "2"
-			(uuid "b2831007-5b1f-4bb2-ab3a-0bb0bb9f8b14")
+			(uuid "dfbdfa9f-9be1-41a4-afb9-23a85bf6e06b")
+		)
+		(pin "3"
+			(uuid "d1482af4-e99e-4459-a8fb-62d7f7d544db")
+		)
+		(pin "4"
+			(uuid "5892ae5e-0f19-419c-ad8f-d5bc3cc61044")
+		)
+		(pin "5"
+			(uuid "f8001c4d-35d0-43ea-bf88-c76dcac5bc90")
+		)
+		(pin "6"
+			(uuid "933b8766-7500-4cbf-a604-e38b934d553c")
+		)
+		(pin "7"
+			(uuid "324685ff-05fb-474e-931b-10d8945ceae5")
+		)
+		(pin "8"
+			(uuid "7b6ec8f0-cd3c-4ca5-9716-a627d5f520c8")
 		)
 		(instances
 			(project "CPR Machine Schematic"
@@ -8725,242 +8439,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 22.86 57.15 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8f07e4d3-326b-413e-9608-18b34ae45006")
-		(property "Reference" "J20"
-			(at 23.495 49.53 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Hip 2 1"
-			(at 23.495 52.07 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "CREATOR" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Check_prices" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DUPLICATE" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey_Part_Number" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MF" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MP" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Package" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "VERIFIER" ""
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "277-1667-ND"
-			(at 22.86 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "5ae0f963-9b00-4093-80c9-0a64da8c51f4")
-		)
-		(pin "2"
-			(uuid "de284b66-1d59-447c-8ae6-039959643a04")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
-					(reference "J20")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Custom_Parts:PTVS5V0Z1USK_Flipped")
-		(at 85.09 111.76 270)
+		(at 82.55 76.2 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8970,7 +8450,7 @@
 		(dnp no)
 		(uuid "94a6bd35-db9a-4289-9430-b7c249c6956c")
 		(property "Reference" "D11"
-			(at 87.122 111.252 90)
+			(at 84.582 75.692 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8981,7 +8461,7 @@
 			)
 		)
 		(property "Value" "ESD321DYAR"
-			(at 87.122 113.284 90)
+			(at 84.582 77.724 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8992,7 +8472,7 @@
 			)
 		)
 		(property "Footprint" "ESD321DYAR:SOT5x3_DYA_TEX"
-			(at 80.645 111.76 0)
+			(at 78.105 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9003,7 +8483,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/esd321.pdf"
-			(at 85.09 111.76 0)
+			(at 82.55 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9014,7 +8494,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 85.09 111.76 0)
+			(at 82.55 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9025,7 +8505,7 @@
 			)
 		)
 		(property "digikey" "296-ESD321DYARCT-ND"
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9036,7 +8516,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9047,7 +8527,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9058,7 +8538,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9069,7 +8549,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9080,7 +8560,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9091,7 +8571,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9102,7 +8582,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9113,7 +8593,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9124,7 +8604,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9135,7 +8615,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9146,7 +8626,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9157,7 +8637,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9168,7 +8648,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 85.09 111.76 90)
+			(at 82.55 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9274,7 +8754,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 27.94 44.45 0)
+		(at 27.94 36.83 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9285,7 +8765,7 @@
 		(fields_autoplaced yes)
 		(uuid "a8df6aac-d632-4f92-acaa-d579cf609989")
 		(property "Reference" "#PWR018"
-			(at 27.94 50.8 0)
+			(at 34.29 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9296,17 +8776,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 27.94 49.53 0)
+			(at 31.75 36.8299 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 27.94 44.45 0)
+			(at 27.94 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9317,7 +8798,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 27.94 44.45 0)
+			(at 27.94 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9328,7 +8809,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 27.94 44.45 0)
+			(at 27.94 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9352,7 +8833,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 62.23 115.57 0)
+		(at 62.23 80.01 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9363,7 +8844,7 @@
 		(fields_autoplaced yes)
 		(uuid "aafbd92e-e152-4642-8ec3-485a81d4a55d")
 		(property "Reference" "#PWR079"
-			(at 62.23 121.92 0)
+			(at 62.23 86.36 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9374,7 +8855,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 62.23 120.65 0)
+			(at 62.23 85.09 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9384,7 +8865,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 62.23 115.57 0)
+			(at 62.23 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9395,7 +8876,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 62.23 115.57 0)
+			(at 62.23 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9406,7 +8887,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 62.23 115.57 0)
+			(at 62.23 80.01 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9430,7 +8911,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 26.67 105.41 0)
+		(at 26.67 57.15 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -9441,29 +8922,29 @@
 		(fields_autoplaced yes)
 		(uuid "afb6761b-5c9f-4955-aed8-9c9de465cd8c")
 		(property "Reference" "TP8"
-			(at 29.21 100.8379 0)
+			(at 29.21 59.1819 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "SCL"
-			(at 29.21 103.3779 0)
+			(at 29.21 61.7219 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 31.75 105.41 0)
+			(at 21.59 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9474,7 +8955,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 31.75 105.41 0)
+			(at 21.59 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9485,7 +8966,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9496,7 +8977,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9507,7 +8988,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9518,7 +8999,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9529,7 +9010,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9540,7 +9021,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9551,7 +9032,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9562,7 +9043,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9573,7 +9054,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9584,7 +9065,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9595,7 +9076,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9606,7 +9087,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9617,7 +9098,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9628,7 +9109,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9639,7 +9120,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9650,7 +9131,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9661,7 +9142,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9672,7 +9153,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9683,7 +9164,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 26.67 105.41 0)
+			(at 26.67 57.15 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9700,240 +9181,6 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
 					(reference "TP8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 22.86 44.45 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c0855861-d665-4ef1-b567-b57ec9ddf10f")
-		(property "Reference" "J9"
-			(at 23.495 36.83 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Hip 1 2"
-			(at 23.495 39.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "CREATOR" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Check_prices" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DUPLICATE" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey_Part_Number" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MF" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MP" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Package" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "VERIFIER" ""
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "277-1667-ND"
-			(at 22.86 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "8ce4ac05-19a4-4c45-8e3d-0a74435523b7")
-		)
-		(pin "2"
-			(uuid "3dadb8bb-26ce-4143-a69b-d9bd4086319e")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
-					(reference "J9")
 					(unit 1)
 				)
 			)
@@ -10099,7 +9346,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 73.66 100.33 90)
+		(at 55.88 64.77 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10109,7 +9356,7 @@
 		(dnp no)
 		(uuid "cab9d577-0ede-444d-9ee2-5c64a6e4a9c7")
 		(property "Reference" "R24"
-			(at 73.66 94.996 90)
+			(at 55.88 59.436 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10119,7 +9366,7 @@
 			)
 		)
 		(property "Value" "33 Ohm"
-			(at 73.66 97.536 90)
+			(at 55.88 61.976 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10129,7 +9376,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 73.914 99.314 90)
+			(at 56.134 63.754 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10140,7 +9387,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.vishay.com/docs/28773/crcwce3.pdf"
-			(at 73.66 100.33 0)
+			(at 55.88 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10151,7 +9398,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 73.66 100.33 0)
+			(at 55.88 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10162,7 +9409,7 @@
 			)
 		)
 		(property "Notes" ""
-			(at 73.66 100.33 0)
+			(at 55.88 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10173,7 +9420,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 73.66 100.33 0)
+			(at 55.88 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10184,7 +9431,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 73.66 100.33 0)
+			(at 55.88 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10195,7 +9442,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 73.66 100.33 0)
+			(at 55.88 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10206,7 +9453,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 73.66 100.33 0)
+			(at 55.88 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10217,7 +9464,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 73.66 100.33 0)
+			(at 55.88 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10228,7 +9475,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10239,7 +9486,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10250,7 +9497,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10261,7 +9508,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10272,7 +9519,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10283,7 +9530,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10294,7 +9541,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10305,7 +9552,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10316,7 +9563,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10327,7 +9574,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10338,7 +9585,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10349,7 +9596,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10360,7 +9607,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10371,7 +9618,7 @@
 			)
 		)
 		(property "digikey" "541-3988-1-ND"
-			(at 73.66 100.33 90)
+			(at 55.88 64.77 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10391,240 +9638,6 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
 					(reference "R24")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 67.31 31.75 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "cd3f88df-170b-479f-b7bf-5b9cd0b05344")
-		(property "Reference" "J26"
-			(at 67.945 24.13 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Pad 1"
-			(at 67.945 26.67 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "CREATOR" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Check_prices" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DUPLICATE" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey_Part_Number" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MF" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MP" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Package" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "VERIFIER" ""
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "277-1667-ND"
-			(at 67.31 31.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "3a5e307d-140e-45c6-a749-5695a44e42f5")
-		)
-		(pin "2"
-			(uuid "2822cc6d-e6b5-4292-97bb-6442b76888fb")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
-					(reference "J26")
 					(unit 1)
 				)
 			)
@@ -10712,7 +9725,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 26.67 92.71 180)
+		(at 26.67 69.85 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10723,29 +9736,29 @@
 		(fields_autoplaced yes)
 		(uuid "da36abf1-acc9-4aff-8f56-df9f26a5913e")
 		(property "Reference" "TP7"
-			(at 29.21 94.7419 0)
+			(at 29.21 65.2779 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Value" "SDA"
-			(at 29.21 97.2819 0)
+			(at 29.21 67.8179 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 21.59 92.71 0)
+			(at 31.75 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10756,7 +9769,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 21.59 92.71 0)
+			(at 31.75 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10767,7 +9780,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10778,7 +9791,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10789,7 +9802,7 @@
 			)
 		)
 		(property "OC_FARNELL" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10800,7 +9813,7 @@
 			)
 		)
 		(property "OC_NEWARK" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10811,7 +9824,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10822,7 +9835,7 @@
 			)
 		)
 		(property "SUPPLIER" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10833,7 +9846,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10844,7 +9857,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10855,7 +9868,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10866,7 +9879,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10877,7 +9890,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10888,7 +9901,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10899,7 +9912,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10910,7 +9923,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10921,7 +9934,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10932,7 +9945,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10943,7 +9956,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10954,7 +9967,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10965,7 +9978,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 26.67 92.71 0)
+			(at 26.67 69.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10989,7 +10002,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 85.09 95.25 0)
+		(at 80.01 59.69 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11000,7 +10013,7 @@
 		(fields_autoplaced yes)
 		(uuid "dac00ee6-eb9b-4af7-869e-0468cacde4cb")
 		(property "Reference" "#PWR032"
-			(at 85.09 99.06 0)
+			(at 80.01 63.5 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11011,7 +10024,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 85.09 90.17 0)
+			(at 80.01 54.61 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11021,7 +10034,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 85.09 95.25 0)
+			(at 80.01 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11032,7 +10045,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 85.09 95.25 0)
+			(at 80.01 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11043,7 +10056,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 85.09 95.25 0)
+			(at 80.01 59.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11060,240 +10073,6 @@
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
 					(reference "#PWR032")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 67.31 69.85 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "dd38057d-edcd-48d5-a19c-4070246f5d7a")
-		(property "Reference" "J29"
-			(at 67.945 62.23 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Pad 4"
-			(at 67.945 64.77 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "CREATOR" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Check_prices" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DUPLICATE" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey_Part_Number" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MF" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MP" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Package" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "VERIFIER" ""
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "277-1667-ND"
-			(at 67.31 69.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "80c84101-61d1-42ec-a76b-ab2661004bc6")
-		)
-		(pin "2"
-			(uuid "757e8c0b-af3f-4f3d-a3ad-54c597676d21")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
-					(reference "J29")
 					(unit 1)
 				)
 			)
@@ -11381,7 +10160,7 @@
 	)
 	(symbol
 		(lib_id "Diode:PTVS5V0Z1USK")
-		(at 62.23 111.76 270)
+		(at 62.23 76.2 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11391,7 +10170,7 @@
 		(dnp no)
 		(uuid "e62025a9-34fa-4c51-92f7-4206cc548d7a")
 		(property "Reference" "D2"
-			(at 57.658 111.252 90)
+			(at 57.658 75.692 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11402,7 +10181,7 @@
 			)
 		)
 		(property "Value" "ESD351DPYR"
-			(at 48.006 113.538 90)
+			(at 48.006 77.978 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11413,7 +10192,7 @@
 			)
 		)
 		(property "Footprint" "2-X1SON:DPY2_TEX"
-			(at 57.785 111.76 0)
+			(at 57.785 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11424,7 +10203,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/esd351.pdf?HQS=dis-dk-null-digikeymode-dsf-pf-null-wwe&ts=1791812746519&ref_url=https%253A%252F%252Fwww.ti.com%252Fgeneral%252Fdocs%252Fsuppproductinfo.tsp%253FdistId%253D10%2526gotoUrl%253Dhttps%253A%252F%252Fwww.ti.com%252Flit%252Fgpn%252Fesd351"
-			(at 62.23 111.76 0)
+			(at 62.23 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11435,7 +10214,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 62.23 111.76 0)
+			(at 62.23 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11446,7 +10225,7 @@
 			)
 		)
 		(property "digikey" "296-51109-1-ND"
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11457,7 +10236,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11468,7 +10247,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11479,7 +10258,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11490,7 +10269,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11501,7 +10280,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11512,7 +10291,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11523,7 +10302,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11534,7 +10313,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11545,7 +10324,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11556,7 +10335,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11567,7 +10346,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11578,7 +10357,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11589,7 +10368,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 62.23 111.76 90)
+			(at 62.23 76.2 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11616,7 +10395,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 72.39 57.15 0)
+		(at 72.39 41.91 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11627,7 +10406,7 @@
 		(fields_autoplaced yes)
 		(uuid "e64b1b3a-2b19-4ec7-9634-4043bed04627")
 		(property "Reference" "#PWR030"
-			(at 72.39 63.5 0)
+			(at 78.74 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11638,17 +10417,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 72.39 62.23 0)
+			(at 76.2 41.9099 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 72.39 57.15 0)
+			(at 72.39 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11659,7 +10439,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 72.39 57.15 0)
+			(at 72.39 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11670,7 +10450,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 72.39 57.15 0)
+			(at 72.39 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11693,242 +10473,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 67.31 44.45 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e6d4b670-cbea-4bc7-9a84-ffad345bb809")
-		(property "Reference" "J27"
-			(at 67.945 36.83 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Pad 2"
-			(at 67.945 39.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "CREATOR" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Check_prices" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DUPLICATE" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey_Part_Number" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MF" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MP" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Package" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "VERIFIER" ""
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "277-1667-ND"
-			(at 67.31 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "a42e36d9-c033-4fde-826a-092f70a99115")
-		)
-		(pin "2"
-			(uuid "9fc7947b-a837-4f5e-a797-10008d4035a4")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
-					(reference "J27")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
-		(at 72.39 31.75 0)
+		(at 72.39 31.75 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11939,7 +10485,7 @@
 		(fields_autoplaced yes)
 		(uuid "e8643204-7556-4004-9ad5-a05be6e8435a")
 		(property "Reference" "#PWR028"
-			(at 72.39 38.1 0)
+			(at 78.74 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11950,13 +10496,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 72.39 36.83 0)
+			(at 76.2 31.7499 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -12084,6 +10631,258 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x08_Socket")
+		(at 39.37 39.37 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e9ba330e-cd81-4ea9-bb98-ad44067b8b39")
+		(property "Reference" "J22"
+			(at 40.005 24.13 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Knee"
+			(at 40.005 26.67 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-08P_1x08_P5.00mm"
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x08, script generated"
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "CREATOR" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Check_prices" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DUPLICATE" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description_1" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey_Part_Number" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MP" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Package" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Pins" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "SnapEDA_Link" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "VERIFIER" ""
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "277-1667-ND"
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8fb4f4f0-8234-473c-9832-12900ba8d14b")
+		)
+		(pin "2"
+			(uuid "cdaeba0a-1805-4689-85df-6a465c75f80b")
+		)
+		(pin "3"
+			(uuid "02133215-247c-4106-b7ed-ebaa2946d3ae")
+		)
+		(pin "4"
+			(uuid "029af6e8-6d86-4ad7-ac26-2638e004953e")
+		)
+		(pin "5"
+			(uuid "58ab14f0-a7b0-4d1b-81ba-85b73e12a132")
+		)
+		(pin "6"
+			(uuid "df73cb3b-85c2-4079-98fa-a1550244dc4f")
+		)
+		(pin "7"
+			(uuid "6d293444-f9ca-4d5e-8585-b7e59e199d02")
+		)
+		(pin "8"
+			(uuid "9ea1c0c4-0dcc-4abe-b462-9d311b250f16")
+		)
+		(instances
+			(project "CPR Machine Schematic"
+				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
+					(reference "J22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 129.54 43.18 270)
 		(unit 1)
@@ -12164,7 +10963,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 27.94 31.75 0)
+		(at 27.94 31.75 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -12175,7 +10974,7 @@
 		(fields_autoplaced yes)
 		(uuid "ee48a27f-2ea2-4950-b962-25dc9694a60c")
 		(property "Reference" "#PWR09"
-			(at 27.94 38.1 0)
+			(at 34.29 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12186,13 +10985,14 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 27.94 36.83 0)
+			(at 31.75 31.7499 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
@@ -12242,7 +11042,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 72.39 69.85 0)
+		(at 72.39 46.99 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -12253,7 +11053,7 @@
 		(fields_autoplaced yes)
 		(uuid "ee4a0145-92c5-45c3-9e89-c5249d26146e")
 		(property "Reference" "#PWR031"
-			(at 72.39 76.2 0)
+			(at 78.74 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12264,17 +11064,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 72.39 74.93 0)
+			(at 76.2 46.9899 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 72.39 69.85 0)
+			(at 72.39 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12285,7 +11086,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 72.39 69.85 0)
+			(at 72.39 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12296,7 +11097,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 72.39 69.85 0)
+			(at 72.39 46.99 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12319,242 +11120,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 41.91 57.15 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ef3096c6-cedc-4263-b66a-26766747ad5a")
-		(property "Reference" "J24"
-			(at 42.545 49.53 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Knee 3"
-			(at 42.545 52.07 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "CREATOR" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Check_prices" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DUPLICATE" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey_Part_Number" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MF" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MP" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Package" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "VERIFIER" ""
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "277-1667-ND"
-			(at 41.91 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "286ed78a-3e96-411f-b7ab-189f1e606e21")
-		)
-		(pin "2"
-			(uuid "71f5ab76-295f-45a5-816f-11aefaa58822")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
-					(reference "J24")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_US")
-		(at 45.72 96.52 0)
+		(at 45.72 60.96 0)
 		(mirror x)
 		(unit 1)
 		(body_style 1)
@@ -12565,7 +11132,7 @@
 		(dnp no)
 		(uuid "f784e1d4-f3d0-4782-a3f1-d758bb65f28c")
 		(property "Reference" "R44"
-			(at 43.434 96.266 90)
+			(at 43.434 60.706 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -12575,7 +11142,7 @@
 			)
 		)
 		(property "Value" "2.2k"
-			(at 40.894 96.266 90)
+			(at 40.894 60.706 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -12585,7 +11152,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 46.736 96.266 90)
+			(at 46.736 60.706 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12596,7 +11163,7 @@
 			)
 		)
 		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
-			(at 45.72 96.52 0)
+			(at 45.72 60.96 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12607,7 +11174,7 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
-			(at 45.72 96.52 0)
+			(at 45.72 60.96 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12618,7 +11185,7 @@
 			)
 		)
 		(property "CREATOR" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12629,7 +11196,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12640,7 +11207,7 @@
 			)
 		)
 		(property "DUPLICATE" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12651,7 +11218,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12662,7 +11229,7 @@
 			)
 		)
 		(property "DigiKey_Part_Number" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12673,7 +11240,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12684,7 +11251,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12695,7 +11262,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12706,7 +11273,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12717,7 +11284,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12728,7 +11295,7 @@
 			)
 		)
 		(property "Sim.Pins" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12739,7 +11306,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12750,7 +11317,7 @@
 			)
 		)
 		(property "VERIFIER" ""
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12761,7 +11328,7 @@
 			)
 		)
 		(property "digikey" "311-2.2KGRCT-ND"
-			(at 45.72 96.52 90)
+			(at 45.72 60.96 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12787,242 +11354,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Socket")
-		(at 67.31 57.15 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f7ac2b0c-0c3c-42e4-b815-45719ef20b55")
-		(property "Reference" "J28"
-			(at 67.945 49.53 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Pad 3"
-			(at 67.945 52.07 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TerminalBlock:TerminalBlock_MaiXu_MX126-5.0-02P_1x02_P5.00mm"
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/909/1935161.pdf"
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "CREATOR" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Check_prices" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DUPLICATE" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description_1" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey_Part_Number" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MF" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MP" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Package" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "VERIFIER" ""
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "digikey" "277-1667-ND"
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "44311759-c065-4ead-b17f-f9b5c6ed5bd7")
-		)
-		(pin "2"
-			(uuid "691fed4b-4d26-40e6-8d03-92e590be3447")
-		)
-		(instances
-			(project "CPR Machine Schematic"
-				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3"
-					(reference "J28")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
-		(at 27.94 57.15 0)
+		(at 27.94 41.91 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -13033,7 +11366,7 @@
 		(fields_autoplaced yes)
 		(uuid "fd649275-8ed5-437c-b104-c20736cc1c72")
 		(property "Reference" "#PWR021"
-			(at 27.94 63.5 0)
+			(at 34.29 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13044,17 +11377,18 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 27.94 62.23 0)
+			(at 31.75 41.9099 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 27.94 57.15 0)
+			(at 27.94 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13065,7 +11399,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 27.94 57.15 0)
+			(at 27.94 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13076,7 +11410,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 27.94 57.15 0)
+			(at 27.94 41.91 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)

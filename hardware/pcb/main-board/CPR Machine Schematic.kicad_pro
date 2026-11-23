@@ -39,9 +39,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.0,
-          "height": 0.3556,
-          "width": 0.6096
+          "drill": 0.6096,
+          "height": 1.8034,
+          "width": 0.9906
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -63,7 +63,7 @@
           "min_clearance": 0.5,
           "min_island_area": 10.0,
           "min_thickness": 0.25,
-          "pad_connection": 2,
+          "pad_connection": 1,
           "remove_islands": 0,
           "thermal_relief_gap": 0.5,
           "thermal_relief_spoke_width": 0.5
@@ -78,12 +78,28 @@
       ],
       "drc_exclusions": [
         [
-          "clearance|104584800|70871500|a58c7651-36f2-4573-a041-4858c04f0310|f4211c50-d55c-4100-a6f6-bfdb0f243629",
+          "clearance|105277600|70871500|8f82114d-187e-4d07-b337-75569831fb0e|a58c7651-36f2-4573-a041-4858c04f0310",
           "Vendor Footprint"
         ],
         [
-          "clearance|108277541|70871500|8eef0956-586a-4128-94c7-11006d6dd145|8fbf076f-5abc-45af-b9d0-47cada4e93f0",
+          "clearance|107582340|70871500|76f3448f-a2e1-41ee-bbf2-582769ea5c26|8fbf076f-5abc-45af-b9d0-47cada4e93f0",
           "Vendor Footprint"
+        ],
+        [
+          "lib_footprint_issues|95810819|73137603|a10b1fb4-055f-4a48-861a-dbab412fb489|00000000-0000-0000-0000-000000000000",
+          "i know dumbass"
+        ],
+        [
+          "lib_footprint_mismatch|60797608|108500001|53c6989d-ec9d-4a76-80d9-ec95ed27705f|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "starved_thermal|172950701|106109450|81665eae-758c-43c1-8db0-32a4cbe06ee5|8d453de6-aae0-4eda-bf43-083274a38c9f|F.Cu",
+          ""
+        ],
+        [
+          "starved_thermal|179972913|106118900|81665eae-758c-43c1-8db0-32a4cbe06ee5|34908d55-c693-41f5-b34a-27435fd5d24e|F.Cu",
+          ""
         ],
         [
           "starved_thermal|199550000|103800000|81665eae-758c-43c1-8db0-32a4cbe06ee5|3dff26cc-d221-47c5-8660-3d4c6e008ed6|F.Cu",
@@ -122,7 +138,7 @@
         "length_out_of_range": "error",
         "lib_footprint_issues": "warning",
         "lib_footprint_mismatch": "warning",
-        "malformed_courtyard": "error",
+        "malformed_courtyard": "ignore",
         "microvia_drill_out_of_range": "error",
         "mirrored_text_on_front_layer": "warning",
         "missing_courtyard": "ignore",
@@ -192,7 +208,6 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
-          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -204,7 +219,6 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
-          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -216,7 +230,6 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
-          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -553,8 +566,8 @@
     "meta": {
       "version": 5
     },
-    "net_colors": {},
-    "netclass_assignments": {},
+    "net_colors": null,
+    "netclass_assignments": null,
     "netclass_patterns": []
   },
   "pcbnew": {
@@ -871,7 +884,7 @@
         "uuid": "8991fc77-975f-4978-a089-6b2a5e33f59b"
       }
     ],
-    "used_designators": "#PWR4,#PWR8-9,#PWR11-12,#PWR17-21,#PWR23-31,#PWR34-38,#PWR51-52,#PWR55,#PWR62,#PWR68,#PWR77-84,#PWR87-177,#PWR184-186,C12-34,C48-55,COUT2-4,C_IN4-8,D1-15,F5-9,H4,J2,J9,J12-30,L2,LED1,R24-45,U2-3,U6-10,U12,Y1",
+    "used_designators": "#PWR4,#PWR8-9,#PWR11-12,#PWR17-21,#PWR23-31,#PWR34-38,#PWR51-52,#PWR55,#PWR62,#PWR68,#PWR77-84,#PWR87-177,#PWR184-185,D1-15,C12-34,C48-55,J2,J9,J12-29,R24-45,U2-3,U6-10,U12,Y1,F5-9,L2,C_IN4-8,COUT2-4,LED1",
     "variants": []
   },
   "sheets": [

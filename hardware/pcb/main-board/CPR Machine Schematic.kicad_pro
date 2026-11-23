@@ -76,7 +76,20 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "clearance|104584800|70871500|a58c7651-36f2-4573-a041-4858c04f0310|f4211c50-d55c-4100-a6f6-bfdb0f243629",
+          "Vendor Footprint"
+        ],
+        [
+          "clearance|108277541|70871500|8eef0956-586a-4128-94c7-11006d6dd145|8fbf076f-5abc-45af-b9d0-47cada4e93f0",
+          "Vendor Footprint"
+        ],
+        [
+          "starved_thermal|199550000|103800000|81665eae-758c-43c1-8db0-32a4cbe06ee5|3dff26cc-d221-47c5-8660-3d4c6e008ed6|F.Cu",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },

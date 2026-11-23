@@ -8027,6 +8027,370 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Molex USB-C:2171790001"
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 20.32 10.16 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.524 1.524)
+					)
+				)
+			)
+			(property "Value" "2171790001"
+				(at 20.32 7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.524 1.524)
+					)
+				)
+			)
+			(property "Footprint" "2171790001_MOL"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+				)
+			)
+			(property "Datasheet" "https://www.molex.com/en-us/products/part-detail-pdf/2171790001?display=pdf"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "2171790001"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "2171790001_MOL"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "2171790001_0_1"
+				(polyline
+					(pts
+						(xy 7.62 5.08) (xy 7.62 -17.78)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 -17.78) (xy 33.02 -17.78)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 33.02 5.08) (xy 7.62 5.08)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 33.02 -17.78) (xy 33.02 5.08)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_out line
+					(at 40.64 -2.54 180)
+					(length 7.62)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A1/B12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 40.64 -7.62 180)
+					(length 7.62)
+					(name "VBUS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A4/B9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 0 0 0)
+					(length 7.62)
+					(name "CC1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 0 -2.54 0)
+					(length 7.62)
+					(name "DP1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 0 -5.08 0)
+					(length 7.62)
+					(name "DN1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 0 -7.62 0)
+					(length 7.62)
+					(name "SBU1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "A8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 40.64 0 180)
+					(length 7.62)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B1/A12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 40.64 -5.08 180)
+					(length 7.62)
+					(name "VBUS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B4/A9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 0 -10.16 0)
+					(length 7.62)
+					(name "CC2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 0 -12.7 0)
+					(length 7.62)
+					(name "DP2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 40.64 -12.7 180)
+					(length 7.62)
+					(name "DN2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 40.64 -10.16 180)
+					(length 7.62)
+					(name "SBU2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(rectangle
 		(start 87.63 12.7)
@@ -8227,12 +8591,6 @@
 		(uuid "010bbb03-85ff-43c4-bc70-30cf5eb7fe5b")
 	)
 	(junction
-		(at 73.66 194.31)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "108c1ec8-4a07-46b3-b425-364509f02f8b")
-	)
-	(junction
 		(at 130.81 72.39)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8291,12 +8649,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5079599e-f266-47a5-92f6-656d21fdc3ab")
-	)
-	(junction
-		(at 67.31 191.77)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "52f8ac75-7278-4a1b-9a2e-582cf760774e")
 	)
 	(junction
 		(at 278.13 41.91)
@@ -8465,10 +8817,6 @@
 		(uuid "386c3a73-0fda-495b-ba8e-e3f31b50fd02")
 	)
 	(no_connect
-		(at 46.99 217.17)
-		(uuid "423bdb27-6925-4823-b1db-c2511268ffe5")
-	)
-	(no_connect
 		(at 167.64 36.83)
 		(uuid "48f76e1e-864c-4e2d-9680-158233e2ecb4")
 	)
@@ -8503,10 +8851,6 @@
 	(no_connect
 		(at 167.64 44.45)
 		(uuid "75ecc041-2c5a-44f0-97a3-9017672fb5ae")
-	)
-	(no_connect
-		(at 46.99 214.63)
-		(uuid "7ca46888-b1f1-432a-8d2f-37574468359c")
 	)
 	(no_connect
 		(at 238.76 62.23)
@@ -8664,16 +9008,6 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 194.31) (xy 73.66 194.31)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0812e692-5c5b-41a1-9958-1ba5c36f3f90")
-	)
-	(wire
-		(pts
 			(xy 43.18 129.54) (xy 38.1 129.54)
 		)
 		(stroke
@@ -8681,16 +9015,6 @@
 			(type default)
 		)
 		(uuid "0a4e2443-ce5b-4cab-bb70-36cbd0b893a9")
-	)
-	(wire
-		(pts
-			(xy 67.31 191.77) (xy 67.31 199.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0a95afa3-f9dd-4152-8c80-57f1f82906fe")
 	)
 	(wire
 		(pts
@@ -8804,16 +9128,6 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 201.93) (xy 54.61 201.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "186585f7-7940-48f0-8376-a40535443acb")
-	)
-	(wire
-		(pts
 			(xy 238.76 67.31) (xy 243.84 67.31)
 		)
 		(stroke
@@ -8861,16 +9175,6 @@
 			(type default)
 		)
 		(uuid "1e3e6c58-2b68-416f-8ca8-bcedc83141a3")
-	)
-	(wire
-		(pts
-			(xy 46.99 199.39) (xy 54.61 199.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1e9d5a5e-0e5e-43cd-b2be-173b27fb0103")
 	)
 	(wire
 		(pts
@@ -9161,16 +9465,6 @@
 			(type default)
 		)
 		(uuid "3dbdc017-2e56-4875-9f6c-f9cd2d4cbfff")
-	)
-	(wire
-		(pts
-			(xy 31.75 224.79) (xy 31.75 227.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3ec5620d-9b5a-4cee-9640-d8989fadfcd8")
 	)
 	(wire
 		(pts
@@ -9664,16 +9958,6 @@
 	)
 	(wire
 		(pts
-			(xy 24.13 224.79) (xy 24.13 227.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "78b1ed60-c2b0-4c07-a0f5-5f26fdd4b5b0")
-	)
-	(wire
-		(pts
 			(xy 130.81 72.39) (xy 138.43 72.39)
 		)
 		(stroke
@@ -9844,16 +10128,6 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 194.31) (xy 77.47 194.31)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "92443682-80b4-474a-83ec-fa205a1f3677")
-	)
-	(wire
-		(pts
 			(xy 273.05 31.75) (xy 273.05 34.29)
 		)
 		(stroke
@@ -9944,16 +10218,6 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 204.47) (xy 54.61 204.47)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a20ade9b-285e-4e61-a5a7-f9602b9cc781")
-	)
-	(wire
-		(pts
 			(xy 133.35 125.73) (xy 121.92 125.73)
 		)
 		(stroke
@@ -10021,16 +10285,6 @@
 			(type default)
 		)
 		(uuid "ab860207-8a57-4407-9908-1433006ad6a1")
-	)
-	(wire
-		(pts
-			(xy 46.99 207.01) (xy 54.61 207.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ab9428a6-aec6-4109-8b93-6530645ec480")
 	)
 	(wire
 		(pts
@@ -10134,26 +10388,6 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 194.31) (xy 73.66 199.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b92a7365-6e7a-4179-8a18-fdfb40af248f")
-	)
-	(wire
-		(pts
-			(xy 67.31 191.77) (xy 77.47 191.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ba845647-55c8-4b8a-9eb1-450d601c8ebf")
-	)
-	(wire
-		(pts
 			(xy 92.71 62.23) (xy 167.64 62.23)
 		)
 		(stroke
@@ -10191,16 +10425,6 @@
 			(type default)
 		)
 		(uuid "c4b841c3-fbc2-45ed-9d2f-a3bd3f29e540")
-	)
-	(wire
-		(pts
-			(xy 46.99 191.77) (xy 67.31 191.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c694eecb-20b8-40ad-b7c3-35cde1c4f00b")
 	)
 	(wire
 		(pts
@@ -10431,16 +10655,6 @@
 			(type default)
 		)
 		(uuid "d92a9329-f8f2-486c-a084-f95af5aadcbf")
-	)
-	(wire
-		(pts
-			(xy 46.99 186.69) (xy 54.61 186.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d9b1c360-4228-4792-be1c-e6d035b85d28")
 	)
 	(wire
 		(pts
@@ -11012,16 +11226,6 @@
 		)
 		(uuid "3b19031a-e8ba-4b62-af84-9a73404d9b87")
 	)
-	(label "USB_DP"
-		(at 54.61 199.39 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3bb87a69-112e-4f55-a640-2b601bfc59a7")
-	)
 	(label "ENC2_A"
 		(at 60.96 139.7 0)
 		(effects
@@ -11041,16 +11245,6 @@
 			(justify right bottom)
 		)
 		(uuid "3eb561ef-327f-44ac-92b4-a025d5432339")
-	)
-	(label "USB_DM"
-		(at 54.61 207.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "46f031fa-01a8-44f6-b3b2-7a4e8a881c49")
 	)
 	(label "PA5"
 		(at 148.59 100.33 0)
@@ -11333,16 +11527,6 @@
 		(uuid "76f55a89-fafb-4346-bcbd-4e7617453efb")
 	)
 	(label "USB_DM"
-		(at 54.61 204.47 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "798f3a99-200e-443f-9a91-a99f8cf89713")
-	)
-	(label "USB_DM"
 		(at 58.42 222.25 180)
 		(effects
 			(font
@@ -11401,16 +11585,6 @@
 			(justify left bottom)
 		)
 		(uuid "8cd34466-ae40-4864-ad86-cfbc45cb7c9f")
-	)
-	(label "USB_DP"
-		(at 54.61 201.93 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8e00f1f1-c0ec-40ec-bd74-58a0a651e6df")
 	)
 	(label "Force_AIn"
 		(at 38.1 101.6 180)
@@ -11522,16 +11696,6 @@
 		)
 		(uuid "9e3ce03f-fb30-4781-b9ef-fd81aabe0e90")
 	)
-	(label "CC1"
-		(at 67.31 196.85 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a0b70b10-2c43-42dd-a18d-a2a8e03982d5")
-	)
 	(label "decoupling_bus"
 		(at 250.19 34.29 0)
 		(effects
@@ -11581,26 +11745,6 @@
 			(justify left bottom)
 		)
 		(uuid "a6b7bf94-dd4a-4dc4-82f5-2e92b5acd0f4")
-	)
-	(label "CC2"
-		(at 77.47 194.31 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a7982402-c5a1-47ba-adb8-e5ead29fe886")
-	)
-	(label "VBUS"
-		(at 54.61 186.69 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a89c29d8-7061-4134-92a4-c4884566c92c")
 	)
 	(label "Go_Button"
 		(at 243.84 148.59 0)
@@ -11661,16 +11805,6 @@
 			(justify left bottom)
 		)
 		(uuid "b6ca9baf-b813-4eb1-88c7-6bd65d3c4d88")
-	)
-	(label "CC2"
-		(at 73.66 196.85 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b8465860-d576-4709-b4d2-9095517ea96e")
 	)
 	(label "PA15"
 		(at 38.1 152.4 180)
@@ -11791,16 +11925,6 @@
 			(justify left bottom)
 		)
 		(uuid "d73e21d1-b227-4ee4-bca5-445f4eecd53a")
-	)
-	(label "CC1"
-		(at 77.47 191.77 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d7e6441f-96bf-48f6-9a61-95db2c1083e3")
 	)
 	(label "Stop_Button"
 		(at 243.84 146.05 0)
@@ -12123,85 +12247,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 67.31 207.01 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "089d8a9f-71a0-4be2-b4ea-49017a8c7d60")
-		(property "Reference" "#PWR030"
-			(at 67.31 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 67.31 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 67.31 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 67.31 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 67.31 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "78610270-4827-4194-ba6c-9dcbfe1b872f")
-		)
-		(instances
-			(project "CPR Machine MCU Board"
-				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "#PWR030")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 273.05 31.75 0)
 		(unit 1)
@@ -12314,7 +12359,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 98.0948 134.62 0)
 			(hide yes)
 			(show_name no)
@@ -12538,107 +12583,6 @@
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
 					(reference "#PWR017")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 73.66 203.2 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "0b0d0c30-7979-4ec3-a1f7-4399e5ebb6df")
-		(property "Reference" "R3"
-			(at 75.692 201.93 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5.1k"
-			(at 75.692 204.47 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 73.66 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
-			(at 73.66 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "CC2 Rd pull-down (USB device)"
-			(at 73.66 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey Part Number" "541-5.10KHCT-ND"
-			(at 73.66 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey URL" "https://www.digikey.com/en/products/detail/vishay-dale/CRCW06035K10FKEA/1174748"
-			(at 73.66 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d8585ad3-63e1-48d4-ae49-ad1fa34e3e5a")
-		)
-		(pin "2"
-			(uuid "b7e5afa5-0198-4ae8-b6bc-d3657997fbc8")
-		)
-		(instances
-			(project "CPR Machine MCU Board"
-				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -13018,7 +12962,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 133.0452 116.84 0)
 			(hide yes)
 			(show_name no)
@@ -13516,7 +13460,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Button_Switch_SMD:SW_SPST_PTS810"
 			(at 281.94 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -13882,7 +13826,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 277.1648 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -14381,7 +14325,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 288.5948 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -14645,7 +14589,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 311.4548 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -14748,7 +14692,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 98.7552 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -14813,85 +14757,6 @@
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
 					(reference "C_LDO0")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 31.75 227.33 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5b1994e8-0ba3-4f87-bc98-825740b244e8")
-		(property "Reference" "#PWR033"
-			(at 31.75 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 31.75 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 31.75 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 31.75 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 31.75 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "94296b70-cc85-4542-b9d1-e9f71855c32b")
-		)
-		(instances
-			(project "CPR Machine MCU Board"
-				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -15178,7 +15043,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 120.9548 134.62 0)
 			(hide yes)
 			(show_name no)
@@ -15422,153 +15287,6 @@
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
 					(reference "C8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:USB_C_Receptacle_USB2.0_16P")
-		(at 31.75 201.93 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6712d061-acdb-442e-ba7a-bebd1576975d")
-		(property "Reference" "MCU_USC-C_Receptacle0"
-			(at 31.75 179.07 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "USB_C_Receptacle_USB2.0_16P"
-			(at 31.75 181.61 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 35.56 201.93 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail-pdf/2171790001?display=pdf"
-			(at 35.56 201.93 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "USB 2.0-only 16P Type-C Receptacle connector"
-			(at 31.75 201.93 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey Part Number" "900-2171790001CT-ND"
-			(at 31.75 201.93 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey URL" "https://www.digikey.com/en/products/detail/molex/2171790001/13913749"
-			(at 31.75 201.93 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "A6"
-			(uuid "027e1108-d924-4f43-8453-a74836355ce7")
-		)
-		(pin "A9"
-			(uuid "5d0bbf92-9f95-4d86-85f9-7b3e69c5618d")
-		)
-		(pin "B6"
-			(uuid "17678910-1be3-40f1-bafa-f921a286000e")
-		)
-		(pin "B7"
-			(uuid "fab7e0a4-4b8d-43c1-b026-cbe4aba10944")
-		)
-		(pin "A7"
-			(uuid "ab6cc661-7025-4770-ab21-64d97714ab39")
-		)
-		(pin "B8"
-			(uuid "2227cf74-3fae-4a3d-a1e3-c4723a8db6bc")
-		)
-		(pin "B12"
-			(uuid "47364476-bba8-447c-8e5b-7959e1c84bf3")
-		)
-		(pin "B1"
-			(uuid "74797382-ea4a-4b39-9643-fa29098a2fc3")
-		)
-		(pin "B5"
-			(uuid "aff40ca4-c867-4146-9571-6b9e63e909d7")
-		)
-		(pin "B9"
-			(uuid "6ce6f059-bcee-4afe-a0ed-359565b11067")
-		)
-		(pin "SH"
-			(uuid "ecf658ba-da22-4b3b-b770-583356357398")
-		)
-		(pin "A8"
-			(uuid "82aab110-9ccd-4449-b61b-a74c510e5e45")
-		)
-		(pin "B4"
-			(uuid "7d9ef7d1-9e44-4e78-9759-2a9c5a5dfd8b")
-		)
-		(pin "A12"
-			(uuid "c4fe0fba-fbfb-4f15-a38a-bdccf0bd446a")
-		)
-		(pin "A1"
-			(uuid "bcfd381e-5916-4e3c-a511-8682e47861b8")
-		)
-		(pin "A5"
-			(uuid "d0e96aef-c9fe-4623-b942-a00049c3d7ba")
-		)
-		(pin "A4"
-			(uuid "cc0119eb-0e74-4bb0-9faa-62046a4c2085")
-		)
-		(instances
-			(project "CPR Machine MCU Board"
-				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "MCU_USC-C_Receptacle0")
 					(unit 1)
 				)
 			)
@@ -16052,7 +15770,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 254.508 53.34 90)
 			(hide yes)
 			(show_name no)
@@ -16678,7 +16396,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 324.1548 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -16749,107 +16467,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 67.31 203.2 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "98cf4cb1-378b-46e1-84e8-1770c1542604")
-		(property "Reference" "R2"
-			(at 69.342 201.93 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5.1k"
-			(at 69.342 204.47 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
-			(at 67.31 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
-			(at 67.31 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "CC1 Rd pull-down (USB device)"
-			(at 67.31 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey Part Number" "541-5.10KHCT-ND"
-			(at 67.31 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKey URL" "https://www.digikey.com/en/products/detail/vishay-dale/CRCW06035K10FKEA/1174748"
-			(at 67.31 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "72b7ca06-3ac9-40e2-aaa0-9aca32e9386a")
-		)
-		(pin "2"
-			(uuid "8b23523d-0f10-4824-a9b6-a8b2fe926a78")
-		)
-		(instances
-			(project "CPR Machine MCU Board"
-				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "R2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "STM32G441VBT6_symb:STM32G441VBT6")
 		(at 167.64 34.29 0)
 		(unit 1)
@@ -16880,7 +16497,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LQFP100-14x14mm_STM"
+		(property "Footprint" "STM:LQFP100-14x14mm_STM"
 			(at 167.64 34.29 0)
 			(hide yes)
 			(show_name no)
@@ -17280,7 +16897,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 171.1452 203.2 0)
 			(hide yes)
 			(show_name no)
@@ -17543,7 +17160,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 300.0248 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -17646,7 +17263,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
 			(at 110.49 127.508 90)
 			(hide yes)
 			(show_name no)
@@ -18699,7 +18316,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOT23-5L_STM"
+		(property "Footprint" "LDO:SOT23-5L_STM"
 			(at 109.22 191.77 0)
 			(hide yes)
 			(show_name no)
@@ -18781,85 +18398,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 73.66 207.01 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d2c28693-f997-40ad-888c-1e716bf5f5a0")
-		(property "Reference" "#PWR031"
-			(at 73.66 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 73.66 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 73.66 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 73.66 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 73.66 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "0a5dd10f-6a54-4a38-9529-f900a483e9a7")
-		)
-		(instances
-			(project "CPR Machine MCU Board"
-				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "#PWR031")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 121.92 113.03 0)
 		(unit 1)
@@ -18893,7 +18431,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 122.8852 116.84 0)
 			(hide yes)
 			(show_name no)
@@ -19099,7 +18637,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 274.828 63.5 90)
 			(hide yes)
 			(show_name no)
@@ -19164,85 +18702,6 @@
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
 					(reference "BOOT0_R1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 24.13 227.33 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "da195749-cbec-4983-ab92-88373edaa396")
-		(property "Reference" "#PWR032"
-			(at 24.13 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 24.13 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 24.13 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 24.13 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 24.13 227.33 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "5e357519-f002-45ed-bee6-8559924ee8e4")
-		)
-		(instances
-			(project "CPR Machine MCU Board"
-				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "#PWR032")
 					(unit 1)
 				)
 			)
@@ -19465,7 +18924,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 143.2052 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -19648,7 +19107,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_2x07_P1.27mm_Vertical_SMD"
 			(at 48.26 44.45 0)
 			(hide yes)
 			(show_name no)
@@ -19789,7 +19248,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 335.5848 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -19894,7 +19353,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 132.3848 134.62 0)
 			(hide yes)
 			(show_name no)
@@ -20158,7 +19617,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 265.7348 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -20514,6 +19973,1021 @@
 				)
 			)
 		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 24.13 223.52 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "98cf4cb1-378b-46e1-84e8-1770c1542604")
+		(property "Reference" "R2"
+			(at 26.162 222.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "5.1k"
+			(at 26.162 224.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 24.13 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
+			(at 24.13 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "CC1 Rd pull-down (USB device)"
+			(at 24.13 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey Part Number" "541-5.10KHCT-ND"
+			(at 24.13 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey URL" "https://www.digikey.com/en/products/detail/vishay-dale/CRCW06035K10FKEA/1174748"
+			(at 24.13 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "72b7ca06-3ac9-40e2-aaa0-9aca32e9386a")
+		)
+		(pin "2"
+			(uuid "8b23523d-0f10-4824-a9b6-a8b2fe926a78")
+		)
+		(instances
+			(project "CPR Machine MCU Board"
+				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
+					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 30.48 223.52 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "0b0d0c30-7979-4ec3-a1f7-4399e5ebb6df")
+		(property "Reference" "R3"
+			(at 32.512 222.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "5.1k"
+			(at 32.512 224.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 30.48 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.vishay.com/docs/20035/dcrcwe3.pdf"
+			(at 30.48 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "CC2 Rd pull-down (USB device)"
+			(at 30.48 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey Part Number" "541-5.10KHCT-ND"
+			(at 30.48 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey URL" "https://www.digikey.com/en/products/detail/vishay-dale/CRCW06035K10FKEA/1174748"
+			(at 30.48 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d8585ad3-63e1-48d4-ae49-ad1fa34e3e5a")
+		)
+		(pin "2"
+			(uuid "b7e5afa5-0198-4ae8-b6bc-d3657997fbc8")
+		)
+		(instances
+			(project "CPR Machine MCU Board"
+				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
+					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 24.13 227.33 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "089d8a9f-71a0-4be2-b4ea-49017a8c7d60")
+		(property "Reference" "#PWR030"
+			(at 24.13 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 24.13 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 24.13 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 24.13 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 24.13 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "78610270-4827-4194-ba6c-9dcbfe1b872f")
+		)
+		(instances
+			(project "CPR Machine MCU Board"
+				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
+					(reference "#PWR030")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 30.48 227.33 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d2c28693-f997-40ad-888c-1e716bf5f5a0")
+		(property "Reference" "#PWR031"
+			(at 30.48 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 30.48 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 30.48 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 30.48 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 30.48 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0a5dd10f-6a54-4a38-9529-f900a483e9a7")
+		)
+		(instances
+			(project "CPR Machine MCU Board"
+				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
+					(reference "#PWR031")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 24.13 212.09) (xy 24.13 219.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a95afa3-f9dd-4152-8c80-57f1f82906fe")
+	)
+	(wire
+		(pts
+			(xy 24.13 212.09) (xy 34.29 212.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba845647-55c8-4b8a-9eb1-450d601c8ebf")
+	)
+	(wire
+		(pts
+			(xy 30.48 214.63) (xy 34.29 214.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92443682-80b4-474a-83ec-fa205a1f3677")
+	)
+	(wire
+		(pts
+			(xy 30.48 214.63) (xy 30.48 219.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b92a7365-6e7a-4179-8a18-fdfb40af248f")
+	)
+	(label "CC1"
+		(at 24.13 217.17 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a0b70b10-2c43-42dd-a18d-a2a8e03982d5")
+	)
+	(label "CC2"
+		(at 30.48 217.17 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b8465860-d576-4709-b4d2-9095517ea96e")
+	)
+	(label "CC1"
+		(at 34.29 212.09 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d7e6441f-96bf-48f6-9a61-95db2c1083e3")
+	)
+	(label "CC2"
+		(at 34.29 214.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a7982402-c5a1-47ba-adb8-e5ead29fe886")
+	)
+	(symbol
+		(lib_id "Molex USB-C:2171790001")
+		(at 25.4 187.96 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e7d43673-c042-4aa1-bbd1-bf0a4774004a")
+		(property "Reference" "MCU_USC-C_Receptacle0"
+			(at 45.72 177.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2171790001"
+			(at 45.72 180.34 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Molex USB-C:2171790001_MOL"
+			(at 25.4 187.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail-pdf/2171790001?display=pdf"
+			(at 25.4 187.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "USB 2.0-only 16P Type-C Receptacle connector"
+			(at 25.4 187.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey Part Number" "900-2171790001CT-ND"
+			(at 25.4 187.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKey URL" "https://www.digikey.com/en/products/detail/molex/2171790001/13913749"
+			(at 25.4 187.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "A1/B12"
+			(uuid "517f59fd-bfb0-4a33-a540-71845339f0f4")
+		)
+		(pin "A4/B9"
+			(uuid "f263fce2-0def-4a46-b6a9-e138d3e8494d")
+		)
+		(pin "A5"
+			(uuid "fd9d5dec-c176-4dd9-83ce-de7cacd7868d")
+		)
+		(pin "A6"
+			(uuid "6a287331-7349-40f9-a901-82dcd59705c2")
+		)
+		(pin "A7"
+			(uuid "e89fcb5b-b2e9-4312-89b5-8780745e3b00")
+		)
+		(pin "A8"
+			(uuid "4403ed91-72fa-4e99-adc3-c9c209d1d268")
+		)
+		(pin "B1/A12"
+			(uuid "1298c057-2835-481a-b23f-f9c96c81bf2f")
+		)
+		(pin "B4/A9"
+			(uuid "b31a90d3-be8a-4511-8534-5f80c550cb15")
+		)
+		(pin "B5"
+			(uuid "4de6ca6a-9228-4a96-ac85-0cbdf164cb14")
+		)
+		(pin "B6"
+			(uuid "82f84fb3-4d7d-4d0e-be40-1b3842e0dfc1")
+		)
+		(pin "B7"
+			(uuid "25c74c0c-166e-4b13-ae38-97150b05f67b")
+		)
+		(pin "B8"
+			(uuid "b930151c-c2ea-447d-9c4d-5aeb3f28f943")
+		)
+		(instances
+			(project "CPR Machine MCU Board"
+				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
+					(reference "MCU_USC-C_Receptacle0")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 25.4 187.96) (xy 22.86 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fba7be95-b716-4f7d-b15a-92947c8b7884")
+	)
+	(label "CC1"
+		(at 22.86 187.96 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "05edfe5e-9c31-4032-9066-2949d2ec1aed")
+	)
+	(wire
+		(pts
+			(xy 25.4 190.5) (xy 22.86 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a51bd2f1-d584-4be7-9866-09c521780ede")
+	)
+	(label "USB_DP"
+		(at 22.86 190.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b1c33b67-959b-48a0-8d39-5b0376c833dc")
+	)
+	(wire
+		(pts
+			(xy 25.4 193.04) (xy 22.86 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9db8e9b2-4ed9-42a5-8363-2c63750cfcfd")
+	)
+	(label "USB_DM"
+		(at 22.86 193.04 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9291d4bd-9bf1-4e30-84d3-9928536a82ae")
+	)
+	(no_connect
+		(at 25.4 195.58)
+		(uuid "67b3d9e9-d041-4d72-9225-4b8a2a315458")
+	)
+	(wire
+		(pts
+			(xy 25.4 198.12) (xy 22.86 198.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ea3306e-6b7a-491b-aefc-6c656485f6ce")
+	)
+	(label "CC2"
+		(at 22.86 198.12 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0e911a10-d143-4ca3-9c92-f51f05298734")
+	)
+	(wire
+		(pts
+			(xy 25.4 200.66) (xy 22.86 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "41f6db61-9e6d-4940-a055-19fca6e13831")
+	)
+	(label "USB_DP"
+		(at 22.86 200.66 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "92918378-7255-48dc-a7ee-cbe6bdec8602")
+	)
+	(wire
+		(pts
+			(xy 66.04 187.96) (xy 68.58 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "219eff45-d597-449c-8512-11378d36279e")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 68.58 187.96 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bef3877d-b0fd-40ee-b959-d911a2b5ea2d")
+		(property "Reference" "#PWR047"
+			(at 68.58 187.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 68.58 187.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 68.58 187.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 68.58 187.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 68.58 187.96 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "53f73cee-7693-4e9d-afce-37d09ccc2593")
+		)
+		(instances
+			(project "CPR Machine MCU Board"
+				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
+					(reference "#PWR047")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 66.04 190.5) (xy 68.58 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f5530c3-0283-4b7f-8e0d-0deb5395673d")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 68.58 190.5 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9d5eeea9-d0d8-416c-a275-495af88bc466")
+		(property "Reference" "#PWR048"
+			(at 68.58 190.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 68.58 190.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 68.58 190.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 68.58 190.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 68.58 190.5 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "223d2b5a-cc2f-40f1-8abe-6f29d034b144")
+		)
+		(instances
+			(project "CPR Machine MCU Board"
+				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
+					(reference "#PWR048")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 66.04 193.04) (xy 68.58 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de59bbb1-f572-4f8f-ac38-37685e8c0d4b")
+	)
+	(label "VBUS"
+		(at 68.58 193.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d16de1b8-6282-4567-a62c-15b9327a36f4")
+	)
+	(wire
+		(pts
+			(xy 66.04 195.58) (xy 68.58 195.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ef6131a-c201-4eb1-b505-3938e55a5d99")
+	)
+	(label "VBUS"
+		(at 68.58 195.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a07e7d83-73a8-4c0c-93c7-2cf7cdf0b488")
+	)
+	(no_connect
+		(at 66.04 198.12)
+		(uuid "b37363b3-c55b-4a84-8e3e-ae2886c585ca")
+	)
+	(wire
+		(pts
+			(xy 66.04 200.66) (xy 68.58 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22339f09-6909-49eb-8f9f-3d5cb78eddd5")
+	)
+	(label "USB_DM"
+		(at 68.58 200.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "defbddc6-4bfd-49cc-97f9-f14eeff02265")
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 45.72 238.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ba425550-1884-4b47-b0ab-9dab81a90d21")
+		(property "Reference" "#FLG05"
+			(at 45.72 236.855 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 45.72 233.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 238.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 238.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 45.72 238.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c92fe5a5-0e64-40f5-a9d0-d9666f7ea70d")
+		)
+		(instances
+			(project "CPR Machine MCU Board"
+				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
+					(reference "#FLG05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 40.64 238.76) (xy 45.72 238.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "54467b13-0bd1-43ea-a695-b1ac5acd4e9e")
+	)
+	(label "VBUS"
+		(at 40.64 238.76 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e48dfe67-b26a-4925-bbc4-d3728a90587a")
 	)
 	(sheet_instances
 		(path "/"

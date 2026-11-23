@@ -1,4 +1,6 @@
 (fp_lib_table
 	(version 7)
-	(lib (name "STM32G441VBT6_footprints") (type "KiCad") (uri "${KIPRJMOD}/lib/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "LDO") (type "KiCad") (uri "${KIPRJMOD}/lib/LDK130M33RY/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "STM") (type "KiCad") (uri "${KIPRJMOD}/lib/STM32G441VBT6/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "Molex USB-C") (type "KiCad") (uri "${KIPRJMOD}/../main-board/Part Library/Molex USB-C/KiCADv6/footprints.pretty") (options "") (descr "Shared with main board"))
 )

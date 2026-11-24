@@ -2237,6 +2237,17 @@
 		)
 		(uuid "fb8a4acf-0db1-4f59-9f28-bc0ca4e773ea")
 	)
+	(hierarchical_label "Knee 4"
+		(shape input)
+		(at 176.53 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "056bd766-b47a-43ab-8b7b-b9f2e15adcab")
+	)
 	(hierarchical_label "Stepper Enable"
 		(shape output)
 		(at 41.91 43.18 0)
@@ -2258,6 +2269,28 @@
 			(justify right)
 		)
 		(uuid "1d7853fd-ac06-4702-b0b5-146faf966441")
+	)
+	(hierarchical_label "Hip 1 1"
+		(shape input)
+		(at 163.83 33.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1dbc15c3-206e-4090-b8cd-e1121c81ba01")
+	)
+	(hierarchical_label "Hip 2 1"
+		(shape input)
+		(at 163.83 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1fa8f98b-f838-40a1-8a4b-e100ea31af44")
 	)
 	(hierarchical_label "Stepper Sleep"
 		(shape output)
@@ -2347,6 +2380,17 @@
 		)
 		(uuid "5ba5f1b6-1e41-47b7-b5ea-a3b4f06e24af")
 	)
+	(hierarchical_label "Knee 3"
+		(shape input)
+		(at 176.53 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "613206e1-5876-4648-9d5e-84bc34783713")
+	)
 	(hierarchical_label "Dir"
 		(shape output)
 		(at 41.91 78.74 0)
@@ -2380,6 +2424,39 @@
 		)
 		(uuid "727f5e80-f0cc-49de-8962-55e749b30090")
 	)
+	(hierarchical_label "Knee 1"
+		(shape input)
+		(at 176.53 33.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "78e46055-7169-4c40-888d-c104084bfe49")
+	)
+	(hierarchical_label "Pad 1"
+		(shape input)
+		(at 189.23 33.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7c653766-d9be-450b-a9dd-ca1dfd1cfe73")
+	)
+	(hierarchical_label "PMM_RST"
+		(shape output)
+		(at 163.83 44.45 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7e7af080-bf5c-4d51-89c3-fd34cb5e33be")
+	)
 	(hierarchical_label "ENC2_A"
 		(shape input)
 		(at 41.91 81.28 0)
@@ -2401,6 +2478,17 @@
 			(justify right)
 		)
 		(uuid "84f5399c-bd0f-4254-9af2-a76688f0c379")
+	)
+	(hierarchical_label "Hip 2 2"
+		(shape input)
+		(at 163.83 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "872eff61-a919-4387-a3d0-3c71014cb790")
 	)
 	(hierarchical_label "Screen_Data_Dir"
 		(shape output)
@@ -2434,6 +2522,28 @@
 			(justify right)
 		)
 		(uuid "9b6e852e-35d8-41be-beae-cebafedf11e2")
+	)
+	(hierarchical_label "Pad 3"
+		(shape input)
+		(at 189.23 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a0185d04-a01e-4ff4-bbff-bf7c21c2bbcf")
+	)
+	(hierarchical_label "Pad 4"
+		(shape input)
+		(at 189.23 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a4c3073a-1c66-4676-b179-c451160c0595")
 	)
 	(hierarchical_label "Stop_Enable"
 		(shape output)
@@ -2490,6 +2600,17 @@
 		)
 		(uuid "c007915d-525e-490e-b64a-da4a2e6952b9")
 	)
+	(hierarchical_label "Pad 2"
+		(shape input)
+		(at 189.23 35.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c7d3315c-21fa-4b8b-8c03-1b38ee0a6a15")
+	)
 	(hierarchical_label "CAN Standby"
 		(shape output)
 		(at 29.21 63.5 180)
@@ -2512,6 +2633,17 @@
 		)
 		(uuid "cc51e914-cda6-44a3-a1f3-79a6d33ba115")
 	)
+	(hierarchical_label "Knee 2"
+		(shape input)
+		(at 176.53 35.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "cfb3318c-3b0c-471c-8234-d45e2ff70622")
+	)
 	(hierarchical_label "ENC2_B"
 		(shape input)
 		(at 29.21 73.66 180)
@@ -2533,6 +2665,17 @@
 			(justify left)
 		)
 		(uuid "daa28cf6-3881-4f3c-8dc3-3837407d5baf")
+	)
+	(hierarchical_label "Hip 1 2"
+		(shape input)
+		(at 163.83 35.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "dcf29577-102d-4bcf-8ac3-4da198d2e488")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -2726,7 +2869,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x25_P2.54mm_Vertical"
 			(at 34.29 66.04 0)
 			(hide yes)
 			(show_name no)

@@ -19445,7 +19445,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "680 Ohm"
 			(at 164.084 31.496 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19698,7 +19698,7 @@
 				)
 			)
 		)
-		(property "digikey" "RMCF0603FT220RCT-ND"
+		(property "digikey" ""
 			(at 153.67 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -22786,7 +22786,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "1.5 kOhm"
+		(property "Value" "3.9 kOhm"
 			(at 146.812 31.496 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22830,7 +22830,7 @@
 				)
 			)
 		)
-		(property "digikey" "RMCF0603FT1K50CT-ND"
+		(property "digikey" ""
 			(at 135.89 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -33015,7 +33015,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "100 Ohm"
+		(property "Value" "270 Ohm"
 			(at 183.134 31.496 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -33268,7 +33268,7 @@
 				)
 			)
 		)
-		(property "digikey" "541-100HCT-ND"
+		(property "digikey" ""
 			(at 172.72 30.48 0)
 			(hide yes)
 			(show_name no)

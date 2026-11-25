@@ -5816,7 +5816,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 116.84 77.47 90)
 			(hide yes)
 			(show_name no)
@@ -6342,7 +6342,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 116.84 41.91 90)
 			(hide yes)
 			(show_name no)
@@ -8837,7 +8837,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 198.12 46.99 90)
 			(hide yes)
 			(show_name no)
@@ -9442,7 +9442,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 198.12 82.55 90)
 			(hide yes)
 			(show_name no)

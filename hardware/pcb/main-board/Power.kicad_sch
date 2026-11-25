@@ -10364,7 +10364,7 @@
 				)
 			)
 		)
-		(property "digikey" "4518-SN74LVC2G04DCKRCT-ND"
+		(property "digikey" "296-13262-1-ND"
 			(at 123.19 156.21 0)
 			(hide yes)
 			(show_name no)
@@ -19512,6 +19512,17 @@
 				)
 			)
 		)
+		(property "digikey" "35-PRPC010SAAN-RC-ND"
+			(at 195.58 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "94be25b4-38ba-490b-ae33-659bc53264b1")
 		)
@@ -19983,7 +19994,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-680HCT-ND"
 			(at 153.67 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -20756,7 +20767,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 20.32 85.09 0)
 			(hide yes)
 			(show_name no)
@@ -23115,7 +23126,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 135.89 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -24617,7 +24628,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 39.37 48.26 0)
 			(hide yes)
 			(show_name no)
@@ -25678,7 +25689,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 96.52 24.13 0)
 			(hide yes)
 			(show_name no)
@@ -27075,6 +27086,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 238.76 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "35-PRPC010SAAN-RC-ND"
 			(at 238.76 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -33445,7 +33467,7 @@
 				)
 			)
 		)
-		(property "digikey" "4518-SN74LVC2G04DCKRCT-ND"
+		(property "digikey" "296-13262-1-ND"
 			(at 157.48 138.43 0)
 			(hide yes)
 			(show_name no)
@@ -33838,7 +33860,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-270HCT-ND"
 			(at 172.72 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -34594,7 +34616,7 @@
 				)
 			)
 		)
-		(property "digikey" "4518-SN74LVC2G04DCKRCT-ND"
+		(property "digikey" "296-13262-1-ND"
 			(at 125.73 138.43 0)
 			(hide yes)
 			(show_name no)

@@ -2747,6 +2747,17 @@
 				)
 			)
 		)
+		(property "digikey" "S2011EC-25-ND"
+			(at 34.29 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "12"
 			(uuid "ebc3b689-c8d6-4053-a93e-bbf72b0e6b0d")
 		)

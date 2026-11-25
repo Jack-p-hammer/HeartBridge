@@ -4945,7 +4945,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "100 nF"
+		(property "Value" "0.1 uF"
 			(at 74.168 29.972 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5187,7 +5187,7 @@
 				)
 			)
 		)
-		(property "digikey" "1292-1643-1-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 83.82 29.21 0)
 			(hide yes)
 			(show_name no)
@@ -8493,7 +8493,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "100 nF"
+		(property "Value" "0.1 uF"
 			(at 74.168 73.152 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8735,7 +8735,7 @@
 				)
 			)
 		)
-		(property "digikey" "1292-1643-1-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 83.82 72.39 0)
 			(hide yes)
 			(show_name no)
@@ -10990,7 +10990,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "100 nF"
+		(property "Value" "0.1 uF"
 			(at 172.72 26.67 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11232,7 +11232,7 @@
 				)
 			)
 		)
-		(property "digikey" "1292-1643-1-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 175.26 27.94 0)
 			(hide yes)
 			(show_name no)

@@ -4384,7 +4384,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(uuid "0721c988-55a0-4bab-9a2c-2ff0fecb5035")
 		(property "Reference" "J11"
@@ -4776,7 +4776,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0a13f920-9c86-4cd2-9728-345bb0e344b7")
@@ -4977,6 +4977,17 @@
 			)
 		)
 		(property "digikey" "277-1667-ND"
+			(at 22.86 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Notes" "x4"
 			(at 22.86 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -5374,7 +5385,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-680HCT-ND"
 			(at 74.93 57.15 0)
 			(hide yes)
 			(show_name no)
@@ -5816,7 +5827,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 116.84 77.47 90)
 			(hide yes)
 			(show_name no)
@@ -6342,7 +6353,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 116.84 41.91 90)
 			(hide yes)
 			(show_name no)
@@ -8837,7 +8848,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 198.12 46.99 90)
 			(hide yes)
 			(show_name no)
@@ -9442,7 +9453,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 198.12 82.55 90)
 			(hide yes)
 			(show_name no)
@@ -9674,7 +9685,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7daa6f09-3613-465a-a5be-033abbe7dd08")
@@ -9875,6 +9886,17 @@
 			)
 		)
 		(property "digikey" "277-1667-ND"
+			(at 67.31 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Notes" "x4"
 			(at 67.31 39.37 0)
 			(hide yes)
 			(show_name no)
@@ -12197,7 +12219,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e9ba330e-cd81-4ea9-bb98-ad44067b8b39")
@@ -12398,6 +12420,17 @@
 			)
 		)
 		(property "digikey" "277-1667-ND"
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Notes" "x4"
 			(at 39.37 39.37 0)
 			(hide yes)
 			(show_name no)

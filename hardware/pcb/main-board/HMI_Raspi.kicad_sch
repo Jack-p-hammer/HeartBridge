@@ -3075,7 +3075,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(uuid "084aedce-6cd7-4a98-a07a-50f7babd8f33")
 		(property "Reference" "J10"
@@ -3342,6 +3342,17 @@
 				)
 			)
 		)
+		(property "digikey" "S1011EC-03-ND"
+			(at 100.33 22.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "dfa403a4-fe6b-453b-a133-9c4972d44c0b")
 		)
@@ -3368,7 +3379,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0b93aeeb-df24-45ac-8521-3fb2ea4c74a9")
@@ -4945,7 +4956,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "100 nF"
+		(property "Value" "0.1 uF"
 			(at 74.168 29.972 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5187,7 +5198,7 @@
 				)
 			)
 		)
-		(property "digikey" "1292-1643-1-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 83.82 29.21 0)
 			(hide yes)
 			(show_name no)
@@ -5863,7 +5874,7 @@
 				)
 			)
 		)
-		(property "digikey" "A121523CT-ND"
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 20.32 44.45 0)
 			(hide yes)
 			(show_name no)
@@ -8171,7 +8182,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(uuid "8f95a6bd-6358-4e55-9340-7e9b5a073e90")
 		(property "Reference" "J16"
@@ -8493,7 +8504,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "100 nF"
+		(property "Value" "0.1 uF"
 			(at 74.168 73.152 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8735,7 +8746,7 @@
 				)
 			)
 		)
-		(property "digikey" "1292-1643-1-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 83.82 72.39 0)
 			(hide yes)
 			(show_name no)
@@ -10556,7 +10567,7 @@
 				)
 			)
 		)
-		(property "digikey" "A121523CT-ND"
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 71.12 45.72 0)
 			(hide yes)
 			(show_name no)
@@ -10990,7 +11001,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "100 nF"
+		(property "Value" "0.1 uF"
 			(at 172.72 26.67 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11232,7 +11243,7 @@
 				)
 			)
 		)
-		(property "digikey" "1292-1643-1-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 175.26 27.94 0)
 			(hide yes)
 			(show_name no)
@@ -11345,7 +11356,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(uuid "eb477ff7-8146-4643-bd46-b8d118947c0c")
 		(property "Reference" "J15"
@@ -12824,7 +12835,7 @@
 				)
 			)
 		)
-		(property "digikey" "A121523CT-ND"
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 69.85 90.17 0)
 			(hide yes)
 			(show_name no)
@@ -12858,7 +12869,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(uuid "facf15a0-ef8f-4fb1-b9c5-2771c60c4ffc")
 		(property "Reference" "J12"
@@ -13115,6 +13126,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 100.33 62.23 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "S1011EC-03-ND"
 			(at 100.33 62.23 0)
 			(hide yes)
 			(show_name no)

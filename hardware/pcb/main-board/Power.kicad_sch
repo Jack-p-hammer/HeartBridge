@@ -10364,7 +10364,7 @@
 				)
 			)
 		)
-		(property "digikey" "4518-SN74LVC2G04DCKRCT-ND"
+		(property "digikey" "296-13262-1-ND"
 			(at 123.19 156.21 0)
 			(hide yes)
 			(show_name no)
@@ -12831,7 +12831,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "2f9b7c67-07dd-4a12-a949-7c9757d668da")
-		(property "Reference" "Q3"
+		(property "Reference" "Q502"
 			(at 35.56 131.572 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13117,7 +13117,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "Q3")
+					(reference "Q502")
 					(unit 1)
 				)
 			)
@@ -16267,7 +16267,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(uuid "4bf0632d-8c0f-43a7-aacc-922426a86a3a")
 		(property "Reference" "J1"
@@ -16570,7 +16570,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "4df6f435-576a-4ec0-bf1c-7dd077f37ff0")
-		(property "Reference" "Q4"
+		(property "Reference" "Q501"
 			(at 20.32 160.274 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16903,7 +16903,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "Q4")
+					(reference "Q501")
 					(unit 1)
 				)
 			)
@@ -19257,7 +19257,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "68af3e97-8bd3-44f1-a128-f3f8cdbb5726")
@@ -19502,6 +19502,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 195.58 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "35-PRPC010SAAN-RC-ND"
 			(at 195.58 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -19983,7 +19994,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-680HCT-ND"
 			(at 153.67 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -20756,7 +20767,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 20.32 85.09 0)
 			(hide yes)
 			(show_name no)
@@ -21444,7 +21455,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7fecfe94-de9c-4f60-b838-7ae56040bbc3")
-		(property "Reference" "Q4"
+		(property "Reference" "Q501"
 			(at 47.498 160.02 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21777,7 +21788,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "Q4")
+					(reference "Q501")
 					(unit 2)
 				)
 			)
@@ -23071,7 +23082,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "3.9 kOhm"
+		(property "Value" "10 kOhm"
 			(at 146.812 31.496 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23115,7 +23126,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 135.89 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -23662,7 +23673,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "8d153d19-ade0-4bc6-bb5d-c4866cb23032")
-		(property "Reference" "R11"
+		(property "Reference" "R502"
 			(at 38.862 167.132 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23946,7 +23957,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "R11")
+					(reference "R502")
 					(unit 1)
 				)
 			)
@@ -24617,7 +24628,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 39.37 48.26 0)
 			(hide yes)
 			(show_name no)
@@ -25678,7 +25689,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 96.52 24.13 0)
 			(hide yes)
 			(show_name no)
@@ -26819,7 +26830,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ae7e27bc-c317-487d-ac48-5115892bd597")
@@ -27075,6 +27086,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 238.76 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "35-PRPC010SAAN-RC-ND"
 			(at 238.76 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -32117,7 +32139,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e3c773ed-84df-4e4f-be0a-80a428996a54")
-		(property "Reference" "C5"
+		(property "Reference" "C_BP501"
 			(at 30.734 145.542 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32399,7 +32421,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "C5")
+					(reference "C_BP501")
 					(unit 1)
 				)
 			)
@@ -33445,7 +33467,7 @@
 				)
 			)
 		)
-		(property "digikey" "4518-SN74LVC2G04DCKRCT-ND"
+		(property "digikey" "296-13262-1-ND"
 			(at 157.48 138.43 0)
 			(hide yes)
 			(show_name no)
@@ -33838,7 +33860,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-270HCT-ND"
 			(at 172.72 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -33954,7 +33976,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f76a8bf6-b547-4625-a68b-4b62cd8050e2")
-		(property "Reference" "R10"
+		(property "Reference" "R501"
 			(at 29.718 167.64 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -34238,7 +34260,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/390cafbd-c317-4387-95c3-e11405a1139f"
-					(reference "R10")
+					(reference "R501")
 					(unit 1)
 				)
 			)
@@ -34594,7 +34616,7 @@
 				)
 			)
 		)
-		(property "digikey" "4518-SN74LVC2G04DCKRCT-ND"
+		(property "digikey" "296-13262-1-ND"
 			(at 125.73 138.43 0)
 			(hide yes)
 			(show_name no)

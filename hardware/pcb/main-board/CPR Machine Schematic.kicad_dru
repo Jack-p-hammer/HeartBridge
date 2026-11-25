@@ -2,8 +2,8 @@
 
 (rule "Vendor land patterns: JLC SMD pad-to-pad 0.15mm"
   (constraint clearance (min 0.15mm))
-  (condition "A.Type == 'Pad' && B.Type == 'Pad' && (A.memberOfFootprint('U11') || A.memberOfFootprint('J18') || A.memberOfFootprint('J19'))"))
+  (condition "A.Type == 'Pad' && B.Type == 'Pad' && (A.memberOfFootprint('U2') || A.memberOfFootprint('J5') || A.memberOfFootprint('J6'))"))
 
 (rule "USB-C shell slots: JLC 2-layer min ring 0.18mm"
   (constraint annular_width (min 0.18mm))
-  (condition "A.memberOfFootprint('J18') || A.memberOfFootprint('J19')"))
+  (condition "A.memberOfFootprint('J5') || A.memberOfFootprint('J6')"))

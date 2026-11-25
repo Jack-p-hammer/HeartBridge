@@ -1,0 +1,56 @@
+Comment,Designator,Footprint,LCSC Part #,Quantity,Manufacturer Part #,Manufacturer,JLC Library,LCSC Stock (2026-11-25),DigiKey Reference,Notes
+100nF 50V X7R,"C2,C3,C5,C9,C10,C11,C12,C13,C14,C15,C16,C18",0603,C14663,12,CC0603KRX7R9BB104,YAGEO,Basic,50031137,399-C0603C104K4RACTUCT-ND / 1292-1643-1-ND,Merges the 0.1uF and 100nF lines. 50V X7R meets or exceeds both refs. Needed for C3 on the battery rail: the KEMET ref (C0603C104K4RACTU) is only 16V.
+47nF 50V X7R,C1,0603,C1622,1,CL10B473KB8NNNC,Samsung,Basic,1617390,490-4934-1-ND,Same spec as ref GCM188R71H473KA55D (0 stock at LCSC).
+2.2uF 10V X7R,C4,0603,C2167658,1,GRM188R71A225KE15J,Murata,Extended,324,490-6418-1-ND,"Exact ref. Basic alternative C23630 (CL10A225KO8NNNC, 16V X5R) saves the extended fee if X5R is OK on BIAS."
+1uF 50V X7R,"C6,C7",0603,C559769,2,CC0603KRX7R9BB105,YAGEO,Extended,414584,311-2082-1-ND,Exact ref. On the 6S rail. Basic alternative C15849 is 50V but X5R.
+100pF 50V C0G,C8,0402,C1546,1,0402CG101J500NT,FH,Basic,2641094,311-1024-1-ND,Same spec as ref CC0402JRNPO9BN101.
+4.7nF 50V X7R,C19,0603,C53987,1,0603B472K500NT,FH,Basic,776993,1276-1098-1-ND,Same spec as ref CL10B472KB8NNNC (C1621 if you want the exact part; extended).
+47pF 50V C0G,"C20,C21",0603,C1671,2,CL10C470JB8NNNC,Samsung,Basic,1042884,(587-3170-1-ND was 0.47uF typo),"CAN bus filter caps, corrected to 47pF. Same 50V rating as the old ref; C0G as is usual for signal-line caps. Schematic value/DigiKey field still say 0.47uF."
+10uF 50V X7R,"C17,C_IN2,C_IN3,C_IN4,C_IN5",1210,C138687,5,CL32B106KBJNNNE,Samsung,Extended,107661,1276-3387-1-ND,Exact ref (from footprint datasheet link).
+47uF 25V X7R,"COUT1,COUT2,COUT3,COUT4",2220,C600189,4,C2220C476M3R2C7186,KEMET,Extended,22,445-174773-1-ND,"Ref CGA9N3X7R1E476M230KB has 0 stock. This matches 25V X7R but stock (22) covers only 5 boards at ~$7.8 each. Cheaper: C694535 (TDK CKG57NX5R1E476MT0S9W, 25V X5R, 271 stock) or C342293 (TDK 16V X7R, 361 stock)."
+100uF 50V Al-elec,C_Bulk1,SMD D10x10,C165627,1,MVK 50V100 M 10*10,SamYoung,Extended,3270,338-2146-1-ND,Ref is CDE AFK (voltage not confirmed). 50V chosen for 6S (25.2V max). Polarised: check orientation in JLC preview.
+SMCJ28A,D1,SMC,C224047,1,SMCJ28A,Littelfuse,Extended,3364,SMCJ28ALFCT-ND,Exact ref. Unidirectional: check cathode band in preview.
+SMCJ28CA,D2,SMC,C720069,1,SMCJ28CA,Littelfuse,Extended,2510,SMCJ28CALFCT-ND,Exact ref.
+ESD321DYAR,"D3,D9",SOT-5X3,C20345394,2,ESD321DYAR,Texas Instruments,Extended,20996,296-ESD321DYARCT-ND,Exact ref.
+SMAJ6.0A,"D4,D5,D6",SMA,C223993,3,SMAJ6.0A,Littelfuse,Extended,14974,SMAJ6.0ALFCT-ND,Exact ref.
+ESD351DPYR,"D7,D8",X1SON-2,C1974929,2,ESD351DPYR,Texas Instruments,Extended,33219,296-51109-1-ND,Exact ref.
+MMBZ27VCLT1G,"D10,D11",SOT-23,C128609,2,MMBZ27VCLT1G,onsemi,Extended,71958,MMBZ27VCLT1GOSCT-ND,Exact ref.
+Fuse 1A 63V,"F1,F2,F4",1206,C3157037,3,0685T1000-01,Bel Fuse,Extended,2873,5923-0685T1000-01CT-ND,Exact ref.
+Fuse 1.5A 63V,"F3,F5,F6",1206,C3165300,3,0685T1500-01,Bel Fuse,Extended,86,5923-0685T1500-01CT-ND,Exact ref. Stock 86 (~28 boards).
+Fuse 0.25A 32V,F7,0603,C3166421,1,C2Q 250,Bel Fuse,Extended,211,5923-C2Q250CT-ND,"Exact ref (on +5V, 32V rating is fine)."
+3.3uH 8.4A,L1,SMD 7x6.6mm,C879414,1,0630CDMCCDS-3R3MC,Sumida,Extended,4286,308-2465-1-ND,Exact ref.
+LED green,"LED1,LED2,LED3,LED5",0603,C125098,4,LTST-C191KGKT,Lite-On,Extended,72892,160-1446-1-ND,Exact ref. Check polarity in preview.
+LED red/green bicolour,LED4,2012 4-pad,C6465979,1,APHBM2012LSURKZGKC,Kingbright,Extended,314,754-1957-1-ND,Exact ref. Check pin-1 rotation in preview.
+DMT6007LFG-7,Q1,PowerDI3333-8,C2802568,1,DMT6007LFG-7,Diodes Inc,Extended,0,DMT6007LFG-7DICT-ND,"OUT OF STOCK at LCSC. Pre-order via JLC Global Sourcing or consign. (C55510091 DMT6007LFG-7-HXY is a third-party clone, not verified.)"
+"T2N7002BK,LM","Q2,Q3,Q4",SOT-23,C146372,3,"T2N7002BK,LM",Toshiba,Extended,50150,T2N7002BKLMCT-ND,Exact ref.
+680 1%,"R2,R14",0603,C23228,2,0603WAF6800T5E,UNI-ROYAL,Basic,1237131,(none),
+270 1%,R3,0603,C22966,1,0603WAF2700T5E,UNI-ROYAL,Basic,712504,(none),
+49.9k 0.1% 25ppm,"R4,R10",0603,C491136,2,ERA-3AEB4992V,Panasonic,Extended,12681,RG16P49.9KBCT-ND,Ref Susumu RG1608P-4992-B-T5 has 0 stock; same spec. R10 sets the 5V feedback; R4 (PGood pull-up) could be basic C23184 if you want to split the line.
+750 1%,R5,0603,C114635,1,RC0603FR-07750RL,YAGEO,Extended,337803,311-750HRCT-ND,Exact ref.
+301 1%,R6,0603,C25192,1,0603WAF3010T5E,UNI-ROYAL,Extended,5229,RMCF0603FT301RCT-ND,Ref RMCF0603FT301R has 0 stock; same spec.
+22k 1%,"R7,R9,R11,R12",0603,C31850,4,0603WAF2202T5E,UNI-ROYAL,Basic,2086181,541-22.0KHCT-ND,USB-C Rp (1.5A source advert).
+9.31k 0.1% 25ppm,R8,0603,C2686441,1,ARG03BTC9311,Viking Tech,Extended,4062,2019-RN73H1JTTD9311B25CT-ND,Ref KOA RN73H1JTTD9311B25 has 0 stock; same spec.
+49.9 1%,"R13,R24",0603,C23185,2,0603WAF499JT5E,UNI-ROYAL,Basic,1066663,541-49.9HCT-ND,"Feeds the button LEDs from +5V. If those LEDs have no internal resistor, current is ~60mA and this resistor sees ~0.18W (> 0.1W). Check the button LED spec."
+100 1%,"R15,R25,R29",0603,C22775,3,0603WAF1000T5E,UNI-ROYAL,Basic,12330637,541-100HCT-ND,
+10k 1%,"R1,R17,R19,R20,R23,R26,R30",0603,C25804,7,0603WAF1002T5E,UNI-ROYAL,Basic,40412635,A121523CT-ND / 541-10.0KHCT-ND,"Merges the two 10k lines. R1 changed from 3.9k to 10k (LED1 on the 6S rail): 0.054W at 25.2V, within the 0.1W rating. Schematic still says 3.9k."
+33 1%,"R18,R21",0603,C23140,2,0603WAF330JT5E,UNI-ROYAL,Basic,3339103,541-3988-1-ND,
+120 1%,R27,0603,C22787,1,0603WAF1200T5E,UNI-ROYAL,Basic,2528099,541-120HCT-ND,RS-485 termination.
+60.4 1%,"R28,R32",0603,C403298,2,ERJ-3EKF60R4V,Panasonic,Extended,7378,P60.4HCT-ND,Exact ref. CAN split termination.
+0 Ohm,R31,0603,C21189,1,0603WAF0000T5E,UNI-ROYAL,Basic,14681626,311-0.0GRCT-ND,
+LM74700MDDFREP,U2,SOT-23-THN-8 (DDF),C3236227,1,LM74700MDDFREP,Texas Instruments,Extended,0,296-LM74700MDDFREPCT-ND,"OUT OF STOCK at LCSC (and ~$5.5). Pre-order/consign, or check LM74701QDDFRQ1 (C3236221, 315 stock, same DDF package) against the datasheet before swapping."
+SN74LVC2G04DCKR,U3,SOT-363,C105251,1,SN74LVC2G04DCKR,Texas Instruments,Extended,26726,4518-SN74LVC2G04DCKRCT-ND,Exact ref.
+MAX42406AFOB+,U4,FC2QFN-17,C25237061,1,MAX42406AFOB+,Analog Devices,Extended,2,505-MAX42406AFOB+-ND,Only 2 in stock: enough for 2 boards. Pre-order more if building more.
+LSM6DSV16XTR,"U5,U6",LGA-14,C5267406,2,LSM6DSV16XTR,STMicroelectronics,Extended,17372,497-LSM6DSV16XTRCT-ND,Exact ref. Check pin-1 rotation in preview.
+THVD1439DR,U7,SOIC-8,C3235058,1,THVD1439DR,Texas Instruments,Extended,84,296-THVD1439DRCT-ND,Exact ref (~$5.5).
+ATA6563-GAQW1,U8,SOIC-8,C5127614,1,ATA6563-GAQW1,Microchip,Extended,3781,150-ATA6563-GAQW1CT-ND,Exact ref.
+USB-C receptacle (power),"J5,J6",SMD,C3197684,2,2171790001,Molex,Extended,7074,900-2171790001CT-ND,Exact ref. Hybrid part: SMD pads + 4 shell tabs.
+XT30PW-F,J1,THT,C2913282,1,XT30PW-F20.G.Y,Amass,Extended,51822,(goBILDA),THT. Verify the Amass variant (-F20 vs -F30) against the footprint before ordering.
+Pin header 2x25 2.54mm male,J2,THT,C19630953,1,KH-2.54PH180-2X25P-L11.5,Kinghelm,Extended,15,(none),"THT, 50 pins. Mates with the PinSocket_2x25 on the MCU board. Any straight 2x25 2.54mm header works; stock is low."
+Pin header 1x10 2.54mm,"J3,J4",THT,C57369,2,2.54-1*10PPin,BOOMELE,Extended,6887,(none),THT.
+Pin header 1x3 2.54mm,"J10,J12",THT,C49257,2,2.54-1*3PPin,BOOMELE,Extended,433629,(none),THT.
+Terminal block 8-pos 5.0mm,"J7,J8,J9",THT,,3,,,,,277-1667-ND,"No single 8-pos part on LCSC. These are modular blocks: use 4x C5188434 (MaiXu MX126-5.0-02P) or 4x C3819953 (Phoenix 1935161, the DigiKey ref) per connector, hand-soldered."
+Terminal block 2-pos 5.0mm,J13,THT,C3819953,1,1935161,Phoenix Contact,Extended,969,277-1667-ND,THT. Exact ref.
+JST PH 6-pin vertical,J11,THT,C131342,1,B6B-PH-K-S(LF)(SN),JST,Extended,66509,455-1708-ND,THT. Exact ref.
+JST PH 3-pin vertical,J14,THT,C131339,1,B3B-PH-K-S(LF)(SN),JST,Extended,90776,455-B3B-PH-KL-ND,THT. Exact ref.
+JST PH 4-pin right-angle,"J15,J16",THT,C157926,2,S4B-PH-K-S(LF)(SN),JST,Extended,40411,455-1721-ND,THT. Exact ref.
+TSR 1-2433 3.3V module,U1,THT SIP-3,C5455553,1,TSR 1-2433,TRACO POWER,Extended,17,1951-2742-ND,THT. Exact ref; only 17 in stock.

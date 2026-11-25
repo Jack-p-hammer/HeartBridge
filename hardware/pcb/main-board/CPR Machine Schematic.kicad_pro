@@ -78,23 +78,31 @@
       ],
       "drc_exclusions": [
         [
-          "clearance|105277600|70871500|8f82114d-187e-4d07-b337-75569831fb0e|a58c7651-36f2-4573-a041-4858c04f0310",
-          "Vendor Footprint"
-        ],
-        [
-          "clearance|108277541|70871500|8eef0956-586a-4128-94c7-11006d6dd145|8fbf076f-5abc-45af-b9d0-47cada4e93f0",
+          "clearance|105277600|69974699|4dd5e0a4-0104-480d-9fbb-f4a748419ec5|8f82114d-187e-4d07-b337-75569831fb0e",
           ""
         ],
         [
-          "lib_footprint_issues|95810819|73137603|a10b1fb4-055f-4a48-861a-dbab412fb489|00000000-0000-0000-0000-000000000000",
-          "i know dumbass"
+          "clearance|108277541|69974699|8eef0956-586a-4128-94c7-11006d6dd145|ec4678f4-724c-426a-a453-543fc2809bd9",
+          ""
+        ],
+        [
+          "clearance|115784800|69974699|513fd866-a41d-480b-881a-1b7e82c47e25|5fd79a12-2b9a-4536-a435-b1eae18d7675",
+          ""
+        ],
+        [
+          "clearance|119477541|69974699|3c433d6f-76c2-4fef-9fe0-429eb33c5174|79662e0a-d15d-40c1-a384-6afeb2b812ef",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|106680000|66348249|737f4423-a2c9-4a5b-89f9-588d7b3b8e37|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|117880000|66348249|2a517f4a-0b4e-4484-844f-65ba065f2fc9|00000000-0000-0000-0000-000000000000",
+          ""
         ],
         [
           "lib_footprint_mismatch|60797608|108500001|53c6989d-ec9d-4a76-80d9-ec95ed27705f|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "starved_thermal|110440000|122660000|6750817e-66d6-461d-a441-66e238c20db4|5c127cce-ca4b-4c9f-9491-c97de8666517|B.Cu",
           ""
         ],
         [
@@ -107,10 +115,6 @@
         ],
         [
           "starved_thermal|199550000|103800000|81665eae-758c-43c1-8db0-32a4cbe06ee5|3dff26cc-d221-47c5-8660-3d4c6e008ed6|F.Cu",
-          ""
-        ],
-        [
-          "starved_thermal|74880000|122660000|6750817e-66d6-461d-a441-66e238c20db4|e44af543-da65-4c46-8fb7-2503c19a66a7|B.Cu",
           ""
         ]
       ],
@@ -200,7 +204,7 @@
         "min_track_width": 0.127,
         "min_via_annular_width": 0.2,
         "min_via_diameter": 0.5,
-        "solder_mask_to_copper_clearance": 0.09,
+        "solder_mask_to_copper_clearance": 0.005,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -895,7 +899,7 @@
         "uuid": "8991fc77-975f-4978-a089-6b2a5e33f59b"
       }
     ],
-    "used_designators": "#PWR4,#PWR8-9,#PWR11-12,#PWR17-21,#PWR23-31,#PWR34-38,#PWR51-52,#PWR55,#PWR62,#PWR68,#PWR77-84,#PWR87-177,#PWR184-185,C12-34,C48-55,COUT2-4,C_IN4-8,D1-15,F5-9,H5-6,J2,J9,J12-29,L2,LED1,LED5,R7,R24-45,U2-3,U6-10,U12,Y1",
+    "used_designators": "#PWR4,#PWR8-9,#PWR11-12,#PWR17-21,#PWR23-31,#PWR34-38,#PWR51-52,#PWR55,#PWR62,#PWR68,#PWR77-84,#PWR87-177,#PWR184-185,#PWR201-236,#PWR301-330,C12-34,C48-55,C201-217,C301-313,COUT2-4,C_BP501,C_IN4-8,D1-15,D201-202,D301-302,ENC301-302,F5-9,F301-302,H5-6,J2,J9,J12-29,J201-203,J301-302,JP201-204,L2,LED1,LED5,Q501-502,R7,R24-45,R201-205,R301-306,R501-502,R_AFILTER_TUNE_301-302,R_BFILTER_TUNE_301-302,R_ZFILTER_TUNE_301-302,TP7,TP10,TP201-202,TP301-308,U2-3,U6-10,U12,U201-203,U301,Y1",
     "variants": []
   },
   "sheets": [

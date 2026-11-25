@@ -122,7 +122,6 @@
 			(dielectric_constraints no)
 		)
 		(pad_to_mask_clearance 0)
-		(solder_mask_min_width 0.1)
 		(allow_soldermask_bridges_in_footprints no)
 		(tenting
 			(front yes)
@@ -2385,6 +2384,19 @@
 				)
 			)
 		)
+		(property "Notes" "x4"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "970b036e-6b6b-4535-ae87-75f72a1fb708")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3/e9ba330e-cd81-4ea9-bb98-ad44067b8b39")
 		(sheetname "/Sensing/")
@@ -2395,7 +2407,7 @@
 				(pins "1" "2" "3" "4" "5" "6" "7" "8")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -3.12 -4.12)
@@ -3243,7 +3255,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6980,7 +6992,7 @@
 				)
 			)
 		)
-		(property "digikey" "A121523CT-ND"
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -10068,7 +10080,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -10655,7 +10667,7 @@
 				)
 			)
 		)
-		(property "digikey" "587-3170-1-ND"
+		(property "digikey" "311-1065-1-ND"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16617,7 +16629,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -17133,7 +17145,7 @@
 				)
 			)
 		)
-		(property "digikey" "4518-SN74LVC2G04DCKRCT-ND"
+		(property "digikey" "296-13262-1-ND"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -17512,7 +17524,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -18262,7 +18274,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -18915,6 +18927,19 @@
 				)
 			)
 		)
+		(property "digikey" "S1011EC-03-ND"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "919d8cdc-d879-4c02-97fc-a9a667437920")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/4742a649-a015-487c-b382-01878b0e2dd4/facf15a0-ef8f-4fb1-b9c5-2771c60c4ffc")
 		(sheetname "/HMI/")
@@ -18925,7 +18950,7 @@
 				(pins "1" "2" "3")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.38 6.46)
@@ -19414,7 +19439,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-270HCT-ND"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -22273,7 +22298,7 @@
 				)
 			)
 		)
-		(property "Value" "100 nF"
+		(property "Value" "0.1 uF"
 			(at 0 1.43 90)
 			(layer "F.Fab")
 			(uuid "0e6969cb-5297-4f2c-9996-513558a56669")
@@ -22552,7 +22577,7 @@
 				)
 			)
 		)
-		(property "digikey" "1292-1643-1-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -24050,7 +24075,7 @@
 				(pins "1" "2" "3" "4")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start 8.06 -1.46)
@@ -24766,7 +24791,7 @@
 				(pins "1" "2" "3" "4" "5" "6")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start 12.06 0.8)
@@ -27131,7 +27156,7 @@
 				(pins "1" "2")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start 7.56 -8.16)
@@ -27966,7 +27991,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -28339,7 +28364,7 @@
 				)
 			)
 		)
-		(property "Value" "100 nF"
+		(property "Value" "0.1 uF"
 			(at 0 1.43 90)
 			(layer "F.Fab")
 			(uuid "4768ffba-cd28-46d7-9f8b-597d06b59c1e")
@@ -28618,7 +28643,7 @@
 				)
 			)
 		)
-		(property "digikey" "1292-1643-1-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -29628,6 +29653,19 @@
 				)
 			)
 		)
+		(property "digikey" "S2011EC-25-ND"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "07a354f5-2e61-452d-88e6-1ed87d6275a3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Connector*:*_2x??_*")
 		(path "/7b515552-6db1-403d-b6a0-a1579d4772aa/26fdcca4-860d-406e-b682-db98c483d1be")
 		(sheetname "/MCU Connector/")
@@ -29642,7 +29680,7 @@
 				)
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start 3.92 -1.38)
@@ -31008,7 +31046,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -32482,6 +32520,19 @@
 				)
 			)
 		)
+		(property "digikey" "S1011EC-03-ND"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "26020765-1097-42b0-8b5f-b233af6bef81")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/4742a649-a015-487c-b382-01878b0e2dd4/084aedce-6cd7-4a98-a07a-50f7babd8f33")
 		(sheetname "/HMI/")
@@ -32492,7 +32543,7 @@
 				(pins "1" "2" "3")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.38 6.46)
@@ -33452,7 +33503,7 @@
 				)
 			)
 		)
-		(property "Value" "100 nF"
+		(property "Value" "0.1 uF"
 			(at 0 1.43 90)
 			(layer "F.Fab")
 			(uuid "42f517b4-c1e7-48d8-bafc-5980c25ff98a")
@@ -33731,7 +33782,7 @@
 				)
 			)
 		)
-		(property "digikey" "1292-1643-1-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -37022,6 +37073,19 @@
 				)
 			)
 		)
+		(property "Notes" "x4"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "945c626b-5f09-470b-bd16-41195c74db5a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3/0a13f920-9c86-4cd2-9728-345bb0e344b7")
 		(sheetname "/Sensing/")
@@ -37032,7 +37096,7 @@
 				(pins "1" "2" "3" "4" "5" "6" "7" "8")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -3.12 -4.12)
@@ -37880,7 +37944,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -39739,7 +39803,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-680HCT-ND"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -40080,7 +40144,7 @@
 				)
 			)
 		)
-		(property "digikey" "455-B3B-PH-KL-ND"
+		(property "digikey" "455-1705-ND"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -40103,7 +40167,7 @@
 				(pins "1" "2" "3")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -2.36 -2.11)
@@ -42563,7 +42627,7 @@
 				)
 			)
 		)
-		(property "digikey" "A121523CT-ND"
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -45092,7 +45156,7 @@
 				)
 			)
 		)
-		(property "digikey" "A121523CT-ND"
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -48433,7 +48497,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-680HCT-ND"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -49742,7 +49806,7 @@
 				(pins "1" "2" "3" "4")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start 8.06 -1.46)
@@ -52455,7 +52519,7 @@
 				)
 			)
 		)
-		(property "digikey" "587-3170-1-ND"
+		(property "digikey" "311-1065-1-ND"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -55115,6 +55179,19 @@
 				)
 			)
 		)
+		(property "digikey" "35-PRPC010SAAN-RC-ND"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d06e544d-b624-41c0-bff3-cc6c4974634e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/390cafbd-c317-4387-95c3-e11405a1139f/ae7e27bc-c317-487d-ac48-5115892bd597")
 		(sheetname "/Power/")
@@ -55125,7 +55202,7 @@
 				(pins "1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.38 -1.38)
@@ -58529,7 +58606,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -60949,6 +61026,19 @@
 				)
 			)
 		)
+		(property "digikey" "35-PRPC010SAAN-RC-ND"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b1e6a7c4-f3ec-42fa-8311-30ce4b6287d7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/390cafbd-c317-4387-95c3-e11405a1139f/68af3e97-8bd3-44f1-a128-f3f8cdbb5726")
 		(sheetname "/Power/")
@@ -60959,7 +61049,7 @@
 				(pins "1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.38 24.24)
@@ -62165,7 +62255,7 @@
 				)
 			)
 		)
-		(property "digikey" "399-C0603C104K4RACTUCT-ND"
+		(property "digikey" "311-1344-1-ND"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -62752,6 +62842,19 @@
 				)
 			)
 		)
+		(property "Notes" "x4"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c9027e6c-ba5b-4c9e-a329-dc587e7958c8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/2e704a40-db78-4cf7-9f7e-cfc586f5aeb3/7daa6f09-3613-465a-a5be-033abbe7dd08")
 		(sheetname "/Sensing/")
@@ -62762,7 +62865,7 @@
 				(pins "1" "2" "3" "4" "5" "6" "7" "8")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -3.12 -4.12)
@@ -64763,7 +64866,7 @@
 				(pins "1" "2")
 			)
 		)
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -3.12 -4.12)

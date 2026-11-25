@@ -591,11 +591,11 @@
     "netclass_patterns": [
       {
         "netclass": "USB-C",
-        "pattern": "USB_D*"
+        "pattern": "/USB_D*"
       },
       {
         "netclass": "+5V_MAIN",
-        "pattern": "+5V_MAIN"
+        "pattern": "/+5V_MAIN"
       },
       {
         "netclass": "+3.3V",
@@ -607,7 +607,7 @@
       },
       {
         "netclass": "VBUS",
-        "pattern": "VBUS"
+        "pattern": "/VBUS"
       }
     ]
   },

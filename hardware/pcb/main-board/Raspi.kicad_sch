@@ -2070,12 +2070,20 @@
 		(uuid "3fc12219-bc08-4031-8e8f-93c48b4a2a5a")
 	)
 	(no_connect
+		(at 29.21 43.18)
+		(uuid "aa06450f-fb7c-4396-849a-bf7602a55d4c")
+	)
+	(no_connect
 		(at 41.91 87.63)
 		(uuid "cdbcb659-326d-4cad-b159-47884af12264")
 	)
 	(no_connect
 		(at 41.91 96.52)
 		(uuid "d1377c44-21f7-4143-9736-af5dc341629f")
+	)
+	(no_connect
+		(at 29.21 53.34)
+		(uuid "eeb01630-9d0f-46fd-b802-5072b2ac0bcc")
 	)
 	(wire
 		(pts
@@ -2470,17 +2478,6 @@
 		)
 		(uuid "aa650214-f97f-4309-bfe4-84695430043c")
 	)
-	(hierarchical_label "Chest_Switch"
-		(shape input)
-		(at 29.21 53.34 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "b3c03253-49f2-4cb0-a04e-f4a55c37ae36")
-	)
 	(hierarchical_label "Pad 2"
 		(shape input)
 		(at 41.91 81.28 0)
@@ -2502,17 +2499,6 @@
 			(justify right)
 		)
 		(uuid "cb455e85-263c-435b-bf2f-4741de4ca9da")
-	)
-	(hierarchical_label "Force_AIn"
-		(shape input)
-		(at 29.21 43.18 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "cc51e914-cda6-44a3-a1f3-79a6d33ba115")
 	)
 	(hierarchical_label "Knee 2"
 		(shape input)

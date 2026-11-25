@@ -23,7 +23,6 @@ LED green,"LED1,LED2,LED3,LED5",0603,C125098,4,LTST-C191KGKT,Lite-On,Extended,72
 LED red/green bicolour,LED4,2012 4-pad,C6465979,1,APHBM2012LSURKZGKC,Kingbright,Extended,314,754-1957-1-ND,Exact ref. Check pin-1 rotation in preview.
 DMT6007LFG-7,Q1,PowerDI3333-8,C2802568,1,DMT6007LFG-7,Diodes Inc,Extended,0,DMT6007LFG-7DICT-ND,"OUT OF STOCK at LCSC. Pre-order via JLC Global Sourcing or consign. (C55510091 DMT6007LFG-7-HXY is a third-party clone, not verified.)"
 "T2N7002BK,LM","Q2,Q3,Q4",SOT-23,C146372,3,"T2N7002BK,LM",Toshiba,Extended,50150,T2N7002BKLMCT-ND,Exact ref.
-3.9k 1% 250mW,R1,0603,C278676,1,ERJ-PA3F3901V,Panasonic,Extended,1971,(none),"Upsized power, same footprint: on the 6S rail (25.2V max) a standard 0603 sees ~0.14W, above its 0.1W rating. Basic 0.1W part would be C23018."
 680 1%,"R2,R14",0603,C23228,2,0603WAF6800T5E,UNI-ROYAL,Basic,1237131,(none),
 270 1%,R3,0603,C22966,1,0603WAF2700T5E,UNI-ROYAL,Basic,712504,(none),
 49.9k 0.1% 25ppm,"R4,R10",0603,C491136,2,ERA-3AEB4992V,Panasonic,Extended,12681,RG16P49.9KBCT-ND,Ref Susumu RG1608P-4992-B-T5 has 0 stock; same spec. R10 sets the 5V feedback; R4 (PGood pull-up) could be basic C23184 if you want to split the line.
@@ -33,7 +32,7 @@ DMT6007LFG-7,Q1,PowerDI3333-8,C2802568,1,DMT6007LFG-7,Diodes Inc,Extended,0,DMT6
 9.31k 0.1% 25ppm,R8,0603,C2686441,1,ARG03BTC9311,Viking Tech,Extended,4062,2019-RN73H1JTTD9311B25CT-ND,Ref KOA RN73H1JTTD9311B25 has 0 stock; same spec.
 49.9 1%,"R13,R24",0603,C23185,2,0603WAF499JT5E,UNI-ROYAL,Basic,1066663,541-49.9HCT-ND,"Feeds the button LEDs from +5V. If those LEDs have no internal resistor, current is ~60mA and this resistor sees ~0.18W (> 0.1W). Check the button LED spec."
 100 1%,"R15,R25,R29",0603,C22775,3,0603WAF1000T5E,UNI-ROYAL,Basic,12330637,541-100HCT-ND,
-10k 1%,"R17,R19,R20,R23,R26,R30",0603,C25804,6,0603WAF1002T5E,UNI-ROYAL,Basic,40412635,A121523CT-ND / 541-10.0KHCT-ND,Merges the two 10k lines.
+10k 1%,"R1,R17,R19,R20,R23,R26,R30",0603,C25804,7,0603WAF1002T5E,UNI-ROYAL,Basic,40412635,A121523CT-ND / 541-10.0KHCT-ND,"Merges the two 10k lines. R1 changed from 3.9k to 10k (LED1 on the 6S rail): 0.054W at 25.2V, within the 0.1W rating. Schematic still says 3.9k."
 33 1%,"R18,R21",0603,C23140,2,0603WAF330JT5E,UNI-ROYAL,Basic,3339103,541-3988-1-ND,
 120 1%,R27,0603,C22787,1,0603WAF1200T5E,UNI-ROYAL,Basic,2528099,541-120HCT-ND,RS-485 termination.
 60.4 1%,"R28,R32",0603,C403298,2,ERJ-3EKF60R4V,Panasonic,Extended,7378,P60.4HCT-ND,Exact ref. CAN split termination.

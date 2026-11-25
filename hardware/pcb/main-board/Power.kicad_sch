@@ -16267,7 +16267,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(uuid "4bf0632d-8c0f-43a7-aacc-922426a86a3a")
 		(property "Reference" "J1"
@@ -19257,7 +19257,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "68af3e97-8bd3-44f1-a128-f3f8cdbb5726")
@@ -23071,7 +23071,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "3.9 kOhm"
+		(property "Value" "10 kOhm"
 			(at 146.812 31.496 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26819,7 +26819,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ae7e27bc-c317-487d-ac48-5115892bd597")

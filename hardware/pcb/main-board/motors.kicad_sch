@@ -10768,7 +10768,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.47 pF"
+		(property "Value" "47 pF"
 			(at 234.95 38.0999 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13766,7 +13766,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.47 pF"
+		(property "Value" "47 pF"
 			(at 234.95 26.6699 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15536,7 +15536,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(uuid "e89ef957-99a9-4a35-ae8b-d1a5b928c735")
 		(property "Reference" "J14"

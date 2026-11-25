@@ -216,6 +216,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -227,6 +228,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -238,6 +240,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -574,8 +577,8 @@
     "meta": {
       "version": 5
     },
-    "net_colors": null,
-    "netclass_assignments": null,
+    "net_colors": {},
+    "netclass_assignments": {},
     "netclass_patterns": []
   },
   "pcbnew": {
@@ -892,7 +895,7 @@
         "uuid": "8991fc77-975f-4978-a089-6b2a5e33f59b"
       }
     ],
-    "used_designators": "#PWR4,#PWR8-9,#PWR11-12,#PWR17-21,#PWR23-31,#PWR34-38,#PWR51-52,#PWR55,#PWR62,#PWR68,#PWR77-84,#PWR87-177,#PWR184-185,D1-15,C12-34,C48-55,J2,J9,J12-29,R7,R24-45,U2-3,U6-10,U12,Y1,F5-9,L2,C_IN4-8,COUT2-4,LED1,LED5",
+    "used_designators": "#PWR4,#PWR8-9,#PWR11-12,#PWR17-21,#PWR23-31,#PWR34-38,#PWR51-52,#PWR55,#PWR62,#PWR68,#PWR77-84,#PWR87-177,#PWR184-185,C12-34,C48-55,COUT2-4,C_IN4-8,D1-15,F5-9,J2,J9,J12-29,L2,LED1,LED5,R7,R24-45,U2-3,U6-10,U12,Y1",
     "variants": []
   },
   "sheets": [

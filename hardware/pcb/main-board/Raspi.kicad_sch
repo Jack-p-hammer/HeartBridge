@@ -2147,6 +2147,16 @@
 		)
 		(uuid "4c17dafe-e0ac-4533-9871-c538443037a6")
 	)
+	(label "PA8"
+		(at 29.21 48.26 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "65f6de1d-6e7e-4389-ab39-c050f151c9cb")
+	)
 	(label "PC0"
 		(at 41.91 86.36 0)
 		(effects
@@ -2166,16 +2176,6 @@
 			(justify right bottom)
 		)
 		(uuid "833e3c06-6bb5-4275-a99f-866c541fb5c4")
-	)
-	(label "PA8"
-		(at 29.21 48.26 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "65f6de1d-6e7e-4389-ab39-c050f151c9cb")
 	)
 	(label "PC10"
 		(at 29.21 55.88 180)
@@ -3409,7 +3409,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a0234fd3-9c77-4772-b44b-ee1b527a2dea")
-		(property "Reference" "F2"
+		(property "Reference" "F7"
 			(at 43.942 26.67 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3693,7 +3693,7 @@
 		(instances
 			(project "CPR Machine Schematic"
 				(path "/8991fc77-975f-4978-a089-6b2a5e33f59b/7b515552-6db1-403d-b6a0-a1579d4772aa"
-					(reference "F2")
+					(reference "F7")
 					(unit 1)
 				)
 			)

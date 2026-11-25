@@ -177,16 +177,6 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 72.39) (xy 120.65 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9dfc2404-d9f4-4cd6-9772-6ea0f5c0fcdf")
-	)
-	(wire
-		(pts
 			(xy 99.06 95.25) (xy 99.06 97.79)
 		)
 		(stroke
@@ -327,16 +317,6 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 69.85) (xy 120.65 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f4f9a21c-5280-4e0a-9043-e66fa52642cd")
-	)
-	(wire
-		(pts
 			(xy 110.49 77.47) (xy 120.65 77.47)
 		)
 		(stroke
@@ -361,7 +341,7 @@
 		(exclude_from_sim no)
 		(in_bom no)
 		(on_board no)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -512,26 +492,6 @@
 		(pin "I2C_SDA" bidirectional
 			(at 110.49 77.47 0)
 			(uuid "6b1999c8-d6ae-43eb-a6c9-6482f9496040")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "Chest_Switch" output
-			(at 110.49 69.85 0)
-			(uuid "3a632895-c412-487e-8f27-7405fabe2787")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "Force_AIn" output
-			(at 110.49 72.39 0)
-			(uuid "8b5fce7e-e4b0-4047-9847-d8255c2019e0")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -997,26 +957,6 @@
 				(justify left)
 			)
 		)
-		(pin "Chest_Switch" input
-			(at 120.65 69.85 180)
-			(uuid "0557de52-8274-4bb8-9e51-ab139af228c0")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "Force_AIn" input
-			(at 120.65 72.39 180)
-			(uuid "c0d03e5f-5e94-4e01-8d7a-149c1f601ea8")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
 		(pin "Screen_Data_Dir" output
 			(at 166.37 68.58 0)
 			(uuid "0f0d0cbe-ffb7-499b-8d5b-ded791052032")
@@ -1233,46 +1173,6 @@
 				(justify left top)
 			)
 		)
-		(pin "Step" input
-			(at 133.35 119.38 90)
-			(uuid "95a1269a-a45d-4828-8e4e-7e5a8cbac025")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "Stepper Sleep" input
-			(at 138.43 119.38 90)
-			(uuid "77fb04af-0cd9-4095-a10f-a6bad5458b20")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "Dir" input
-			(at 135.89 119.38 90)
-			(uuid "d2155e21-bb4d-44c0-9b20-5bfc92b55dd0")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "Stepper Enable" input
-			(at 140.97 119.38 90)
-			(uuid "ee148e9f-4702-44ab-82b6-8f90094f9e02")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
 		(pin "CAN Standby" input
 			(at 148.59 119.38 90)
 			(uuid "05c36dc9-eace-4d26-8866-377475bad632")
@@ -1296,16 +1196,6 @@
 		(pin "TX_CAN" output
 			(at 153.67 119.38 90)
 			(uuid "c2a43e9f-d79d-4f6a-a150-95943d9f1e3a")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "Stepper_nFault" output
-			(at 143.51 119.38 90)
-			(uuid "3b1295bf-12fd-4e33-9b55-dd0c737111de")
 			(effects
 				(font
 					(size 1.27 1.27)

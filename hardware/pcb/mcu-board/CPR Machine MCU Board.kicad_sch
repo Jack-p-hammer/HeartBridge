@@ -14469,8 +14469,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "0dddfff3-069e-44aa-b362-ead75a2a1efa")
-		(property "Reference" "+3.3V_LED1"
-			(at 197.612 198.374 0)
+		(property "Reference" "LED1"
+			(at 202.692 197.866 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -14555,7 +14555,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "+3.3V_LED1")
+					(reference "LED1")
 					(unit 1)
 				)
 			)
@@ -15310,8 +15310,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "30b745bb-f156-4044-9f55-f09f419b40e8")
-		(property "Reference" "BOOT0_SW0"
-			(at 281.94 50.8 0)
+		(property "Reference" "BOOT0"
+			(at 281.94 52.07 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -15321,7 +15321,7 @@
 			)
 		)
 		(property "Value" "BOOT0"
-			(at 281.94 53.34 0)
+			(at 281.94 54.61 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -15394,7 +15394,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "BOOT0_SW0")
+					(reference "BOOT0")
 					(unit 1)
 				)
 			)
@@ -17640,8 +17640,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "75d227aa-89fd-4a2b-bd5d-61d54eb994d9")
-		(property "Reference" "STATUS_LED1"
-			(at 220.472 198.374 0)
+		(property "Reference" "LED2"
+			(at 225.806 197.866 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -17726,7 +17726,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "STATUS_LED1")
+					(reference "LED2")
 					(unit 1)
 				)
 			)
@@ -17743,8 +17743,8 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7839e461-90a7-4651-9740-380bb2bb38b2")
-		(property "Reference" "FAULT_LED1"
-			(at 243.332 198.374 0)
+		(property "Reference" "LED3"
+			(at 248.412 198.12 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -17829,7 +17829,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "FAULT_LED1")
+					(reference "LED3")
 					(unit 1)
 				)
 			)
@@ -17848,7 +17848,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7cd852d6-4b13-47f5-8571-e78225839203")
-		(property "Reference" "BOOT0_R0"
+		(property "Reference" "R8"
 			(at 255.27 52.0699 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17934,7 +17934,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "BOOT0_R0")
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -20086,82 +20086,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 273.05 207.01 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "bda16485-c38d-46ff-9686-62defe455c4b")
-		(property "Reference" "H4"
-			(at 275.59 205.7399 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MountingHole"
-			(at 275.59 208.2799 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5_Pad"
-			(at 273.05 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 273.05 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 273.05 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(instances
-			(project "CPR Machine MCU Board"
-				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "H4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3.3V")
 		(at 170.18 180.34 0)
 		(unit 1)
@@ -20432,7 +20356,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c02b834c-626f-43d1-8f80-8d9c34390036")
-		(property "Reference" "USB-C_ESD0"
+		(property "Reference" "D0"
 			(at 62.23 213.36 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20528,7 +20452,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "USB-C_ESD0")
+					(reference "D0")
 					(unit 1)
 				)
 			)
@@ -21043,7 +20967,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "cf0781ec-ad4a-4236-a8bd-a6d50d5a03ac")
-		(property "Reference" "MCU_LDO_Regulator0"
+		(property "Reference" "LDO0"
 			(at 143.002 181.356 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21138,7 +21062,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "MCU_LDO_Regulator0")
+					(reference "LDO0")
 					(unit 1)
 				)
 			)
@@ -21519,7 +21443,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d8ed79d5-b1f4-41e1-9a8c-83244bcb3309")
-		(property "Reference" "BOOT0_R1"
+		(property "Reference" "R7"
 			(at 275.59 62.2299 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21605,7 +21529,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "BOOT0_R1")
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -21623,26 +21547,26 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "db7f07a1-442a-42e7-b930-5e71790fb58a")
-		(property "Reference" "HSE_R0"
-			(at 136.906 67.31 0)
+		(property "Reference" "R9"
+			(at 140.97 67.3099 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Value" "0"
-			(at 136.906 69.85 0)
+			(at 140.97 69.8499 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
@@ -21709,7 +21633,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "HSE_R0")
+					(reference "R9")
 					(unit 1)
 				)
 			)
@@ -21989,8 +21913,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e1d2266e-50cb-4a0b-ac4d-0958edb0ecd6")
-		(property "Reference" "J1"
-			(at 59.69 45.7201 0)
+		(property "Reference" "DEBUG1"
+			(at 59.69 43.1799 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -22000,8 +21924,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "Conn_ST_STDC14"
-			(at 59.69 43.1801 0)
+		(property "Value" "DEBUG1"
+			(at 59.69 45.7199 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -22111,7 +22035,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "J1")
+					(reference "DEBUG1")
 					(unit 1)
 				)
 			)
@@ -22497,7 +22421,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e7d43673-c042-4aa1-bbd1-bf0a4774004a")
-		(property "Reference" "MCU_USB-C0"
+		(property "Reference" "USB0"
 			(at 45.72 177.8 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22611,7 +22535,7 @@
 		(instances
 			(project "CPR Machine MCU Board"
 				(path "/483db755-3387-4fb4-8577-4bfb7c10a960"
-					(reference "MCU_USB-C0")
+					(reference "USB0")
 					(unit 1)
 				)
 			)

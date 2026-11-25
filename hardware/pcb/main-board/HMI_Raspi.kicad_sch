@@ -3342,6 +3342,17 @@
 				)
 			)
 		)
+		(property "digikey" "S1011EC-03-ND"
+			(at 100.33 22.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "dfa403a4-fe6b-453b-a133-9c4972d44c0b")
 		)
@@ -5863,7 +5874,7 @@
 				)
 			)
 		)
-		(property "digikey" "A121523CT-ND"
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 20.32 44.45 0)
 			(hide yes)
 			(show_name no)
@@ -10556,7 +10567,7 @@
 				)
 			)
 		)
-		(property "digikey" "A121523CT-ND"
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 71.12 45.72 0)
 			(hide yes)
 			(show_name no)
@@ -12824,7 +12835,7 @@
 				)
 			)
 		)
-		(property "digikey" "A121523CT-ND"
+		(property "digikey" "541-10.0KHCT-ND"
 			(at 69.85 90.17 0)
 			(hide yes)
 			(show_name no)
@@ -13115,6 +13126,17 @@
 			)
 		)
 		(property "VERIFIER" ""
+			(at 100.33 62.23 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "digikey" "S1011EC-03-ND"
 			(at 100.33 62.23 0)
 			(hide yes)
 			(show_name no)

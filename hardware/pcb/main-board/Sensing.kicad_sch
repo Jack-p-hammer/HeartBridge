@@ -4987,6 +4987,17 @@
 				)
 			)
 		)
+		(property "Notes" "x4"
+			(at 22.86 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "745f37f0-ace2-4179-818f-27db91d0b460")
 		)
@@ -5374,7 +5385,7 @@
 				)
 			)
 		)
-		(property "digikey" ""
+		(property "digikey" "541-680HCT-ND"
 			(at 74.93 57.15 0)
 			(hide yes)
 			(show_name no)
@@ -9885,6 +9896,17 @@
 				)
 			)
 		)
+		(property "Notes" "x4"
+			(at 67.31 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "1d0147c1-559b-4503-86ee-8e7ceef0db30")
 		)
@@ -12398,6 +12420,17 @@
 			)
 		)
 		(property "digikey" "277-1667-ND"
+			(at 39.37 39.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Notes" "x4"
 			(at 39.37 39.37 0)
 			(hide yes)
 			(show_name no)

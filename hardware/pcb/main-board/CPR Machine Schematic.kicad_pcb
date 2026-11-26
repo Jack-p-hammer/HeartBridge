@@ -62014,7 +62014,7 @@
 		(property "Reference" "J8"
 			(at 17.25 -2.4 0)
 			(layer "F.SilkS")
-			(uuid "1fed182a-fb28-4e87-a9c9-3fcdb4bb1c42")
+			(uuid "4f288da7-10cb-4ae6-8579-1f55ea774d60")
 			(effects
 				(font
 					(size 1 1)
@@ -62025,7 +62025,7 @@
 		(property "Value" "Pads"
 			(at 17.25 4.92 0)
 			(layer "F.Fab")
-			(uuid "0656cc31-e14a-434b-a997-ba71d1305cd0")
+			(uuid "b1a27aa5-b317-46eb-9847-35e33933829e")
 			(effects
 				(font
 					(size 1 1)
@@ -62037,7 +62037,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "70553493-a6d2-4021-a39d-1a5f1bf10d89")
+			(uuid "cec6efc7-49ae-4aaa-8e5a-08326e235d49")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -62048,7 +62048,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "06a17fb6-a325-4232-9cd3-8bf6280e63ff")
+			(uuid "604ded7e-4a89-4d4e-9aec-0ed9b96f68bd")
 			(effects
 				(font
 					(size 1.27 1.27)

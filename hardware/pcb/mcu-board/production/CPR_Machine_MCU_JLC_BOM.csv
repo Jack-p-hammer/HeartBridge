@@ -1,0 +1,22 @@
+Comment,Designator,Footprint,LCSC Part #,Quantity,Manufacturer Part #,Manufacturer,JLC Library,LCSC Stock (2026-11-25),DigiKey Reference,Notes
+100nF 50V X7R,"C1,C2,C3,C4,C5,C6,C7,C11",0603,C14663,8,CC0603KRX7R9BB104,YAGEO,Basic,50004385,399-C0603C104K4RACTUCT-ND,Meets/exceeds ref (KEMET 16V X7R).
+15pF 50V C0G,"C8,C9",0603,C1644,2,CL10C150JB8NNNC,Samsung,Basic,878460,399-C0603C150J5GACTUCT-ND,Same spec as ref (50V C0G 5%). Crystal load caps.
+1uF 50V X7R,"C10,C12,C13,C_LDO0,C_LDO1",0603,C559769,5,CC0603KRX7R9BB105,YAGEO,Extended,414527,311-2082-1-ND,"Exact ref. Basic alternative C15849 (CL10A105KB8NNNC, 50V X5R) saves one extended fee; fine at 3.3/5V."
+10nF 50V X7R,C14,0603,C57112,1,0603B103K500NT,FH,Basic,4216621,399-C0603C103K5RACTUCT-ND,Same spec as ref (50V X7R).
+4.7uF 16V X5R,C_BULK1,0603,C19666,1,CL10A475KO8NNNC,Samsung,Basic,2977409,1276-1784-1-ND,Exact ref.
+TPD4E1U06DBVR,D0,SOT-23-6,C124691,1,TPD4E1U06DBVR,Texas Instruments,Extended,19509,296-35965-1-ND,Exact ref. USB/CC ESD array; check pin-1 in preview.
+SMAJ6.0A,D1,SMA,C223993,1,SMAJ6.0A,Littelfuse,Extended,14974,SMAJ6.0ALFCT-ND,Exact ref. Unidirectional: check cathode band in preview.
+STDC14 header 2x7 1.27mm SMD,DEBUG1,SMD 2x7 1.27mm,C5307809,1,FTSH-107-01-L-DV-K,Samtec,Extended,2416,SAM9449-ND,Exact ref.
+Fuse 250mA,F1,1206,C3157997,1,C1F 250,Bel Fuse,Extended,89,5923-C1F250CT-ND,Exact ref. Stock 89.
+Ferrite 120R@100MHz,FB1,0603,C14709,1,BLM18PG121SN1D,Murata,Basic,2283216,490-1037-1-ND,Exact ref.
+LDO 3.3V 300mA,LDO0,SOT-23-5,C2969807,1,LDK130M33R,STMicroelectronics,Extended,45959,497-17800-1-ND,SUBSTITUTE for LDK130M33RY (3 in stock): same part without the automotive (Y) grade; same pinout.
+LED green,"LED1,LED2",0603,C125098,2,LTST-C191KGKT,Lite-On,Extended,71015,160-1446-1-ND,Exact ref. Check polarity in preview.
+LED red,LED3,0603,C2286,1,KT-0603R,Hubei KENTO,Basic,8659422,160-1447-1-ND,"SUBSTITUTE for LTST-C191KRKT (not stocked): basic red 0603, Vf 1.8-2.4V, 615-630nm. Check polarity in preview."
+STM32G431VBT6,MCU0,LQFP-100 14x14,C529359,1,STM32G431VBT6,STMicroelectronics,Extended,491,497-STM32G441VBT6-ND,"SUBSTITUTE for STM32G441VBT6 (0 stock): identical pinout/package/flash, no AES block. Build firmware for the G431 target. Check pin-1 in preview."
+5.1k 1%,"R2,R3",0603,C23186,2,0603WAF5101T5E,UNI-ROYAL,Basic,17547016,541-5.10KHCT-ND,USB-C CC pull-downs.
+1.5k 1%,"R4,R5,R6",0603,C22843,3,0603WAF1501T5E,UNI-ROYAL,Basic,2405221,RMCF0603FT1K50CT-ND,
+10k 1%,"R7,R8",0603,C25804,2,0603WAF1002T5E,UNI-ROYAL,Basic,40401948,541-10.0KHCT-ND,
+0 Ohm,R9,0603,C21189,1,0603WAF0000T5E,UNI-ROYAL,Basic,14681626,RMCF0603ZT0R00CT-ND,
+USB-C receptacle,USB0,SMD,C3197684,1,2171790001,Molex,Extended,7074,900-2171790001CT-ND,"Exact ref. Hybrid part (SMD pads + 4 shell tabs); overhangs the edge, so JLC may add edge rails."
+Crystal 8MHz 10pF,Y1,SMD 3225-4P,C7183312,1,ECS-80-10-33-CGN-TR3,ECS,Extended,107,50-ECS-80-10-33-CGN-TR3CT-ND,Exact ref. Stock 107.
+Tactile switch SPST,BOOT0,SMD 4.2x3.2mm,C221895,1,PTS810SJG250SMTRLFS,C&K,Extended,11448,CKN10502CT-ND,"SUBSTITUTE for PTS810SJM250SMTR LFS (2 in stock): same switch/footprint, slightly stiffer press."

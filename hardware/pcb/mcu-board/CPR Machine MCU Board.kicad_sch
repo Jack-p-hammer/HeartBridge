@@ -16870,7 +16870,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5c856304-dbbf-49e9-af0e-2d91e49a5fcf")
@@ -18675,7 +18675,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(uuid "9a448265-f4c4-475d-92d3-9826b9b86e29")
 		(property "Reference" "J3"

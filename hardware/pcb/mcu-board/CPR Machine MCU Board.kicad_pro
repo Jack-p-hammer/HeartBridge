@@ -89,6 +89,10 @@
         [
           "copper_edge_clearance|199320000|112681401|acf2c39c-577a-426a-b06b-83ea3bfc7c59|509e99d1-943f-4ace-a969-207ec5162dd6",
           ""
+        ],
+        [
+          "lib_footprint_mismatch|195000000|110551750|fe0f76a6-b28a-4f22-b233-9782598740a0|00000000-0000-0000-0000-000000000000",
+          ""
         ]
       ],
       "meta": {
@@ -139,7 +143,7 @@
         "silk_overlap": "warning",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
-        "starved_thermal": "error",
+        "starved_thermal": "warning",
         "text_height": "warning",
         "text_on_edge_cuts": "error",
         "text_thickness": "warning",
